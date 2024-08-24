@@ -2,32 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.premise .title {
+  font-size: 4rem;
+  background: #ffd93b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.premise .care-about {
+  font-size: 2.5rem;
+  color: white;
+  background: #ff738e;
+  .care-about-list {
+    font-size: 2rem;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.exposition {
+  font-size: 2rem;
+  .exposition-video {
+    width: 100%;
+    height: 100%;
+  }
+  .exposition-warning {
+    background: #ffa53b;
+    color: white;
+  }
+  .exposition-link {
+    background: #7ed957;
+    color: white;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.how-help {
+  font-size: 2.5rem;
+  .questions-1 {
+    background: #6422b8;
+    color: white;
+  }
+  .answer-1 {
+    background: #7ed957;
+    color: white;
+  }
+  .questions-2 {
+    background: #00c4cc;
+    color: white;
+  }
+  .answer-2 {
+    background: #ffd93b;
+    color: white;
+  }
+  .questions-3 {
+    background: #a548ff;
+    color: white;
+  }
+  .answer-3 {
+    background: #ffa53b;
+    color: white;
+  }
+}
+
+.who-help {
+  font-size: 2.5rem;
+  .who-help-1 {
+    background: #6422b8;
+    color: white;
+  }
+  .who-1-1 {
+    background: #7ed957;
+    color: white;
+    font-size: 2rem;
+  }
+  .who-1-2 {
+    background: #ff3131;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .who-help-2 {
+    background: #ffa53b;
+    color: white;
+  }
+
+  .who-2-1 {
+    background: #7ed957;
+    color: white;
+    font-size: 2rem;
+  }
+  .who-2-2 {
+    background: #ff3131;
+    font-size: 2rem;
+    color: white;
+  }
+  .who-help-3 {
+    background: #a548ff;
+    color: white;
+  }
+
+  .who-3-1 {
+    background: #7ed957;
+    color: white;
+    font-size: 2rem;
+  }
+  .who-3-2 {
+    background: #ff3131;
+    font-size: 2rem;
+    color: white;
   }
 }

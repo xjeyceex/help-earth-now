@@ -1,5 +1,13 @@
+'use client'
+
+import { LocationContext } from './location-provider';
+import { useContext } from 'react';
+
 export default function Header() {
-  const video_url = "https://www.youtube.com/embed/4ZmGmryMKI4?si=dFc6ZBnIF5N3-hS3";
+  const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+  const location = useContext(LocationContext);
+
   return (
     <div>
 

@@ -9,12 +9,22 @@ interface LocationState {
   city?: string;
   state?: string;
   country?: string;
+  countryCode?: string;
 }
 
 export const LocationContext = createContext<LocationState | undefined>(undefined);
 
+const defaultLocation: LocationState = {
+  latitude: 40.7128,
+  longitude: -74.0060,
+  region: "New York",
+  city: "New York City",
+  state: "New York",
+  country: "United States",
+  countryCode: "US"
+};
+
 const getLocation = (setLocation: (location: LocationState) => void): void => {
-  // Geolocation is supported
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -33,56 +43,32 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
             city: data.address.city || data.address.town || data.address.village || undefined,
             state: data.address.state || undefined,
             country: data.address.country || undefined,
+            countryCode: data.address.country_code?.toUpperCase() || undefined,
           });
         } catch (error) {
           console.error("Error fetching location data:", error);
-          // Default to a US city in case of API failure
-          setLocation({
-            latitude: 40.7128, 
-            longitude: -74.0060, 
-            region: "New York",
-            city: "New York City",
-            state: "New York",
-            country: "United States",
-          });
+          setLocation(defaultLocation);
         }
       },
       (error) => {
-        console.log("Geolocation access denied or failed:", error.message);
-        // Default to a US city in case of geolocation failure
-        setLocation({
-          latitude: 40.7128, 
-          longitude: -74.0060, 
-          region: "New York",
-          city: "New York City",
-          state: "New York",
-          country: "United States",
-        });
+        console.error("Geolocation access denied or failed:", error.message);
+        setLocation(defaultLocation);
       }
     );
   } else {
-    console.log("Geolocation is not supported by this browser.");
-    // Default to a US city if geolocation is not supported
-    setLocation({
-      latitude: 40.7128, 
-      longitude: -74.0060, 
-      region: "New York",
-      city: "New York City",
-      state: "New York",
-      country: "United States",
-    });
+    console.error("Geolocation is not supported by this browser.");
+    setLocation(defaultLocation);
   }
 };
 
-
 export default function LocationProvider({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
-
+  console.log(location)
   useEffect(() => {
     getLocation(setLocation);
   }, []);
 
-  return (  
+  return (
     <LocationContext.Provider value={location}>
       {children}
     </LocationContext.Provider>

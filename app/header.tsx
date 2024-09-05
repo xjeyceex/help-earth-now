@@ -7,11 +7,13 @@ export default function Header() {
   const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
   const location = useContext(LocationContext);
-
   return (
     <div>
 
       <div className="grid grid-cols-3 premise">
+        <div className="care-about col-span-3 text-center p-2">
+        This is your Location: {location?.region || location?.city || location?.state || location?.country || 'United States'}      
+        </div>
         <div className="title col-span-2 text-center p-12">
           Climate change is hurting us all - now
         </div>

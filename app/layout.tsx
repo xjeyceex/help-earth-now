@@ -8,7 +8,7 @@ import { Theme } from '@radix-ui/themes';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Climante change is hurting us all",
+  title: "Climate change is hurting us all",
   description: "Be informed of current political agenda relevant to you and your location",
 };
 

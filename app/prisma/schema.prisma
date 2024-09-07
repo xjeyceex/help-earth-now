@@ -20,4 +20,5 @@ model users{
   email String
   createDate DateTime @default(now())
   updateDate DateTime @updatedAt
+  isAdmin Boolean @default(false)
 }

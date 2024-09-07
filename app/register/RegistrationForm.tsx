@@ -33,6 +33,10 @@ export const RegistrationForm = () => {
         const form = e.target as HTMLFormElement;
         form.reset();
         
+        // Alert the user of successful registration
+        alert('User registered successfully');
+        window.location.href = '/login';
+        
         // Uncomment to auto-login user after successful registration
         // const result = await signIn('credentials', {
         //   redirect: false, 
@@ -124,7 +128,7 @@ export const RegistrationForm = () => {
           type="submit"
           className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300"
         >
-          Sign In
+          Register
         </button>
       </div>
     </form>

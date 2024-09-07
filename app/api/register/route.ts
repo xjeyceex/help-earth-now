@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 
-// Initialize Prisma Client
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
     const { firstName, lastName, email, password } = await req.json();
-    console.log('password:', password);
 
-    // Insert user data into the "users" table using Prisma
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await prisma.users.create({
       data: {
         firstName,
         lastName,
         email,
-        password,
+        password: hashedPassword, 
         updateDate: new Date(),
       },
     });
@@ -27,9 +27,12 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error('Error:', error);
 
+    // Ensure the error object has a message property
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+
     return NextResponse.json(
-      { message: "An Error has occurred" },
+      { message: errorMessage },
       { status: 500 }
     );
   }
-}
+};

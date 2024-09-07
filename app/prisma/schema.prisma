@@ -17,7 +17,7 @@ model users{
   id String @id @default(cuid())
   firstName String
   lastName String
-  email String
+  email String @unique
   createDate DateTime @default(now())
   updateDate DateTime @updatedAt
   isAdmin Boolean @default(false)

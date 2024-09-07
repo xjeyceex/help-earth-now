@@ -15,13 +15,13 @@ interface LocationState {
 export const LocationContext = createContext<LocationState | undefined>(undefined);
 
 const defaultLocation: LocationState = {
-  latitude: 40.7128,
-  longitude: -74.0060,
-  region: "New York",
-  city: "New York City",
-  state: "New York",
+  latitude: 0,
+  longitude: 0,
+  region: undefined,
+  city: undefined,
+  state: undefined,
   country: "United States",
-  countryCode: "US"
+  countryCode: "US",
 };
 
 const getLocation = (setLocation: (location: LocationState) => void): void => {
@@ -63,7 +63,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
 
 export default function LocationProvider({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
-
+  console.log(location)
   useEffect(() => {
     getLocation(setLocation);
   }, []);

@@ -2,18 +2,33 @@
 
 import { LocationContext } from './location-provider';
 import { useContext } from 'react';
+import Link from 'next/link';
 
 export default function Header() {
   const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
   const location = useContext(LocationContext);
+  
   return (
     <div>
 
-      <div className="grid grid-cols-3 premise">
-        <div className="care-about col-span-3 text-center p-2">
-        This is your Location: {location?.region || location?.city || location?.state || location?.country || 'United States'}      
+      <div className="grid grid-cols-3 premise w-screen">
+        <div className="care-about col-span-3 px-8 py-4 bg-white shadow-md flex justify-between items-center">
+          <p className="text-lg font-medium text-gray-800">
+            This is your Location: {location?.region || location?.city || location?.state || location?.country || 'United States'}
+          </p>
+          
+          <div className="flex items-center space-x-2">
+            <Link className="text-sm text-black hover:underline" href="/login">
+              Sign In
+            </Link>
+            <span className="text-sm text-black">|</span>
+            <Link className="text-sm text-black hover:underline" href="/register">
+              Sign Up
+            </Link>
+          </div>
         </div>
+
         <div className="title col-span-2 text-center p-12">
           Climate change is hurting us all - now
         </div>

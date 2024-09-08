@@ -41,7 +41,7 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="bg-white p-6 w-full max-w-md">
+      <div className="bg-white p-6 w-screen max-w-md rounded-xl">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
 
         {error && <p className="text-red-500 mb-4">Invalid Username or Password</p>}
@@ -70,12 +70,13 @@ export const LoginForm = () => {
           />
         </div>
 
-        <p className="text-center pb-3">
+        {/* For Registration if ever needed */}
+        {/* <p className="text-center pb-3">
           Need to create an account?{' '}
           <Link className="text-indigo-500 hover:underline" href="/register">
             Create Account
           </Link>
-        </p>
+        </p> */}
 
         <button
           type="submit"

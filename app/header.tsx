@@ -19,13 +19,18 @@ export default function Header() {
           </p>
           
           <div className="flex items-center space-x-2">
-            <Link className="text-sm text-black hover:underline" href="/login">
+            <Link className="text-base text-black hover:underline" href="/login">
               Sign In
             </Link>
-            <span className="text-sm text-black">|</span>
-            <Link className="text-sm text-black hover:underline" href="/register">
-              Sign Up
-            </Link>
+
+            {/* {user.loggedin && <Link className="text-sm text-black hover:underline" href="/login">
+              Sign Out
+              </Link>
+              <span className="text-sm text-black">|</span>
+              <Link className="text-sm text-black hover:underline" href="/admin">
+                Admin Panel
+              </Link>
+            } */}
           </div>
         </div>
 

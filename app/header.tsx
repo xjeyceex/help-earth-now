@@ -21,11 +21,11 @@ export default function Header() {
           <div className="flex items-center space-x-2">
             {status === 'authenticated' ? (
               <>
-                <Link className="text-sm text-black hover:underline" href="/api/auth/signout">
+                <Link className="text-base text-black hover:underline" href="/api/auth/signout">
                   Sign Out
                 </Link>
-                <span className="text-sm text-black">|</span>
-                <Link className="text-sm text-black hover:underline" href="/admin">
+                <span className="text-base text-black">|</span>
+                <Link className="text-base text-black hover:underline" href="/admin">
                   Admin Panel
                 </Link>
               </>

@@ -69,7 +69,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
 
 export default function LocationProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
-
+  console.log('location',location)
   const updateLocation = () => {
     getLocation(setLocation);
   };

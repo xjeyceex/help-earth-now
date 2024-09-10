@@ -16,12 +16,12 @@ export const metadata: Metadata = {
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  session?: Session; // Add session type
+  session?: Session; 
 }
 
 export default function RootLayout({
   children,
-  session, // Accept session prop
+  session,
 }: RootLayoutProps) {
   return (
     <html lang="en">

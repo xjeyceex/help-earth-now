@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect, ReactNode } from 'react';
 
 interface LocationState {
   latitude: number;
@@ -12,7 +12,13 @@ interface LocationState {
   countryCode?: string;
 }
 
-export const LocationContext = createContext<LocationState | undefined>(undefined);
+interface LocationContextProps {
+  location: LocationState | undefined;
+  updateLocation: () => void;
+  setManualLocation: (manualLocation: LocationState) => void;
+}
+
+export const LocationContext = createContext<LocationContextProps | undefined>(undefined);
 
 const defaultLocation: LocationState = {
   latitude: 0,
@@ -61,15 +67,23 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
   }
 };
 
-export default function LocationProvider({ children }: { children: React.ReactNode }) {
+export default function LocationProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
+
+  const updateLocation = () => {
+    getLocation(setLocation);
+  };
+
+  const setManualLocation = (manualLocation: LocationState) => {
+    setLocation(manualLocation);
+  };
 
   useEffect(() => {
     getLocation(setLocation);
   }, []);
 
   return (
-    <LocationContext.Provider value={location}>
+    <LocationContext.Provider value={{ location, updateLocation, setManualLocation }}>
       {children}
     </LocationContext.Provider>
   );

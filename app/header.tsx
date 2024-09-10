@@ -1,42 +1,14 @@
-"use client";
-
-import { useSession } from 'next-auth/react';
+'use client'
 import { LocationContext } from './location-provider';
 import { useContext } from 'react';
-import Link from 'next/link';
 
 export default function Header() {
   const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-  const location = useContext(LocationContext);
-  const { data: session, status } = useSession(); 
+  const context = useContext(LocationContext);
   return (
     <div>
       <div className="grid grid-cols-3 premise w-screen">
-        <div className="care-about col-span-3 px-8 py-4 bg-white shadow-md flex justify-between items-center">
-          <p className="text-lg font-medium text-gray-800">
-            This is your Location: {location?.region || location?.city || location?.state || location?.country || 'United States'}
-          </p>
-
-          <div className="flex items-center space-x-2">
-            {status === 'authenticated' ? (
-              <>
-                <Link className="text-base text-black hover:underline" href="/api/auth/signout">
-                  Sign Out
-                </Link>
-                <span className="text-base text-black">|</span>
-                <Link className="text-base text-black hover:underline" href="/admin">
-                  Admin Panel
-                </Link>
-              </>
-            ) : (
-              <Link className="text-base text-black hover:underline" href="/login">
-                Sign In
-              </Link>
-            )}
-          </div>
-        </div>
-
         <div className="title col-span-2 text-center p-12">
           Climate change is hurting us all - now
         </div>

@@ -10,7 +10,3 @@ export const states = [
     'West Virginia', 'Wisconsin', 'Wyoming'
   ];
   
-  export const regions = [
-    'Northeast', 'Southwest', 'West', 'Southeast', 'Midwest'
-  ];
-  

@@ -16,9 +16,8 @@ export async function POST(req: Request) {
       where: { email },
     });
 
-    // If user not found, return 404
     if (!user) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json({ message: "Invalid user/password combination" }, { status: 404 });
     }
 
     // Compare the entered password with the hashed password in the DB
@@ -26,7 +25,7 @@ export async function POST(req: Request) {
     
     // If password does not match, return an error
     if (!isPasswordValid) {
-      return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
+      return NextResponse.json({ message: "Invalid user/password combination" }, { status: 401 });
     }
 
     // If login is successful, create a JWT token

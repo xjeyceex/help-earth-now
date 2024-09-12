@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, createContext, useEffect, ReactNode } from 'react';
 
@@ -67,15 +67,44 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
   }
 };
 
+const getLocationByState = async (state: string, setLocation: (location: LocationState) => void) => {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?q=${state}&format=json&addressdetails=1`
+    );
+    const data = await response.json();
+    if (data && data.length > 0) {
+      const { lat, lon } = data[0];
+      setLocation({
+        latitude: parseFloat(lat),
+        longitude: parseFloat(lon),
+        state,
+        country: data[0]?.address?.country || 'United States',
+        countryCode: data[0]?.address?.country_code?.toUpperCase() || 'US',
+        region: data[0]?.address.region || undefined,
+      });
+    } else {
+      setLocation(defaultLocation);
+    }
+  } catch (error) {
+    console.error("Error fetching location data by state:", error);
+    setLocation(defaultLocation);
+  }
+};
+
 export default function LocationProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
-  console.log('location',location)
+  
   const updateLocation = () => {
     getLocation(setLocation);
   };
 
   const setManualLocation = (manualLocation: LocationState) => {
-    setLocation(manualLocation);
+    if (manualLocation.state) {
+      getLocationByState(manualLocation.state, setLocation);
+    } else {
+      setLocation(manualLocation);
+    }
   };
 
   useEffect(() => {

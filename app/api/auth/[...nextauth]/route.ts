@@ -36,7 +36,8 @@ const authHandler = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const response = await fetch('http://localhost:3000/api/auth/login', {
+          const hostName = process.env.HOSTNAME
+          const response = await fetch(`${hostName}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -71,17 +72,17 @@ const authHandler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id; // This should be a string
-        token.email = user.email; // This should be a string
-        token.accessToken = user.token; // This could be string or undefined
+        token.id = user.id;
+        token.email = user.email; 
+        token.accessToken = user.token; 
       }
       return token;
     },
     async session({ session, token }) {
       session.user = {
-        id: token.id as string, // Ensure id is treated as a string
-        email: token.email as string, // Ensure email is treated as a string
-        token: token.accessToken ?? '', // Use an empty string if accessToken is undefined
+        id: token.id as string,
+        email: token.email as string, 
+        token: token.accessToken ?? '', 
       };
       return session;
     },

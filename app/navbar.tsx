@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useSession } from 'next-auth/react';
 import { LocationContext } from './location-provider';
 import { useContext, useState, useEffect } from 'react';
@@ -52,8 +52,8 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="bg-white shadow-md flex justify-between items-center px-8 py-4 w-screen max-w-screen-xl mx-auto">
-        <div className="flex items-center space-x-4">
+      <div className="bg-rose-300 flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full max-w-screen-xl mx-auto">
+        <div className="flex flex-1 items-center space-x-4 mb-2 md:mb-0">
           <p className="text-lg font-medium text-gray-800">
             Current Location: {location?.region || location?.city || location?.state || location?.country || 'United States'}
           </p>
@@ -65,42 +65,42 @@ export default function Navbar() {
           </button>
         </div>
 
-        <div className="relative flex items-center">
+        <div className="relative flex flex-1 items-center">
           <input
             type="email"
             onChange={handleEmailChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-2 w-full"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-2 w-full md:w-64"
             placeholder="Your Email address..."
           />
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-1 justify-end items-center space-x-2 mt-2 md:mt-0">
           {status === 'authenticated' ? (
             <div className="inline-flex space-x-2 text-sm">
-              <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition">
+              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition">
                 <Link href="/api/auth/signout">
                   Sign Out
                 </Link>
               </button>
-              <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
                 <Link href="/admin">
                   Admin Panel
                 </Link>
               </button>
             </div>
           ) : (
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition">
-            <Link href="/login">
-              Sign In
-            </Link>
-          </button>
+            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition">
+              <Link href="/login">
+                Sign In
+              </Link>
+            </button>
           )}
         </div>
       </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="text-lg font-semibold mb-4">Update Location</h2>
             <div className="mb-4">
               <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">State</label>

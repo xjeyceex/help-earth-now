@@ -14,6 +14,7 @@ export default function Navbar() {
   const [selectedState, setSelectedState] = useState(location?.state || '');
   const [email, setEmail] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [counties, setCounties] = useState<string[]>([]);
 
   useEffect(() => {
     if (location) {
@@ -34,7 +35,24 @@ export default function Navbar() {
     setEmail(e.target.value);
   };
 
-  const handleUpdateLocation = () => {
+  const handleUpdateLocation = async () => {
+    if (!selectedState) {
+      console.warn('Please select a state');
+      return;
+    }
+    
+    try {
+      const res = await fetch(`/api/getCounties?state=${selectedState}`);
+      console.log(res)
+      if (!res.ok) {
+        throw new Error('Failed to fetch counties');
+      }
+      const data = await res.json();
+      console.log('data.counties', data.counties); // List of counties
+    } catch (error) {
+      console.error('Error fetching counties:', error);
+    }
+
     if (setManualLocation) {
       const newLocation = {
         latitude: location?.latitude || 0,

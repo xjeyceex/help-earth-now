@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect, ReactNode } from 'react';
 
 interface LocationState {
   latitude: number;
@@ -10,18 +10,26 @@ interface LocationState {
   state?: string;
   country?: string;
   countryCode?: string;
+  county?: string;
 }
 
-export const LocationContext = createContext<LocationState | undefined>(undefined);
+interface LocationContextProps {
+  location: LocationState | undefined;
+  updateLocation: () => void;
+  setManualLocation: (manualLocation: LocationState) => void;
+}
+
+export const LocationContext = createContext<LocationContextProps | undefined>(undefined);
 
 const defaultLocation: LocationState = {
-  latitude: 40.7128,
-  longitude: -74.0060,
-  region: "New York",
-  city: "New York City",
-  state: "New York",
+  latitude: 0,
+  longitude: 0,
+  region: undefined,
+  city: undefined,
+  state: undefined,
   country: "United States",
-  countryCode: "US"
+  countryCode: "US",
+  county: undefined, 
 };
 
 const getLocation = (setLocation: (location: LocationState) => void): void => {
@@ -32,7 +40,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
 
         try {
           const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
           );
           const data = await response.json();
 
@@ -44,6 +52,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
             state: data.address.state || undefined,
             country: data.address.country || undefined,
             countryCode: data.address.country_code?.toUpperCase() || undefined,
+            county: data.address.county || undefined, 
           });
         } catch (error) {
           console.error("Error fetching location data:", error);
@@ -61,15 +70,23 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
   }
 };
 
-export default function LocationProvider({ children }: { children: React.ReactNode }) {
+export default function LocationProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
-  console.log(location)
+  
+  const updateLocation = () => {
+    getLocation(setLocation);
+  };
+
+  const setManualLocation = (manualLocation: LocationState) => {
+    setLocation(manualLocation);
+  };
+
   useEffect(() => {
     getLocation(setLocation);
   }, []);
 
   return (
-    <LocationContext.Provider value={location}>
+    <LocationContext.Provider value={{ location, updateLocation, setManualLocation }}>
       {children}
     </LocationContext.Provider>
   );

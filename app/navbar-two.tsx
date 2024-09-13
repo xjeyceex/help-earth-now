@@ -3,24 +3,24 @@ import { useSession } from 'next-auth/react';
 import { LocationContext } from './location-provider';
 import { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { states } from './us-locations';
+import { states, counties as allCounties } from './us-locations';
 
 interface County {
   name: string;
   countyCode: number;
 }
 
-export default function Navbar() {
+export default function NavbarTwo() {
   const context = useContext(LocationContext);
   const { location, setManualLocation } = context || {};
   const { data: session, status } = useSession();
 
-  const [selectedRegion, setSelectedRegion] = useState(location?.region || '');
-  const [selectedState, setSelectedState] = useState(location?.state || '');
-  const [email, setEmail] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [counties, setCounties] = useState<County[]>([]);
-  const [selectedCounty, setSelectedCounty] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState<string>(location?.region || '');
+  const [selectedState, setSelectedState] = useState<string>(location?.state || '');
+  const [email, setEmail] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [counties, setCounties] = useState<string[]>([]);
+  const [selectedCounty, setSelectedCounty] = useState<string>('');
 
   useEffect(() => {
     if (location) {
@@ -28,6 +28,15 @@ export default function Navbar() {
       setSelectedState(location.state || '');
     }
   }, [location]);
+
+  useEffect(() => {
+    if (selectedState) {
+      const stateCounties = allCounties[selectedState] || [];
+      setCounties(stateCounties);
+    } else {
+      setCounties([]);
+    }
+  }, [selectedState]);
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
@@ -41,7 +50,7 @@ export default function Navbar() {
     setSelectedCounty(e.target.value);
   };
 
-  const handleUpdateLocation = async () => {
+  const handleUpdateLocation = () => {
     if (setManualLocation) {
       const newLocation = {
         latitude: location?.latitude || 0,
@@ -56,28 +65,6 @@ export default function Navbar() {
     }
     setIsModalOpen(false);
   };
-
-  const fetchCountyByState = async () => {
-    if (!selectedState) {
-      console.warn('Please select a state');
-      return;
-    }
-    try {
-      const res = await fetch(`/api/getCounties?state=${selectedState}`);
-
-      if (!res.ok) {
-        throw new Error('Failed to fetch counties');
-      }
-      const data = await res.json();
-      setCounties(data.counties || []);
-    } catch (error) {
-      console.error('Error fetching counties:', error);
-    }
-  }
-
-  useEffect(()=>{
-    fetchCountyByState()
-  }, [selectedState])
 
   return (
     <>
@@ -153,9 +140,9 @@ export default function Navbar() {
                   className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
                 >
                   <option value="">Select County</option>
-                  {counties.map(county => (
-                    <option key={county.countyCode} value={county.countyCode} className="text-gray-700">
-                      {county.name}
+                  {counties.map((county, index) => (
+                    <option key={index} value={county} className="text-gray-700">
+                      {county}
                     </option>
                   ))}
                 </select>
@@ -180,4 +167,4 @@ export default function Navbar() {
       )}
     </>
   );
-}
+};

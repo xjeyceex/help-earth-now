@@ -61,6 +61,7 @@ export default function NavbarTwo() {
       <div className="bg-rose-300 flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full mx-auto">
         <div className="flex flex-1 items-center space-x-4 mb-2 md:mb-0">
           <p className="text-lg font-medium text-gray-800">
+            {/* Displays the County + Region or City and so on */}
             Current Location: {location?.county ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` : location?.region || location?.city || location?.state || location?.country || 'United States'}
           </p>
           <button
@@ -83,14 +84,14 @@ export default function NavbarTwo() {
         <div className="flex flex-1 justify-end items-center space-x-2 mt-2 md:mt-0">
           {status === 'authenticated' ? (
             <div className="inline-flex space-x-2 text-sm">
-              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition">
-                <Link href="/api/auth/signout">
-                  Sign Out
-                </Link>
-              </button>
               <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
                 <Link href="/admin">
                   Admin Panel
+                </Link>
+              </button>
+              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition">
+                <Link href="/api/auth/signout">
+                  Sign Out
                 </Link>
               </button>
             </div>

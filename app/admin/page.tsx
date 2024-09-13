@@ -3,6 +3,9 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import AdminNavbar from '../components/AdminNavbar';
+import AdminPanel from './admin-panel';
+import ContentManagement from '../content/content-management';
 
 export default function Admin() {
   const { status } = useSession();
@@ -32,9 +35,9 @@ export default function Admin() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">Admin Only Page</h1>
-      <p className="text-lg text-gray-600">Welcome! This page is only accessible by authenticated users.</p>
-    </div>
+    <>
+      <AdminNavbar/>
+      <AdminPanel/>
+    </>
   );
 }

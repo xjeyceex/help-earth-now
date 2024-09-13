@@ -5,11 +5,6 @@ import { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { states, counties as allCounties } from './us-locations';
 
-interface County {
-  name: string;
-  countyCode: number;
-}
-
 export default function NavbarTwo() {
   const context = useContext(LocationContext);
   const { location, setManualLocation } = context || {};
@@ -21,13 +16,6 @@ export default function NavbarTwo() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
-
-  useEffect(() => {
-    if (location) {
-      setSelectedRegion(location.region || '');
-      setSelectedState(location.state || '');
-    }
-  }, [location]);
 
   useEffect(() => {
     if (selectedState) {

@@ -10,6 +10,7 @@ interface LocationState {
   state?: string;
   country?: string;
   countryCode?: string;
+  county?: string;
 }
 
 interface LocationContextProps {
@@ -28,6 +29,7 @@ const defaultLocation: LocationState = {
   state: undefined,
   country: "United States",
   countryCode: "US",
+  county: undefined, 
 };
 
 const getLocation = (setLocation: (location: LocationState) => void): void => {
@@ -38,7 +40,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
 
         try {
           const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
           );
           const data = await response.json();
 
@@ -50,6 +52,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
             state: data.address.state || undefined,
             country: data.address.country || undefined,
             countryCode: data.address.country_code?.toUpperCase() || undefined,
+            county: data.address.county || undefined, 
           });
         } catch (error) {
           console.error("Error fetching location data:", error);
@@ -67,31 +70,6 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
   }
 };
 
-const getLocationByState = async (state: string, setLocation: (location: LocationState) => void) => {
-  try {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?q=${state}&format=json&addressdetails=1`
-    );
-    const data = await response.json();
-    if (data && data.length > 0) {
-      const { lat, lon } = data[0];
-      setLocation({
-        latitude: parseFloat(lat),
-        longitude: parseFloat(lon),
-        state,
-        country: data[0]?.address?.country || 'United States',
-        countryCode: data[0]?.address?.country_code?.toUpperCase() || 'US',
-        region: data[0]?.address.region || undefined,
-      });
-    } else {
-      setLocation(defaultLocation);
-    }
-  } catch (error) {
-    console.error("Error fetching location data by state:", error);
-    setLocation(defaultLocation);
-  }
-};
-
 export default function LocationProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<LocationState | undefined>(undefined);
   
@@ -100,11 +78,7 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
   };
 
   const setManualLocation = (manualLocation: LocationState) => {
-    if (manualLocation.state) {
-      getLocationByState(manualLocation.state, setLocation);
-    } else {
-      setLocation(manualLocation);
-    }
+    setLocation(manualLocation);
   };
 
   useEffect(() => {

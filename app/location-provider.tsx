@@ -57,23 +57,23 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
           };
 
           setLocation(locationData);
-          Cookies.set('userLocation', JSON.stringify(locationData), { expires: 365 });
+          // Cookies.set('userLocation', JSON.stringify(locationData), { expires: 365 });
         } catch (error) {
           console.error("Error fetching location data:", error);
           setLocation(defaultLocation);
-          Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
+          // Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
         }
       },
       (error) => {
         console.error("Geolocation access denied or failed:", error.message);
         setLocation(defaultLocation);
-        Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
+        // Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
       }
     );
   } else {
     console.error("Geolocation is not supported by this browser.");
     setLocation(defaultLocation);
-    Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
+    // Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
   }
 };
 
@@ -86,7 +86,7 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
 
   const setManualLocation = (manualLocation: LocationState) => {
     setLocation(manualLocation);
-    Cookies.set('userLocation', JSON.stringify(manualLocation), { expires: 365 });
+    // Cookies.set('userLocation', JSON.stringify(manualLocation), { expires: 365 });
   };
 
   useEffect(() => {

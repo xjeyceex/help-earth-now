@@ -1,22 +1,36 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { v4 as uuidv4 } from 'uuid';
 
 const CookieConsent = () => {
-  const [isConsentGiven, setIsConsentGiven] = useState(false);
+  const [showConsent, setShowConsent] = useState<boolean>(false);
 
   useEffect(() => {
+    // Check if the consent cookie is set
     const consent = Cookies.get('cookieConsent');
-    if (consent) {
-      setIsConsentGiven(true);
+    if (!consent) {
+      // If no consent cookie, show the consent banner
+      setShowConsent(true);
     }
   }, []);
 
   const handleConsent = () => {
+    // Set the cookie consent
     Cookies.set('cookieConsent', 'true', { expires: 365 });
-    setIsConsentGiven(true);
+
+    // Generate and set visitor ID if not already set
+    const visitorID = Cookies.get('visitorID');
+    if (!visitorID) {
+      const newVisitorID = uuidv4();
+      Cookies.set('visitorID', newVisitorID, { expires: 365 });
+    }
+
+    // Hide the consent banner after setting consent
+    setShowConsent(false);
   };
 
-  if (isConsentGiven) return null; 
+  // Render nothing if consent is given
+  if (!showConsent) return null;
 
   return (
     <div className="fixed bottom-0 inset-x-0 bg-white shadow-md p-4 flex justify-between items-center">

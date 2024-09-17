@@ -63,8 +63,10 @@ export default function NavbarTwo() {
       <div className="bg-rose-300 flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full mx-auto">
         <div className="flex flex-1 items-center space-x-4 mb-2 md:mb-0">
           <p className="text-lg font-medium text-gray-800">
-            {/* Displays the County + Region or City and so on */}
-            Current Location: {location?.county ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` : location?.region || location?.city || location?.state || location?.country || 'United States'}
+            {/* if County exists Displays the County + Region or City and so on */}
+            Current Location: {location?.county ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
+            : 
+            location?.region || location?.city || location?.state || location?.country || 'United States'}
           </p>
           <button
             onClick={() => setIsModalOpen(true)}

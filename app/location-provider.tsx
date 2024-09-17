@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, createContext, useEffect, ReactNode } from 'react';
+import Cookies from 'js-cookie';
 
 interface LocationState {
   latitude: number;
@@ -44,7 +45,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
           );
           const data = await response.json();
 
-          setLocation({
+          const locationData: LocationState = {
             latitude,
             longitude,
             region: data.address.region || undefined,
@@ -53,20 +54,26 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
             country: data.address.country || undefined,
             countryCode: data.address.country_code?.toUpperCase() || undefined,
             county: data.address.county || undefined, 
-          });
+          };
+
+          setLocation(locationData);
+          Cookies.set('userLocation', JSON.stringify(locationData), { expires: 365 });
         } catch (error) {
           console.error("Error fetching location data:", error);
           setLocation(defaultLocation);
+          Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
         }
       },
       (error) => {
         console.error("Geolocation access denied or failed:", error.message);
         setLocation(defaultLocation);
+        Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
       }
     );
   } else {
     console.error("Geolocation is not supported by this browser.");
     setLocation(defaultLocation);
+    Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
   }
 };
 
@@ -79,10 +86,16 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
 
   const setManualLocation = (manualLocation: LocationState) => {
     setLocation(manualLocation);
+    Cookies.set('userLocation', JSON.stringify(manualLocation), { expires: 365 });
   };
 
   useEffect(() => {
-    getLocation(setLocation);
+    const cookieLocation = Cookies.get('userLocation');
+    if (cookieLocation) {
+      setLocation(JSON.parse(cookieLocation));
+    } else {
+      getLocation(setLocation);
+    }
   }, []);
 
   return (

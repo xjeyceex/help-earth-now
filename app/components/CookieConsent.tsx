@@ -6,23 +6,29 @@ import { v4 as uuidv4 } from 'uuid';
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+
 
   useEffect(() => {
-    // Check if the consent cookie is set
     const consent = Cookies.get('cookieConsent');
     if (!consent) {
-      // If no consent cookie, show the consent banner
       setShowConsent(true);
       
-      // Trigger sliding animation after render
-      setTimeout(() => {
+      if (isFirstRender) {
+        // Trigger sliding animation after render only on first load
+        setTimeout(() => {
+          setIsVisible(true);
+        }, 100); // Short delay for animation
+      } else {
+        // No animation on subsequent renders
         setIsVisible(true);
-      }, 100); // Short delay for animation
+      }
+
+      setIsFirstRender(false);
     }
-  }, []);
+  }, [isFirstRender]);
 
   const handleConsent = () => {
-    // Set the cookie consent
     Cookies.set('cookieConsent', 'true', { expires: 365 });
 
     // Generate and set visitor ID if not already set
@@ -32,14 +38,12 @@ const CookieConsent = () => {
       Cookies.set('visitorID', newVisitorID, { expires: 365 });
     }
 
-    // Hide the consent banner after setting consent
     setIsVisible(false);
     setTimeout(() => {
       setShowConsent(false);
-    }, 300); // Match the duration of the slide out animation
+    }, 300);
   };
 
-  // Render nothing if consent is given
   if (!showConsent) return null;
 
   return (
@@ -55,7 +59,7 @@ const CookieConsent = () => {
             href="/cookie-policy"
             className="text-blue-600 underline hover:text-blue-800"
           >
-            Cookies Policy
+            Cookie Policy
           </a>.
         </p>
       </div>

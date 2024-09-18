@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
+import Link from 'next/link';
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState<boolean>(false);
@@ -55,12 +56,12 @@ const CookieConsent = () => {
       <div className="text-sm text-gray-700">
         <p>
           This website uses cookies to ensure you get the best experience on our website.{' '}
-          <a
+          <Link
             href="/cookie-policy"
             className="text-blue-600 underline hover:text-blue-800"
           >
             Cookie Policy
-          </a>.
+          </Link>.
         </p>
       </div>
       <div className="flex justify-start mt-4">

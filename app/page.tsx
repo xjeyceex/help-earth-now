@@ -3,6 +3,7 @@ import What from "./what";
 import Who from "./who";
 import Navbar from "./navbar";
 import NavbarTwo from "./navbar-two";
+import CookieConsent from "./components/CookieConsent";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Header />
       <What />
       <Who />
+      <CookieConsent/>
     </main>
   );
 }

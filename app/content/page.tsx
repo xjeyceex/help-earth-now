@@ -1,4 +1,5 @@
 import AdminNavbar from "../components/AdminNavbar";
+import CookieConsent from "../components/CookieConsent";
 import ContentManagement from "./content-management"
 
 export default function Content() {
@@ -6,6 +7,7 @@ export default function Content() {
     <>
       <AdminNavbar/>
       <ContentManagement/>
+      <CookieConsent/>
     </>
   );
 }

@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';

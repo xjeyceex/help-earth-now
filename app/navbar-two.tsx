@@ -4,7 +4,6 @@ import { LocationContext } from './location-provider';
 import { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { states, counties as allCounties } from './us-locations';
-import CookieConsent from './components/CookieConsent';
 
 export default function NavbarTwo() {
   const context = useContext(LocationContext);
@@ -59,7 +58,6 @@ export default function NavbarTwo() {
 
   return (
     <>
-      <CookieConsent/>
       <div className="bg-rose-300 flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 w-full mx-auto">
         <div className="flex flex-1 items-center space-x-4 mb-2 md:mb-0">
           <p className="text-lg font-medium text-gray-800">

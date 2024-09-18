@@ -68,7 +68,7 @@ export default function NavbarTwo() {
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
+            className="px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition"
           >
             Change Location
           </button>
@@ -86,19 +86,19 @@ export default function NavbarTwo() {
         <div className="flex flex-1 justify-end items-center space-x-2 mt-2 md:mt-0">
           {status === 'authenticated' ? (
             <div className="inline-flex space-x-2 text-sm">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition">
                 <Link href="/admin">
                   Admin Panel
                 </Link>
               </button>
-              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition">
+              <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition">
                 <Link href="/api/auth/signout">
                   Sign Out
                 </Link>
               </button>
             </div>
           ) : (
-            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition">
+            <button className="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded-full transition">
               <Link href="/login">
                 Sign In
               </Link>

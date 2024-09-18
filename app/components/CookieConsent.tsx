@@ -67,7 +67,7 @@ const CookieConsent = () => {
       <div className="flex justify-start mt-4">
         <button
           onClick={handleConsent}
-          className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
+          className="bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition"
         >
           Accept
         </button>

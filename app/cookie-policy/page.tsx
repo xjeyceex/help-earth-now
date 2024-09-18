@@ -8,6 +8,7 @@ export default function CookiePolicy() {
                         This Cookie Policy explains what cookies are, how we use cookies, and your options regarding cookies on our website.
                     </p>
                 </div>
+
                 <div className="p-6">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">What Are Cookies?</h2>
                     <p className="text-gray-700 mb-6">
@@ -20,17 +21,21 @@ export default function CookiePolicy() {
                     </p>
                     <ul className="list-disc list-inside text-gray-600 mb-4">
                         <li>Enhance site functionality and user experience.</li>
-                        <li>Analyze site traffic and usage.</li>
+                        <li>Analyze site traffic and usage to improve our service.</li>
+                        <li>Provide certain functionalities like remembering your login details.</li>
                     </ul>
                     <span className="text-gray-600 block">
-                        We do not keep any personal information through cookies.
+                        We do not and will never collect or store any personal information through cookies.
                     </span>
 
-                    <br/>
+                    <br />
 
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Managing Cookies</h2>
                     <p className="text-gray-700 mb-6">
-                        You can manage or disable cookies through your browser settings. For detailed instructions, refer to your browser’s help section.
+                        You can manage or disable cookies through your browser settings. For detailed instructions, refer to your browser’s help section or visit{' '}
+                        <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                            www.aboutcookies.org
+                        </a>.
                     </p>
 
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Your Choices</h2>
@@ -38,13 +43,6 @@ export default function CookiePolicy() {
                         By using our site, you consent to our use of cookies. You can withdraw your consent or manage cookie preferences at any time through your browser settings.
                     </p>
 
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Contact Us</h2>
-                    <p className="text-gray-700 mb-2">
-                        If you have any questions about our use of cookies, please contact us at:
-                    </p>
-                    <p className="text-gray-600">
-                        <strong>Email:</strong> <a href="mailto:support@example.com" className="text-blue-600 hover:underline">support@example.com</a><br />
-                    </p>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ import AdminNavbar from '../components/AdminNavbar';
 import AdminPanel from './admin-panel';
 import ContentManagement from '../content/content-management';
 import CookieConsent from '../components/CookieConsent';
+import NavbarTwo from '../navbar-two';
 
 export default function Admin() {
   const { status } = useSession();
@@ -38,7 +39,7 @@ export default function Admin() {
   return (
     <>
       <CookieConsent/>
-      <AdminNavbar/>
+      <NavbarTwo/>
       <AdminPanel/>
     </>
   );

@@ -21,7 +21,6 @@ export default function CookiePolicy() {
                     <ul className="list-disc list-inside text-gray-600 mb-4">
                         <li>Enhance site functionality and user experience.</li>
                         <li>Analyze site traffic and usage.</li>
-                        <li>Provide personalized content and advertisements.</li>
                     </ul>
                     <span className="text-gray-600 block">
                         We do not keep any personal information through cookies.
@@ -45,7 +44,6 @@ export default function CookiePolicy() {
                     </p>
                     <p className="text-gray-600">
                         <strong>Email:</strong> <a href="mailto:support@example.com" className="text-blue-600 hover:underline">support@example.com</a><br />
-                        <strong>Phone:</strong> +1-234-567-890
                     </p>
                 </div>
             </div>

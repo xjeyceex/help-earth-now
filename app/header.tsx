@@ -7,8 +7,8 @@ export default function Header() {
 
   const context = useContext(LocationContext);
   return (
-    <div>
-      <div className="grid grid-cols-3 premise w-screen">
+    <div className='w-full'>
+      <div className="grid grid-cols-3 premise">
         <div className="title col-span-2 text-center p-12">
           Climate change is hurting us all - now
         </div>

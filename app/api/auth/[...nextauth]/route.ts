@@ -36,7 +36,7 @@ const authHandler = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const hostName = process.env.HOSTNAME
+          const hostName = process.env.HOSTNAME || 'http://localhost:3000'; // Fallback to localhost for local builds
           const response = await fetch(`${hostName}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -45,21 +45,20 @@ const authHandler = NextAuth({
               password: credentials?.password,
             }),
           });
-      
-          const data = await response.json();
-      
-          if (response.ok && data.token) {
 
-            return { id: data.id, email: data.email, token: data.token };
-          } else {
-            console.error('Authorization failed:', data);
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Authorization failed:', errorData);
             return null;
           }
+
+          const data = await response.json();
+          return { id: data.id, email: data.email, token: data.token };
         } catch (error) {
           console.error('Error during authorization:', error);
           return null;
         }
-      }      
+      },
     }),
   ],
   pages: {
@@ -72,21 +71,21 @@ const authHandler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id; 
-        token.email = user.email; 
-        token.accessToken = user.token; 
+        token.id = user.id;
+        token.email = user.email;
+        token.accessToken = user.token;
       }
       return token;
     },
     async session({ session, token }) {
       session.user = {
-        id: token.id as string, 
-        email: token.email as string, 
-        token: token.accessToken ?? '', 
+        id: token.id as string,
+        email: token.email as string,
+        token: token.accessToken ?? '',
       };
       return session;
     },
-  },  
+  },
 });
 
 export { authHandler as GET, authHandler as POST };

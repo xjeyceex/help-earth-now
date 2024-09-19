@@ -23,7 +23,7 @@ export default function Navbar() {
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
-    setSelectedCounty('')
+    setSelectedCounty('');
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,27 +51,26 @@ export default function Navbar() {
     setIsModalOpen(false);
   };
 
-  const fetchCountyByState = async () => {
-    if (!selectedState) {
-      console.warn('Please select a state');
-      return;
-    }
-    try {
-      const res = await fetch(`/api/getCounties?state=${selectedState}`);
-
-      if (!res.ok) {
-        throw new Error('Failed to fetch counties');
+  useEffect(() => {
+    const fetchCountyByState = async () => {
+      if (!selectedState) {
+        console.warn('Please select a state');
+        return;
       }
-      const data = await res.json();
-      setCounties(data.counties || []);
-    } catch (error) {
-      console.error('Error fetching counties:', error);
-    }
-  }
+      try {
+        const res = await fetch(`/api/getCounties?state=${selectedState}`);
+        if (!res.ok) {
+          throw new Error('Failed to fetch counties');
+        }
+        const data = await res.json();
+        setCounties(data.counties || []);
+      } catch (error) {
+        console.error('Error fetching counties:', error);
+      }
+    };
 
-  useEffect(()=>{
-    fetchCountyByState()
-  }, [selectedState, fetchCountyByState])
+    fetchCountyByState();
+  }, [selectedState]);
 
   return (
     <>

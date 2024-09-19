@@ -71,7 +71,7 @@ export default function Navbar() {
 
   useEffect(()=>{
     fetchCountyByState()
-  }, [selectedState])
+  }, [selectedState, fetchCountyByState])
 
   return (
     <>

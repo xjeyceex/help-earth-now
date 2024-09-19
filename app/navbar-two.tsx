@@ -10,8 +10,8 @@ export default function NavbarTwo() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkClasses = (path: string) =>
-    `block px-4 py-2 transition text-lg ${
-      pathname === path ? 'text-gray-400' : 'text-white hover:text-gray-300'
+    `block px-4 py-2 transition text-sm ${
+      pathname === path ? 'text-white' : 'text-gray-400 hover:text-gray-300'
     }`;
 
   const toggleMenu = () => {
@@ -21,12 +21,12 @@ export default function NavbarTwo() {
   return (
     <nav className="bg-black w-full sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8 p-4">
-        
+
         {/* Brand / Logo */}
         <div className="text-white text-2xl font-bold">MyApp</div>
 
         {/* Spacer */}
-        <div className="w-full"></div>
+        <div className="w-auto"></div>
 
         {/* Hamburger button for small screens */}
         <div className="md:hidden">
@@ -66,7 +66,7 @@ export default function NavbarTwo() {
               </Link>
               <Link
                 href="/api/auth/signout"
-                className="px-4 py-2 text-white hover:text-red-500 transition"
+                className="px-4 py-2 text-gray-400 text-sm hover:text-red-500 transition"
               >
                 Sign Out
               </Link>

@@ -53,11 +53,17 @@ export default function LocationAndEmail() {
 
   return (
     <>
+      <div className="text-center bg-red-400 w-full">
+        <h1 className="text-3xl font-bold py-8 text-white">Provide Your Location and Email</h1>
+        <p className="text-white text-2xl pb-8 ">
+          To give you the best information based on your location and keep you updated via email, please provide your location and email address below.
+        </p>
+      </div>
       <div className="flex flex-col md:flex-row w-full mx-auto">
         {/* Location Section */}
         <div className="flex-1 bg-yellow-300 p-6 flex items-center justify-center">
-          <div className="w-full max-w-md text-center">
-            <p className="text-3xl font-medium text-black mb-4">
+          <div className="w-full max-w-md text-center m-6">
+            <p className="text-3xl font-medium text-black mb-8">
               Current Location: {location?.county ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
               : 
               location?.region || location?.city || location?.state || location?.country || 'United States'}
@@ -72,14 +78,17 @@ export default function LocationAndEmail() {
         </div>
 
         {/* Email Section */}
-        <div className="flex-1 bg-red-300 p-6 flex items-center justify-center">
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-md focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-2 w-full max-w-md"
-            placeholder="Enter your email address here..."
-          />
+        <div className="flex-1 bg-cyan-300 p-6 flex items-center justify-center">
+          <div className="w-full max-w-md text-center m-6">
+            <p className="text-3xl font-medium text-black mb-8"> Enter your Email here: </p>
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-md focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-2 w-full max-w-md"
+              placeholder="Enter your email address here..."
+            />
+          </div>
         </div>
       </div>
 

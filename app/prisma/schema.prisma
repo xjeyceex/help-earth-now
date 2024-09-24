@@ -22,4 +22,5 @@ model users{
   updateDate DateTime @updatedAt
   isAdmin Boolean @default(false)
   password String
+  isActive Boolean @default(true)
 }

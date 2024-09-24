@@ -14,6 +14,10 @@ export default function NavbarTwo() {
       pathname === path ? 'text-white' : 'text-gray-400 hover:text-gray-300'
     }`;
 
+    if (status !== 'authenticated') {
+      return null; // Hide the navbar if the user is not authenticated
+    }
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };

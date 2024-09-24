@@ -7,8 +7,8 @@ export default function Header() {
 
   const context = useContext(LocationContext);
   return (
-    <div>
-      <div className="grid grid-cols-3 premise w-screen">
+    <div className='w-full'>
+      <div className="grid grid-cols-3 premise">
         <div className="title col-span-2 text-center p-12">
           Climate change is hurting us all - now
         </div>
@@ -23,10 +23,10 @@ export default function Header() {
       </div>
 
       <div className="grid grid-cols-3 exposition">
-        <iframe className="col-span-2 row-span-2 exposition-video" src={video_url} ></iframe>
+        <iframe className="col-span-2 row-span-2 exposition-video" src={video_url}></iframe>
         <div className="row-span-2">
           <div className="exposition-warning p-12">
-            It's bad and it's getting worse
+            It&apos;s bad and it&apos;s getting worse
           </div>
           <div className="exposition-link p-12">
             What can I do?

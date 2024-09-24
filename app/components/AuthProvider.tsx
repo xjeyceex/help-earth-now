@@ -11,7 +11,7 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children, session }) => {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session || undefined}>
       {children}
     </SessionProvider>
   );

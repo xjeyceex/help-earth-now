@@ -5,7 +5,8 @@ import LocationProvider from "./location-provider";
 import AuthProvider from "./components/AuthProvider";
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
-import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
+import { Session } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,18 +17,18 @@ export const metadata: Metadata = {
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  session?: Session; 
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  session,
 }: RootLayoutProps) {
+  const session: Session | null = await getSession(); 
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <Theme>
-          <AuthProvider session={session}>
+          <AuthProvider session={session || undefined}>  
             <LocationProvider>
               {children}
             </LocationProvider>

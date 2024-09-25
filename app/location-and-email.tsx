@@ -53,47 +53,38 @@ export default function LocationAndEmail() {
 
   return (
     <>
-      <div className="text-center bg-red-400 w-full">
-        <h1 className="text-3xl font-bold py-8 text-white">Provide Your Location and Email</h1>
-        <p className="text-white text-2xl pb-8 ">
-          To give you the best information based on your location and keep you updated via email, please provide your location and email address below.
-        </p>
-      </div>
-      <div className="flex flex-col md:flex-row w-full mx-auto">
-        {/* Location Section */}
-        <div className="flex-1 bg-yellow-300 p-6 flex items-center justify-center">
-          <div className="w-full max-w-md text-center m-6">
-            <p className="text-3xl font-medium text-black mb-8">
-              Current Location: {location?.county ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
-              : 
-              location?.region || location?.city || location?.state || location?.country || 'United States'}
-            </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="px-4 py-2 bg-blue-600 text-white text-xl rounded-md hover:bg-blue-700 transition"
-            >
-              Change Location
-            </button>
-          </div>
+      {/* Footer-like subtle section */}
+      <div className="fixed bottom-0 w-full bg-black p-4 flex justify-between items-center text-white shadow-lg">
+        {/* Location Button */}
+        <div className="flex items-center">
+          <p className="mr-4">
+            Location: {location?.county 
+              ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}`
+              : location?.region || location?.city || location?.state || location?.country || 'United States'}
+          </p>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition"
+          >
+            Change Location
+          </button>
         </div>
 
-        {/* Email Section */}
-        <div className="flex-1 bg-cyan-300 p-6 flex items-center justify-center">
-          <div className="w-full max-w-md text-center m-6">
-            <p className="text-3xl font-medium text-black mb-8"> Enter your Email here: </p>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-md focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-2 w-full max-w-md"
-              placeholder="Enter your email address here..."
-            />
-          </div>
+        {/* Email Input */}
+        <div className="flex items-center">
+          <input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-1"
+            placeholder="Enter email..."
+          />
         </div>
       </div>
 
+      {/* Modal for changing location */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="text-lg font-semibold mb-4">Update Location</h2>
             <div className="mb-4">

@@ -1,18 +1,16 @@
 'use client';
 import { useContext, useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { LocationContext } from './location-provider';
 import { states, counties as allCounties } from './us-locations';
 
 export default function LocationAndEmail() {
   const { location, setManualLocation } = useContext(LocationContext) || {};
-  const { data: session, status } = useSession();
-
   const [selectedState, setSelectedState] = useState<string>(location?.state || '');
   const [email, setEmail] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
+  const [isEmailSaved, setIsEmailSaved] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedState) {
@@ -51,6 +49,13 @@ export default function LocationAndEmail() {
     setIsModalOpen(false);
   };
 
+  const handleSaveEmail = () => {
+    setIsEmailSaved(true);
+    setTimeout(() => {
+      setIsEmailSaved(false);
+    }, 2000);
+  };
+
   return (
     <>
       {/* Footer-like subtle section */}
@@ -70,8 +75,8 @@ export default function LocationAndEmail() {
           </button>
         </div>
 
-        {/* Email Input */}
-        <div className="flex items-center">
+        {/* Email Input with Save Button */}
+        <div className="flex items-center space-x-2">
           <input
             type="email"
             value={email}
@@ -79,6 +84,12 @@ export default function LocationAndEmail() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 pl-3 pr-3 py-1"
             placeholder="Enter email..."
           />
+          <button
+            onClick={handleSaveEmail}
+            className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition"
+          >
+            Save Email
+          </button>
         </div>
       </div>
 
@@ -131,6 +142,21 @@ export default function LocationAndEmail() {
                 Save
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal to confirm email save */}
+      {isEmailSaved && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md text-center">
+            <h2 className="text-lg font-semibold mb-4">Email Saved!</h2>
+            <button
+              onClick={() => setIsEmailSaved(false)}
+              className="px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}

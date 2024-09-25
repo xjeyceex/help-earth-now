@@ -1,11 +1,6 @@
-'use client'
-import { LocationContext } from './location-provider';
-import { useContext } from 'react';
-
 export default function Header() {
   const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-  const context = useContext(LocationContext);
   return (
     <div className='w-full'>
       <div className="grid grid-cols-3 premise">

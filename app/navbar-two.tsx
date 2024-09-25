@@ -15,7 +15,7 @@ export default function NavbarTwo() {
     }`;
 
     if (status !== 'authenticated') {
-      return null; // Hide the navbar if the user is not authenticated
+      return null; 
     }
 
   const toggleMenu = () => {

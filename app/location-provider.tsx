@@ -11,7 +11,7 @@ interface LocationState {
   state?: string;
   country?: string;
   countryCode?: string;
-  county?: string;
+  county?: string; 
 }
 
 interface LocationContextProps {
@@ -33,6 +33,25 @@ const defaultLocation: LocationState = {
   county: undefined, 
 };
 
+const fetchLocationFromIP = async (setLocation: (location: LocationState) => void) => {
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+    const data = await response.json();
+    const ipLocation: LocationState = {
+      latitude: data.latitude || 0,
+      longitude: data.longitude || 0,
+      region: data.region || '',
+      state: data.region || '',
+      country: data.country || 'United States',
+      county: '',
+      countryCode: data.country_code?.toUpperCase() || undefined,
+    };
+    setLocation(ipLocation);
+  } catch (error) {
+    console.error('Error fetching location from IP:', error);
+  }
+};
+
 const getLocation = (setLocation: (location: LocationState) => void): void => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -40,9 +59,7 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
         const { latitude, longitude } = position.coords;
 
         try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
-          );
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`);
           const data = await response.json();
 
           const locationData: LocationState = {
@@ -57,23 +74,20 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
           };
 
           setLocation(locationData);
-          // Cookies.set('userLocation', JSON.stringify(locationData), { expires: 365 });
+          Cookies.set('userLocation', JSON.stringify(locationData), { expires: 365 });
         } catch (error) {
           console.error("Error fetching location data:", error);
-          setLocation(defaultLocation);
-          // Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
+          fetchLocationFromIP(setLocation);
         }
       },
       (error) => {
         console.error("Geolocation access denied or failed:", error.message);
-        setLocation(defaultLocation);
-        // Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
+        fetchLocationFromIP(setLocation);
       }
     );
   } else {
     console.error("Geolocation is not supported by this browser.");
-    setLocation(defaultLocation);
-    // Cookies.set('userLocation', JSON.stringify(defaultLocation), { expires: 365 });
+    fetchLocationFromIP(setLocation);
   }
 };
 
@@ -86,7 +100,7 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
 
   const setManualLocation = (manualLocation: LocationState) => {
     setLocation(manualLocation);
-    // Cookies.set('userLocation', JSON.stringify(manualLocation), { expires: 365 });
+    Cookies.set('userLocation', JSON.stringify(manualLocation), { expires: 365 });
   };
 
   useEffect(() => {
@@ -94,6 +108,7 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
     if (cookieLocation) {
       setLocation(JSON.parse(cookieLocation));
     } else {
+      setLocation(defaultLocation);
       getLocation(setLocation);
     }
   }, []);

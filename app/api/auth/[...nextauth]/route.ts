@@ -36,7 +36,7 @@ const authHandler = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const hostName = process.env.HOSTNAME || 'http://localhost:3000'; // Fallback to localhost for local builds
+          const hostName = process.env.HOSTNAME; 
           const response = await fetch(`${hostName}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -2,118 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Premise */
 .premise .title {
   font-size: 4rem;
   background: #ffd93b;
-}
-
-.premise .care-about {
-  font-size: 2.5rem;
-  color: white;
-  background: #ff738e;
-  .care-about-list {
-    font-size: 2rem;
-  }
-}
-
-.exposition {
-  font-size: 2rem;
-  .exposition-video {
-    width: 100%;
-    height: 100%;
-  }
-  .exposition-warning {
-    background: #ffa53b;
-    color: white;
-  }
-  .exposition-link {
-    background: #7ed957;
-    color: white;
-  }
-}
-
-.how-help {
-  font-size: 2.5rem;
-  .questions-1 {
-    background: #6422b8;
-    color: white;
-  }
-  .answer-1 {
-    background: #7ed957;
-    color: white;
-  }
-  .questions-2 {
-    background: #00c4cc;
-    color: white;
-  }
-  .answer-2 {
-    background: #ffd93b;
-    color: white;
-  }
-  .questions-3 {
-    background: #a548ff;
-    color: white;
-  }
-  .answer-3 {
-    background: #ffa53b;
-    color: white;
-  }
-}
-
-.who-help {
-  font-size: 2.5rem;
-  .who-help-1 {
-    background: #6422b8;
-    color: white;
-  }
-  .who-1-1 {
-    background: #7ed957;
-    color: white;
-    font-size: 2rem;
-  }
-  .who-1-2 {
-    background: #ff3131;
-    font-size: 2rem;
-    color: white;
-  }
-
-  .who-help-2 {
-    background: #ffa53b;
-    color: white;
-  }
-
-  .who-2-1 {
-    background: #7ed957;
-    color: white;
-    font-size: 2rem;
-  }
-  .who-2-2 {
-    background: #ff3131;
-    font-size: 2rem;
-    color: white;
-  }
-  .who-help-3 {
-    background: #a548ff;
-    color: white;
-  }
-
-  .who-3-1 {
-    background: #7ed957;
-    color: white;
-    font-size: 2rem;
-  }
-  .who-3-2 {
-    background: #ff3131;
-    font-size: 2rem;
-    color: white;
-  }
-}
-
-/* Responsive font size adjustments */
-@media (max-width: 768px) {
-  .premise .title {
-    font-size: 2rem; /* Smaller font for mobile screens */
-  }
 }
 
 .premise .care-about {
@@ -126,17 +18,7 @@
   font-size: 2rem;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-  .premise .care-about {
-    font-size: 1.5rem; /* Smaller font for mobile screens */
-  }
-  
-  .premise .care-about .care-about-list {
-    font-size: 1.2rem;
-  }
-}
-
+/* Exposition */
 .exposition {
   font-size: 2rem;
 }
@@ -156,8 +38,107 @@
   color: white;
 }
 
-/* Adjustments for smaller screens */
+/* How Help */
+.how-help {
+  font-size: 2.5rem;
+}
+
+.how-help .questions-1,
+.how-help .questions-2,
+.how-help .questions-3,
+.how-help .answer-1,
+.how-help .answer-2,
+.how-help .answer-3 {
+  color: white;
+}
+
+.how-help .questions-1 {
+  background: #6422b8;
+}
+
+.how-help .answer-1 {
+  background: #7ed957;
+}
+
+.how-help .questions-2 {
+  background: #00c4cc;
+}
+
+.how-help .answer-2 {
+  background: #ffd93b;
+}
+
+.how-help .questions-3 {
+  background: #a548ff;
+}
+
+.how-help .answer-3 {
+  background: #ffa53b;
+}
+
+/* Who Help */
+.who-help {
+  font-size: 2.5rem;
+}
+
+.who-help .who-help-1,
+.who-help .who-help-2,
+.who-help .who-help-3 {
+  font-size: 2rem;
+}
+
+.who-help .who-1-1,
+.who-help .who-1-2,
+.who-help .who-2-1,
+.who-help .who-2-2,
+.who-help .who-3-1,
+.who-help .who-3-2 {
+  font-size: 1.6rem;
+}
+
+.who-help .who-1-1,
+.who-help .who-2-1,
+.who-help .who-3-1 {
+  background: #7ed957;
+  color: rgb(255, 255, 255);
+}
+
+.who-help .who-1-2,
+.who-help .who-2-2,
+.who-help .who-3-2 {
+  background: #ff3131;
+  color: white;
+}
+
+.who-help .who-help-1 {
+  background: #6422b8;
+  color: white;
+}
+
+.who-help .who-help-2 {
+  background: #ffa53b;
+  color: white;
+}
+
+.who-help .who-help-3 {
+  background: #a548ff;
+  color: white;
+}
+
+/* Responsive Font Size Adjustments */
 @media (max-width: 768px) {
+  .premise .title {
+    font-size: 2rem;
+  }
+
+  .premise .care-about {
+    font-size: 1.5rem;
+  }
+
+  .premise .care-about .care-about-list {
+    font-size: 1.2rem;
+  }
+
   .exposition {
     font-size: 1.5rem;
   }
@@ -167,44 +148,7 @@
     font-size: 1.2rem;
     padding: 1rem;
   }
-}
 
-.how-help {
-  font-size: 2.5rem;
-}
-
-.how-help .questions-1 {
-  background: #6422b8;
-  color: white;
-}
-
-.how-help .answer-1 {
-  background: #7ed957;
-  color: white;
-}
-
-.how-help .questions-2 {
-  background: #00c4cc;
-  color: white;
-}
-
-.how-help .answer-2 {
-  background: #ffd93b;
-  color: white;
-}
-
-.how-help .questions-3 {
-  background: #a548ff;
-  color: white;
-}
-
-.how-help .answer-3 {
-  background: #ffa53b;
-  color: white;
-}
-
-/* Responsive adjustments for 'how-help' */
-@media (max-width: 768px) {
   .how-help {
     font-size: 1.8rem;
   }
@@ -218,37 +162,31 @@
     font-size: 1.2rem;
     padding: 1rem;
   }
-}
 
-.who-help {
-  font-size: 2.5rem;
-}
-
-.who-help .who-help-1 {
-  background: #6422b8;
-  color: white;
-}
-
-.who-help .who-1-1 {
-  background: #7ed957;
-  color: white;
-  font-size: 2rem;
-}
-
-.who-help .who-1-2 {
-  background: #ff3131;
-  font-size: 2rem;
-  color: white;
-}
-
-/* Responsive adjustments for 'who-help' */
-@media (max-width: 768px) {
   .who-help {
+    font-size: 1.5rem;
+  }
+
+  .who-help .who-help-1,
+  .who-help .who-help-2,
+  .who-help .who-help-3 {
     font-size: 1.8rem;
   }
 
   .who-help .who-1-1,
-  .who-help .who-1-2 {
+  .who-help .who-1-2,
+  .who-help .who-2-1,
+  .who-help .who-2-2,
+  .who-help .who-3-1,
+  .who-help .who-3-2 {
     font-size: 1.2rem;
+  }
+
+  .who-help .p-6 {
+    padding: 1rem;
+  }
+
+  .who-help .p-12 {
+    padding: 1.5rem;
   }
 }

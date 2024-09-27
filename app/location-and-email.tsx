@@ -12,6 +12,7 @@ export default function LocationAndEmail() {
   const [selectedCounty, setSelectedCounty] = useState<string>('');
   const [isEmailSaved, setIsEmailSaved] = useState<boolean>(false);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false); // State for collapse/expand
 
   useEffect(() => {
     if (selectedState) {
@@ -29,7 +30,6 @@ export default function LocationAndEmail() {
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailRegex.test(e.target.value));
   };
@@ -54,7 +54,6 @@ export default function LocationAndEmail() {
   };
 
   const handleSaveEmail = () => {
-    // Check if the email is valid before saving
     if (isEmailValid) {
       setIsEmailSaved(true);
       setTimeout(() => {
@@ -65,44 +64,57 @@ export default function LocationAndEmail() {
     }
   };
 
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
     <>
-      <div className="fixed bottom-0 w-full bg-black p-2 md:p-4 flex flex-col md:flex-row justify-center md:justify-between items-center text-white shadow-lg z-50">
-        <div className="flex items-center mb-2 md:mb-0">
-          <p className="mr-2 text-xs md:text-sm text-center md:text-left">
-            Location: {location?.county 
-              ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
-              : location?.region || location?.city || location?.state || location?.country || 'United States'}
-          </p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="px-2 py-1 bg-blue-600 text-white text-xs md:text-sm rounded hover:bg-blue-700 transition"
-          >
-            Change Location
+      <div className="fixed bottom-0 w-full bg-black p-2 md:p-4 text-white shadow-lg z-50">
+        <div className="flex justify-center items-center">
+          <button onClick={toggleCollapse} className="text-white text-lg">
+            {isCollapsed ? ' ↑' : '↓'} 
           </button>
         </div>
 
-        <div className="flex items-center w-full md:w-auto justify-center md:justify-start mx-2">
-          <p className="mr-2 text-xs md:text-sm text-center md:text-left">
-            If you would like occasional updates:
-          </p>
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            className={`w-full md:w-auto bg-gray-50 border ${isEmailValid ? 'border-gray-300' : 'border-red-500'} text-gray-900 text-xs md:text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 px-2 py-1`}
-            placeholder="Enter email..."
-          />
-          <button
-            onClick={handleSaveEmail}
-            className="ml-2 px-2 py-1 bg-green-600 text-white text-xs md:text-sm rounded hover:bg-green-700 transition"
-          >
-            Save
-          </button>
-        </div>
+        {!isCollapsed && (
+          <div className="flex flex-col md:flex-row justify-center md:justify-between items-center">
+            <div className="flex items-center mb-2 md:mb-0">
+              <p className="mr-2 text-xs md:text-sm text-center md:text-left">
+                Location: {location?.county 
+                  ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
+                  : location?.region || location?.city || location?.state || location?.country || 'United States'}
+              </p>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-2 py-1 bg-blue-600 text-white text-xs md:text-sm rounded hover:bg-blue-700 transition"
+              >
+                Change Location
+              </button>
+            </div>
+
+            <div className="flex items-center w-full md:w-auto justify-center md:justify-start mx-2">
+              <p className="mr-2 text-xs md:text-sm text-center md:text-left">
+                If you would like occasional updates:
+              </p>
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                className={`w-full md:w-auto bg-gray-50 border ${isEmailValid ? 'border-gray-300' : 'border-red-500'} text-gray-900 text-xs md:text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 px-2 py-1`}
+                placeholder="Enter email..."
+              />
+              <button
+                onClick={handleSaveEmail}
+                className="ml-2 px-2 py-1 bg-green-600 text-white text-xs md:text-sm rounded hover:bg-green-700 transition"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Modal for changing location */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-xs sm:max-w-md flex flex-col items-center">
@@ -155,7 +167,6 @@ export default function LocationAndEmail() {
         </div>
       )}
 
-      {/* Modal to confirm email save */}
       {isEmailSaved && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md text-center">

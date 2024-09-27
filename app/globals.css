@@ -170,7 +170,7 @@
   .who-help .who-help-1,
   .who-help .who-help-2,
   .who-help .who-help-3 {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
   }
 
   .who-help .who-1-1,
@@ -188,5 +188,11 @@
 
   .who-help .p-12 {
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .who-help .who-help-3 {
+    font-size: 0.8rem;
   }
 }

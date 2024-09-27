@@ -11,7 +11,7 @@ interface ContentItem {
   type: string;
 }
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 4;
 
 export default function ContentManagement() {
   const { status } = useSession();
@@ -22,7 +22,6 @@ export default function ContentManagement() {
   const [newContentType, setNewContentType] = useState("article");
   const [filterType, setFilterType] = useState("all");
 
-  // Example content for now
   useEffect(() => {
     setContentItems([
       { id: 1, title: "First Article", isActive: true, type: "article" },
@@ -34,7 +33,6 @@ export default function ContentManagement() {
     ]);
   }, []);
 
-  // Redirect if not authenticated
   useEffect(() => {
     if (status === "loading") return;
     if (status === "unauthenticated") {
@@ -51,8 +49,8 @@ export default function ContentManagement() {
         type: newContentType
       };
       setContentItems([newItem, ...contentItems]);
-      setNewContentTitle(""); // Reset input field
-      setNewContentType("article"); // Reset content type
+      setNewContentTitle("");
+      setNewContentType("article");
     }
   };
 
@@ -68,10 +66,10 @@ export default function ContentManagement() {
     );
   };
 
-  // Pagination logic
-  const filteredItems = filterType === "all"
-    ? contentItems
-    : contentItems.filter(item => item.type === filterType);
+  const filteredItems =
+    filterType === "all"
+      ? contentItems
+      : contentItems.filter(item => item.type === filterType);
 
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
@@ -93,15 +91,16 @@ export default function ContentManagement() {
 
   return (
     <div className="p-4">
-      <div className="flex items-center justify-between mb-4">
-        {/* Content Type Filter */}
-        <div>
-          <label htmlFor="filterType" className="mr-2">Content Management:</label>
+      <div className="flex flex-col md:flex-row items-center justify-between mb-4">
+        <div className="w-full md:w-auto mb-2 md:mb-0">
+          <label htmlFor="filterType" className="mr-2">
+            Content Management:
+          </label>
           <select
             id="filterType"
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="border p-2 rounded-md"
+            className="border p-2 rounded-md w-full md:w-auto"
           >
             <option value="all">All</option>
             <option value="article">Article</option>
@@ -111,62 +110,58 @@ export default function ContentManagement() {
         </div>
       </div>
 
-      {/* Add New Content Section */}
-      <div className="mb-4">
+      <div className="flex flex-col md:flex-row md:items-center mb-4 space-y-2 md:space-y-0">
         <input
           type="text"
           value={newContentTitle}
           onChange={(e) => setNewContentTitle(e.target.value)}
           placeholder="Enter new content title"
-          className="border p-2 rounded-md mr-2"
+          className="border p-2 rounded-md w-full md:w-auto mr-0 md:mr-2"
         />
-
-        {/* Content Type Selection for New Content */}
         <select
           value={newContentType}
           onChange={(e) => setNewContentType(e.target.value)}
-          className="border p-2 rounded-md mr-2"
+          className="border p-2 rounded-md w-full md:w-auto mr-0 md:mr-2"
         >
           <option value="article">Article</option>
           <option value="video">Video</option>
           <option value="podcast">Podcast</option>
         </select>
-
         <button
           onClick={handleAddContent}
-          className="bg-green-500 text-white px-4 py-2 rounded-md"
+          className="bg-green-500 text-white px-4 py-2 rounded-md w-full md:w-auto"
         >
           Add Content
         </button>
       </div>
 
-      {/* Content Items List */}
       <div className="space-y-4">
         {currentItems.map(item => (
           <div key={item.id} className="p-4 border rounded-md bg-white">
             <p className="text-lg">{item.title} ({item.type})</p>
-            <button
-              onClick={() => handleEditContent(item)}
-              className="mr-4 bg-blue-500 text-white px-4 py-2 rounded-md"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDeactivateContent(item.id)}
-              className="bg-red-500 text-white px-4 py-2 rounded-md"
-            >
-              Deactivate
-            </button>
+            <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0">
+              <button
+                onClick={() => handleEditContent(item)}
+                className="mr-4 bg-blue-500 text-white px-4 py-2 rounded-md w-full md:w-auto"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeactivateContent(item.id)}
+                className="bg-red-500 text-white px-4 py-2 rounded-md w-full md:w-auto"
+              >
+                Deactivate
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Pagination Controls */}
-      <div className="mt-4 flex justify-between items-center">
+      <div className="mt-4 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className={`px-4 py-2 bg-gray-300 rounded-md ${
+          className={`px-4 py-2 bg-gray-300 rounded-md w-full md:w-auto ${
             currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -178,7 +173,7 @@ export default function ContentManagement() {
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className={`px-4 py-2 bg-gray-300 rounded-md ${
+          className={`px-4 py-2 bg-gray-300 rounded-md w-full md:w-auto ${
             currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

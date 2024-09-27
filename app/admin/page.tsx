@@ -3,7 +3,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import AdminNavbar from '../components/AdminNavbar';
 import AdminPanel from './admin-panel';
 import ContentManagement from '../content/content-management';
 import CookieConsent from '../components/CookieConsent';

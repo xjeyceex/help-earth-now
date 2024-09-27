@@ -70,7 +70,7 @@ export default function LocationAndEmail() {
 
   return (
     <>
-      <div className="fixed bottom-0 w-full bg-black p-2 md:p-4 text-white shadow-lg z-50">
+      <div className="sticky bottom-0 w-full bg-black p-2 md:p-4 text-white shadow-lg z-50">
         <div className="flex justify-center items-center">
           <button onClick={toggleCollapse} className="text-white text-lg">
             {isCollapsed ? ' ↑' : '↓'} 

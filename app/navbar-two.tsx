@@ -76,7 +76,7 @@ export default function NavbarTwo() {
             </>
           ) : (
             <Link
-              href="/login"
+              href="/dontlogmein"
               className="px-4 py-2 text-white hover:text-blue-500 transition"
             >
               Sign In
@@ -114,7 +114,7 @@ export default function NavbarTwo() {
             </>
           ) : (
             <Link
-              href="/login"
+              href="/dontlogmein"
               className="block px-4 py-2 text-white hover:text-blue-500 transition"
             >
               Sign In

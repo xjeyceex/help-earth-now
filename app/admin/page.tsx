@@ -15,7 +15,7 @@ export default function Admin() {
   useEffect(() => {
     if (status === 'loading') return;
     if (status === 'unauthenticated') {
-      router.push('/login'); 
+      router.push('/'); 
     }
   }, [status, router]);
 

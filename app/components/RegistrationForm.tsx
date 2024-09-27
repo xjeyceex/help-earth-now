@@ -36,7 +36,7 @@ export const RegistrationForm = () => {
         setIsModalOpen(true); // Open the modal
         // Redirect after a short delay
         setTimeout(() => {
-          window.location.href = '/login';
+          window.location.href = '/';
         }, 2400); // Adjust delay as needed
 
         // Uncomment to auto-login user after successful registration
@@ -115,13 +115,6 @@ export const RegistrationForm = () => {
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
-
-          <p className="text-center pb-3">
-            Already have an account?{' '}
-            <Link className="text-indigo-500 hover:underline" href="/login">
-              Login
-            </Link>
-          </p>
 
           <button
             type="submit"

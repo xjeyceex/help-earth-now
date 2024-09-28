@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
@@ -25,12 +27,12 @@ export default function Header() {
           allowFullScreen
         ></iframe>
 
-        <div className="flex flex-col h-full">
-          <div className="exposition-warning p-6 text-xl md:text-2xl bg-yellow-400 text-white flex-grow">
-            It&apos;s bad and it&apos;s getting worse
+        <div className="flex flex-col h-full justify-center items-center">
+          <div className="exposition-warning p-6 text-xl md:text-2xl bg-yellow-400 text-white h-full w-full text-center">
+            It&apos;s bad and it&apos;s getting worse, and we need to fight it-now
           </div>
-          <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white flex-grow">
-            What can I do?
+          <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white h-full w-full text-center">
+            <Link href='/what' className="underline">What can I do?</Link>
           </div>
         </div>
       </div>

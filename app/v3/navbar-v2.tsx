@@ -12,12 +12,12 @@ export default function NavbarTwo() {
   const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
   const { location, setManualLocation } = useContext(LocationContext) || {};
   const [selectedState, setSelectedState] = useState<string>(location?.state || '');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
-
 
   const linkClasses = (path: string) =>
     `block px-4 py-2 transition text-sm ${
@@ -26,6 +26,10 @@ export default function NavbarTwo() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   useEffect(() => {
@@ -65,7 +69,7 @@ export default function NavbarTwo() {
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8 p-4">
         {/* Brand / Logo */}
         <div className="hidden sm:block">
-          <Link href="#home">
+          <Link href="/v3">
             <img src="/logo.png" alt="MyApp Logo" className="h-8 transform scale-150" /> {/* Adjust the scale value as needed */}
           </Link>
         </div>
@@ -118,22 +122,32 @@ export default function NavbarTwo() {
             Who
           </Link>
           
-          {/* Show only if authenticated */}
+          {/* Show dropdown if authenticated */}
           {status === 'authenticated' && (
-            <>
-              <Link href="/content" className={linkClasses('/content')}>
-                Content Management
-              </Link>
-              <Link href="/admin" className={linkClasses('/admin')}>
-                Admin Panel
-              </Link>
-              <Link
-                href="/api/auth/signout"
-                className="px-4 py-2 text-gray-400 text-sm hover:text-red-500 transition"
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                className={`text-gray-400 hover:text-gray-300 transition ${isDropdownOpen ? 'text-white' : ''}`}
               >
-                Sign Out
-              </Link>
-            </>
+                Menu
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute right-0 w-48 bg-black shadow-lg rounded mt-2">
+                  <Link href="/content" className={linkClasses('/content')}>
+                    Content Management
+                  </Link>
+                  <Link href="/admin" className={linkClasses('/admin')}>
+                    Admin Panel
+                  </Link>
+                  <Link
+                    href="/api/auth/signout"
+                    className="block px-4 py-2 text-white hover:text-red-500 transition"
+                  >
+                    Sign Out
+                  </Link>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -158,7 +172,7 @@ export default function NavbarTwo() {
             Who
           </Link>
 
-          {/* Show only if authenticated */}
+          {/* Show dropdown if authenticated */}
           {status === 'authenticated' && (
             <>
               <Link href="/content" className={linkClasses('/content')}>
@@ -213,20 +227,18 @@ export default function NavbarTwo() {
               ))}
             </select>
           </div>
-          <div className="flex justify-end space-x-2 w-full">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 bg-gray-300 text-gray-800 text-sm rounded-md hover:bg-gray-400 transition"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleUpdateLocation}
-              className="px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
-            >
-              Save
-            </button>
-          </div>
+          <button
+            onClick={handleUpdateLocation}
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+          >
+            Update Location
+          </button>
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="mt-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-200 transition"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     )}

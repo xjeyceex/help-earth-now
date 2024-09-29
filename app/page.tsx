@@ -16,7 +16,7 @@ export default function Home() {
       <Who />
       <CookieConsent/>
       <Footer/>
-      <LocationAndEmail/>
+      {/* <LocationAndEmail/> */}
     </main>
   );
 }

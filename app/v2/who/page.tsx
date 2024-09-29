@@ -9,7 +9,7 @@ export default function Home() {
       <NavbarTwo/>
       <Who/>
       <CookieConsent/>
-      <LocationAndEmail/>
+      {/* <LocationAndEmail/> */}
     </main>
   );
 }

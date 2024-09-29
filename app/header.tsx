@@ -22,7 +22,7 @@ export default function Header() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 exposition ">
         <iframe 
-          className="col-span-2 w-full h-40 md:h-auto md:min-h-[300px] aspect-video md:aspect-auto exposition-video"
+          className="col-span-2 w-full h-40 md:h-auto md:min-h-[600px] aspect-video md:aspect-auto exposition-video"
           src={video_url}
           allowFullScreen
         ></iframe>

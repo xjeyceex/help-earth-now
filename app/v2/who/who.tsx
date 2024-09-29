@@ -2,65 +2,60 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 
 export default function Who() {
-  return (
+	return (
     <>
-      <div className="grid grid-cols-3 gap-4 p-4 bg-gray-50 text-gray-800" id='who'>
-      
-        {/* President Section */}
-        <div className="col-span-3 text-2xl font-bold text-center py-4 border-b border-gray-300">
+      <div className="grid grid-cols-3 who-help" id='who'>
+
+        {/* Senate */}
+        <div className="flex items-center justify-center text-center who-help-1 p-4 md:p-8 row-span-2">
           President
         </div>
-        <div className="col-span-1 flex items-center justify-center text-center bg-blue-200 p-4 rounded-lg">
-          Kamala Harris - Rating 76
+        <div className="col-span-2 who-1-1 p-4 md:p-8">
+          Kamala Harris - Rating 76: <Link href='https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/' className="underline" target="_blank"> Calls climate crisis an urgent issue and prom​oted the IRA - spending $20B to fight climate change </Link>
         </div>
-        <div className="col-span-2 bg-white p-4 rounded-lg shadow">
-          <Link 
-          href="https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/"
-          className="underline text-blue-600" 
-          target="_blank">
-          Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change
-          </Link>
-        </div>
-        <div className="col-span-1 flex items-center justify-center text-center bg-red-200 p-4 rounded-lg">
-          Donald Trump - Rating -82
-        </div>
-        <div className="col-span-2 bg-white p-4 rounded-lg shadow">
-          <Link 
-          href="https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels"
-          className="underline text-blue-600"
-          target="_blank">
-          Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change
-          </Link>
+        <div className="col-span-2 who-1-2 p-4 md:p-8">
+          Donald Trump - Rating -82: <Link href='https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels' className="underline" target="_blank"> Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change </Link>
         </div>
 
-        {/* Senate Section */}
-        <div className="col-span-3 text-2xl font-bold text-center py-4 border-t border-b border-gray-300">
+        {/* Senate */}
+        <div className="flex items-center justify-center text-center who-help-2 p-4 md:p-8 row-span-8">
           Senate
         </div>
-        {[
-          { name: "Debbie Mucarsel-Powell", rating: 52 },
-          { name: "Rick Scott", rating: 10 },
-          { name: "Catherine Cortez Masto", rating: 12 },
-          { name: "Joe Manchin", rating: 10 },
-          { name: "Sherrod Brown", rating: 24 },
-          { name: "Jon Tester", rating: -12 },
-          { name: "Tammy Baldwin", rating: 65 },
-          { name: "Debbie Mucarsel-Powell", rating: -23 }
-        ].map((senator, index) => (
-          <div key={index} className={`col-span-1 ${index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100'} p-4 rounded-lg`}>
-          {senator.name} - Rating {senator.rating}
-          </div>
-        ))}
+        <div className="col-span-2 who-2-1 p-4 md:p-8">
+          Debbie Mucarsel-Powell - Rating 52
+        </div>
+        <div className="col-span-2 who-2-2 p-4 md:p-8">
+          Rick Scott - Rating 10
+        </div>
+        <div className="col-span-2 who-2-1 p-4 md:p-8">
+          Catherine Cortez Masto - Rating 12
+        </div>
+        <div className="col-span-2 who-2-2 p-4 md:p-8">
+          Joe Manchin - Rating 10
+        </div>
+        <div className="col-span-2 who-2-1 p-4 md:p-8">
+          Sherrod Brown - Rating 24
+        </div>
+        <div className="col-span-2 who-2-2 p-4 md:p-8">
+          Jon Tester - Rating -12
+        </div>
+        <div className="col-span-2 who-2-1 p-4 md:p-8">
+          Tammy Baldwin - Rating 65
+        </div>
+        <div className="col-span-2 who-2-2 p-4 md:p-8">
+          Debbie Mucarsel-Powell - Rating -23
+        </div>
 
-        {/* House of Representatives */}
-        <div className="col-span-3 text-2xl font-bold text-center py-4 border-t border-gray-300">
+        {/* House of Representative */}
+        <div className="flex items-center justify-center text-center who-help-3 p-4 md:p-8 row-span-1">
           House of Representatives
         </div>
-        <div className="col-span-1 flex items-center justify-center text-center bg-green-200 p-4 rounded-lg">
+        <div className="col-span-2 who-3-1 p-4 md:p-8">
           Gay Valimont - Rating 96
         </div>
       </div>
       <Footer/>
     </>
-  );
-}
+	);
+  }
+  

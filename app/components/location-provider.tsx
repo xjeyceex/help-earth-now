@@ -28,9 +28,37 @@ const defaultLocation: LocationState = {
   region: undefined,
   city: undefined,
   state: undefined,
-  country: "United States",
-  countryCode: "US",
-  county: undefined, 
+  country: 'United States',
+  countryCode: 'US',
+  county: undefined,
+};
+
+const fetchCountyFromCityOrState = async (location: LocationState, setLocation: (location: LocationState) => void) => {
+  const { latitude, longitude, city, region, state } = location;
+
+  if (!location.county && (city || region || state)) {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
+      );
+      const data = await response.json();
+
+      if (data.address && data.address.county) {
+        setLocation({
+          ...location,
+          county: data.address.county, // Update the county field
+        });
+        
+        // Save the updated location with county to cookies
+        Cookies.set('userLocation', JSON.stringify({
+          ...location,
+          county: data.address.county,
+        }), { expires: 365 });
+      }
+    } catch (error) {
+      console.error('Error fetching county from city or state:', error);
+    }
+  }
 };
 
 const fetchLocationFromIP = async (setLocation: (location: LocationState) => void) => {
@@ -47,6 +75,7 @@ const fetchLocationFromIP = async (setLocation: (location: LocationState) => voi
       countryCode: data.country_code?.toUpperCase() || undefined,
     };
     setLocation(ipLocation);
+    await fetchCountyFromCityOrState(ipLocation, setLocation); // Try to get the county based on IP data
   } catch (error) {
     console.error('Error fetching location from IP:', error);
   }
@@ -59,7 +88,9 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
         const { latitude, longitude } = position.coords;
 
         try {
-          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`);
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
+          );
           const data = await response.json();
 
           const locationData: LocationState = {
@@ -70,24 +101,27 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
             state: data.address.state || undefined,
             country: data.address.country || undefined,
             countryCode: data.address.country_code?.toUpperCase() || undefined,
-            county: data.address.county || undefined, 
+            county: data.address.county || undefined,
           };
 
           setLocation(locationData);
           Cookies.set('userLocation', JSON.stringify(locationData), { expires: 365 });
+          
+          // If county is not available, try to fetch based on other data
+          await fetchCountyFromCityOrState(locationData, setLocation);
         } catch (error) {
-          console.error("Error fetching location data:", error);
-          fetchLocationFromIP(setLocation);
+          console.error('Error fetching location data:', error);
+          fetchLocationFromIP(setLocation); // Fallback to IP location
         }
       },
       (error) => {
-        console.error("Geolocation access denied or failed:", error.message);
-        fetchLocationFromIP(setLocation);
+        console.error('Geolocation access denied or failed:', error.message);
+        fetchLocationFromIP(setLocation); // Fallback if geolocation fails
       }
     );
   } else {
-    console.error("Geolocation is not supported by this browser.");
-    fetchLocationFromIP(setLocation);
+    console.error('Geolocation is not supported by this browser.');
+    fetchLocationFromIP(setLocation); // Fallback if geolocation is not supported
   }
 };
 
@@ -99,21 +133,23 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
   };
 
   const setManualLocation = (manualLocation: LocationState) => {
-    // Clear previous data and set the new manual location
     const newLocation = {
-        latitude: manualLocation.latitude,
-        longitude: manualLocation.longitude,
-        region: undefined,
-        city: manualLocation.city || undefined,
-        state: manualLocation.state || undefined,
-        country: manualLocation.country || 'United States',
-        countyCode: manualLocation.countryCode || undefined,
-        county: manualLocation.county || undefined, 
+      latitude: manualLocation.latitude,
+      longitude: manualLocation.longitude,
+      region: undefined,
+      city: manualLocation.city || undefined,
+      state: manualLocation.state || undefined,
+      country: manualLocation.country || 'United States',
+      countyCode: manualLocation.countryCode || undefined,
+      county: manualLocation.county || undefined,
     };
   
     setLocation(newLocation);
     Cookies.set('userLocation', JSON.stringify(newLocation), { expires: 365 });
-};
+
+    // If county is missing, try to get it
+    fetchCountyFromCityOrState(newLocation, setLocation);
+  };
 
   useEffect(() => {
     const cookieLocation = Cookies.get('userLocation');

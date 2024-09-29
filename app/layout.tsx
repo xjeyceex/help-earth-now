@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import LocationProvider from "./location-provider";
+import LocationProvider from "./components/location-provider";
 import AuthProvider from "./components/AuthProvider";
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';

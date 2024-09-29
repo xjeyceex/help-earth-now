@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import AdminPanel from './admin-panel';
 import ContentManagement from '../content/content-management';
 import CookieConsent from '../components/CookieConsent';
-import NavbarTwo from '../navbar-two';
+import NavbarTwo from '../components/navbar-two';
 
 export default function Admin() {
   const { status } = useSession();

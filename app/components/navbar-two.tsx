@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from './location-provider';
-import { states, counties as allCounties } from './us-locations';
+import { states, counties as allCounties } from '../us-locations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 

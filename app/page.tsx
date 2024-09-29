@@ -5,6 +5,7 @@ import Navbar from "./navbar";
 import NavbarTwo from "./navbar-two";
 import CookieConsent from "./components/CookieConsent";
 import LocationAndEmail from "./email-input";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <What />
       <Who />
       <CookieConsent/>
+      <Footer/>
       <LocationAndEmail/>
     </main>
   );

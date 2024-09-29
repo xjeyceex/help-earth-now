@@ -1,4 +1,3 @@
-import AdminNavbar from "../components/AdminNavbar";
 import CookieConsent from "../components/CookieConsent";
 import NavbarTwo from "../navbar-two";
 import ContentManagement from "./content-management"

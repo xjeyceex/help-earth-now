@@ -64,7 +64,7 @@ export default function NavbarTwo() {
     <nav className="bg-black w-full sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8 p-4">
         {/* Brand / Logo */}
-        <div className="text-white text-2xl font-bold hidden sm:block">MyApp</div>
+        <div className="text-white text-2xl font-bold hidden sm:block"><Link href='#'>MyApp</Link></div>
 
         <div className="flex items-center mb-2 md:mb-0">
           <p className="mr-2 text-xs md:text-sm text-center md:text-left text-white">

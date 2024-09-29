@@ -105,13 +105,13 @@ export default function NavbarTwo() {
 
         {/* Links for larger screens */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link href="/v2" className={linkClasses('/v2')}>
+          <Link href="/v3" className={linkClasses('/v3')}>
             Home
           </Link>
-          <Link href="/v2/what" className={linkClasses('/v2/what')}>
+          <Link href="/v3/what" className={linkClasses('/v3/what')}>
             What
           </Link>
-          <Link href="/v2/who" className={linkClasses('/v2/who')}>
+          <Link href="/v3/who" className={linkClasses('/v3/who')}>
             Who
           </Link>
           
@@ -145,13 +145,13 @@ export default function NavbarTwo() {
             ✕
           </button>
 
-          <Link href="/v2" className={linkClasses('/v2')}>
+          <Link href="/v3" className={linkClasses('/v3')}>
             Home
           </Link>
-          <Link href="/v2/what" className={linkClasses('/v2/what')}>
+          <Link href="/v3/what" className={linkClasses('/v3/what')}>
             What
           </Link>
-          <Link href="/v2/who" className={linkClasses('/v2/who')}>
+          <Link href="/v3/who" className={linkClasses('/v3/who')}>
             Who
           </Link>
 

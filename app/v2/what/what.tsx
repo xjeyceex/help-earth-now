@@ -9,7 +9,7 @@ export default function What() {
 			</div>
 			<div className="col-span-2 answer-1 p-12">
 				Raise your thermostat.  Will you feel a degree? {' '} 
-				<Link href='#who' className="underline">Vote for people who care</Link>
+				<Link href='/who' className="underline">Vote for people who care</Link>
 				<br/>
 				Burn less: fewer fires, drive less
 			</div>

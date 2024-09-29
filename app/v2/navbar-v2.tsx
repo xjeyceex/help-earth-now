@@ -3,8 +3,8 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
-import { LocationContext } from './location-provider';
-import { states, counties as allCounties } from './us-locations';
+import { LocationContext } from '../location-provider';
+import { states, counties as allCounties } from '../us-locations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
@@ -105,23 +105,23 @@ export default function NavbarTwo() {
 
         {/* Links for larger screens */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link href="#home" className={linkClasses('/')}>
+          <Link href="/v2" className={linkClasses('/v2')}>
             Home
           </Link>
-          <Link href="#what" className={linkClasses('/#what')}>
+          <Link href="/v2/what" className={linkClasses('/v2/what')}>
             What
           </Link>
-          <Link href="#who" className={linkClasses('/#who')}>
+          <Link href="/v2/who" className={linkClasses('/v2/who')}>
             Who
           </Link>
           
           {/* Show only if authenticated */}
           {status === 'authenticated' && (
             <>
-              <Link href="/content" className={linkClasses('/#content')}>
+              <Link href="/content" className={linkClasses('/content')}>
                 Content Management
               </Link>
-              <Link href="/admin" className={linkClasses('/#admin')}>
+              <Link href="/admin" className={linkClasses('/admin')}>
                 Admin Panel
               </Link>
               <Link
@@ -145,13 +145,13 @@ export default function NavbarTwo() {
             ✕
           </button>
 
-          <Link href="#home" className={linkClasses('/')}>
+          <Link href="/v2" className={linkClasses('/v2')}>
             Home
           </Link>
-          <Link href="#what" className={linkClasses('/what')}>
+          <Link href="/v2/what" className={linkClasses('/v2/what')}>
             What
           </Link>
-          <Link href="#who" className={linkClasses('/who')}>
+          <Link href="/v2/who" className={linkClasses('/v2/who')}>
             Who
           </Link>
 

@@ -7,6 +7,7 @@ import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties } from '../us-locations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 export default function NavbarTwo() {
   const { status } = useSession();
@@ -72,7 +73,7 @@ export default function NavbarTwo() {
           {/* Brand / Logo */}
           <div className="hidden sm:block">
             <Link href={`${baseHref}#home`}>
-              <img src="/logo.png" alt="MyApp Logo" className="h-8 transform scale-150" />
+              <Image src="/logo.png" alt="MyApp Logo" className="h-8 transform scale-150" />
             </Link>
           </div>
           <div className="flex items-center mb-2 md:mb-0">

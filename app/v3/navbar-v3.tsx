@@ -7,6 +7,7 @@ import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties } from '../us-locations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 export default function NavbarThree() {
   const { status } = useSession();
@@ -70,7 +71,7 @@ export default function NavbarThree() {
         {/* Brand / Logo */}
         <div className="hidden sm:block">
           <Link href="/v3">
-            <img src="/logo.png" alt="MyApp Logo" className="h-8 transform scale-150" /> {/* Adjust the scale value as needed */}
+            <Image src="/logo.png" alt="MyApp Logo" className="h-8 transform scale-150" /> {/* Adjust the scale value as needed */}
           </Link>
         </div>
         <div className="flex items-center mb-2 md:mb-0">

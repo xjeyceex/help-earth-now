@@ -8,7 +8,7 @@ import { states, counties as allCounties } from '../us-locations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
-export default function NavbarTwo() {
+export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -133,10 +133,10 @@ export default function NavbarTwo() {
               </button>
               {isDropdownOpen && (
                 <div className="absolute right-0 w-48 bg-black shadow-lg rounded mt-2">
-                  <Link href="/content" className={linkClasses('/content')}>
+                  <Link href="/v3/content" className={linkClasses("/v3/content")}>
                     Content Management
                   </Link>
-                  <Link href="/admin" className={linkClasses('/admin')}>
+                  <Link href="/v3/admin" className={linkClasses('/v3/admin')}>
                     Admin Panel
                   </Link>
                   <Link
@@ -175,10 +175,10 @@ export default function NavbarTwo() {
           {/* Show dropdown if authenticated */}
           {status === 'authenticated' && (
             <>
-              <Link href="/content" className={linkClasses('/content')}>
+              <Link href="/v3/content" className={linkClasses("/v3/content")}>
                 Content Management
               </Link>
-              <Link href="/admin" className={linkClasses('/admin')}>
+              <Link href="/v3/admin" className={linkClasses('/v3/admin')}>
                 Admin Panel
               </Link>
               <Link

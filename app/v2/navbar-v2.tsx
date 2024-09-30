@@ -133,10 +133,10 @@ export default function NavbarTwo() {
               </button>
               {isDropdownOpen && (
                 <div className="absolute right-0 w-48 bg-black shadow-lg rounded mt-2">
-                  <Link href="/content" className={linkClasses('/content')}>
+                  <Link href="/v2/content" className={linkClasses("/v2/content")}>
                     Content Management
                   </Link>
-                  <Link href="/admin" className={linkClasses('/admin')}>
+                  <Link href="/v2/admin" className={linkClasses('/v2/admin')}>
                     Admin Panel
                   </Link>
                   <Link
@@ -175,10 +175,10 @@ export default function NavbarTwo() {
           {/* Show dropdown if authenticated */}
           {status === 'authenticated' && (
             <>
-              <Link href="/content" className={linkClasses('/content')}>
+              <Link href="/v2/content" className={linkClasses("/v2/content")}>
                 Content Management
               </Link>
-              <Link href="/admin" className={linkClasses('/admin')}>
+              <Link href="/v2/admin" className={linkClasses('/v2/admin')}>
                 Admin Panel
               </Link>
               <Link

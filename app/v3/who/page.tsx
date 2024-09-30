@@ -1,6 +1,6 @@
 import CookieConsent from "@/app/components/CookieConsent";
 import LocationAndEmail from "@/app/email-input";
-import NavbarTwo from "../navbar-v2";
+import NavbarTwo from "../navbar-v3";
 import Who from "./who";
 
 export default function Home() {

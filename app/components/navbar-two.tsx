@@ -76,7 +76,6 @@ export default function NavbarTwo() {
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                className="h-8 transform scale-150"
                 width={48}  // Set the appropriate width
                 height={48} // Set the appropriate height
               />

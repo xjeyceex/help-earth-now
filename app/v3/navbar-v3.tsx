@@ -66,7 +66,7 @@ export default function NavbarThree() {
 
   return (
     <>
-    <nav className="bg-black w-full sticky top-0 z-50">
+    <nav className="bg-gray-800 w-full sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8 p-4">
         {/* Brand / Logo */}
         <div className="hidden sm:block">
@@ -74,7 +74,6 @@ export default function NavbarThree() {
             <Image
               src="/logo.png"
               alt="MyApp Logo"
-              className="h-8 transform scale-150"
               width={48}  // Set the appropriate width
               height={48} // Set the appropriate height
             />

@@ -72,8 +72,14 @@ export default function NavbarTwo() {
         <div className="container mx-auto flex items-center justify-between px-4 md:px-8 p-4">
           {/* Brand / Logo */}
           <div className="hidden sm:block">
-            <Link href={`${baseHref}#home`}>
-              <Image src="/logo.png" alt="MyApp Logo" className="h-8 transform scale-150" />
+            <Link href="#home">
+              <Image
+                src="/logo.png"
+                alt="MyApp Logo"
+                className="h-8 transform scale-150"
+                width={48}  // Set the appropriate width
+                height={48} // Set the appropriate height
+              />
             </Link>
           </div>
           <div className="flex items-center mb-2 md:mb-0">

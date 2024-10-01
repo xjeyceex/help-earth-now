@@ -9,7 +9,7 @@ interface User {
   lastName: string;
   email: string;
   isActive: boolean;
-  isAdmin: boolean; // Add this property to the User interface
+  isAdmin: boolean; 
 }
 
 export default function AdminPanel() {
@@ -60,7 +60,7 @@ export default function AdminPanel() {
     setName(user.firstName);
     setEmail(user.email);
     setIsActive(user.isActive);
-    setIsAdmin(user.isAdmin); // Set admin status when editing
+    setIsAdmin(user.isAdmin); 
   };
 
   const handleSaveUser = async () => {
@@ -94,6 +94,22 @@ export default function AdminPanel() {
   };
 
   const handleAddUser = async () => {
+    if (!email) {
+      alert('Please fill in both the name and email fields.'); 
+      return;
+    }
+
+    if (users.some(user => user.email === email)) {
+      alert('Email already exists.');
+      return;
+    }
+  
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+  
     try {
       const response = await fetch('/api/users', {
         method: 'POST',
@@ -106,12 +122,12 @@ export default function AdminPanel() {
           email, 
           password: 'defaultPassword', 
           isActive, 
-          isAdmin // Include admin status when adding
+          isAdmin
         }),
       });
-
+  
       if (!response.ok) throw new Error('Failed to add user');
-
+  
       const newUser = await response.json();
       setUsers([...users, newUser]);
       setIsAdding(false);
@@ -122,6 +138,7 @@ export default function AdminPanel() {
       console.error('Error adding user:', error);
     }
   };
+  
 
   return (
     <div className="p-4 max-w-4xl mx-auto">

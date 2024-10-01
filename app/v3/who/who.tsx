@@ -40,12 +40,42 @@ const candidates = [
         positive: false,
         link: 'https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/'
       },
-      { name: 'Joe Manchin', rating: 10, positive: false },
-      { name: 'Catherine Cortez Masto', rating: 12, positive: true },
-      { name: 'Sherrod Brown', rating: 24, positive: true },
-      { name: 'Jon Tester', rating: -12, positive: false },
-      { name: 'Tammy Baldwin', rating: 65, positive: true },
-      { name: 'Matt Gaetz', rating: -23, positive: false },
+      { name: 'Joe Manchin', 
+        rating: 10, 
+        description: 'Advocates for energy independence, recognizes climate issues.', 
+        positive: true,
+        link: 'https://www.vox.com/climate/23955967/joe-manchin-climate-change-senate-biden-inflation'
+      },
+      { name: 'Catherine Cortez Masto', 
+        rating: 12,
+        description: 'Strong advocate for renewable energy and climate action ',  
+        positive: true,
+        link: 'https://www.cortezmasto.senate.gov/news/press-releases/cortez-masto-introduces-legislation-to-create-a-national-climate-service-corps/'
+      },
+      { name: 'Sherrod Brown', 
+        rating: 24, 
+        description: 'Advocates for sustainable jobs and clean energy transition',
+        positive: true,
+        link: 'https://www.brown.senate.gov/newsroom/press/release/brown-climate-change-threat-economy'
+      },
+      { name: 'Jon Tester', 
+        rating: -12, 
+        description: 'Supports renewable energy, emphasizes resource extraction',
+        positive: true,
+        link: 'https://www.tester.senate.gov/about/issues/energy/'
+      },
+      { name: 'Tammy Baldwin', 
+        rating: 65, 
+        description: 'Strong advocate for climate action and renewable energy',
+        positive: true,
+        link: 'https://www.baldwin.senate.gov/news/press-releases/us-senator-tammy-baldwin-helps-introduce-legislation-to-achieve-net-zero-greenhouse-gas-emissions'
+      },
+      { name: 'Matt Gaetz', 
+        rating: -23, 
+        description: '',
+        positive: false,
+        link: ''
+      },
     ],
   },
   {

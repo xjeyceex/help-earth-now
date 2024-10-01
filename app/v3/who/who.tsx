@@ -32,7 +32,8 @@ const candidates = [
         link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
         positive: true,
       },
-      { name: 'Rick Scott', 
+      { 
+        name: 'Rick Scott', 
         rating: 10, 
         description: 'Generally skeptical of climate change; prioritizes economic interests.', 
         positive: false,
@@ -83,10 +84,9 @@ export default function Who() {
     <>
       <div className="grid grid-cols-3 who-help" id="who">
         {candidates.map((group, groupIndex) => (
-          <>
+          <div key={group.group}>
             {/* Group Header */}
             <div
-              key={group.group}
               className={`flex items-center justify-center text-center who-help-${groupIndex + 1} p-4 md:p-8 row-span-${group.items.length}`}
             >
               {group.group}
@@ -119,7 +119,7 @@ export default function Who() {
                 </div>
               );
             })}
-          </>
+          </div>
         ))}
       </div>
       <Footer />

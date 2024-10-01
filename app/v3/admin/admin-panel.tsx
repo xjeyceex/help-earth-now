@@ -163,7 +163,6 @@ export default function AdminPanel() {
         },
         body: JSON.stringify({ oldPassword, newPassword }),
       });
-      console.log('response',response)
   
       const result = await response.json();
   
@@ -323,6 +322,7 @@ export default function AdminPanel() {
         <thead>
           <tr className="bg-gray-200">
             <th className="border p-2">First Name</th>
+            <th className="border p-2">Last Name</th>
             <th className="border p-2">Email</th>
             <th className="border p-2">Active</th>
             <th className="border p-2">Admin</th> 

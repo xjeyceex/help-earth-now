@@ -20,7 +20,7 @@ export default function CookiePolicy() {
                         </p>
 
                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">How We Use Cookies</h2>
-                        <p className="text-gray-700 mb-6">
+                        <p className="text-gray-700 mb-2">
                             We use cookies to:
                         </p>
                         <ul className="list-disc list-inside text-gray-600 mb-4">

@@ -18,6 +18,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Invalid user/password combination" }, { status: 404 });
     }
 
+    if (!user.isActive) {
+      return NextResponse.json({ message: "User account is inactive" }, { status: 403 });
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     
     if (!isPasswordValid) {
@@ -30,7 +34,7 @@ export async function POST(req: Request) {
       { expiresIn: '1h' }
     );
 
-    return NextResponse.json({ message: "Login successful", token }, { status: 200 });
+    return NextResponse.json({ message: "Login successful", token, isAdmin: user.isAdmin, id: user.id }, { status: 200 });
 
   } catch (error) {
     console.error("Error during login:", error);

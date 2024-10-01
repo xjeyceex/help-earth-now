@@ -20,9 +20,9 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 exposition ">
-        <iframe 
-          className="col-span-2 w-full h-40 md:h-auto md:min-h-[600px] aspect-video md:aspect-auto exposition-video"
+      <div className="grid grid-cols-1 md:grid-cols-3">
+        <iframe
+          className="col-span-2 w-full aspect-video"
           src={video_url}
           allowFullScreen
         ></iframe>
@@ -32,7 +32,7 @@ export default function Header() {
             It&apos;s bad and it&apos;s getting worse, and we need to fight it-now
           </div>
           <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white h-full w-full text-center">
-            <Link href='#what' className="underline">What can I do?</Link>
+            <Link href='/v3/what' className="underline">What can I do?</Link>
           </div>
         </div>
       </div>

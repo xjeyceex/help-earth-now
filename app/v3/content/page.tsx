@@ -1,11 +1,11 @@
-import CookieConsent from "../components/CookieConsent";
-import NavbarTwo from "../components/navbar-two";
+import CookieConsent from "@/app/components/CookieConsent";
+import NavbarThree from "../navbar-v3";
 import ContentManagement from "./content-management"
 
 export default function Content() {
   return (
     <>
-      <NavbarTwo/>
+      <NavbarThree/>
       <ContentManagement/>
       <CookieConsent/>
     </>

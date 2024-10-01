@@ -1,5 +1,5 @@
-import CookieConsent from "../components/CookieConsent";
-import NavbarTwo from "../components/navbar-two";
+import CookieConsent from "@/app/components/CookieConsent";
+import NavbarTwo from "../navbar-v2";
 import ContentManagement from "./content-management"
 
 export default function Content() {

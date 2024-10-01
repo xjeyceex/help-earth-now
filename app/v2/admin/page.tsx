@@ -4,8 +4,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import AdminPanel from './admin-panel';
-import CookieConsent from '../components/CookieConsent';
-import NavbarTwo from '../components/navbar-two';
+import CookieConsent from '@/app/components/CookieConsent';
+import NavbarTwo from '../navbar-v2';
 
 export default function Admin() {
   const { status } = useSession();

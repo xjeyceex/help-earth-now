@@ -6,6 +6,7 @@ declare module 'next-auth' {
   interface User {
     id: string;
     email: string;
+    isAdmin?: boolean; // Add isAdmin property
     token?: string; 
   }
 
@@ -13,6 +14,7 @@ declare module 'next-auth' {
     user: {
       id: string;
       email: string;
+      isAdmin?: boolean; // Add isAdmin property
       token?: string; 
     };
   }
@@ -22,6 +24,7 @@ declare module 'next-auth/jwt' {
   interface JWT {
     id?: string;
     email?: string;
+    isAdmin?: boolean; // Add isAdmin property
     accessToken?: string; 
   }
 }
@@ -45,20 +48,22 @@ const authHandler = NextAuth({
               password: credentials?.password,
             }),
           });
-
+      
           if (!response.ok) {
             const errorData = await response.json();
             console.error('Authorization failed:', errorData);
             return null;
           }
-
+      
           const data = await response.json();
-          return { id: data.id, email: data.email, token: data.token };
+          console.log('data', data); // Check for isAdmin
+          return { id: data.id, email: data.email, token: data.token, isAdmin: data.isAdmin };
         } catch (error) {
           console.error('Error during authorization:', error);
           return null;
         }
-      },
+      }
+      
     }),
   ],
   pages: {
@@ -74,6 +79,7 @@ const authHandler = NextAuth({
         token.id = user.id;
         token.email = user.email;
         token.accessToken = user.token;
+        token.isAdmin = user.isAdmin; // Add isAdmin to the token
       }
       return token;
     },
@@ -82,6 +88,7 @@ const authHandler = NextAuth({
         id: token.id as string,
         email: token.email as string,
         token: token.accessToken ?? '',
+        isAdmin: token.isAdmin ?? false, // Set isAdmin in session
       };
       return session;
     },

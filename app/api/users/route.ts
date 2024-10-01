@@ -36,6 +36,7 @@ export async function POST(req: Request) {
         email: body.email,
         password: hashedPassword, 
         isActive: body.isActive,
+        isAdmin: body.isAdmin || false,
         createDate: new Date(), 
         updateDate: new Date(),
       },

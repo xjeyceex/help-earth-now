@@ -13,6 +13,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         lastName: body.lastName,
         email: body.email,
         isActive: body.isActive,
+        isAdmin: body.isAdmin, // Include isAdmin field here
       },
     });
     return NextResponse.json(updatedUser);

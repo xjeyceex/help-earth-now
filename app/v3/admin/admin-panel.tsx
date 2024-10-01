@@ -9,6 +9,7 @@ interface User {
   lastName: string;
   email: string;
   isActive: boolean;
+  isAdmin: boolean; 
 }
 
 export default function AdminPanel() {
@@ -26,6 +27,7 @@ export default function AdminPanel() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(session?.user?.isAdmin)
     if (status === 'loading') return;
     if (status === 'unauthenticated') {
       router.push('/');
@@ -52,6 +54,7 @@ export default function AdminPanel() {
   }
 
   const handleEditUser = async (user: User) => {
+    if (!session?.user?.isAdmin) return; // Only allow admin to edit
     setIsEditing(true);
     setSelectedUser(user);
     setName(user.firstName);
@@ -168,22 +171,35 @@ export default function AdminPanel() {
         </div>
       )}
 
-      <ul className="mt-4">
-        {users.map(user => (
-          <li key={user.id} className="flex justify-between items-center border-b py-2">
-            <div>
-              <span className="font-semibold">{user.firstName} {user.lastName}</span>
-              <span className="ml-4 text-gray-600">{user.email}</span>
-            </div>
-            <button
-              onClick={() => handleEditUser(user)}
-              className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
-            >
-              Edit
-            </button>
-          </li>
-        ))}
-      </ul>
+      <table className="mt-4 w-full border-collapse">
+        <thead>
+          <tr>
+            <th className="border p-2">Name</th>
+            <th className="border p-2">Email</th>
+            <th className="border p-2">Status</th>
+            <th className="border p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.id}>
+              <td className="border p-2">{user.firstName} {user.lastName}</td>
+              <td className="border p-2">{user.email}</td>
+              <td className="border p-2">{user.isActive ? 'Active' : 'Inactive'}</td>
+              <td className="border p-2">
+                {session?.user?.isAdmin && (
+                  <button
+                    onClick={() => handleEditUser(user)}
+                    className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                  >
+                    Edit
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <div className="mt-4">
         {/* Pagination controls */}
@@ -237,7 +253,7 @@ export default function AdminPanel() {
                 onClick={handleSaveUser}
                 className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
               >
-                Save
+                Save Changes
               </button>
               <button
                 type="button"

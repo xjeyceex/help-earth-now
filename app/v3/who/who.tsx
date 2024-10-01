@@ -1,5 +1,6 @@
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
+import React from "react";
 
 // Data for mapping
 const candidates = [
@@ -39,30 +40,12 @@ const candidates = [
         positive: false,
         link: 'https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/'
       },
-      { name: 'Joe Manchin',
-        rating: 10, 
-        positive: false
-      },
-      { name: 'Catherine Cortez Masto', 
-        rating: 12, 
-        positive: true
-      },
-      { name: 'Sherrod Brown', 
-        rating: 24, 
-        positive: true 
-      },
-      { name: 'Jon Tester', 
-        rating: -12, 
-        positive: false 
-      },
-      { name: 'Tammy Baldwin', 
-        rating: 65, 
-        positive: true 
-      },
-      { name: 'Matt Gaetz', 
-        rating: -23, 
-        positive: false 
-      },
+      { name: 'Joe Manchin', rating: 10, positive: false },
+      { name: 'Catherine Cortez Masto', rating: 12, positive: true },
+      { name: 'Sherrod Brown', rating: 24, positive: true },
+      { name: 'Jon Tester', rating: -12, positive: false },
+      { name: 'Tammy Baldwin', rating: 65, positive: true },
+      { name: 'Matt Gaetz', rating: -23, positive: false },
     ],
   },
   {
@@ -84,7 +67,7 @@ export default function Who() {
     <>
       <div className="grid grid-cols-3 who-help" id="who">
         {candidates.map((group, groupIndex) => (
-          <div key={group.group}>
+          <React.Fragment key={group.group}> 
             {/* Group Header */}
             <div
               className={`flex items-center justify-center text-center who-help-${groupIndex + 1} p-4 md:p-8 row-span-${group.items.length}`}
@@ -101,7 +84,7 @@ export default function Who() {
 
               return (
                 <div
-                  key={`${group.group}-${candidate.name}-${itemIndex}`}
+                  key={`${group.group}-${candidate.name}-${itemIndex}`} // Ensure this key is unique
                   className={`col-span-2 ${ratingClass} ${dynamicClass} p-4 md:p-8`}
                 >
                   {candidate.name} - Rating {candidate.rating}:{" "}
@@ -119,7 +102,7 @@ export default function Who() {
                 </div>
               );
             })}
-          </div>
+          </React.Fragment> 
         ))}
       </div>
       <Footer />

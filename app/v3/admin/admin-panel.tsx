@@ -21,11 +21,18 @@ export default function AdminPanel() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isActive, setIsActive] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false); // New state for admin status
+  const [isAdmin, setIsAdmin] = useState(false); 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalUsers, setTotalUsers] = useState(0);
-  const usersPerPage = 10; // Define how many users to show per page
+  const usersPerPage = 10; 
   const router = useRouter();
+  
+  // State for password change
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [oldPassword, setOldPassword] = useState(''); 
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordChangeError, setPasswordChangeError] = useState('');
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -54,7 +61,10 @@ export default function AdminPanel() {
   }
 
   const handleEditUser = async (user: User) => {
-    if (!session?.user?.isAdmin) return; // Only allow admin to edit
+    if (!session?.user?.isAdmin) {
+      alert("You don't have the permission to edit users.");
+      return;
+    }
     setIsEditing(true);
     setSelectedUser(user);
     setName(user.firstName);
@@ -94,8 +104,8 @@ export default function AdminPanel() {
   };
 
   const handleAddUser = async () => {
-    if (!email) {
-      alert('Please fill in both the name and email fields.'); 
+    if (!name || !email) {
+      alert('Please fill in both the name and email fields.');
       return;
     }
 
@@ -138,7 +148,48 @@ export default function AdminPanel() {
       console.error('Error adding user:', error);
     }
   };
+
+  const handleChangePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      setPasswordChangeError('Passwords do not match.');
+      return;
+    }
   
+    try {
+      const response = await fetch(`/api/users/${session?.user?.id}/change-password`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ oldPassword, newPassword }),
+      });
+      console.log('response',response)
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        if (result?.message === 'Incorrect old password') {
+          setPasswordChangeError('Old password is incorrect.');
+        } else {
+          setPasswordChangeError('Failed to change password.');
+        }
+        return;
+      }
+  
+      alert('Password changed successfully.');
+      setIsChangingPassword(false);
+      setOldPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setPasswordChangeError('');
+  
+    } catch (error) {
+      console.error('Error changing password:', error);
+      setPasswordChangeError('Failed to change password.');
+    }
+  };
+
+  const totalPages = Math.ceil(totalUsers / usersPerPage);
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
@@ -149,6 +200,66 @@ export default function AdminPanel() {
       >
         Add User
       </button>
+
+      {/* Change Password Section */}
+      <button
+        onClick={() => setIsChangingPassword(!isChangingPassword)}
+        className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition ml-4"
+      >
+        {isChangingPassword ? 'Cancel Password Change' : 'Change My Password'}
+      </button>
+
+      {isChangingPassword && (
+        <div className="mt-4 p-4 border rounded shadow">
+          <h2 className="text-xl font-semibold mb-2">Change Password</h2>
+          <form onSubmit={e => e.preventDefault()}>
+            <div className="mb-2">
+              <label className="block">Old Password</label>
+              <input
+                type="password"
+                value={oldPassword}
+                onChange={e => setOldPassword(e.target.value)}
+                className="border rounded px-2 py-1 w-full"
+              />
+            </div>
+            <div className="mb-2">
+              <label className="block">New Password</label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={e => setNewPassword(e.target.value)}
+                className="border rounded px-2 py-1 w-full"
+              />
+            </div>
+            <div className="mb-2">
+              <label className="block">Confirm New Password</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                className="border rounded px-2 py-1 w-full"
+              />
+            </div>
+            {passwordChangeError && <p className="text-red-500">{passwordChangeError}</p>}
+            <div>
+              <button
+                type="button"
+                onClick={handleChangePassword}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
+              >
+                Change Password
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsChangingPassword(false)}
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {isAdding && (
         <div className="mt-4 p-4 border rounded shadow">
@@ -172,27 +283,21 @@ export default function AdminPanel() {
                 className="border rounded px-2 py-1 w-full"
               />
             </div>
-            <div className="mb-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isActive}
-                  onChange={e => setIsActive(e.target.checked)}
-                  className="mr-2"
-                />
-                Active
-              </label>
+            <div className="mb-2">
+              <label className="block">Active</label>
+              <input
+                type="checkbox"
+                checked={isActive}
+                onChange={e => setIsActive(e.target.checked)}
+              />
             </div>
-            <div className="mb-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isAdmin}
-                  onChange={e => setIsAdmin(e.target.checked)} 
-                  className="mr-2"
-                />
-                Admin
-              </label>
+            <div className="mb-2">
+              <label className="block">Admin</label>
+              <input
+                type="checkbox"
+                checked={isAdmin}
+                onChange={e => setIsAdmin(e.target.checked)}
+              />
             </div>
             <div>
               <button
@@ -214,12 +319,12 @@ export default function AdminPanel() {
         </div>
       )}
 
-      <table className="mt-4 w-full border-collapse">
+      <table className="mt-4 w-full table-auto border-collapse">
         <thead>
-          <tr>
-            <th className="border p-2">Name</th>
+          <tr className="bg-gray-200">
+            <th className="border p-2">First Name</th>
             <th className="border p-2">Email</th>
-            <th className="border p-2">Status</th>
+            <th className="border p-2">Active</th>
             <th className="border p-2">Admin</th> 
             <th className="border p-2">Actions</th>
           </tr>
@@ -227,101 +332,37 @@ export default function AdminPanel() {
         <tbody>
           {users.map(user => (
             <tr key={user.id}>
-              <td className="border p-2">{user.firstName} {user.lastName}</td>
+              <td className="border p-2">{user.firstName}</td>
+              <td className="border p-2">{user.lastName}</td>
               <td className="border p-2">{user.email}</td>
-              <td className="border p-2">{user.isActive ? 'Active' : 'Inactive'}</td>
+              <td className="border p-2">{user.isActive ? 'Yes' : 'No'}</td>
               <td className="border p-2">{user.isAdmin ? 'Yes' : 'No'}</td> 
               <td className="border p-2">
-                {session?.user?.isAdmin && (
-                  <button
-                    onClick={() => handleEditUser(user)}
-                    className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
-                  >
-                    Edit
-                  </button>
-                )}
+                <button
+                  onClick={() => handleEditUser(user)}
+                  className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 transition"
+                >
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div className="mt-4">
-        {/* Pagination controls */}
-        {Array.from({ length: Math.ceil(totalUsers / usersPerPage) }, (_, index) => (
+      {/* Pagination */}
+      <div className="mt-4 flex justify-center space-x-2">
+        {Array.from({ length: totalPages }, (_, i) => (
           <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            className={`mx-1 px-2 py-1 border rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-black'}`}
+            key={i}
+            onClick={() => setCurrentPage(i + 1)}
+            disabled={currentPage === i + 1}
+            className={`px-3 py-1 rounded ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'} hover:bg-blue-400`}
           >
-            {index + 1}
+            {i + 1}
           </button>
         ))}
       </div>
-
-      {isEditing && selectedUser && (
-        <div className="mt-4 p-4 border rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Edit User</h2>
-          <form onSubmit={e => e.preventDefault()}>
-            <div className="mb-2">
-              <label className="block">First Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isActive}
-                  onChange={e => setIsActive(e.target.checked)}
-                  className="mr-2"
-                />
-                Active
-              </label>
-            </div>
-            <div className="mb-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isAdmin}
-                  onChange={e => setIsAdmin(e.target.checked)}
-                  className="mr-2"
-                />
-                Admin
-              </label>
-            </div>
-            <div>
-              <button
-                type="button"
-                onClick={handleSaveUser}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mr-2"
-              >
-                Save Changes
-              </button>
-              <button
-                type="button"
-                onClick={() => { setIsEditing(false); setSelectedUser(null); }}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
     </div>
   );
 }

@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       { expiresIn: '1h' }
     );
 
-    return NextResponse.json({ message: "Login successful", token, isAdmin: user.isAdmin }, { status: 200 });
+    return NextResponse.json({ message: "Login successful", token, isAdmin: user.isAdmin, id: user.id }, { status: 200 });
 
   } catch (error) {
     console.error("Error during login:", error);

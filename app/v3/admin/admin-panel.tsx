@@ -9,7 +9,7 @@ interface User {
   lastName: string;
   email: string;
   isActive: boolean;
-  isAdmin: boolean; 
+  isAdmin: boolean; // Add this property to the User interface
 }
 
 export default function AdminPanel() {
@@ -21,13 +21,13 @@ export default function AdminPanel() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isActive, setIsActive] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false); // New state for admin status
   const [currentPage, setCurrentPage] = useState(1);
   const [totalUsers, setTotalUsers] = useState(0);
   const usersPerPage = 10; // Define how many users to show per page
   const router = useRouter();
 
   useEffect(() => {
-    console.log(session?.user?.isAdmin)
     if (status === 'loading') return;
     if (status === 'unauthenticated') {
       router.push('/');
@@ -60,6 +60,7 @@ export default function AdminPanel() {
     setName(user.firstName);
     setEmail(user.email);
     setIsActive(user.isActive);
+    setIsAdmin(user.isAdmin); // Set admin status when editing
   };
 
   const handleSaveUser = async () => {
@@ -71,7 +72,13 @@ export default function AdminPanel() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName: name, lastName: selectedUser.lastName, email, isActive }),
+        body: JSON.stringify({ 
+          firstName: name, 
+          lastName: selectedUser.lastName, 
+          email, 
+          isActive, 
+          isAdmin 
+        }),
       });
       if (!response.ok) {
         throw new Error('Failed to update user');
@@ -93,7 +100,14 @@ export default function AdminPanel() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName: name, lastName: '', email, password: 'defaultPassword', isActive }),
+        body: JSON.stringify({ 
+          firstName: name, 
+          lastName: '', 
+          email, 
+          password: 'defaultPassword', 
+          isActive, 
+          isAdmin // Include admin status when adding
+        }),
       });
 
       if (!response.ok) throw new Error('Failed to add user');
@@ -103,6 +117,7 @@ export default function AdminPanel() {
       setIsAdding(false);
       setName('');
       setEmail('');
+      setIsAdmin(false); 
     } catch (error) {
       console.error('Error adding user:', error);
     }
@@ -151,6 +166,17 @@ export default function AdminPanel() {
                 Active
               </label>
             </div>
+            <div className="mb-4">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  checked={isAdmin}
+                  onChange={e => setIsAdmin(e.target.checked)} 
+                  className="mr-2"
+                />
+                Admin
+              </label>
+            </div>
             <div>
               <button
                 type="button"
@@ -177,6 +203,7 @@ export default function AdminPanel() {
             <th className="border p-2">Name</th>
             <th className="border p-2">Email</th>
             <th className="border p-2">Status</th>
+            <th className="border p-2">Admin</th> {/* Add column for Admin status */}
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
@@ -186,6 +213,7 @@ export default function AdminPanel() {
               <td className="border p-2">{user.firstName} {user.lastName}</td>
               <td className="border p-2">{user.email}</td>
               <td className="border p-2">{user.isActive ? 'Active' : 'Inactive'}</td>
+              <td className="border p-2">{user.isAdmin ? 'Yes' : 'No'}</td> {/* Display admin status */}
               <td className="border p-2">
                 {session?.user?.isAdmin && (
                   <button
@@ -214,7 +242,7 @@ export default function AdminPanel() {
         ))}
       </div>
 
-      {isEditing && (
+      {isEditing && selectedUser && (
         <div className="mt-4 p-4 border rounded shadow">
           <h2 className="text-xl font-semibold mb-2">Edit User</h2>
           <form onSubmit={e => e.preventDefault()}>
@@ -247,17 +275,28 @@ export default function AdminPanel() {
                 Active
               </label>
             </div>
+            <div className="mb-4">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  checked={isAdmin}
+                  onChange={e => setIsAdmin(e.target.checked)} // Handle admin status change
+                  className="mr-2"
+                />
+                Admin
+              </label>
+            </div>
             <div>
               <button
                 type="button"
                 onClick={handleSaveUser}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mr-2"
               >
                 Save Changes
               </button>
               <button
                 type="button"
-                onClick={() => setIsEditing(false)}
+                onClick={() => { setIsEditing(false); setSelectedUser(null); }}
                 className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
               >
                 Cancel

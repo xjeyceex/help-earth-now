@@ -18,9 +18,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Invalid user/password combination" }, { status: 404 });
     }
 
-    console.log('Authenticated User:', user); // Log user data here
-
-
     const isPasswordValid = await bcrypt.compare(password, user.password);
     
     if (!isPasswordValid) {

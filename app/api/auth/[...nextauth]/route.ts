@@ -56,7 +56,6 @@ const authHandler = NextAuth({
           }
       
           const data = await response.json();
-          console.log('data', data); // Check for isAdmin
           return { id: data.id, email: data.email, token: data.token, isAdmin: data.isAdmin };
         } catch (error) {
           console.error('Error during authorization:', error);

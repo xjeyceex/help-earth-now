@@ -203,7 +203,7 @@ export default function AdminPanel() {
             <th className="border p-2">Name</th>
             <th className="border p-2">Email</th>
             <th className="border p-2">Status</th>
-            <th className="border p-2">Admin</th> {/* Add column for Admin status */}
+            <th className="border p-2">Admin</th> 
             <th className="border p-2">Actions</th>
           </tr>
         </thead>
@@ -213,7 +213,7 @@ export default function AdminPanel() {
               <td className="border p-2">{user.firstName} {user.lastName}</td>
               <td className="border p-2">{user.email}</td>
               <td className="border p-2">{user.isActive ? 'Active' : 'Inactive'}</td>
-              <td className="border p-2">{user.isAdmin ? 'Yes' : 'No'}</td> {/* Display admin status */}
+              <td className="border p-2">{user.isAdmin ? 'Yes' : 'No'}</td> 
               <td className="border p-2">
                 {session?.user?.isAdmin && (
                   <button
@@ -280,7 +280,7 @@ export default function AdminPanel() {
                 <input
                   type="checkbox"
                   checked={isAdmin}
-                  onChange={e => setIsAdmin(e.target.checked)} // Handle admin status change
+                  onChange={e => setIsAdmin(e.target.checked)}
                   className="mr-2"
                 />
                 Admin

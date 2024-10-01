@@ -18,6 +18,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Invalid user/password combination" }, { status: 404 });
     }
 
+    if (!user.isActive) {
+      return NextResponse.json({ message: "User account is inactive" }, { status: 403 });
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     
     if (!isPasswordValid) {

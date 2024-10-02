@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default function Header() {
-  const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  const video_url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
   return (
     <div className="w-full" id="home">

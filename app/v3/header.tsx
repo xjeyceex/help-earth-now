@@ -7,6 +7,7 @@ import Link from 'next/link';
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1");
+  const [warningText, setWarningText] = useState("It's bad and it's getting worse, and we need to fight it - now");
 
   useEffect(() => {
     console.log('Location state:', location?.state);
@@ -14,45 +15,59 @@ export default function Header() {
       switch (location.state) {
         case 'Arizona':
           setVideoUrl('https://www.youtube.com/embed/4WuLQ2hnpw8?autoplay=1&mute=1');
+          setWarningText('Phoenix breaks temperature record with 19th day of extreme heat');
           break;
         case 'Nevada':
           setVideoUrl('https://www.youtube.com/embed/UjQEGYaDkSE?autoplay=1&mute=1');
+          setWarningText('Temperatures are increasing regularly in Nevada.');
           break;
         case 'Georgia':
           setVideoUrl('https://www.youtube.com/embed/h5dc6yAA84c?autoplay=1&mute=1');
+          setWarningText('Hurricanes are getting stronger and more frequent in Georgia.');
           break;
         case 'Michigan':
           setVideoUrl('https://www.youtube.com/embed/oZhxV5JVRT4?autoplay=1&mute=1');
+          setWarningText('Michigan auto insurance rates are rising every year.');
           break;
         case 'Wisconsin':
           setVideoUrl('https://www.youtube.com/embed/2UkXtCR1eEQ?autoplay=1&mute=1');
+          setWarningText('Car insurance rates are expected to increase by 8.4% in Wisconsin.');
           break;
         case 'Pennsylvania':
           setVideoUrl('https://www.youtube.com/embed/N73liuUE-l4?autoplay=1&mute=1');
+          setWarningText('Car insurance rates are soaring in Pennsylvania.');
           break;
         case 'North Carolina':
           setVideoUrl('https://www.youtube.com/embed/uMlhkLbOnmA?autoplay=1&mute=1');
+          setWarningText('Hurricanes are causing more damage in North Carolina.');
           break;
         case 'Florida':
           setVideoUrl('https://www.youtube.com/embed/ozqGvyTWeAg?autoplay=1&mute=1');
+          setWarningText('Storm surge from hurricanes in Florida is devastating communities.');
           break;
         case 'Nebraska':
           setVideoUrl('https://www.youtube.com/embed/Vox2kq3ammk?autoplay=1&mute=1');
+          setWarningText('Wildfires in Nebraska are burning large areas and destroying homes.');
           break;
         case 'Oregon':
           setVideoUrl('https://www.youtube.com/embed/3-4SR8vC1kA?autoplay=1&mute=1');
+          setWarningText('Wildfires in Oregon have devastated communities.');
           break;
         case 'New Mexico':
           setVideoUrl('https://www.youtube.com/embed/TZV__hUOkJQ?autoplay=1&mute=1');
+          setWarningText('Wildfires in New Mexico are spreading and destroying homes.');
           break;
         case 'Colorado':
           setVideoUrl('https://www.youtube.com/embed/7P4fVa2_8cg?autoplay=1&mute=1');
+          setWarningText('Colorado wildfires are burning hundreds of homes.');
           break;
         case 'California':
           setVideoUrl('https://www.youtube.com/embed/u_b0o-1_r9Q?autoplay=1&mute=1');
+          setWarningText('California wildfires have devastated communities.');
           break;
         default:
           setVideoUrl('https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1');
+          setWarningText("It's bad and it's getting worse, and we need to fight it - now");
           break;
       }
     }
@@ -87,7 +102,7 @@ export default function Header() {
 
         <div className="flex flex-col h-full justify-center items-center">
           <div className="exposition-warning p-6 text-xl md:text-2xl bg-yellow-400 text-white h-full w-full text-center">
-            It&apos;s bad and it&apos;s getting worse, and we need to fight it - now
+            {warningText}
           </div>
           <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white h-full w-full text-center">
             <Link href='/v3/what' className="underline">What can I do?</Link>

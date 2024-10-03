@@ -21,11 +21,17 @@ export default function Header() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3">
-        <iframe
+        <video
           className="col-span-2 w-full aspect-video"
           src={video_url}
-          allowFullScreen
-        ></iframe>
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+        >
+          Your browser does not support the video tag.
+        </video>
 
         <div className="flex flex-col h-full justify-center items-center">
           <div className="exposition-warning p-6 text-xl md:text-2xl bg-yellow-400 text-white h-full w-full text-center">

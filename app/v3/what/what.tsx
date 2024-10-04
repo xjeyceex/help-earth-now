@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function What() {
 	return (
 		<>
-			<div className="grid grid-cols-3 how-help" id='what'>
+			<div className="grid grid-cols-3 how-help">
 				<div className="text-center questions-1 p-12">
 					What can I do for free?
 				</div>
@@ -31,7 +31,6 @@ export default function What() {
 					Upgrade to energy efficient windows
 				</div>
 			</div>
-      		<Footer/>
 		</>
 	);
 }

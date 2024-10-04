@@ -104,8 +104,8 @@ export default function Header() {
           <div className="exposition-warning p-6 text-xl md:text-2xl bg-yellow-400 text-white h-full w-full text-center">
             {warningText}
           </div>
-          <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white h-full w-full text-center">
-            <Link href='/v3/what' className="underline">What can I do?</Link>
+          <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white h-full w-full text-center" id="what">
+            <Link href='#what' className="underline">What can I do?</Link>
           </div>
         </div>
       </div>

@@ -117,15 +117,18 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
+            <Link href="/about" className={linkClasses('/about')}>
+              About Us
+            </Link>
             <Link href="/v3" className={linkClasses('/v3')}>
               Home
             </Link>
             <Link href="/v3/what" className={linkClasses('/v3/what')}>
-              What
+              What can I do?
             </Link>
-            <Link href="/v3/who" className={linkClasses('/v3/who')}>
+            {/* <Link href="/v3/who" className={linkClasses('/v3/who')}>
               Who
-            </Link>
+            </Link> */}
 
             {/* Show dropdown if authenticated */}
             {status === 'authenticated' && (

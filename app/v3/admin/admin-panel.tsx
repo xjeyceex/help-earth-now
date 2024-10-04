@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Modal from '@/app/components/Modal';
 
 interface User {
   id: number;
@@ -104,8 +105,8 @@ export default function AdminPanel() {
   };
 
   const handleAddUser = async () => {
-    if (!name || !email) {
-      alert('Please fill in both the name and email fields.');
+    if (!email) {
+      alert('Please fill in the and email field.');
       return;
     }
 
@@ -200,123 +201,12 @@ export default function AdminPanel() {
         Add User
       </button>
 
-      {/* Change Password Section */}
       <button
         onClick={() => setIsChangingPassword(!isChangingPassword)}
         className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition ml-4"
       >
         {isChangingPassword ? 'Cancel Password Change' : 'Change My Password'}
       </button>
-
-      {isChangingPassword && (
-        <div className="mt-4 p-4 border rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Change Password</h2>
-          <form onSubmit={e => e.preventDefault()}>
-            <div className="mb-2">
-              <label className="block">Old Password</label>
-              <input
-                type="password"
-                value={oldPassword}
-                onChange={e => setOldPassword(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block">New Password</label>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={e => setNewPassword(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block">Confirm New Password</label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            {passwordChangeError && <p className="text-red-500">{passwordChangeError}</p>}
-            <div>
-              <button
-                type="button"
-                onClick={handleChangePassword}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
-              >
-                Change Password
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsChangingPassword(false)}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
-
-      {isAdding && (
-        <div className="mt-4 p-4 border rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Add User</h2>
-          <form onSubmit={e => e.preventDefault()}>
-            <div className="mb-2">
-              <label className="block">First Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="border rounded px-2 py-1 w-full"
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block">Active</label>
-              <input
-                type="checkbox"
-                checked={isActive}
-                onChange={e => setIsActive(e.target.checked)}
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block">Admin</label>
-              <input
-                type="checkbox"
-                checked={isAdmin}
-                onChange={e => setIsAdmin(e.target.checked)}
-              />
-            </div>
-            <div>
-              <button
-                type="button"
-                onClick={handleAddUser}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
-              >
-                Add User
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsAdding(false)}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
 
       <table className="mt-4 w-full table-auto border-collapse">
         <thead>
@@ -363,6 +253,171 @@ export default function AdminPanel() {
           </button>
         ))}
       </div>
+
+            {/* Add User Modal */}
+      <Modal isOpen={isAdding} onClose={() => setIsAdding(false)} title="Add User">
+        <form onSubmit={e => e.preventDefault()}>
+          <div className="mb-2">
+            <label className="block">First Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              className="border rounded px-2 py-1 w-full"
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="border rounded px-2 py-1 w-full"
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block">Active</label>
+            <input
+              type="checkbox"
+              checked={isActive}
+              onChange={e => setIsActive(e.target.checked)}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block">Admin</label>
+            <input
+              type="checkbox"
+              checked={isAdmin}
+              onChange={e => setIsAdmin(e.target.checked)}
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={handleAddUser}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
+            >
+              Add User
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAdding(false)}
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* Change Password Modal */}
+      <Modal isOpen={isChangingPassword} onClose={() => setIsChangingPassword(false)} title="Change Password">
+        <form onSubmit={e => e.preventDefault()}>
+          <div className="mb-2">
+            <label className="block">Old Password</label>
+            <input
+              type="password"
+              value={oldPassword}
+              onChange={e => setOldPassword(e.target.value)}
+              className="border rounded px-2 py-1 w-full"
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block">New Password</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              className="border rounded px-2 py-1 w-full"
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block">Confirm New Password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              className="border rounded px-2 py-1 w-full"
+            />
+          </div>
+          {passwordChangeError && <p className="text-red-500">{passwordChangeError}</p>}
+          <div>
+            <button
+              type="button"
+              onClick={handleChangePassword}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
+            >
+              Change Password
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsChangingPassword(false)}
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* Edit User Modal */}
+      {selectedUser && (
+        <Modal isOpen={isEditing} onClose={() => setIsEditing(false)} title="Edit User">
+          <form onSubmit={e => e.preventDefault()}>
+            <div className="mb-2">
+              <label className="block">First Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="border rounded px-2 py-1 w-full"
+              />
+            </div>
+            <div className="mb-2">
+              <label className="block">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="border rounded px-2 py-1 w-full"
+              />
+            </div>
+            <div className="mb-2">
+              <label className="block">Active</label>
+              <input
+                type="checkbox"
+                checked={isActive}
+                onChange={e => setIsActive(e.target.checked)}
+              />
+            </div>
+            <div className="mb-2">
+              <label className="block">Admin</label>
+              <input
+                type="checkbox"
+                checked={isAdmin}
+                onChange={e => setIsAdmin(e.target.checked)}
+              />
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={handleSaveUser}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition mr-2"
+              >
+                Save Changes
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsEditing(false)}
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </Modal>
+      )}
+
     </div>
   );
 }

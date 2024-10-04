@@ -12,14 +12,14 @@ const candidates = [
         rating: '90% from LCV.',
         description: 'Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change',
         link: 'https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/',
-        positive: true,
+        party: 'democratic', 
       },
       {
         name: 'Donald Trump',
         rating: '30% from LCV.',
         description: 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
         link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
-        positive: false,
+        party: 'republican', 
       },
     ],
   },
@@ -31,50 +31,56 @@ const candidates = [
         rating: '85% from LCV.',
         description: 'Strong proponent of addressing climate change; emphasizes its impact on communities.',
         link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
-        positive: true,
+        party: 'democratic', 
       },
       { 
         name: 'Rick Scott', 
         rating: '40% from LCV.', 
         description: 'Generally skeptical of climate change; prioritizes economic interests.', 
-        positive: false,
-        link: 'https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/'
+        party: 'republican', 
+        link: 'https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/',
       },
-      { name: 'Joe Manchin', 
+      { 
+        name: 'Joe Manchin', 
         rating: 'Moderate ratings from environmental groups ', 
         description: 'Advocates for energy independence, recognizes climate issues.', 
-        positive: true,
-        link: 'https://www.vox.com/climate/23955967/joe-manchin-climate-change-senate-biden-inflation'
+        party: 'democratic', 
+        link: 'https://www.vox.com/climate/23955967/joe-manchin-climate-change-senate-biden-inflation',
       },
-      { name: 'Catherine Cortez Masto', 
+      { 
+        name: 'Catherine Cortez Masto', 
         rating: 'High ratings from environmental advocates ',
         description: 'Strong advocate for renewable energy and climate action ',  
-        positive: true,
-        link: 'https://www.cortezmasto.senate.gov/news/press-releases/cortez-masto-introduces-legislation-to-create-a-national-climate-service-corps/'
+        party: 'democratic', 
+        link: 'https://www.cortezmasto.senate.gov/news/press-releases/cortez-masto-introduces-legislation-to-create-a-national-climate-service-corps/',
       },
-      { name: 'Sherrod Brown', 
+      { 
+        name: 'Sherrod Brown', 
         rating: 'High ratings from environmental advocates ', 
         description: 'Advocates for sustainable jobs and clean energy transition',
-        positive: true,
-        link: 'https://www.brown.senate.gov/newsroom/press/release/brown-climate-change-threat-economy'
+        party: 'democratic', 
+        link: 'https://www.brown.senate.gov/newsroom/press/release/brown-climate-change-threat-economy',
       },
-      { name: 'Jon Tester', 
+      { 
+        name: 'Jon Tester', 
         rating: 'Discusses importance of conservation', 
         description: 'Supports renewable energy, emphasizes resource extraction',
-        positive: true,
-        link: 'https://www.tester.senate.gov/about/issues/energy/'
+        party: 'democratic', 
+        link: 'https://www.tester.senate.gov/about/issues/energy/',
       },
-      { name: 'Tammy Baldwin', 
+      { 
+        name: 'Tammy Baldwin', 
         rating: 'High ratings from environmental groups', 
         description: 'Strong advocate for climate action and renewable energy',
-        positive: true,
-        link: 'https://www.baldwin.senate.gov/news/press-releases/us-senator-tammy-baldwin-helps-introduce-legislation-to-achieve-net-zero-greenhouse-gas-emissions'
+        party: 'democratic', 
+        link: 'https://www.baldwin.senate.gov/news/press-releases/us-senator-tammy-baldwin-helps-introduce-legislation-to-achieve-net-zero-greenhouse-gas-emissions',
       },
-      { name: 'Matt Gaetz', 
+      { 
+        name: 'Matt Gaetz', 
         rating: '25% from LCV.', 
         description: 'Skeptical of climate change; focuses on economic growth.',
-        positive: false,
-        link: ''
+        party: 'republican', 
+        link: '',
       },
     ],
   },
@@ -86,7 +92,7 @@ const candidates = [
         rating: '90% from LCV.',
         description: 'Strong advocate for climate action; emphasizes urgency in addressing climate change.',
         link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
-        positive: true,
+        party: 'democratic', 
       },
     ],
   },
@@ -107,18 +113,16 @@ export default function Who() {
 
             {/* Candidate Items */}
             {group.items.map((candidate, itemIndex) => {
-              // Determine the class based on positive or negative rating
-              const ratingClass = candidate.positive ? "who-1" : "who-2";
-              // Generate dynamic class name based on group and item index
-              const dynamicClass = `who-${groupIndex + 1}-${candidate.positive ? "1" : "2"}`;
+              // Determine the color based on party affiliation
+              const partyColor = candidate.party === 'democratic' ? '#0033A0' : '#C8102E'; // Blue for Democrats, Red for Republicans
 
               return (
                 <div
-                  key={`${group.group}-${candidate.name}-${itemIndex}`} // Ensure this key is unique
-                  className={`col-span-2 ${ratingClass} ${dynamicClass} p-4 md:p-8`}
+                  key={`${group.group}-${candidate.name}-${itemIndex}`}
+                  className={`col-span-2 p-4 md:p-8`}
+                  style={{ backgroundColor: partyColor, color: 'white' }} 
                 >
                   {candidate.name} - {' '}
-                  {/* {Rating: {candidate.rating} {"- "}} */}
                   {candidate.link ? (
                     <Link
                       href={candidate.link}

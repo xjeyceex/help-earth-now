@@ -167,15 +167,18 @@ export default function NavbarThree() {
               ✕
             </button>
 
+            <Link href="/about" className={linkClasses('/about')}>
+              About Us
+            </Link>
             <Link href="/v3" className={linkClasses('/v3')}>
               Home
             </Link>
             <Link href="/v3/what" className={linkClasses('/v3/what')}>
-              What
+              What can I do?
             </Link>
-            <Link href="/v3/who" className={linkClasses('/v3/who')}>
+            {/* <Link href="/v3/who" className={linkClasses('/v3/who')}>
               Who
-            </Link>
+            </Link> */}
 
             {status === 'authenticated' && (
               <>

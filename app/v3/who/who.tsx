@@ -117,7 +117,8 @@ export default function Who() {
                   key={`${group.group}-${candidate.name}-${itemIndex}`} // Ensure this key is unique
                   className={`col-span-2 ${ratingClass} ${dynamicClass} p-4 md:p-8`}
                 >
-                  {candidate.name} - Rating: {candidate.rating} {"- "}
+                  {candidate.name} - {' '}
+                  {/* {Rating: {candidate.rating} {"- "}} */}
                   {candidate.link ? (
                     <Link
                       href={candidate.link}

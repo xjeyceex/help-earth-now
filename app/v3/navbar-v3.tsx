@@ -166,12 +166,11 @@ export default function NavbarThree() {
             <button onClick={toggleMenu} className="text-white self-end text-lg">
               ✕
             </button>
-
-            <Link href="/about" className={linkClasses('/about')}>
-              About Us
-            </Link>
             <Link href="/v3" className={linkClasses('/v3')}>
               Home
+            </Link>
+            <Link href="/about" className={linkClasses('/about')}>
+              About Us
             </Link>
             <Link href="/v3/what" className={linkClasses('/v3/what')}>
               What can I do?

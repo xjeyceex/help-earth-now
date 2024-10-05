@@ -76,8 +76,8 @@ export default function NavbarThree() {
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={40} // Reduced width
-                height={40} // Reduced height
+                width={40} 
+                height={40} 
               />
             </Link>
           </div>
@@ -236,9 +236,15 @@ export default function NavbarThree() {
             </div>
             <button
               onClick={handleUpdateLocation}
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+              className="mt-4 w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
             >
               Save
+            </button>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="mt-2 w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition"
+            >
+              Cancel
             </button>
           </div>
         </div>

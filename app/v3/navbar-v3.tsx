@@ -71,7 +71,7 @@ export default function NavbarThree() {
       <nav className="bg-gray-800 w-full sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-3 py-2">
           {/* Brand / Logo */}
-          <div className="hidden sm:block">
+          <div className="sm:block">
             <Link href="/v3">
               <Image
                 src="/logo.png"

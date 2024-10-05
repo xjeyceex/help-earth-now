@@ -129,6 +129,11 @@ html {
   color: white;
 }
 
+.who-help .who-help-4 {
+  background: #00c4cc;
+  color: white;
+}
+
 /* Responsive Font Size Adjustments */
 @media (max-width: 768px) {
   .premise .title {

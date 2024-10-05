@@ -11,7 +11,9 @@ export default function Footer() {
                         <Link href="/about" className="underline text-blue-400" target="_blank">About Us</Link>
                     </h3>
                     <p className="text-sm">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    We're a team passionate about making a positive impact on both people and the planet.
+                    <br />
+                    We keep things simple, offering clear solutions to complex problems so everyone can take action. Want to learn more? The deeper you go, the more you'll discover—without the clutter, we promise!
                     </p>
                 </div>
 

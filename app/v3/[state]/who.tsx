@@ -282,25 +282,29 @@ export default function Who() {
 
               {/* Candidate Items */}
               {group.items.map((candidate, itemIndex) => {
-                const partyColor = candidate.party === Party.Democratic ? '#0033A0' : '#C8102E';
+                // Determine the color based on party affiliation
+                const partyColor = candidate.party === 'democratic' ? '#0033A0' : '#C8102E'; // Blue for Democrats, Red for Republicans
 
                 return (
                   <div
                     key={`${group.group}-${candidate.name}-${itemIndex}`}
                     className={`col-span-2 p-4 md:p-8`}
-                    style={{ backgroundColor: partyColor, color: 'white' }}
+                    style={{ backgroundColor: partyColor, color: 'white' }} 
                   >
                     {candidate.name} - {' '}
-                    {candidate.link ? (
-                      <Link
-                        href={candidate.link}
-                        className="underline"
-                        target="_blank"
-                      >
-                        {candidate.description}
-                      </Link>
-                    ) : (
-                      candidate.description || ""
+                    {candidate.description || ""}
+                    {candidate.link && (
+                      <>
+                        {' - '}
+                        <Link
+                          href={candidate.link}
+                          className="inline-flex items-center text-blue-300 hover:text-blue-500 underline transition duration-200"
+                          target="_blank"
+                        >
+                          Learn More 
+                          <span className="ml-1">↗</span>
+                        </Link>
+                      </>
                     )}
                   </div>
                 );

@@ -36,7 +36,7 @@ export default function CookiePolicy() {
 
                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Managing Cookies</h2>
                         <p className="text-gray-700 mb-6">
-                            You can manage or disable cookies through your browser settings. For detailed instructions, refer to your browser's help section or visit{' '}
+                            You can manage or disable cookies through your browser settings. For detailed instructions, refer to your browser&#39;s help section or visit{' '}
                             <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                 www.aboutcookies.org
                             </a>.

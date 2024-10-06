@@ -11,11 +11,11 @@ export default function Footer() {
                         <Link href="/about" className="underline text-blue-400" target="_blank">About Us</Link>
                     </h3>
                     <p className="text-sm">
-                    We're a team passionate about making a positive impact on both people and the planet.
+                    We&#39;re a team passionate about making a positive impact on both people and the planet.
                     <br />
                     We keep things simple, offering clear solutions to complex problems so everyone can take action. 
                     <br />
-                    Want to learn more? The deeper you go, the more you'll discover—without the clutter, we promise!
+                    Want to learn more? The deeper you go, the more you&#39;ll discover—without the clutter, we promise!
                     </p>
                 </div>
 

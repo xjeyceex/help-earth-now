@@ -78,7 +78,8 @@ export default function What() {
                     What can I do for free?
                 </div>
                 <div className="col-span-2 answer-1 p-12">
-                    Raise your thermostat. Will you feel a degree? {' '}
+                    Raise your thermostat. Will you feel a degree? 
+                    <br />
                     <Link href={generateVoteLink()} className="underline">Vote for people who care</Link>
                     <br />
                     Burn less: fewer fires, drive less

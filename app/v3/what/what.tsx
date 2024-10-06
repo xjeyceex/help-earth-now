@@ -73,7 +73,7 @@ export default function What() {
 
     return (
         <>
-            <div className="grid grid-cols-3 how-help">
+            <div className="grid grid-cols-3 how-help w-full">
                 <div className="text-center questions-1 p-12">
                     What can I do for free?
                 </div>

@@ -150,7 +150,7 @@ export default function Header() {
         <div className="care-about p-4 md:p-6 text-lg md:text-2xl">
           Do you care about:
           <ul className="care-about-list list-disc list-inside space-y-3 text-base md:text-xl leading-relaxed mt-4">
-            {!location?.state ? (
+            {!location?.state || !stateQuestions[location.state] ? (
               <>
                 <li>More and larger hurricanes?</li>
                 <li>Increasing insurance rates?</li>

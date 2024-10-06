@@ -184,16 +184,15 @@ const candidates = [
         link: 'https://www.propublica.org/article/jim-justice-coal-empire-sued-by-federal-government-again',
       },
       {
-        name: 'Gavin Newsom',
-        rating: 'For Climate Action',
-        description: 'Governor Newsom has been a staunch advocate for aggressive climate policies in California, including clean energy initiatives, carbon reduction goals, and ambitious state regulations to address climate change.',
-        party: 'democratic',
+        name: 'Mark Gordon',
+        rating: 'Against Climate Action',
+        description: 'Governor Gordon has focused on energy policies that support fossil fuel industries, particularly coal, oil, and natural gas. While Wyoming has some initiatives for renewable energy, Gordon has largely avoided aggressive climate policies.',
+        party: 'republican',
         link: 'https://www.forbes.com/sites/bobeccles/2023/11/22/climate-change-in-wyoming-the-sanity-of-governor-mark-gordon-and-the-inanity-of-the-wyoming-freedom-caucus/',
       },
     ],
   },
 ]
-
 
 export default function Who() {
   return (

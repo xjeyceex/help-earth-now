@@ -118,77 +118,77 @@ const candidates = [
         rating: 'For Climate Action',
         description: "Governor Carney has supported clean energy initiatives and Delaware's participation in the Regional Greenhouse Gas Initiative (RGGI). Delaware has worked toward increasing renewable energy and setting carbon reduction targets.",
         party: 'democratic',
-        link: 'https://governor.delaware.gov/climate-action/',
+        link: 'https://news.delaware.gov/2021/11/04/governor-carney-releases-plan-outlining-delawares-path-forward-on-climate-change/',
       },
       {
         name: 'Eric Holcomb',
         rating: 'Against Climate Action',
         description: 'Governor Holcomb has focused more on economic growth and has downplayed aggressive state-level climate policies. Indiana has not prioritized strong climate action compared to states with Democratic leadership.',
         party: 'republican',
-        link: 'https://www.indystar.com/story/news/2021/11/17/indiana-governor-holcomb-signs-first-statewide-energy-policy-law/6406210001/',
+        link: 'https://www.politico.com/newsletters/the-long-game/2022/11/15/a-red-state-governor-walks-into-a-cop-00066950/',
       },
       {
         name: 'Mike Parson',
         rating: 'Against Climate Action',
         description: 'Governor Parson has expressed skepticism about climate change and has not supported strong climate policies. His administration has focused more on economic development and fossil fuel industries.',
         party: 'republican',
-        link: 'https://news.stlpublicradio.org/government-politics-issues/2023-06-26/missouri-leaders-warn-climate-change-to-damage-state-economy-environment',
+        link: 'https://www.kansascity.com/opinion/readers-opinion/guest-commentary/article248707085.html',
       },
       {
         name: 'Greg Gianforte',
         rating: 'Against Climate Action',
         description: "Governor Gianforte has aligned with the GOP's stance on climate skepticism and has focused on economic growth, particularly in fossil fuels. He has resisted stronger climate policies and clean energy transitions.",
         party: 'republican',
-        link: 'https://www.greatfallstribune.com/story/news/2021/07/02/gianforte-signs-montana-law-removes-climate-change-study-energy-policy/7828047002/',
+        link: 'https://montanafreepress.org/2023/05/12/gianforte-signs-climate-change-analysis-ban-into-law/',
       },
       {
         name: 'Roy Cooper',
         rating: 'For Climate Action',
         description: 'Governor Cooper has been a strong advocate for clean energy, carbon reduction, and climate resilience. Under his leadership, North Carolina has expanded its renewable energy industry and set clean energy goals, particularly focusing on offshore wind and solar.',
         party: 'democratic',
-        link: 'https://governor.nc.gov/news/press-releases/2022/07/27/governor-cooper-issues-executive-order-246-addressing-climate-change-and-advancing-clean-energy-affordable-and-reliable-energy',
+        link: 'https://governor.nc.gov/news/press-releases/2022/01/07/governor-cooper-signs-executive-order-detailing-next-steps-path-clean-energy-and-equitable-economy',
       },
       {
         name: 'Doug Burgum',
         rating: 'Against Climate Action',
         description: 'Governor Burgum has emphasized energy production, especially from fossil fuels. While he has supported clean energy technologies like wind power, his administration has generally opposed stronger regulatory actions on climate change.',
         party: 'republican',
-        link: 'https://www.kxnet.com/news/burgum-touts-energy-dominance-but-says-coal-will-stay-viable/',
+        link: 'https://www.washingtonpost.com/politics/interactive/2023/presidential-candidates-2024-policies-issues/doug-burgum-climate-change/',
       },
       {
         name: 'Spencer Cox',
         rating: 'Against Climate Action',
         description: 'Governor Cox supports natural resource management, including some clean energy initiatives, but has not pushed for aggressive state-level climate action. His stance aligns with supporting industries like oil, gas, and mining.',
         party: 'republican',
-        link: 'https://www.sltrib.com/news/2021/04/23/governor-cox-defends-his/',
+        link: 'https://www.politico.com/news/2021/09/01/spencer-cox-utah-covid-promises-508111/',
       },
       {
         name: 'Phil Scott',
         rating: 'For Climate Action',
         description: "Governor Scott has supported clean energy initiatives, including expanding renewable energy use and promoting Vermont's climate goals. Under his leadership, Vermont has taken significant steps toward climate resilience and reducing carbon emissions.",
         party: 'republican',
-        link: 'https://vtdigger.org/2021/12/13/gov-scott-wants-vermont-to-lead-on-climate-action-will-he-be-a-hindrance-instead/',
+        link: 'https://governor.vermont.gov/press-release/governor-phil-scott-joins-us-climate-alliance-governors-applauding-unites-states',
       },
       {
         name: 'Jay Inslee',
         rating: 'For Climate Action',
         description: "Governor Inslee is widely regarded as one of the nation's strongest climate advocates. He has made climate change his signature issue, pushing for ambitious carbon reduction targets and renewable energy growth.",
         party: 'democratic',
-        link: 'https://www.governor.wa.gov/issues/issues/climate',
+        link: 'https://www.jayinslee.com/issues/global-climate',
       },
       {
         name: 'Jim Justice',
         rating: 'Against Climate Action',
         description: 'Governor Justice has been an advocate for the coal industry and has resisted significant state-level action on climate change. His administration has largely downplayed the urgency of addressing climate change.',
         party: 'republican',
-        link: 'https://www.npr.org/sections/live-updates/2021/11/01/1051262759/jim-justice-coal-governor-west-virginia',
+        link: 'https://www.propublica.org/article/jim-justice-coal-empire-sued-by-federal-government-again',
       },
       {
         name: 'Gavin Newsom',
         rating: 'For Climate Action',
         description: 'Governor Newsom has been a staunch advocate for aggressive climate policies in California, including clean energy initiatives, carbon reduction goals, and ambitious state regulations to address climate change.',
         party: 'democratic',
-        link: 'https://www.gov.ca.gov/2020/09/23/governor-newsom-announces-california-will-phase-out-gasoline-powered-cars-drive-demand-for-zero-emission-vehicles-and-boldly-move-to-reduce-greenhouse-gas-emissions-by-2045/',
+        link: 'https://www.forbes.com/sites/bobeccles/2023/11/22/climate-change-in-wyoming-the-sanity-of-governor-mark-gordon-and-the-inanity-of-the-wyoming-freedom-caucus/',
       },
     ],
   },
@@ -221,16 +221,19 @@ export default function Who() {
                   style={{ backgroundColor: partyColor, color: 'white' }} 
                 >
                   {candidate.name} - {' '}
-                  {candidate.link ? (
-                    <Link
-                      href={candidate.link}
-                      className="underline"
-                      target="_blank"
-                    >
-                      {candidate.description}
-                    </Link>
-                  ) : (
-                    candidate.description || ""
+                  {candidate.description || ""}
+                  {candidate.link && (
+                    <>
+                      {' - '}
+                      <Link
+                        href={candidate.link}
+                        className="inline-flex items-center text-blue-300 hover:text-blue-500 underline transition duration-200"
+                        target="_blank"
+                      >
+                        Learn More 
+                        <span className="ml-1">↗</span>
+                      </Link>
+                    </>
                   )}
                 </div>
               );

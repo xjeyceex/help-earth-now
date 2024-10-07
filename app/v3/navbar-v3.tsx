@@ -66,6 +66,13 @@ export default function NavbarThree() {
     setIsModalOpen(false);
   };
 
+  const handleUpdateAutomatically = () => {
+    if (updateLocation) {
+      updateLocation(); 
+    }
+    setIsModalOpen(false); 
+  }
+
   return (
     <>
       <nav className="bg-gray-800 w-full sticky top-0 z-50">
@@ -235,8 +242,14 @@ export default function NavbarThree() {
               </select>
             </div>
             <button
+              onClick={handleUpdateAutomatically}
+              className="mt-2 w-full py-2 px-4 border bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+            >
+              Update Automatically
+            </button>
+            <button
               onClick={handleUpdateLocation}
-              className="mt-4 w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+              className="mt-2 w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
             >
               Save
             </button>
@@ -245,12 +258,6 @@ export default function NavbarThree() {
               className="mt-2 w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition"
             >
               Cancel
-            </button>
-            <button
-              onClick={updateLocation}
-              className="mt-2 w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition"
-            >
-              Update Automatically
             </button>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties } from '../us-locations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
 export default function NavbarThree() {
@@ -68,6 +68,13 @@ export default function NavbarThree() {
     setIsModalOpen(false);
   };
 
+  const handleUpdateAutomatically = () => {
+    if (updateLocation) {
+      updateLocation(); 
+    }
+    setIsModalOpen(false); 
+  }
+
   return (
     <>
       <nav className="bg-gray-800 w-full sticky top-0 z-50">
@@ -89,12 +96,6 @@ export default function NavbarThree() {
                 ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
                 : location?.region || location?.city || location?.state || location?.country || 'United States'}
             </p>
-            <button
-              onClick={updateLocation}
-              className="flex items-center justify-center w-5 h-5 bg-gray-600 text-white text-xs rounded-full hover:bg-blue-700 transition mr-2"
-            >
-              <FontAwesomeIcon icon={faSync} className="text-xs" />
-              </button>
             <button
               onClick={() => setIsModalOpen(true)}
               className="flex items-center justify-center w-5 h-5 bg-gray-600 text-white text-xs rounded-full hover:bg-blue-700 transition"
@@ -243,8 +244,14 @@ export default function NavbarThree() {
               </select>
             </div>
             <button
+              onClick={handleUpdateAutomatically}
+              className="mt-2 w-full py-2 px-4 border bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+            >
+              Update Automatically
+            </button>
+            <button
               onClick={handleUpdateLocation}
-              className="mt-4 w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+              className="mt-2 w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
             >
               Save
             </button>

@@ -174,10 +174,10 @@ export default function Header() {
         </iframe>
 
         <div className="flex flex-col h-full justify-center items-center">
-          <div className="exposition-warning flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center">
+          <div className="exposition-warning md:flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center">
             {warningText}
           </div>
-          <div className="exposition-link flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center" id="what">
+          <div className="exposition-link hidden md:flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center" id="what">
             <Link href="#what" className="underline">What can I do?</Link>
           </div>
         </div>

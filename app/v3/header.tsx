@@ -81,7 +81,7 @@ export default function Header() {
     if (location?.state) {
       switch (location.state) {
         case 'Arizona':
-          setVideoUrl('https://www.youtube.com/embed/4WuLQ2hnpw8?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=4WuLQ2hnpw8');
+          setVideoUrl('https://www.youtube.com/embed/wxr-W5f0EzQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=wxr-W5f0EzQ');
           setWarningText('Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.');
           break;
         case 'Nevada':

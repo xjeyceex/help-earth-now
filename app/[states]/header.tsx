@@ -86,7 +86,7 @@ export default function Header() {
     if (state) {
       switch (state) {
         case 'az':
-          setVideoUrl('https://www.youtube.com/embed/4WuLQ2hnpw8?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=4WuLQ2hnpw8');
+          setVideoUrl('https://www.youtube.com/embed/wxr-W5f0EzQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=wxr-W5f0EzQ');
           setWarningText('Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.');
           break;
         case 'nv':
@@ -178,12 +178,13 @@ export default function Header() {
         >
           Your browser does not support the video tag.
         </iframe>
+
         <div className="flex flex-col h-full justify-center items-center">
-          <div className="exposition-warning flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center">
+          <div className="exposition-warning p-6 text-xl md:text-2xl bg-yellow-400 text-white h-full w-full text-center">
             {warningText}
           </div>
-          <div className="exposition-link flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center" id="what">
-            <Link href="#what" className="underline">What can I do?</Link>
+          <div className="exposition-link p-6 text-xl md:text-2xl bg-green-400 text-white h-full w-full text-center" id="what">
+            <Link href='#what' className="underline">What can I do?</Link>
           </div>
         </div>
       </div>

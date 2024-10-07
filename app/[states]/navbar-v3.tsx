@@ -99,9 +99,9 @@ export default function NavbarThree() {
           </div>
           <div className="flex items-center">
             <p className="mr-1 text-xs md:text-sm text-white">
-              Location: {location?.county 
-                ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
-                : location?.region || location?.city || location?.state || location?.country || 'United States'}
+              Location: {location?.county && location?.state 
+                ? `${location.county}, ${location.state}` 
+                : 'United States'}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}

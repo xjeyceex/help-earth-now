@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI");
-  const [warningText, setWarningText] = useState("It's bad and it's getting worse, and we need to fight it - now");
+  const [warningText, setWarningText] = useState("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
 
   const stateQuestions: { [key: string]: string[] } = {
     'Florida': [
@@ -134,7 +134,7 @@ export default function Header() {
           break;
         default:
           setVideoUrl('https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI');
-          setWarningText("It's bad and it's getting worse, and we need to fight it - now.");
+          setWarningText("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
           break;
       }
     }
@@ -149,12 +149,12 @@ export default function Header() {
 
         <div className="care-about p-4 md:p-6 text-lg md:text-2xl">
           Do you care about:
-          <ul className="care-about-list list-disc list-inside space-y-3 text-base md:text-xl leading-relaxed mt-4">
+          <ul className="care-about-list list-disc list-inside pl-5 space-y-3 text-base md:text-xl leading-relaxed mt-4">
             {!location?.state || !stateQuestions[location.state] ? (
               <>
-                <li>More and larger hurricanes?</li>
-                <li>Increasing insurance rates?</li>
-                <li>More and deeper floods?</li>
+                <li>Rising temperatures?</li>
+                <li>Extreme weather events affecting communities?</li>
+                <li>The potential increase in insurance premiums due to climate-related risks?</li>
               </>
             ) : (
               location.state && stateQuestions[location.state]?.map((question: string, index: number) => (
@@ -164,7 +164,6 @@ export default function Header() {
           </ul>
         </div>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3">
         <iframe
           className="col-span-2 w-full aspect-video"

@@ -13,8 +13,8 @@ export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
-  const { location, setManualLocation } = useContext(LocationContext) || {};
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+  const { location, setManualLocation, updateLocation } = useContext(LocationContext) || {};
   const [selectedState, setSelectedState] = useState<string>(location?.state || '');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
@@ -245,6 +245,12 @@ export default function NavbarThree() {
               className="mt-2 w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition"
             >
               Cancel
+            </button>
+            <button
+              onClick={updateLocation}
+              className="mt-2 w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition"
+            >
+              Update Automatically
             </button>
           </div>
         </div>

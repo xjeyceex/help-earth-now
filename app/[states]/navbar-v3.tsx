@@ -35,15 +35,6 @@ export default function NavbarThree() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  useEffect(() => {
-    if (selectedState) {
-      const stateCounties = allCounties[selectedState] || [];
-      setCounties(stateCounties);
-    } else {
-      setCounties([]);
-    }
-  }, [selectedState]);
-
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
     setSelectedCounty('');
@@ -74,6 +65,22 @@ export default function NavbarThree() {
     }
     setIsModalOpen(false); 
   }
+
+  useEffect(() => {
+    if (isModalOpen && location) {
+      setSelectedState(location.state || '');
+      setSelectedCounty(location.county || '');
+    }
+  }, [isModalOpen, location]);
+
+  useEffect(() => {
+    if (selectedState) {
+      const stateCounties = allCounties[selectedState] || [];
+      setCounties(stateCounties);
+    } else {
+      setCounties([]);
+    }
+  }, [selectedState]);
 
   return (
     <>

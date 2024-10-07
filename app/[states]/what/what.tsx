@@ -6,8 +6,6 @@ export default function What() {
     const params = useParams()
     const state = params.states
 
-    console.log(state)
-
     return (
         <>
             <div className="grid grid-cols-3 how-help w-full">

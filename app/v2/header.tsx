@@ -9,7 +9,6 @@ export default function Header() {
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1");
 
   useEffect(() => {
-    console.log('Location state:', location?.state);
     if (location?.state) {
       switch (location.state) {
         case 'Arizona':

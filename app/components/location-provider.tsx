@@ -70,12 +70,13 @@ const fetchLocationFromIP = async (setLocation: (location: LocationState) => voi
       longitude: data.longitude || 0,
       region: data.region || '',
       state: data.region || '',
+      city: data.city || '', 
       country: data.country || 'United States',
       county: '',
       countryCode: data.country_code?.toUpperCase() || undefined,
     };
     setLocation(ipLocation);
-    await fetchCountyFromCityOrState(ipLocation, setLocation); // Try to get the county based on IP data
+    await fetchCountyFromCityOrState(ipLocation, setLocation); 
   } catch (error) {
     console.error('Error fetching location from IP:', error);
   }
@@ -137,7 +138,7 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
       latitude: manualLocation.latitude,
       longitude: manualLocation.longitude,
       region: undefined,
-      city: manualLocation.city || undefined,
+      city: manualLocation.city || undefined, // Handle city input from manual location
       state: manualLocation.state || undefined,
       country: manualLocation.country || 'United States',
       countyCode: manualLocation.countryCode || undefined,

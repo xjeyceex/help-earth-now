@@ -136,7 +136,7 @@ export default function Header() {
           <div className="text-left">
             Do you care about:
           </div>
-          <ul className="care-about-list list-disc list-inside pl-5 space-y-3 text-base md:text-xl leading-relaxed mt-4">
+          <ul className="care-about-list list-disc list-inside space-y-3 text-base md:text-xl leading-relaxed mt-4">
             {!location?.state || !stateQuestions[location.state] ? (
               <>
                 <li>Rising temperatures?</li>

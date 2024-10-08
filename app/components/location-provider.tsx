@@ -138,18 +138,20 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
       latitude: manualLocation.latitude,
       longitude: manualLocation.longitude,
       region: manualLocation.region,
-      city: manualLocation.city || undefined, // Handle city input from manual location
+      city: manualLocation.city || undefined,
       state: manualLocation.state || undefined,
       country: manualLocation.country || 'United States',
-      countyCode: manualLocation.countryCode || undefined,
+      countryCode: manualLocation.countryCode || undefined,
       county: manualLocation.county || undefined,
     };
   
     setLocation(newLocation);
     Cookies.set('userLocation', JSON.stringify(newLocation), { expires: 365 });
-
-    // If county is missing, try to get it
-    fetchCountyFromCityOrState(newLocation, setLocation);
+  
+    // Skip fetching county if the state is already available
+    if (!newLocation.state) {
+      fetchCountyFromCityOrState(newLocation, setLocation);
+    }
   };
 
   useEffect(() => {

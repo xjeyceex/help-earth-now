@@ -138,21 +138,22 @@ export default function NavbarThree() {
 
   useEffect(() => {
     const route = pathname.split('/')[1]; 
-    const newState = routeToStateMap[route]; 
-
-    if (newState && setManualLocation) {
+    const newState = routeToStateMap[route];
+  
+    if (newState && location?.state !== newState && setManualLocation) {
       const newLocation = {
         latitude: 0,
         longitude: 0,
-        region: '', 
+        region: '',
         state: newState,
         country: 'United States',
-        county: '', 
+        county: '',
       };
+      
       setManualLocation(newLocation);
-      setSelectedState(newState); 
+      setSelectedState(newState); // Update the dropdown or any relevant UI
     }
-  }, [pathname, setManualLocation]);
+  }, [pathname, location?.state, setManualLocation]);
 
   return (
     <>

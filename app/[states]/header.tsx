@@ -77,65 +77,54 @@ export default function Header() {
   };
   
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768; 
+
     if (state) {
+      let baseVideoUrl = 'https://www.youtube.com/embed/';
       switch (state) {
         case 'az':
-          setVideoUrl('https://www.youtube.com/embed/wxr-W5f0EzQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=wxr-W5f0EzQ');
+          baseVideoUrl += 'wxr-W5f0EzQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=wxr-W5f0EzQ';
           setWarningText('Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.');
           break;
         case 'nv':
-          setVideoUrl('https://www.youtube.com/embed/UjQEGYaDkSE?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=UjQEGYaDkSE');
+          baseVideoUrl += 'UjQEGYaDkSE?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=UjQEGYaDkSE';
           setWarningText('Temperatures are increasing regularly in Nevada. Insurance prices are on the rise.');
           break;
         case 'ga':
-          setVideoUrl('https://www.youtube.com/embed/h5dc6yAA84c?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=h5dc6yAA84c');
+          baseVideoUrl += 'h5dc6yAA84c?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=h5dc6yAA84c';
           setWarningText('Hurricanes are getting stronger and more frequent in Georgia, leading to significant damage and rising insurance prices.');
           break;
         case 'mi':
-          setVideoUrl('https://www.youtube.com/embed/oZhxV5JVRT4?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=oZhxV5JVRT4');
+          baseVideoUrl += 'oZhxV5JVRT4?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=oZhxV5JVRT4';
           setWarningText('Michigan auto insurance rates are rising every year, affecting residents statewide.');
           break;
         case 'wi':
-          setVideoUrl('https://www.youtube.com/embed/2UkXtCR1eEQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=2UkXtCR1eEQ');
+          baseVideoUrl += '2UkXtCR1eEQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=2UkXtCR1eEQ';
           setWarningText('Car insurance rates are expected to increase by 8.4% in Wisconsin due to various climate impacts.');
           break;
         case 'pa':
-          setVideoUrl('https://www.youtube.com/embed/N73liuUE-l4?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=N73liuUE-l4');
+          baseVideoUrl += 'N73liuUE-l4?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=N73liuUE-l4';
           setWarningText('Car insurance rates are soaring in Pennsylvania, coupled with flooding damaging homes and communities.');
           break;
         case 'nc':
-          setVideoUrl('https://www.youtube.com/embed/uMlhkLbOnmA?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=uMlhkLbOnmA');
+          baseVideoUrl += 'uMlhkLbOnmA?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=uMlhkLbOnmA';
           setWarningText('Hurricanes are causing more damage in North Carolina, resulting in rising insurance costs.');
           break;
         case 'fl':
-          setVideoUrl('https://www.youtube.com/embed/ozqGvyTWeAg?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=ozqGvyTWeAg');
+          baseVideoUrl += 'ozqGvyTWeAg?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=ozqGvyTWeAg';
           setWarningText('Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.');
           break;
-        case 'ne':
-          setVideoUrl('https://www.youtube.com/embed/Vox2kq3ammk?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=Vox2kq3ammk');
-          setWarningText('Wildfires in Nebraska are burning large areas and destroying homes, causing insurance prices to increase.');
-          break;
-        case 'or':
-          setVideoUrl('https://www.youtube.com/embed/3-4SR8vC1kA?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=3-4SR8vC1kA');
-          setWarningText('Wildfires in Oregon have devastated communities, leading to rising insurance costs.');
-          break;
-        case 'nm':
-          setVideoUrl('https://www.youtube.com/embed/TZV__hUOkJQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=TZV__hUOkJQ');
-          setWarningText('Wildfires in New Mexico are spreading and destroying homes, with insurance prices increasing.');
-          break;
-        case 'co':
-          setVideoUrl('https://www.youtube.com/embed/7P4fVa2_8cg?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=7P4fVa2_8cg');
-          setWarningText('Colorado wildfires are burning hundreds of homes, driving insurance prices up.');
-          break;
-        case 'ca':
-          setVideoUrl('https://www.youtube.com/embed/u_b0o-1_r9Q?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=u_b0o-1_r9Q');
-          setWarningText('California wildfires have devastated communities and caused insurance prices to rise significantly.');
-          break;
         default:
-          setVideoUrl('https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI');
+          baseVideoUrl += '0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI';
           setWarningText("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
           break;
       }
+
+      if (isMobile) {
+        baseVideoUrl += '&vq=small';
+      }
+
+      setVideoUrl(baseVideoUrl);
     }
   }, [state]);
   

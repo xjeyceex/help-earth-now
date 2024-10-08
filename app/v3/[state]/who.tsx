@@ -183,7 +183,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Roy Cooper',
         rating: 'For Climate Action',
-        description: 'Governor Cooper has been a strong advocate for clean energy, carbon reduction, and climate resilience. Under his leadership, North Carolina has expanded its renewable energy industry and set clean energy goals, particularly focusing on offshore wind and solar.',
+        description: 'Governor Cooper has led North Carolina in advancing clean energy, focusing on offshore wind, solar, and ambitious carbon reduction goals.',
         party: Party.Democratic,
         state: ['NC'],
         link: 'https://governor.nc.gov/news/press-releases/2022/01/07/governor-cooper-signs-executive-order-detailing-next-steps-path-clean-energy-and-equitable-economy',

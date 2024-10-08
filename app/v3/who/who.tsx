@@ -17,8 +17,8 @@ const candidates = [
       {
         name: 'Donald Trump',
         rating: '30% from LCV.',
-        description: 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
-        link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
+        description: "Trump's delay of a $19.1 billion disaster relief bill for North Carolina hindered vital flood mitigation, worsening the effects of Hurricane Herlene in 2023.",
+        link: 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
         party: 'republican',
       },
     ],

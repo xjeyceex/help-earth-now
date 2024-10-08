@@ -16,7 +16,7 @@ export default function What() {
 			<div className="text-center questions-2 p-12">
 				What if I can spend a little?
 			</div>
-			<div className="col-span-2 answer-2 p-12">
+			<div className="flex items-center col-span-2 answer-2 p-12">
 				Insulate your doors & windows better
 				<br/>
 				Support our efforts, or others like us

@@ -171,7 +171,7 @@ export default function Header() {
               <Link href="/resources" className="underline text-blue-500 hover:text-blue-700 text-2xl">Read More.</Link>
             </div> */}
           </div>
-          <div className="exposition-link p-6 text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex flex-col items-center justify-center" id="what">
+          <div className="exposition-link p-6 md:flex hidden text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex-col items-center justify-center" id="what">
             <Link href="#what" className="underline">What can I do?</Link>
           </div>
         </div>

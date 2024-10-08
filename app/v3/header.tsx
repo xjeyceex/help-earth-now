@@ -77,35 +77,35 @@ export default function Header() {
     if (location?.state) {
       let baseVideoUrl = 'https://www.youtube.com/embed/';
       switch (location?.state) {
-        case 'az':
+        case 'Arizona':
           baseVideoUrl += 'wxr-W5f0EzQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=wxr-W5f0EzQ';
           setWarningText('Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.');
           break;
-        case 'nv':
+        case 'Nevada':
           baseVideoUrl += 'UjQEGYaDkSE?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=UjQEGYaDkSE';
           setWarningText('Temperatures are increasing regularly in Nevada. Insurance prices are on the rise.');
           break;
-        case 'ga':
+        case 'Georgia':
           baseVideoUrl += 'h5dc6yAA84c?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=h5dc6yAA84c';
           setWarningText('Hurricanes are getting stronger and more frequent in Georgia, leading to significant damage and rising insurance prices.');
           break;
-        case 'mi':
+        case 'Michigan':
           baseVideoUrl += 'oZhxV5JVRT4?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=oZhxV5JVRT4';
           setWarningText('Michigan auto insurance rates are rising every year, affecting residents statewide.');
           break;
-        case 'wi':
+        case 'Wisconsin':
           baseVideoUrl += '2UkXtCR1eEQ?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=2UkXtCR1eEQ';
           setWarningText('Car insurance rates are expected to increase by 8.4% in Wisconsin due to various climate impacts.');
           break;
-        case 'pa':
+        case 'Pennsylvania':
           baseVideoUrl += 'N73liuUE-l4?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=N73liuUE-l4';
           setWarningText('Car insurance rates are soaring in Pennsylvania, coupled with flooding damaging homes and communities.');
           break;
-        case 'nc':
+        case 'North Carolina':
           baseVideoUrl += 'uMlhkLbOnmA?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=uMlhkLbOnmA';
           setWarningText('Hurricanes are causing more damage in North Carolina, resulting in rising insurance costs.');
           break;
-        case 'fl':
+        case 'Florida':
           baseVideoUrl += 'ozqGvyTWeAg?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=ozqGvyTWeAg';
           setWarningText('Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.');
           break;

@@ -159,7 +159,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Eric Holcomb',
         rating: 'Against Climate Action',
-        description: 'Governor Holcomb has focused more on economic growth and has downplayed aggressive state-level climate policies. Indiana has not prioritized strong climate action compared to states with Democratic leadership.',
+        description: 'Governor Holcomb focuses on economic growth, with limited emphasis on climate policies compared to Democratic-led states.',
         party: Party.Republican,
         state: ['IN'],
         link: 'https://www.politico.com/newsletters/the-long-game/2022/11/15/a-red-state-governor-walks-into-a-cop-00066950/',
@@ -175,7 +175,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Greg Gianforte',
         rating: 'Against Climate Action',
-        description: "Governor Gianforte has aligned with the GOP's stance on climate skepticism and has focused on economic growth, particularly in fossil fuels. He has resisted stronger climate policies and clean energy transitions.",
+        description: "Governor Gianforte has aligned with the GOP's stance on climate skepticism and has focused on economic growth, particularly in sectors like fossil fuels. He has resisted stronger climate policies and clean energy transitions.",
         party: Party.Republican,
         state: ['MT'],
         link: 'https://montanafreepress.org/2023/05/12/gianforte-signs-climate-change-analysis-ban-into-law/',
@@ -191,7 +191,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Doug Burgum',
         rating: 'Against Climate Action',
-        description: 'Governor Burgum has emphasized energy production, especially from fossil fuels. While he has supported clean energy technologies like wind power, his administration has generally opposed stronger regulatory actions on climate change.',
+        description: 'Governor Burgum prioritizes energy production, particularly fossil fuels, and while supporting wind power, his administration opposes stronger climate regulations.',
         party: Party.Republican,
         state: ['ND'],
         link: 'https://www.washingtonpost.com/politics/interactive/2023/presidential-candidates-2024-policies-issues/doug-burgum-climate-change/',
@@ -199,7 +199,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Spencer Cox',
         rating: 'Against Climate Action',
-        description: 'Governor Cox supports natural resource management, including some clean energy initiatives, but has not pushed for aggressive state-level climate action. His stance aligns with supporting industries like oil, gas, and mining.',
+        description: 'Governor Cox supports natural resource management and some clean energy initiatives but has not pursued aggressive climate action, favoring industries like oil, gas, and mining.',
         party: Party.Republican,
         state: ['UT'],
         link: 'https://www.politico.com/news/2021/09/01/spencer-cox-utah-covid-promises-508111/',
@@ -207,7 +207,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Phil Scott',
         rating: 'For Climate Action',
-        description: "Governor Scott has supported clean energy initiatives, including expanding renewable energy use and promoting Vermont's climate goals. Under his leadership, Vermont has taken significant steps toward climate resilience and reducing carbon emissions.",
+        description: "Governor Scott has backed clean energy initiatives, expanded renewables, and advanced Vermont’s climate goals, making significant strides in climate resilience and carbon reduction.",
         party: Party.Republican,
         state: ['VT'],
         link: 'https://governor.vermont.gov/press-release/governor-phil-scott-joins-us-climate-alliance-governors-applauding-unites-states',
@@ -215,7 +215,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Jay Inslee',
         rating: 'For Climate Action',
-        description: "Governor Inslee is widely regarded as one of the nation's strongest climate advocates. He has made climate change his signature issue, championing clean energy, carbon reduction policies, and climate resilience in Washington state.",
+        description: "Governor Inslee is a leading climate advocate, focusing on ambitious carbon reduction, renewable energy growth, and reducing fossil fuel reliance.",
         party: Party.Democratic,
         state: ['WA'],
         link: 'https://www.jayinslee.com/issues/global-climate',
@@ -223,7 +223,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Jim Justice',
         rating: 'Against Climate Action',
-        description: 'Governor Justice has been an advocate for the coal industry and has resisted significant state-level action on climate change. His administration has largely downplayed the urgency of addressing climate change.',
+        description: 'Governor Justice has supported the coal industry and resisted strong climate action, prioritizing economic issues tied to fossil fuels over addressing climate change.',
         party: Party.Republican,
         state: ['WV'],
         link: 'https://www.propublica.org/article/jim-justice-coal-empire-sued-by-federal-government-again',
@@ -231,7 +231,7 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Mark Gordon',
         rating: 'Against Climate Action',
-        description: 'Governor Gordon has focused on energy policies that support fossil fuel industries, particularly coal, oil, and natural gas. While Wyoming has some initiatives for renewable energy, Gordon has largely avoided aggressive climate policies.',
+        description: 'Governor Gordon supports fossil fuel industries, particularly coal, oil, and gas, and has avoided aggressive climate policies, despite some renewable energy initiatives in Wyoming.',
         party: Party.Republican,
         state: ['WY'],
         link: 'https://www.forbes.com/sites/bobeccles/2023/11/22/climate-change-in-wyoming-the-sanity-of-governor-mark-gordon-and-the-inanity-of-the-wyoming-freedom-caucus/',

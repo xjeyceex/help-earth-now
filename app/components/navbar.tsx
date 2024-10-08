@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { LocationContext } from './location-provider';
 import { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { states } from '../us-locations';
+import { states } from '../us-locandcandidates';
 
 interface County {
   name: string;

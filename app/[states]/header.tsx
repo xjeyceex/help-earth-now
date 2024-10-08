@@ -142,14 +142,14 @@ export default function Header() {
             Do you care about:
           </div>
           <ul className="care-about-list list-disc list-inside pl-5 space-y-3 text-base md:text-xl leading-relaxed mt-4">
-            {!location?.state || !stateQuestions[location.state] ? (
+            {!state || !stateQuestions[state] ? (
               <>
                 <li>Rising temperatures?</li>
                 <li>Extreme weather events affecting communities?</li>
                 <li>The potential increase in insurance premiums due to climate-related risks?</li>
               </>
             ) : (
-              location.state && stateQuestions[location.state]?.map((question: string, index: number) => (
+              state && stateQuestions[state]?.map((question: string, index: number) => (
                 <li key={index}>{question}</li>
               ))
             )}

@@ -14,7 +14,7 @@ export default function What() {
                     What can I do for free?
                 </div>
                 <div className="col-span-2 answer-1 p-12">
-                    Raise your thermostat. Will you feel a degree? 
+                    Share this site with others
                     <br />
                     <Link href={`${state}/who`} className="underline">Vote for people who care</Link>
                     <br />
@@ -24,9 +24,7 @@ export default function What() {
                     What if I can spend a little?
                 </div>
                 <div className="col-span-2 answer-2 p-12">
-                    Insulate your doors better
-                    <br />
-                    Support our efforts, or others like us
+                    Insulate your doors & windows better
                 </div>
                 <div className="flex items-center text-center questions-3 p-12">
                     What if I can spend more?

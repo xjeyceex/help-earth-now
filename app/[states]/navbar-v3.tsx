@@ -136,7 +136,7 @@ export default function NavbarThree() {
             <Link href={`/${currentState}`} className={linkClasses(`/${currentState}`)}>
               Home
             </Link>
-            <Link href="/about" className={linkClasses('/about')}>
+            <Link href={`/${currentState}/about`} className={linkClasses(`/${currentState}/about`)}>
               About Us
             </Link>
             {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
@@ -185,7 +185,7 @@ export default function NavbarThree() {
             <Link href={`/${pathname.split('/')[1]}`} className={linkClasses(`/${pathname.split('/')[1]}`)}>
               Home
             </Link>
-            <Link href="/about" className={linkClasses('/about')}>
+            <Link href={`/${currentState}/about`} className={linkClasses(`/${currentState}/about`)}>
               About Us
             </Link>
             {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>

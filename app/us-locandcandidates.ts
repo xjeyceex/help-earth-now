@@ -806,7 +806,7 @@ interface Candidate {
   description: string;
   link: string;
   party: Party;
-  state: string[]; 
+  state: string; 
 }
 
 
@@ -821,7 +821,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change',
         link: 'https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/',
         party: Party.Democratic,
-        state: ['All'],
+        state: 'All',
       },
       {
         name: 'Donald Trump',
@@ -829,7 +829,7 @@ export const candidates: CandidateGroup[] = [
         description: "Trump's delay of a $19.1 billion disaster relief bill for North Carolina hindered vital flood mitigation, worsening the effects of Hurricane Herlene in 2023.",
         link: 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
         party: Party.Republican,
-        state: ['All'],
+        state: 'All',
       },
     ],
   },
@@ -842,7 +842,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Strong proponent of addressing climate change; emphasizes its impact on communities.',
         link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
         party: Party.Democratic,
-        state: ['FL'],
+        state: 'FL',
       },
       {
         name: 'Rick Scott',
@@ -850,7 +850,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Generally skeptical of climate change; prioritizes economic interests.',
         party: Party.Republican,
         link: 'https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/',
-        state: ['FL'],
+        state: 'FL',
       },
       {
         name: 'Joe Manchin',
@@ -858,7 +858,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Advocates for energy independence, recognizes climate issues.',
         party: Party.Democratic,
         link: 'https://www.vox.com/climate/23955967/joe-manchin-climate-change-senate-biden-inflation',
-        state: ['WV'],
+        state: 'WV',
       },
       {
         name: 'Catherine Cortez Masto',
@@ -866,7 +866,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Strong advocate for renewable energy and climate action',
         party: Party.Democratic,
         link: 'https://www.cortezmasto.senate.gov/news/press-releases/cortez-masto-introduces-legislation-to-create-a-national-climate-service-corps/',
-        state: ['NV'],
+        state: 'NV',
       },
       {
         name: 'Sherrod Brown',
@@ -874,7 +874,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Advocates for sustainable jobs and clean energy transition',
         party: Party.Democratic,
         link: 'https://www.brown.senate.gov/newsroom/press/release/brown-climate-change-threat-economy',
-        state: ['OH'],
+        state: 'OH',
       },
       {
         name: 'Jon Tester',
@@ -882,7 +882,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Supports renewable energy, emphasizes resource extraction',
         party: Party.Democratic,
         link: 'https://www.tester.senate.gov/about/issues/energy/',
-        state: ['MT'],
+        state: 'MT',
       },
       {
         name: 'Tammy Baldwin',
@@ -890,7 +890,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Strong advocate for climate action and renewable energy',
         party: Party.Democratic,
         link: 'https://www.baldwin.senate.gov/news/press-releases/us-senator-tammy-baldwin-helps-introduce-legislation-to-achieve-net-zero-greenhouse-gas-emissions',
-        state: ['WI'],
+        state: 'WI',
       },
     ],
   },
@@ -903,7 +903,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Strong advocate for climate action; emphasizes urgency in addressing climate change.',
         link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
         party: Party.Democratic,
-        state: ['FL'],
+        state: 'FL',
       },
       {
         name: 'Matt Gaetz',
@@ -911,7 +911,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Skeptical of climate change; focuses on economic growth.',
         party: Party.Republican,
         link: 'https://www.newsweek.com/matt-gaetz-voted-against-fema-funding-before-hurricane-helene-hit-1961501',
-        state: ['FL'],
+        state: 'FL',
       },
       {
         name: 'Abigail Spanberger',
@@ -919,7 +919,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Supports climate action with a focus on clean energy and policies that protect rural communities.',
         link: 'https://spanberger.house.gov/resources/energy-and-environment',
         party: Party.Democratic,
-        state: ['VA'],
+        state: 'VA',
       },
       {
         name: 'Tony Gonzales',
@@ -927,7 +927,7 @@ export const candidates: CandidateGroup[] = [
         description: 'Supports climate action with a focus on clean energy and policies that protect rural communities.',
         link: 'https://c3act.org/people/tony-gonzales/',
         party: Party.Republican,
-        state: ['TX'],
+        state: 'TX',
       },
     ],
   },
@@ -939,7 +939,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'For Climate Action',
         description: "Governor Carney has supported clean energy initiatives and Delaware's participation in the Regional Greenhouse Gas Initiative (RGGI). Delaware has worked toward increasing renewable energy and setting carbon reduction targets.",
         party: Party.Democratic,
-        state: ['DE'],
+        state: 'DE',
         link: 'https://news.delaware.gov/2021/11/04/governor-carney-releases-plan-outlining-delawares-path-forward-on-climate-change/',
       },
       {
@@ -947,7 +947,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: 'Governor Holcomb focuses on economic growth, with limited emphasis on climate policies compared to Democratic-led states.',
         party: Party.Republican,
-        state: ['IN'],
+        state: 'IN',
         link: 'https://www.politico.com/newsletters/the-long-game/2022/11/15/a-red-state-governor-walks-into-a-cop-00066950/',
       },
       {
@@ -955,7 +955,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: 'Governor Parson has expressed skepticism about climate change and has not supported strong climate policies. His administration has focused more on economic development and fossil fuel industries.',
         party: Party.Republican,
-        state: ['MO'],
+        state: 'MO',
         link: 'https://www.kansascity.com/opinion/readers-opinion/guest-commentary/article248707085.html',
       },
       {
@@ -963,7 +963,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: "Governor Gianforte has aligned with the GOP's stance on climate skepticism and has focused on economic growth, particularly in sectors like fossil fuels. He has resisted stronger climate policies and clean energy transitions.",
         party: Party.Republican,
-        state: ['MT'],
+        state: 'MT',
         link: 'https://montanafreepress.org/2023/05/12/gianforte-signs-climate-change-analysis-ban-into-law/',
       },
       {
@@ -971,7 +971,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'For Climate Action',
         description: 'Governor Cooper has led North Carolina in advancing clean energy, focusing on offshore wind, solar, and ambitious carbon reduction goals.',
         party: Party.Democratic,
-        state: ['NC'],
+        state: 'NC',
         link: 'https://governor.nc.gov/news/press-releases/2022/01/07/governor-cooper-signs-executive-order-detailing-next-steps-path-clean-energy-and-equitable-economy',
       },
       {
@@ -979,7 +979,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: 'Governor Burgum prioritizes energy production, particularly fossil fuels, and while supporting wind power, his administration opposes stronger climate regulations.',
         party: Party.Republican,
-        state: ['ND'],
+        state: 'ND',
         link: 'https://www.washingtonpost.com/politics/interactive/2023/presidential-candidates-2024-policies-issues/doug-burgum-climate-change/',
       },
       {
@@ -987,15 +987,15 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: 'Governor Cox supports natural resource management and some clean energy initiatives but has not pursued aggressive climate action, favoring industries like oil, gas, and mining.',
         party: Party.Republican,
-        state: ['UT'],
+        state: 'UT',
         link: 'https://www.politico.com/news/2021/09/01/spencer-cox-utah-covid-promises-508111/',
       },
       {
         name: 'Phil Scott',
         rating: 'For Climate Action',
-        description: "Governor Scott has backed clean energy initiatives, expanded renewables, and advanced Vermont’s climate goals, making significant strides in climate resilience and carbon reduction.",
+        description: "Governor Scott has backed clean energy initiatives, expanded renewables, and advanced Vermont's climate goals, making significant strides in climate resilience and carbon reduction.",
         party: Party.Republican,
-        state: ['VT'],
+        state: 'VT',
         link: 'https://governor.vermont.gov/press-release/governor-phil-scott-joins-us-climate-alliance-governors-applauding-unites-states',
       },
       {
@@ -1003,7 +1003,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'For Climate Action',
         description: "Governor Inslee is a leading climate advocate, focusing on ambitious carbon reduction, renewable energy growth, and reducing fossil fuel reliance.",
         party: Party.Democratic,
-        state: ['WA'],
+        state: 'WA',
         link: 'https://www.jayinslee.com/issues/global-climate',
       },
       {
@@ -1011,7 +1011,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: 'Governor Justice has supported the coal industry and resisted strong climate action, prioritizing economic issues tied to fossil fuels over addressing climate change.',
         party: Party.Republican,
-        state: ['WV'],
+        state: 'WV',
         link: 'https://www.propublica.org/article/jim-justice-coal-empire-sued-by-federal-government-again',
       },
       {
@@ -1019,7 +1019,7 @@ export const candidates: CandidateGroup[] = [
         rating: 'Against Climate Action',
         description: 'Governor Gordon supports fossil fuel industries, particularly coal, oil, and gas, and has avoided aggressive climate policies, despite some renewable energy initiatives in Wyoming.',
         party: Party.Republican,
-        state: ['WY'],
+        state: 'WY',
         link: 'https://www.forbes.com/sites/bobeccles/2023/11/22/climate-change-in-wyoming-the-sanity-of-governor-mark-gordon-and-the-inanity-of-the-wyoming-freedom-caucus/',
       },
     ],

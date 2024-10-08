@@ -17,7 +17,7 @@ interface Candidate {
   description: string;
   link: string;
   party: Party;
-  state: string[]; 
+  state: string; 
 }
 
 interface CandidateGroup {
@@ -30,8 +30,8 @@ const getCandidatesForState = (state: string, candidates: CandidateGroup[]) => {
     .map(group => ({
       ...group,
       items: group.items.filter(candidate =>
-        candidate.state.map(s => s.toLowerCase()).includes(state.toLowerCase()) 
-        || candidate.state.includes('All')
+        candidate.state.toLowerCase() === state.toLowerCase()
+        || candidate.state === 'All'
       ),
     }))
     .filter(group => group.items.length > 0);

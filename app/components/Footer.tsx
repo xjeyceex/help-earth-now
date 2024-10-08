@@ -5,7 +5,6 @@ export default function Footer() {
         <footer className="bg-gray-800 text-white py-6 px-4 w-full">
                 {/* Email Registration Section */}
                 <div className="flex flex-col items-center justify-center">
-                    <h3 className="text-xl font-bold mb-2">Subscribe</h3>
                     <p className="text-sm mb-2 text-center">
                         Sign up to receive occasional updates on our efforts and events
                     </p>

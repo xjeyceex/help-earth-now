@@ -9,6 +9,60 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
+const routeToStateMap: { [key: string]: string } = {
+  al: 'Alabama',
+  ak: 'Alaska',
+  az: 'Arizona',
+  ar: 'Arkansas',
+  ca: 'California',
+  co: 'Colorado',
+  ct: 'Connecticut',
+  de: 'Delaware',
+  fl: 'Florida',
+  ga: 'Georgia',
+  hi: 'Hawaii',
+  id: 'Idaho',
+  il: 'Illinois',
+  in: 'Indiana',
+  ia: 'Iowa',
+  ks: 'Kansas',
+  ky: 'Kentucky',
+  la: 'Louisiana',
+  me: 'Maine',
+  md: 'Maryland',
+  ma: 'Massachusetts',
+  mi: 'Michigan',
+  mn: 'Minnesota',
+  ms: 'Mississippi',
+  mo: 'Missouri',
+  mt: 'Montana',
+  ne: 'Nebraska',
+  nv: 'Nevada',
+  nh: 'New Hampshire',
+  nj: 'New Jersey',
+  nm: 'New Mexico',
+  ny: 'New York',
+  nc: 'North Carolina',
+  nd: 'North Dakota',
+  oh: 'Ohio',
+  ok: 'Oklahoma',
+  or: 'Oregon',
+  pa: 'Pennsylvania',
+  ri: 'Rhode Island',
+  sc: 'South Carolina',
+  sd: 'South Dakota',
+  tn: 'Tennessee',
+  tx: 'Texas',
+  ut: 'Utah',
+  vt: 'Vermont',
+  va: 'Virginia',
+  wa: 'Washington',
+  wv: 'West Virginia',
+  wi: 'Wisconsin',
+  wy: 'Wyoming',
+};
+
+
 export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
@@ -81,6 +135,24 @@ export default function NavbarThree() {
       setCounties([]);
     }
   }, [selectedState]);
+
+  useEffect(() => {
+    const route = pathname.split('/')[1]; 
+    const newState = routeToStateMap[route]; 
+
+    if (newState && setManualLocation) {
+      const newLocation = {
+        latitude: 0,
+        longitude: 0,
+        region: '', 
+        state: newState,
+        country: 'United States',
+        county: '', 
+      };
+      setManualLocation(newLocation);
+      setSelectedState(newState); 
+    }
+  }, [pathname, setManualLocation]);
 
   return (
     <>

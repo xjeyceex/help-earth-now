@@ -137,12 +137,16 @@ export default function Header() {
   return (
     <div className="w-full" id="home">
       <div className="grid grid-cols-1 md:grid-cols-3 premise">
-        <div className="title col-span-2 text-center p-4 md:p-10 text-lg md:text-3xl leading-tight md:leading-normal">
+        {/* Title Section - Centered */}
+        <div className="title col-span-2 p-4 md:p-10 text-lg md:text-3xl leading-tight md:leading-normal flex justify-center items-center">
           Climate change is hurting us all - now
         </div>
 
-        <div className="care-about p-4 md:p-6 text-lg md:text-2xl">
-          Do you care about:
+        {/* Care About Section - Left-aligned */}
+        <div className="care-about col-span-1 flex flex-col items-start p-4 md:p-6 text-lg md:text-2xl">
+          <div className="text-left">
+            Do you care about:
+          </div>
           <ul className="care-about-list list-disc list-inside pl-5 space-y-3 text-base md:text-xl leading-relaxed mt-4">
             {!location?.state || !stateQuestions[location.state] ? (
               <>
@@ -158,7 +162,9 @@ export default function Header() {
           </ul>
         </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3">
+        {/* Video Section */}
         <iframe
           className="col-span-2 w-full aspect-video"
           src={videoUrl}
@@ -168,11 +174,15 @@ export default function Header() {
           Your browser does not support the video tag.
         </iframe>
 
+        {/* Exposition Section */}
         <div className="flex flex-col h-full justify-center items-center">
-          <div className="exposition-warning flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center">
-            {warningText}
+          <div className="exposition-warning p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center flex flex-col items-center justify-center">
+            {warningText}{' '}
+            {/* <div>
+              <Link href="/resources" className="underline text-blue-500 hover:text-blue-700 text-2xl">Read More.</Link>
+            </div> */}
           </div>
-          <div className="exposition-link flex justify-center items-center p-6 text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center" id="what">
+          <div className="exposition-link p-6 text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex flex-col items-center justify-center" id="what">
             <Link href="#what" className="underline">What can I do?</Link>
           </div>
         </div>

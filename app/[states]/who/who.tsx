@@ -40,8 +40,8 @@ const candidates: CandidateGroup[] = [
       {
         name: 'Donald Trump',
         rating: '30% from LCV.',
-        description: 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
-        link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
+        description: "In 2019, Trump's delay of a crucial $19.1 billion disaster relief bill for North Carolina postponed vital flood mitigation projects, leading to significant impacts from subsequent storms, including the flooding caused by Hurricane Herlene in 2023.",
+        link: 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
         party: Party.Republican,
         state: ['All'],
       },

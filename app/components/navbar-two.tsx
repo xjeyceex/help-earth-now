@@ -82,10 +82,10 @@ export default function NavbarTwo() {
             </Link>
           </div>
           <div className="flex items-center mb-2 md:mb-0">
-            <p className="mr-2 text-xs md:text-sm text-center md:text-left text-white">
+            <p className="mr-1 text-xs md:text-sm text-white">
               Location: {location?.county 
-                ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
-                : location?.region || location?.city || location?.state || location?.country || 'United States'}
+                ? `${location.county}, ${location.state}` 
+                : location?.state || 'United States'}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}

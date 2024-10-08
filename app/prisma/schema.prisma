@@ -24,3 +24,15 @@ model users{
   password String
   isActive Boolean @default(true)
 }
+
+model Candidate {
+  id          String   @id @default(cuid()) 
+  firstName   String  
+  lastName    String  
+  description String   
+  party       String    
+  link        String   
+  rating      String   
+  state       String   
+}
+

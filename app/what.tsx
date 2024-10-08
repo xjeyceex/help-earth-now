@@ -17,7 +17,7 @@ export default function What() {
 				What if I can spend a little?
 			</div>
 			<div className="col-span-2 answer-2 p-12">
-				Insulate your doors better
+				Insulate your doors & windows better
 				<br/>
 				Support our efforts, or others like us
 			</div>

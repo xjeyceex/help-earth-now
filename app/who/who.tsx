@@ -68,7 +68,7 @@ export default function Who() {
             <React.Fragment key={group.group}>
               {/* Group Header */}
               <div
-                className={`flex items-center justify-center text-center who-help-${groupIndex + 1} p-4 md:p-8`}
+                className={`flex items-center justify-center text-center who-help-${groupIndex + 1} p-4 md:p-8 border border-gray-300`} // Added border to group header
                 style={{ gridRow: `span ${group.items.length}` }} 
               >
                 {group.group}
@@ -82,7 +82,7 @@ export default function Who() {
                 return (
                   <div
                     key={`${group.group}-${candidate.name}-${itemIndex}`}
-                    className={`col-span-2 p-4 md:p-8`}
+                    className={`col-span-2 p-4 md:p-8 border border-gray-300`} // Added border to candidate item
                     style={{ backgroundColor: partyColor, color: 'white' }} 
                   >
                     {candidate.name} - {' '}

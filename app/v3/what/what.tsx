@@ -11,8 +11,9 @@ export default function What() {
                 <div className="col-span-2 answer-1 p-12">
                     Share this site with others
                     <br />
-                    <Link href='/who' className="underline">Vote for people who care</Link>
-                    <br />
+                    <Link href='/who' className="text-blue-500 underline hover:text-blue-700">
+                        Vote for people who care &rarr;
+                    </Link>                    <br />
                     Burn less: fewer fires, drive less
                 </div>
                 <div className="flex items-center text-center questions-2 p-12">

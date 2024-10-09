@@ -827,7 +827,7 @@ export const candidates: CandidateGroup[] = [
       {
         name: 'Donald Trump',
         rating: '30% from LCV.',
-        description: "Trump's delay of a $19.1 billion disaster relief bill for North Carolina hindered vital flood mitigation, worsening the effects of Hurricane Herlene in 2023.",
+        description: "Trump's delay of a $19.1 billion disaster relief bill for North Carolina hindered vital flood mitigation, worsening the effects of Hurricane Helene in 2023.",
         link: 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
         party: Party.Republican,
         state: 'All',

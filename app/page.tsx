@@ -1,6 +1,5 @@
 import Header from "./v3/header";
 import What from "./v3/what/what";
-import Who from "./v3/who/who";
 import NavbarThree from "./v3/navbar-v3";
 import CookieConsent from "./components/CookieConsent";
 import Footer from "./components/Footer";
@@ -11,7 +10,6 @@ export default function Home() {
       <NavbarThree/>
       <Header />
       <What />
-      <Who />
       <CookieConsent/>
       <Footer/>
     </main>

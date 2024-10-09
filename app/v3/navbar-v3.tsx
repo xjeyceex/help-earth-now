@@ -86,7 +86,7 @@ export default function NavbarThree() {
         <div className="container mx-auto flex items-center justify-between px-3 py-2">
           {/* Brand / Logo */}
           <div className="sm:block">
-            <Link href="/v3">
+            <Link href="/">
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
@@ -131,16 +131,16 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/v3" className={linkClasses('/v3')}>
+            <Link href="/" className={linkClasses('/')}>
               Home
             </Link>
             <Link href="/about" className={linkClasses('/about')}>
               About Us
             </Link>
-            {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
+            {/* <Link href="//what" className={linkClasses('//what')}>
               What can I do?
             </Link> */}
-            {/* <Link href="/v3/who" className={linkClasses('/v3/who')}>
+            {/* <Link href="//who" className={linkClasses('//who')}>
               Who
             </Link> */}
 
@@ -155,10 +155,10 @@ export default function NavbarThree() {
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-72 bg-gray-800 shadow-lg rounded-lg mt-2 p-3">
-                    <Link href="/v3/content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="//content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Content Management
                     </Link>
-                    <Link href="/v3/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="//admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Admin Panel
                     </Link>
                     <Link
@@ -180,25 +180,25 @@ export default function NavbarThree() {
             <button onClick={toggleMenu} className="text-white self-end text-lg">
               ✕
             </button>
-            <Link href="/v3" className={linkClasses('/v3')}>
+            <Link href="/" className={linkClasses('/')}>
               Home
             </Link>
             <Link href="/about" className={linkClasses('/about')}>
               About Us
             </Link>
-            {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
+            {/* <Link href="//what" className={linkClasses('//what')}>
               What can I do?
             </Link> */}
-            {/* <Link href="/v3/who" className={linkClasses('/v3/who')}>
+            {/* <Link href="//who" className={linkClasses('//who')}>
               Who
             </Link> */}
 
             {status === 'authenticated' && (
               <>
-                <Link href="/v3/content" className={linkClasses("/v3/content")}>
+                <Link href="//content" className={linkClasses("//content")}>
                   Content Management
                 </Link>
-                <Link href="/v3/admin" className={linkClasses('/v3/admin')}>
+                <Link href="//admin" className={linkClasses('//admin')}>
                   Admin Panel
                 </Link>
                 <Link

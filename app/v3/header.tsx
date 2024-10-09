@@ -71,8 +71,8 @@ const stateData: { [key: string]: { video: string, warning: string, questions: s
     ],
   },
   'Nebraska': {
-    video: 'N3xyZInOqAI',
-    warning: 'Wildfires in Nebraska are burning large areas and destroying homes, with increasing insurance prices.',
+    video: '0yMGg5VDltI',
+    warning: 'Wildfires burning large areas, and destroying homes in Nebraska. Temperatures and insurance prices are increasing.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
       'Insurance prices increasing each year?',
@@ -80,8 +80,8 @@ const stateData: { [key: string]: { video: string, warning: string, questions: s
     ],
   },
   'Oregon': {
-    video: 'RpXpxdrMVXw',
-    warning: 'Oregon is facing more frequent wildfires and rising temperatures, leading to increased insurance premiums.',
+    video: '0yMGg5VDltI',
+    warning: 'Oregon faces increasing wildfires, rising temperatures, and growing insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
       'Insurance prices increasing each year?',
@@ -89,8 +89,8 @@ const stateData: { [key: string]: { video: string, warning: string, questions: s
     ],
   },
   'New Mexico': {
-    video: '2XhgSv5XeLw',
-    warning: 'Wildfires are becoming more common in New Mexico, along with rising temperatures and insurance costs.',
+    video: '0yMGg5VDltI',
+    warning: 'New Mexico is experiencing regular temperature increases, wildfires, and rising insurance rates.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
       'Temperatures increasing regularly?',
@@ -98,8 +98,8 @@ const stateData: { [key: string]: { video: string, warning: string, questions: s
     ],
   },
   'Colorado': {
-    video: 'zdJ_t_Y4QiU',
-    warning: 'Wildfires in Colorado are causing extensive damage, while strong winds and rising insurance prices add to the challenges.',
+    video: '0yMGg5VDltI',
+    warning: 'Colorado is seeing stronger winds, wildfires, and rising insurance rates as extreme weather increases.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
       'Insurance prices increasing each year?',
@@ -107,8 +107,8 @@ const stateData: { [key: string]: { video: string, warning: string, questions: s
     ],
   },
   'California': {
-    video: 'Xk3K7wSI6Oc',
-    warning: 'California is experiencing more frequent wildfires, rising temperatures, and water shortages, leading to higher insurance costs.',
+    video: '0yMGg5VDltI',
+    warning: 'Wildfires and droughts in California are increasing, leading to rising temperatures and insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
       'Insurance prices increasing each year?',

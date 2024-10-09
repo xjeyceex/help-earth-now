@@ -86,7 +86,7 @@ export default function Header() {
       ],
     },
     'ne': {
-      video: 'f0opJnJXZoI',
+      video: '0yMGg5VDltI',
       warning: 'Wildfires burning large areas, and destroying homes in Nebraska. Temperatures and insurance prices are increasing.',
       questions: [
         'Wildfires burning large areas, and destroying homes?',
@@ -95,7 +95,7 @@ export default function Header() {
       ],
     },
     'or': {
-      video: '2XtDZdB_TQ8',
+      video: '0yMGg5VDltI',
       warning: 'Oregon faces increasing wildfires, rising temperatures, and growing insurance premiums.',
       questions: [
         'Wildfires burning large areas, and destroying homes?',
@@ -104,7 +104,7 @@ export default function Header() {
       ],
     },
     'nm': {
-      video: 'zrv9zLNFWd4',
+      video: '0yMGg5VDltI',
       warning: 'New Mexico is experiencing regular temperature increases, wildfires, and rising insurance rates.',
       questions: [
         'Wildfires burning large areas, and destroying homes?',
@@ -113,7 +113,7 @@ export default function Header() {
       ],
     },
     'co': {
-      video: 'MZBS3tObk40',
+      video: '0yMGg5VDltI',
       warning: 'Colorado is seeing stronger winds, wildfires, and rising insurance rates as extreme weather increases.',
       questions: [
         'Wildfires burning large areas, and destroying homes?',
@@ -122,7 +122,7 @@ export default function Header() {
       ],
     },
     'ca': {
-      video: 'bgs4ZSy3fyE',
+      video: '0yMGg5VDltI',
       warning: 'Wildfires and droughts in California are increasing, leading to rising temperatures and insurance premiums.',
       questions: [
         'Wildfires burning large areas, and destroying homes?',

@@ -1,22 +1,19 @@
-import Header from "./header";
-import What from "./what";
-import Who from "./who";
-import Navbar from "./components/navbar";
-import NavbarTwo from "./components/navbar-two";
+import Header from "./v3/header";
+import What from "./v3/what/what";
+import Who from "./v3/who/who";
+import NavbarThree from "./v3/navbar-v3";
 import CookieConsent from "./components/CookieConsent";
-import LocationAndEmail from "./email-input";
 import Footer from "./components/Footer";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      <NavbarTwo/>
+      <NavbarThree/>
       <Header />
       <What />
       <Who />
       <CookieConsent/>
       <Footer/>
-      {/* <LocationAndEmail/> */}
     </main>
   );
 }

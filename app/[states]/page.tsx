@@ -1,6 +1,5 @@
 import Header from "./header";
 import What from "./what/what";
-import Who from "../who";
 import NavbarThree from "./navbar-v3";
 import CookieConsent from "../components/CookieConsent";
 import Footer from "../components/Footer";

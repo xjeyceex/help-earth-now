@@ -9,6 +9,7 @@ import { candidates } from "@/app/us-locandcandidates";
 enum Party {
   Democratic = 'democratic',
   Republican = 'republican',
+  Independent = 'independent',
 }
 
 interface Candidate {

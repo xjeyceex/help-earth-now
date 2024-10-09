@@ -793,6 +793,7 @@ export const routeToStateMap: { [key: string]: string } = {
 enum Party {
   Democratic = 'democratic',
   Republican = 'republican',
+  Independent = 'independent',
 }
 
 interface CandidateGroup {

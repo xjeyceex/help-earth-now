@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
-import { states, counties as allCounties } from '../us-locandcandidates';
+import { states, counties as allCounties, stateAbbreviations } from '../us-locandcandidates';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
@@ -97,9 +97,11 @@ export default function NavbarThree() {
           </div>
           <div className="flex items-center">
             <p className="mr-1 text-xs md:text-sm text-white">
-              Location: {location?.county 
-                ? `${location.county}, ${location.state}` 
-                : location?.state || 'United States'}
+              Location: {location?.county
+                ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
+                : location?.state
+                ? stateAbbreviations[location.state] // Show state abbreviation only
+                : 'United States'}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}

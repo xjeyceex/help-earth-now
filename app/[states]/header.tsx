@@ -170,7 +170,7 @@ export default function Header() {
           <div className="text-left">
             Do you care about:
           </div>
-          <ul className="care-about-list list-disc list-inside space-y-3 text-base md:text-xl leading-relaxed mt-4">
+          <ul className="care-about-list list-disc list-inside md:space-y-3 md:mt-4 mt-2 text-base md:text-xl leading-relaxed ">
             {careAboutQuestions.map((question, index) => (
               <li key={index}>{question}</li>
             ))}

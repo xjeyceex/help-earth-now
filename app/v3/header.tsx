@@ -156,7 +156,7 @@ export default function Header() {
         {/* Care About Section - Left-aligned */}
         <div className="care-about col-span-1 flex flex-col items-start p-4 md:p-6 text-lg md:text-2xl">
           <div className="text-left">Do you care about:</div>
-          <ul className="care-about-list list-disc list-inside space-y-3 text-base md:text-xl leading-relaxed mt-4">
+          <ul className="care-about-list list-disc list-inside md:space-y-3 md:mt-4 mt-2 text-base md:text-xl leading-relaxed ">
             {questions.map((question: string, index: number) => (
               <li key={index}>{question}</li>
             ))}

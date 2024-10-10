@@ -47,9 +47,16 @@ const getCandidatesForState = (state: string, candidates: CandidateGroup[]) => {
         )
       ];
 
+      // Sort candidates by party: Democrats first, then Republicans, then Independents
+      const sortedCandidates = combinedCandidates.sort((a, b) => {
+        if (a.party === 'democratic' && b.party !== 'democratic') return -1; // Democratic first
+        if (a.party !== 'democratic' && b.party === 'democratic') return 1;  // Republican/Independent second
+        return 0; // No change in order if both have the same party
+      });
+
       return {
         ...group,
-        items: combinedCandidates,
+        items: sortedCandidates,
       };
     })
     .filter(group => group.items.length > 0); // Remove any groups with no candidates

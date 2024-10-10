@@ -1383,6 +1383,118 @@ export const candidates: CandidateGroup[] = [
         "link": "https://www.barrasso.senate.gov/public/index.cfm/2021/2/barrasso-undermining-america-s-energy-security-will-not-solve-climate-change",
         "party": Party.Republican,
         "rating": ""
+      },
+      {
+        "state": "CA",
+        "name": "Adam Schiff",
+        "description": "Supports strong climate action, clean energy, carbon reduction, and environmental justice.",
+        "link": "https://schiff.house.gov/issues/climate-and-environment",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "CA",
+        "name": "Steve Garvey",
+        "description": "Recognizes the importance of addressing climate change and supports efforts to raise awareness about its risks.",
+        "link": "https://www.kpbs.org/news/politics/2024/10/07/california-us-senate-race-explainer",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "CT",
+        "name": "Chris Murphy",
+        "description": "Sees climate change as a security threat and supports emission cuts through bipartisan efforts.",
+        "link": "https://www.murphy.senate.gov/newsroom/press-releases/murphy-the-biden-administration-views-climate-change-as-existential",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "CT",
+        "name": "Matt Corey",
+        "description": "Focuses on economic and security issues, not climate change.",
+        "link": "https://www.ctpublic.org/news/2024-08-13/ct-gop-primary-us-senate-matthew-corey",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "HI",
+        "name": "Mazie Hirono",
+        "description": "Advocates for strong climate action, supporting clean energy policies like the Clean Power Plan and opposing efforts to weaken climate regulations.",
+        "link": "https://www.lcv.org/media-center/lcv-action-fund-endorses-senator-mazie-hirono-re-election/",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "HI",
+        "name": "Bob McDermott",
+        "description": "Skeptical of human-caused climate change and opposes large investments in renewable energy.",
+        "link": "https://www.staradvertiser.com/2024/07/22/election/2024-election-bob-mcdermott/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "MA",
+        "name": "Elizabeth Warren",
+        "description": "Advocates for aggressive action on climate change, supporting the Green New Deal as a way to address environmental challenges while promoting economic growth and innovation.",
+        "link": "https://www.warren.senate.gov/oversight/letters/warren-senators-urge-treasury-department-to-address-climate-related-financial-risks",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "MA",
+        "name": "John Deaton",
+        "description": "Critical of climate change policies, claiming they are often just 'class warfare' without effective solutions, and emphasizes the need for pro-growth legislation instead.",
+        "link": "https://www.wamc.org/news/2024-09-12/her-policies-do-not-help-poor-people-republican-deaton-makes-longshot-case-for-replacing-warren-in-the-senate",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "MN",
+        "name": "Amy Klobuchar",
+        "description": "Advocates for 100% net-zero emissions by 2050, significant clean energy investments, and prioritizing the needs of communities most affected by climate change.",
+        "link": "https://www.klobuchar.senate.gov/public/index.cfm/homegrown-energy-environment-natural-resources",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "MN",
+        "name": "Royce White",
+        "description": "Views climate change as a natural occurrence and emphasizes economic growth over environmental regulations.",
+        "link": "https://www.mprnews.org/story/2024/05/30/joe-fraser-royce-white-primary-battle-gop-challenger-to-dfl-sen-klobuchar",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "MO",
+        "name": "Lucas Kunce",
+        "description": "Supports aggressive climate action, advocating for a shift from fossil fuels to renewable energy.",
+        "link": "https://www.lcv.org/media-center/lcv-action-fund-endorses-lucas-kunce-for-senate/",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "MO",
+        "name": "Josh Hawley",
+        "description": "Opposes international climate agreements, advocating for increased domestic energy production to enhance U.S. energy independence.",
+        "link": "https://www.hawley.senate.gov/hawley-leads-bill-restoring-american-energy-independence-ending-reliance-foreign-nations/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "RI",
+        "name": "Sheldon Whitehouse",
+        "description": "Emphasizes urgent climate action, advocating for legislation that ends fossil fuel subsidies and promotes renewable energy.",
+        "link": "https://www.whitehouse.senate.gov/news/release/whitehouse-outlines-next-steps-to-lower-emissions-after-passage-of-landmark-climate-bill/",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "RI",
+        "name": "Patricia Morgan",
+        "description": "Opposes offshore wind projects due to concerns over marine life and high energy costs, calling for comprehensive scientific studies first.",
+        "link": "https://www.thenewportbuzz.com/u-s-senate-race-heats-up-patricia-morgan-calls-for-halt-on-offshore-wind-projects/51417#google_vignette",
+        "party": Party.Republican,
+        "rating": ""
       }      
     ]    
   },

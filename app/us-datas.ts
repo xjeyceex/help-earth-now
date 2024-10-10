@@ -1424,7 +1424,7 @@ export const candidates: CandidateGroup[] = [
     ],
   },
   {
-    group: 'Governors',
+    group: 'Governor',
     items: [
       {
         name: 'John Carney',

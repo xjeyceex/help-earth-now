@@ -1570,94 +1570,174 @@ export const candidates: CandidateGroup[] = [
   {
     group: 'Governor',
     items: [
-      {
-        name: 'John Carney',
-        rating: 'For Climate Action',
-        description: "Governor Carney has supported clean energy initiatives and Delaware's participation in the Regional Greenhouse Gas Initiative (RGGI). Delaware has worked toward increasing renewable energy and setting carbon reduction targets.",
+    {
+        state: "DE",
+        name: "Matt Meyer",
+        description: "Prioritizes addressing climate change through sustainable practices and renewable energy investments",
+        link: "https://www.delawarepublic.org/show/the-green/2024-08-13/candidate-conversations-democratic-candidate-for-governor-matt-meyer",
         party: Party.Democratic,
-        state: 'DE',
-        link: 'https://news.delaware.gov/2021/11/04/governor-carney-releases-plan-outlining-delawares-path-forward-on-climate-change/',
-      },
-      {
-        name: 'Eric Holcomb',
-        rating: 'Against Climate Action',
-        description: 'Governor Holcomb focuses on economic growth, with limited emphasis on climate policies compared to Democratic-led states.',
+        rating: ""
+    },
+    {
+        state: "DE",
+        name: "Mike Ramone",
+        description: "Supports climate solutions through entrepreneurship rather than government mandates.",
+        link: "https://www.delawarepublic.org/show/the-green/2024-08-16/delaware-election-candidates-stake-out-positions-on-environmental-issues",
         party: Party.Republican,
-        state: 'IN',
-        link: 'https://www.politico.com/newsletters/the-long-game/2022/11/15/a-red-state-governor-walks-into-a-cop-00066950/',
-      },
-      {
-        name: 'Mike Parson',
-        rating: 'Against Climate Action',
-        description: 'Governor Parson has expressed skepticism about climate change and has not supported strong climate policies. His administration has focused more on economic development and fossil fuel industries.',
-        party: Party.Republican,
-        state: 'MO',
-        link: 'https://www.kansascity.com/opinion/readers-opinion/guest-commentary/article248707085.html',
-      },
-      {
-        name: 'Greg Gianforte',
-        rating: 'Against Climate Action',
-        description: "Governor Gianforte has aligned with the GOP's stance on climate skepticism and has focused on economic growth, particularly in sectors like fossil fuels. He has resisted stronger climate policies and clean energy transitions.",
-        party: Party.Republican,
-        state: 'MT',
-        link: 'https://montanafreepress.org/2023/05/12/gianforte-signs-climate-change-analysis-ban-into-law/',
-      },
-      {
-        name: 'Roy Cooper',
-        rating: 'For Climate Action',
-        description: 'Governor Cooper has led North Carolina in advancing clean energy, focusing on offshore wind, solar, and ambitious carbon reduction goals.',
+        rating: ""
+    },
+    {
+        state: "IN",
+        name: "Jennifer McCormick",
+        description: "Calls for Indiana to adopt renewable energy and sustainable practices to combat climate change",
+        link: "https://www.wvpe.org/indiana-news/2024-04-03/jennifer-mccormick-says-indiana-ready-for-something-different-after-20-years-of-gop-control",
         party: Party.Democratic,
-        state: 'NC',
-        link: 'https://governor.nc.gov/news/press-releases/2022/01/07/governor-cooper-signs-executive-order-detailing-next-steps-path-clean-energy-and-equitable-economy',
-      },
-      {
-        name: 'Doug Burgum',
-        rating: 'Against Climate Action',
-        description: 'Governor Burgum prioritizes energy production, particularly fossil fuels, and while supporting wind power, his administration opposes stronger climate regulations.',
+        rating: ""
+    },
+    {
+        state: "IN",
+        name: "Mike Braun",
+        description: "Advocates for market-based solutions to climate change, supporting the Growing Climate Solutions Act to empower farmers in carbon markets.",
+        link: "https://www.braun.senate.gov/news/press-releases/what-theyre-saying-about-growing-climate-solutions-act/",
         party: Party.Republican,
-        state: 'ND',
-        link: 'https://www.washingtonpost.com/politics/interactive/2023/presidential-candidates-2024-policies-issues/doug-burgum-climate-change/',
-      },
-      {
-        name: 'Spencer Cox',
-        rating: 'Against Climate Action',
-        description: 'Governor Cox supports natural resource management and some clean energy initiatives but has not pursued aggressive climate action, favoring industries like oil, gas, and mining.',
-        party: Party.Republican,
-        state: 'UT',
-        link: 'https://www.politico.com/news/2021/09/01/spencer-cox-utah-covid-promises-508111/',
-      },
-      {
-        name: 'Phil Scott',
-        rating: 'For Climate Action',
-        description: "Governor Scott has backed clean energy initiatives, expanded renewables, and advanced Vermont's climate goals, making significant strides in climate resilience and carbon reduction.",
-        party: Party.Republican,
-        state: 'VT',
-        link: 'https://governor.vermont.gov/press-release/governor-phil-scott-joins-us-climate-alliance-governors-applauding-unites-states',
-      },
-      {
-        name: 'Jay Inslee',
-        rating: 'For Climate Action',
-        description: "Governor Inslee is a leading climate advocate, focusing on ambitious carbon reduction, renewable energy growth, and reducing fossil fuel reliance.",
+        rating: ""
+    },
+    {
+        state: "MO",
+        name: "Crystal Quade",
+        description: "Supports urgent climate action and investing in renewable energy for Missouri's sustainable future.",
+        link: "https://abc17news.com/voter-guide-2024/2024/06/26/crystal-quade-candidate-for-missouri-governor/",
         party: Party.Democratic,
-        state: 'WA',
-        link: 'https://www.jayinslee.com/issues/global-climate',
-      },
-      {
-        name: 'Jim Justice',
-        rating: 'Against Climate Action',
-        description: 'Governor Justice has supported the coal industry and resisted strong climate action, prioritizing economic issues tied to fossil fuels over addressing climate change.',
+        rating: ""
+    },
+    {
+        state: "MO",
+        name: "Mike Kehoe",
+        description: "Advocates for a balanced approach to climate change, supporting economic growth alongside environmental responsibility",
+        link: "https://themissouritimes.com/opinion-mike-kehoe-is-the-clear-choice-for-missouri-governor/",
         party: Party.Republican,
-        state: 'WV',
-        link: 'https://www.propublica.org/article/jim-justice-coal-empire-sued-by-federal-government-again',
-      },
-      {
-        name: 'Mark Gordon',
-        rating: 'Against Climate Action',
-        description: 'Governor Gordon supports fossil fuel industries, particularly coal, oil, and gas, and has avoided aggressive climate policies, despite some renewable energy initiatives in Wyoming.',
+        rating: ""
+    },
+    {
+        state: "MT",
+        name: "Greg Gianforte",
+        description: "Aligned with the GOP's stance on climate skepticism and has focused on economic growth, particularly in sectors like fossil fuels. He has resisted stronger climate policies and clean energy transitions.\n",
+        link: "https://montanafreepress.org/2023/05/12/gianforte-signs-climate-change-analysis-ban-into-law/\n",
         party: Party.Republican,
-        state: 'WY',
-        link: 'https://www.forbes.com/sites/bobeccles/2023/11/22/climate-change-in-wyoming-the-sanity-of-governor-mark-gordon-and-the-inanity-of-the-wyoming-freedom-caucus/',
-      },
-    ],
+        rating: ""
+    },
+    {
+        state: "MT",
+        name: "Ryan Busse",
+        description: "Supports strong climate action to ensure Montana's environmental protection and accountability.",
+        link: "https://www.mtpr.org/montana-news/2023-09-15/democrat-ryan-busse-joins-the-race-for-montana-governor",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "NC",
+        name: "Josh Stein",
+        description: "Supports aggressive climate action and aims for North Carolina to achieve carbon neutrality by 2050​",
+        link: "https://cleanenergy.org/blog/candidate-josh-stein-on-climate-energy/",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "NC",
+        name: "Mark Robinson",
+        description: "Dismisses climate change as \"junk science,\" questioning the validity of climate science in his gubernatorial campaign​",
+        link: "https://www.wfae.org/energy-environment/2023-08-11/as-he-runs-for-governor-lt-gov-mark-robinson-casts-doubt-on-climate-science",
+        party: Party.Republican,
+        rating: ""
+    },
+    {
+        state: "ND",
+        name: "Merrill Piepkorn",
+        description: "Advocates for sustainable energy and the protection of North Dakota's natural resources to combat climate change.",
+        link: "https://kfgo.com/2024/10/03/piepkorn-strikes-positive-notes-outlines-policy-stance/",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "ND",
+        name: "Kelly Armstrong",
+        description: "Advocates for an \"all of the above\" energy strategy, promoting balanced discussions on energy sources without framing climate change as divisive",
+        link: "https://www.minotdailynews.com/news/local-news/2022/10/congressman-energy-industry-needs-to-fight-right/",
+        party: Party.Republican,
+        rating: ""
+    },
+    {
+        state: "UT",
+        name: "Spencer Cox",
+        description: "Supports natural resource management and some clean energy initiatives but has not pursued aggressive climate action, favoring industries like oil, gas, and mining.",
+        link: "https://www.politico.com/news/2021/09/01/spencer-cox-utah-covid-promises-508111\n",
+        party: Party.Republican,
+        rating: ""
+    },
+    {
+        state: "UT",
+        name: "Brian King",
+        description: "Advocates for comprehensive climate action to protect Utah's environment and residents.",
+        link: "https://www.kuer.org/politics-government/2023-12-04/utah-democratic-rep-brian-king-announces-a-challenge-to-gov-cox",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "VT",
+        name: "Phil Scott ",
+        description: "Backed clean energy initiatives, expanded renewables, and advanced Vermont’s climate goals, making significant strides in climate resilience and carbon reduction.",
+        link: "https://governor.vermont.gov/press-release/governor-phil-scott-joins-us-climate-alliance-governors-applauding-unites-states\n",
+        party: Party.Republican,
+        rating: ""
+    },
+    {
+        state: "VT",
+        name: "Esther Charlestin",
+        description: "Calls for urgent action on climate change, advocating for a collaborative and proactive approach to create a sustainable future for Vermont.",
+        link: "https://vtdigger.org/2024/01/05/middlebury-educator-and-consultant-esther-charlestin-announces-run-for-governor/",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "WA",
+        name: "Bob Ferguson",
+        description: "Advocates for robust environmental protections and aims to enhance Washington's climate action initiatives",
+        link: "https://www.sierraclub.org/washington/2024-endorsements",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "WA",
+        name: "Dave Reichert",
+        description: "Acknowledges climate change but criticizes current policies for increasing costs without effectively reducing emissions.",
+        link: "https://www.heraldnet.com/news/ferguson-reichert-clash-on-crime-abortion-and-trump-in-first-debate/",
+        party: Party.Republican,
+        rating: ""
+    },
+    {
+        state: "WV",
+        name: "Steve Williams",
+        description: "Advocates for collaborative action on climate change, focusing on community health and sustainable policies",
+        link: "https://mountainstatespotlight.org/2024/05/15/williams-huntington-governor-turnaround/",
+        party: Party.Democratic,
+        rating: ""
+    },
+    {
+        state: "WV",
+        name: "Patrick Morrisey",
+        description: "Advocates for balancing energy needs and climate policies, opposing regulations that could hurt West Virginia's economy",
+        link: "https://wvpublic.org/morrisey-previews-supreme-court-case-against-epa-power-on-carbon/",
+        party: Party.Republican,
+        rating: ""
+    },
+    {
+        state: "WY",
+        name: "Mark Gordon",
+        description: "Supports fossil fuel industries, particularly coal, oil, and gas, and has avoided aggressive climate policies, despite some renewable energy initiatives in Wyoming.",
+        link: "https://www.forbes.com/sites/bobeccles/2023/11/22/climate-change-in-wyoming-the-sanity-of-governor-mark-gordon-and-the-inanity-of-the-wyoming-freedom-caucus/",
+        party: Party.Republican,
+        rating: ""
+    }
+  ]
   },
 ];

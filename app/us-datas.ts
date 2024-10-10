@@ -1747,7 +1747,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     video: 'ozqGvyTWeAg',
     warning: 'Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.',
     questions: [
-      'Hurricanes getting stronger, more frequent, and cause more damage due to rising sea levels?',
+      'Hurricanes getting stronger, more frequent, and causing more damage due to rising sea levels?',
       'Insurance cancelled or prices rising?',
       'Sea level rising & beaches and houses at risk?',
       'Temperatures increasing regularly',
@@ -1775,7 +1775,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     video: 'h5dc6yAA84c',
     warning: 'Hurricanes are getting stronger and more frequent in Georgia, leading to significant damage and rising insurance prices.',
     questions: [
-      'Hurricanes getting stronger, more frequent, and cause more damage?',
+      'Hurricanes getting stronger, more frequent, and causing more damage?',
       'Flooding destroying homes and communities?',
       'Insurance prices going up?',
     ],
@@ -1812,7 +1812,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     video: 'uMlhkLbOnmA',
     warning: 'Hurricanes are causing more damage in North Carolina, resulting in rising insurance costs.',
     questions: [
-      'Hurricanes getting stronger, more frequent, and cause more damage?',
+      'Hurricanes getting stronger, more frequent, and causing more damage?',
       'Flooding destroying homes and communities?',
       'Insurance prices going up?',
     ],

@@ -15,8 +15,8 @@ export default function Header() {
   const [warningText, setWarningText] = useState("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
   const [questions, setquestions] = useState<string[]>([
     'Rising temperatures?',
-    'Extreme weather events affecting communities?',
-    'The potential increase in insurance premiums due to climate-related risks?',
+    'Insurance cancelled or prices rising?',
+    'Flooding destroying homes and communities?',
   ]);
   
   useEffect(() => {
@@ -37,8 +37,8 @@ export default function Header() {
       setWarningText("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
       setquestions([
         'Rising temperatures?',
-        'Extreme weather events affecting communities?',
-        'The potential increase in insurance premiums due to climate-related risks?',
+        'Insurance cancelled or prices rising?',
+        'Flooding destroying homes and communities?',
       ]);
     }
   }, [state]);

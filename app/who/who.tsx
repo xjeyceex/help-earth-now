@@ -41,9 +41,9 @@ const getCandidatesForState = (state: string, candidates: CandidateGroup[]) => {
 
       // Combine state-specific and "All" candidates, ensuring no duplicates
       const combinedCandidates = [
-        ...allCandidates,
-        ...stateSpecificCandidates.filter(stateCandidate => 
-          !allCandidates.some(allCandidate => allCandidate.name === stateCandidate.name)
+        ...stateSpecificCandidates,
+        ...allCandidates.filter(allCandidate => 
+          !stateSpecificCandidates.some(stateCandidate => stateCandidate.name === allCandidate.name)
         )
       ];
 

@@ -1758,7 +1758,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     warning: 'Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.',
     questions: [
       'Temperatures are getting hotter?',
-      'Insurance cancelled or prices rising?',
+      'Insurance prices going up?',
       'Droughts getting worse?'
     ],
   },
@@ -1781,7 +1781,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'mi': {
-    video: 'oZhxV5JVRT4',
+    video: 'bj2YtSMKEBU',
     warning: 'Michigan auto insurance rates are rising every year, affecting residents statewide.',
     questions: [
       'Insurance prices increasing each year?',
@@ -1790,20 +1790,20 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'wi': {
-    video: '2UkXtCR1eEQ',
+    video: 'qTfZwcesdAw',
     warning: 'Car insurance rates are expected to increase by 8.4% in Wisconsin due to various climate impacts.',
     questions: [
-      'Insurance prices increasing each year?',
       'Flooding destroying homes and communities?',
+      'Insurance prices increasing each year?',
       'Temperatures are getting hotter?',
     ],
   },
   'pa': {
-    video: 'N73liuUE-l4',
+    video: 'xpIjd_cHL2o',
     warning: 'Car insurance rates are soaring in Pennsylvania, coupled with flooding damaging homes and communities.',
     questions: [
-      'Insurance prices increasing each year?',
       'Flooding destroying homes and communities?',
+      'Insurance prices increasing each year?',
       'Temperatures are getting hotter?',
       'Problems with Agriculture?'
     ],

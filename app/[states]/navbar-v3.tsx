@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
-import { states, counties as allCounties, stateAbbreviations } from '../us-locandcandidates';
+import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
-import { routeToStateMap } from '../us-locandcandidates';
+import { routeToStateMap } from '../us-datas';
 
 export default function NavbarThree() {
   const { status } = useSession();

@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import React from "react";
 import { useParams } from "next/navigation"; 
-import { candidates } from "@/app/us-locandcandidates";
+import { candidates } from "@/app/us-datas";
 
 enum Party {
   Democratic = 'democratic',

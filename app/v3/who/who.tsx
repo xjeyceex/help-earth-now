@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { LocationContext } from '@/app/components/location-provider';
-import { routeToStateMap, candidates } from '@/app/us-locandcandidates'; 
+import { routeToStateMap, candidates } from '@/app/us-datas'; 
 
 enum Party {
   Democratic = 'democratic',

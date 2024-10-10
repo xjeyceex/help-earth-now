@@ -1,4 +1,4 @@
-// app/api/governors/route.ts
+// app/api/hors/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
@@ -20,7 +20,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
-  const range = 'House of Representatives!A3:E'; // Adjust the range as needed
+  const range = 'HouseOfRepresentatives !A3:E'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -45,9 +45,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
         return acc;
       }, {} as SheetRow);
     });
-
-    console.log(formattedData)
-    
+        
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
@@ -58,10 +56,10 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
-    const governorsData = await getSheetsData();
-    return NextResponse.json(governorsData);
+    const horsData = await getSheetsData();
+    return NextResponse.json(horsData);
   } catch (error) {
-    console.error('Error fetching governors data:', error);
-    return NextResponse.json({ error: 'Failed to fetch governors data' }, { status: 500 });
+    console.error('Error fetching hors data:', error);
+    return NextResponse.json({ error: 'Failed to fetch hors data' }, { status: 500 });
   }
 }

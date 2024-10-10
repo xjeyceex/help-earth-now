@@ -45,8 +45,6 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
         return acc;
       }, {} as SheetRow);
     });
-
-    console.log(formattedData)
     
     return formattedData;
   } catch (error) {

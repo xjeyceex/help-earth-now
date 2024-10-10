@@ -202,7 +202,7 @@ export default function Header() {
             {warningText}
           </div>
           <div className="exposition-link p-6 lg:flex hidden text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex-col items-center justify-center" id="what">
-            <Link href="#what" className="underline">What can I do?</Link>
+            <Link href="#what-test" className="underline">What can I do?</Link>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export default function What() {
 
     return (
         <>
-            <div className="grid grid-cols-3 how-help w-full">
+            <div className="grid grid-cols-3 how-help w-full" id='what-test'>
                 <div className="flex text-center questions-1 p-12 items-center">
                     What can I do for free?
                 </div>

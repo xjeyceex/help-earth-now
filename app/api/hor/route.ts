@@ -57,7 +57,13 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 export async function GET(req: NextRequest) {
   try {
     const horsData = await getSheetsData();
-    return NextResponse.json(horsData);
+    return NextResponse.json(horsData, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',  
+            'Access-Control-Allow-Methods': 'GET, POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        },
+        });;
   } catch (error) {
     console.error('Error fetching hors data:', error);
     return NextResponse.json({ error: 'Failed to fetch hors data' }, { status: 500 });

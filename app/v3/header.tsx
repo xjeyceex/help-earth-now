@@ -19,7 +19,8 @@ export default function Header() {
     const isMobile = window.innerWidth <= 768;
 
     if (location?.state) {
-      const stateAbbreviation = stateAbbreviations[location.state].toLowerCase();
+      const convertStateAbbreviations = stateAbbreviations[location.state] || 'US';
+      const stateAbbreviation = convertStateAbbreviations.toLowerCase();
 
       if (stateAbbreviation && stateData[stateAbbreviation]) {
         const { video, warning, questions: stateQuestions } = stateData[stateAbbreviation];

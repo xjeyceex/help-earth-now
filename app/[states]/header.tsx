@@ -45,24 +45,26 @@ export default function Header() {
   
   return (
     <div className="w-full" id="home">
-      <div className="grid grid-cols-1 lg:grid-cols-8 premise">
+      <div className="grid grid-cols-1 lg:grid-cols-9 premise">
         {/* Title Section - Centered */}
-        <div className="title col-span-5 p-4 md:p-10 text-lg md:text-3xl leading-tight md:leading-normal flex justify-center items-center text-center">
+        <div className="title col-span-5 p-2 md:p-2 text-lg md:text-3xl leading-tight md:leading-normal flex justify-center items-center text-center">
           Climate change is hurting us all - now
         </div>
 
         {/* Care About Section - Left-aligned */}
-        <div className="care-about col-span-3 flex flex-col items-start p-4 md:p-6 text-lg md:text-2xl">
+        <div className="care-about col-span-4 flex flex-col items-start p-2 md:p-4 text-lg md:text-2xl">
           <div className="text-left">Do you care about:</div>
-          <ul className="care-about-list list-disc md:space-y-3 md:mt-4 mt-2 text-base md:text-xl leading-relaxed pl-8">
+          <ul className="care-about-list list-disc mt-2 text-base md:text-xl leading-relaxed md:leading-tight pl-8">
             {questions.map((question: string, index: number) => (
-              <li key={index}>{question}</li>
+              <li key={index} className="pb-1 md:pb-1">
+                {question}
+              </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-8">
+      <div className="grid grid-cols-1 lg:grid-cols-9">
         {/* Video Section */}
         <iframe
           className="col-span-5 w-full aspect-video"
@@ -74,7 +76,7 @@ export default function Header() {
         </iframe>
 
         {/* Exposition Section */}
-        <div className="flex flex-col col-span-3 h-full justify-center items-center">
+        <div className="flex flex-col col-span-4 h-full justify-center items-center">
           <div className="exposition-warning p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center flex flex-col items-center justify-center">
             {warningText}
           </div>

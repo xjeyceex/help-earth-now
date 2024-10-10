@@ -20,7 +20,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
-  const range = 'Senators!A3:F82'; // Adjust the range as needed
+  const range = 'Senators!A3:F'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -45,7 +45,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
         return acc;
       }, {} as SheetRow);
     });
-    
+
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);

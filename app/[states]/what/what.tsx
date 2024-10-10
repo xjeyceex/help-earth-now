@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 export default function What() {
     const params = useParams()
     const state = params.states
-    console.log(state)
 
     return (
         <>

@@ -1791,7 +1791,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
   },
   'wi': {
     video: 'qTfZwcesdAw',
-    warning: 'Car insurance rates are expected to increase by 8.4% in Wisconsin due to various climate impacts.',
+    warning: 'Deadly flooding has devastated homes and communities in Wisconsin.',
     questions: [
       'Flooding destroying homes and communities?',
       'Insurance prices increasing each year?',
@@ -1800,7 +1800,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
   },
   'pa': {
     video: 'xpIjd_cHL2o',
-    warning: 'Car insurance rates are soaring in Pennsylvania, coupled with flooding damaging homes and communities.',
+    warning: 'Flooding is devastating homes and communities in Pennsylvania, causing widespread destruction and displacing residents.',
     questions: [
       'Flooding destroying homes and communities?',
       'Insurance prices increasing each year?',

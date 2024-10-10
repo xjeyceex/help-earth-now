@@ -49,6 +49,11 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
+    // Log detailed error message
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Stack trace:', error.stack);
+    }
     throw new Error('Error fetching data from Google Sheets');
   }
 };

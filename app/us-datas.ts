@@ -1822,8 +1822,8 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     warning: 'Wildfires burning large areas, and destroying homes in Nebraska. Temperatures and insurance prices are increasing.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Temperatures increasing rapidly?',
+      'Insurance cancelled and prices rising?',
+      'Temperatures going up?',
     ],
   },
   'or': {
@@ -1831,8 +1831,8 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     warning: 'Oregon faces increasing wildfires, rising temperatures, and growing insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Temperatures increasing rapidly?',
+      'Insurance cancelled and prices rising?',
+      'Temperatures going up?',
     ],
   },
   'nm': {
@@ -1840,8 +1840,8 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     warning: 'New Mexico is experiencing regular temperature increases, wildfires, and rising insurance rates.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Temperatures increasing regularly?',
-      'Insurance cancelled or prices rising?',
+      'Temperatures going up?',
+      'Insurance cancelled and prices rising?',
     ],
   },
   'co': {
@@ -1849,7 +1849,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     warning: 'Colorado is seeing stronger winds, wildfires, and rising insurance rates as extreme weather increases.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
+      'Insurance cancelled and prices rising?',
       'Strong winds increasing, with more tornadoes?',
     ],
   },
@@ -1858,8 +1858,8 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     warning: 'Wildfires and droughts in California are increasing, leading to rising temperatures and insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Temperatures increasing rapidly?',
+      'Insurance cancelled and prices rising?',
+      'Temperatures going up?',
       'Droughts increasing, with less water for longer periods?',
     ],
   },

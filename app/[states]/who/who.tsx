@@ -28,14 +28,31 @@ interface CandidateGroup {
 
 const getCandidatesForState = (state: string, candidates: CandidateGroup[]) => {
   return candidates
-    .map(group => ({
-      ...group,
-      items: group.items.filter(candidate =>
+    .map(group => {
+      // Get state-specific candidates (if any)
+      const stateSpecificCandidates = group.items.filter(candidate =>
         candidate.state.toLowerCase() === state.toLowerCase()
-        || candidate.state === 'All'
-      ),
-    }))
-    .filter(group => group.items.length > 0);
+      );
+
+      // Get "All" candidates
+      const allCandidates = group.items.filter(candidate =>
+        candidate.state === 'All'
+      );
+
+      // Combine state-specific and "All" candidates, ensuring no duplicates
+      const combinedCandidates = [
+        ...stateSpecificCandidates,
+        ...allCandidates.filter(allCandidate => 
+          !stateSpecificCandidates.some(stateCandidate => stateCandidate.name === allCandidate.name)
+        )
+      ];
+
+      return {
+        ...group,
+        items: combinedCandidates,
+      };
+    })
+    .filter(group => group.items.length > 0); // Remove any groups with no candidates
 };
 
 export default function Who() {

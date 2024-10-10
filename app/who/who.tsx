@@ -38,12 +38,26 @@ const mapToCandidate = (data: any): Candidate => {
 
 // Helper function to fetch data from APIs
 const fetchCandidateData = async (state: string) => {
-  const endpoints = ['/api/governors', '/api/senators', '/api/hor'];
-  const responses = await Promise.all(endpoints.map(endpoint => fetch(`${endpoint}?state=${state}`)));
-  const data = await Promise.all(responses.map(response => response.json()));
+  try {
+    const endpoints = ['/api/governors', '/api/senators', '/api/hor'];
+    const responses = await Promise.all(endpoints.map(endpoint => fetch(`${endpoint}?state=${state}`)));
 
-  // Map each response to the Candidate format and ensure party values are corrected
-  return data.map(group => group.map(mapToCandidate));
+    if (responses.some(response => !response.ok)) {
+      throw new Error('One or more API requests failed');
+    }
+
+    const data = await Promise.all(responses.map(response => response.json()));
+
+    // Ensure the data is valid before proceeding
+    if (!Array.isArray(data)) {
+      throw new Error('API response is not an array');
+    }
+
+    return data.map(group => group.map(mapToCandidate));
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];  // Return empty data to handle the error gracefully
+  }
 };
 
 const getCandidatesForState = (state: string, candidates: CandidateGroup[]) => {

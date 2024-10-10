@@ -897,62 +897,494 @@ export const candidates: CandidateGroup[] = [
     group: 'Senate',
     items: [
       {
-        name: 'Debbie Mucarsel-Powell',
-        rating: '85% from LCV.',
-        description: 'Strong proponent of addressing climate change; emphasizes its impact on communities.',
-        link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
-        party: Party.Democratic,
-        state: 'FL',
+        "state": "AZ",
+        "name": "Kyrsten Sinema",
+        "description": "Supports moderate climate action, focusing on bipartisan solutions and market-driven clean energy investments, but is cautious about aggressive policies like the Green New Deal.",
+        "link": "https://www.ft.com/content/a793ffb3-058e-44fd-8f99-f50eb10c3fff",
+        "party": Party.Independent,
+        "rating": ""
       },
       {
-        name: 'Rick Scott',
-        rating: '40% from LCV.',
-        description: 'Generally skeptical of climate change; prioritizes economic interests.',
-        party: Party.Republican,
-        link: 'https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/',
-        state: 'FL',
+        "state": "AZ",
+        "name": "Mark Kelly",
+        "description": "Kelly advocates for aggressive action on climate change, including clean energy, reducing carbon emissions, and investing in renewable energy sources.",
+        "link": "https://edition.cnn.com/2023/07/16/politics/mark-kelly-climate-change-heat-wave-cnntv/index.html",
+        "party": Party.Democratic,
+        "rating": ""
       },
       {
-        name: 'Joe Manchin',
-        rating: 'Moderate ratings from environmental groups',
-        description: 'Advocates for energy independence, recognizes climate issues.',
-        party: Party.Democratic,
-        link: 'https://www.vox.com/climate/23955967/joe-manchin-climate-change-senate-biden-inflation',
-        state: 'WV',
+        "state": "MT",
+        "name": "Jon Tester",
+        "description": "Supports renewable energy, emphasizes resource extraction.",
+        "link": "https://www.tester.senate.gov/about/issues/energy/",
+        "party": Party.Democratic,
+        "rating": ""
       },
       {
-        name: 'Catherine Cortez Masto',
-        rating: 'High ratings from environmental advocates',
-        description: 'Strong advocate for renewable energy and climate action',
-        party: Party.Democratic,
-        link: 'https://www.cortezmasto.senate.gov/news/press-releases/cortez-masto-introduces-legislation-to-create-a-national-climate-service-corps/',
-        state: 'NV',
+        "state": "NV",
+        "name": "Jacky Rosen",
+        "description": "Rosen has strongly supported climate change action, including pushing for investment in green energy and infrastructure.",
+        "link": "https://www.rosen.senate.gov/2022/01/21/rosen-helps-introduce-landmark-bipartisan-climate-resilience-legislation/",
+        "party": Party.Democratic,
+        "rating": ""
       },
       {
-        name: 'Sherrod Brown',
-        rating: 'High ratings from environmental advocates',
-        description: 'Advocates for sustainable jobs and clean energy transition',
-        party: Party.Democratic,
-        link: 'https://www.brown.senate.gov/newsroom/press/release/brown-climate-change-threat-economy',
-        state: 'OH',
+        "state": "NV",
+        "name": "Catherine Cortez Masto",
+        "description": "Strong advocate for renewable energy and climate action.",
+        "link": "https://www.cortezmasto.senate.gov/news/press-releases/cortez-masto-introduces-legislation-to-create-a-national-climate-service-corps/",
+        "party": Party.Democratic,
+        "rating": ""
       },
       {
-        name: 'Jon Tester',
-        rating: 'Discusses importance of conservation',
-        description: 'Supports renewable energy, emphasizes resource extraction',
-        party: Party.Democratic,
-        link: 'https://www.tester.senate.gov/about/issues/energy/',
-        state: 'MT',
+        "state": "OH",
+        "name": "Sherrod Brown",
+        "description": "Brown has advocated for more action on climate change, emphasizing the need for a transition to renewable energy and protection of American workers in that shift.",
+        "link": "https://www.brown.senate.gov/newsroom/press/release/brown-climate-change-threat-economy",
+        "party": Party.Democratic,
+        "rating": ""
       },
       {
-        name: 'Tammy Baldwin',
-        rating: 'High ratings from environmental groups',
-        description: 'Strong advocate for climate action and renewable energy',
-        party: Party.Democratic,
-        link: 'https://www.baldwin.senate.gov/news/press-releases/us-senator-tammy-baldwin-helps-introduce-legislation-to-achieve-net-zero-greenhouse-gas-emissions',
-        state: 'WI',
+        "state": "PA",
+        "name": "Bob Casey",
+        "description": "Casey supports comprehensive climate policies, advocating for clean energy solutions and increased funding for climate change research.",
+        "link": "https://www.casey.senate.gov/issues/climate-and-environment",
+        "party": Party.Democratic,
+        "rating": ""
       },
-    ],
+      {
+        "state": "WV",
+        "name": "Joe Manchin",
+        "description": "Advocates for energy independence, recognizes climate issues.",
+        "link": "https://www.vox.com/climate/23955967/joe-manchin-climate-change-senate-biden-inflation",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "WI",
+        "name": "Tammy Baldwin",
+        "description": "Strong advocate for climate action and renewable energy.",
+        "link": "https://www.baldwin.senate.gov/news/press-releases/us-senator-tammy-baldwin-helps-introduce-legislation-to-achieve-net-zero-greenhouse-gas-emissions",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "FL",
+        "name": "Debbie Mucarsel-Powell",
+        "description": "Strong proponent of addressing climate change; emphasizes its impact on communities.",
+        "link": "https://edition.cnn.com/2019/02/04/politics/debbie-mucarsel-powell-barrier-breakers/index.html",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "FL",
+        "name": "Rick Scott",
+        "description": "Generally skeptical of climate change; prioritizes economic interests.",
+        "link": "https://www.politifact.com/article/2015/mar/11/fact-checking-rick-scott-environment-and-sea-level/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "MI",
+        "name": "Elissa Slotkin",
+        "description": "Elissa Slotkin supports strong climate action, clean energy, emissions cuts, and green jobs.",
+        "link": "https://www.ontheissues.org/Domestic/Elissa_Slotkin_Environment.htm",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "MI",
+        "name": "Mike Rogers",
+        "description": "Mike Rogers is skeptical of human-driven climate change, opposes strict regulations, and supports market-driven solutions and energy innovation, like nuclear power.",
+        "link": "https://climatepower.us/news/ahead-of-tonights-slotkin-rogers-debate-separating-truth-from-fiction-on-climate-and-clean-energy/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "ME",
+        "name": "Angus King",
+        "description": "Angus King supports strong climate action, renewable energy, and carbon reduction as essential for both the environment and the economy.",
+        "link": "https://www.mainepublic.org/climate/2024-01-12/angus-king-calls-for-climate-action-after-wednesday-storm",
+        "party": Party.Independent,
+        "rating": ""
+      },
+      {
+        "state": "ME",
+        "name": "David Costello",
+        "description": "David Costello favors market-driven solutions and innovation to address climate change, opposed to strict government regulations.",
+        "link": "https://www.ontheissues.org/Domestic/David_Costello_Environment.htm",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "ME",
+        "name": "Demi Kouzounas",
+        "description": "Demi Kouzounas supports climate action through innovation and balancing economic growth with environmental protection.",
+        "link": "https://ballotpedia.org/Demi_Kouzounas",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "ND",
+        "name": "Kevin Cramer",
+        "description": "Kevin Cramer is skeptical of human-driven climate change and opposes strict climate regulations, favoring energy innovation and fossil fuels.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "ND",
+        "name": "Katrina Christiansen",
+        "description": "Katrina Christiansen supports clean energy, carbon reduction, and climate action for future generations.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NH",
+        "name": "Maggie Hassan",
+        "description": "Hassan is a strong advocate for climate action, focusing on clean energy, emissions reductions, and funding for climate resilience.",
+        "link": "https://www.hassan.senate.gov/news/press-releases/as-climate-change-continues-to-increase-costs-of-disasters-senator-hassan-highlights-importance-of-investing-in-flood-mitigation-during-senate-hearing",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "VA",
+        "name": "Tim Kaine",
+        "description": "Kaine supports a Green New Deal and prioritizes investment in renewable energy to address the climate crisis.",
+        "link": "https://www.kaine.senate.gov/issues/environment-and-energy",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "VA",
+        "name": "Hung Cao",
+        "description": "Hung Cao supports addressing climate change through innovation and market-driven solutions, favoring energy independence and clean energy tech.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "CO",
+        "name": "Michael Bennet",
+        "description": "Bennet has been a vocal advocate for climate action, supporting aggressive policies aimed at reducing emissions and promoting renewable energy.",
+        "link": "https://www.bennet.senate.gov/public/index.cfm/climate-change-environment",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "AL",
+        "name": "Katie Britt",
+        "description": "Katie Britt is skeptical of climate regulations like the Green New Deal and supports energy independence, focusing on fossil fuels and innovation.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "AR",
+        "name": "John Boozman",
+        "description": "Boozman has often voiced skepticism regarding the urgency of climate change action, emphasizing energy production from coal and natural gas while supporting adaptation measures.",
+        "link": "https://www.boozman.senate.gov/public/index.cfm/2021/8/the-right-way-and-wrong-way-to-address-climate-change",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "DE",
+        "name": "Lisa Blunt Rochester",
+        "description": "Lisa Blunt Rochester supports clean energy, emissions cuts, and green jobs to address climate change.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "DE",
+        "name": "Eric Hansen",
+        "description": "Eric Hansen supports climate action through innovation, clean energy, and market-driven solutions.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "GA",
+        "name": "Jon Ossoff",
+        "description": "Ossoff has supported climate policies aimed at reducing carbon emissions, transitioning to clean energy, and investing in green technologies.",
+        "link": "https://www.politico.com/news/2021/06/01/jon-ossoff-climate-change-491505",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "ID",
+        "name": "Mike Crapo",
+        "description": "Crapo is generally skeptical about climate change regulations and favors market-based solutions rather than government mandates.",
+        "link": "https://www.crapo.senate.gov/media/newsreleases/crapo-risch-warn-fed-to-stop-engaging-in-climate-activism",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "IL",
+        "name": "Dick Durbin",
+        "description": "Durbin is an advocate for aggressive climate action, emphasizing renewable energy, carbon reduction, and infrastructure improvements to combat climate change.",
+        "link": "https://www.durbin.senate.gov/newsroom/press-releases/durbin-climate-action-cannot-wait",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "IN",
+        "name": "Valerie McCray",
+        "description": "Valerie McCray supports clean energy, carbon reduction, and policies for environmental justice to tackle climate change.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "IN",
+        "name": "Jim Banks",
+        "description": "Jim Banks opposes strict climate regulations, favoring energy independence and solutions that prioritize fossil fuels.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "IA",
+        "name": "Chuck Grassley",
+        "description": "Grassley tends to support pragmatic approaches to climate change, focusing on agricultural innovation and energy diversification without heavily regulating fossil fuels.",
+        "link": "https://www.desmoinesregister.com/story/opinion/columnists/2019/10/30/sen-chuck-grassley-can-climate-hero/2490883001/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "KS",
+        "name": "Jerry Moran",
+        "description": "Moran has supported climate action on certain aspects, particularly concerning agricultural practices and energy efficiency, but often opposes stringent regulations on fossil fuel industries.",
+        "link": "https://www.moran.senate.gov/public/index.cfm/2021/6/sen-moran-statement-on-the-growing-climate-solutions-act",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "KY",
+        "name": "Mitch McConnell",
+        "description": "McConnell has been a consistent skeptic of large-scale climate legislation, often emphasizing economic impacts and energy independence through fossil fuels.",
+        "link": "https://thehill.com/homenews/senate/435904-mcconnell-i-do-believe-in-human-caused-climate-change/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "LA",
+        "name": "John Kennedy",
+        "description": "Kennedy has downplayed the urgency of climate change and often opposes environmental regulations that could harm the energy industry.",
+        "link": "https://www.foxnews.com/politics/kennedy-stumps-biden-official-fifty-trillion-price-tag-climate-change",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "MD",
+        "name": "Angela Alsobrooks",
+        "description": "Angela Alsobrooks supports climate action through clean energy, carbon reduction, and green job creation.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "MD",
+        "name": "Larry Hogan",
+        "description": "Larry Hogan supports clean energy, emissions reduction, and market-based climate solutions.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "MS",
+        "name": "Roger Wicker",
+        "description": "Roger Wicker opposes strict climate regulations, supporting energy independence and clean energy innovation.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "NE",
+        "name": "Preston Love",
+        "description": "Preston Love supports urgent climate action, focusing on clean energy, emissions reductions, and environmental justice.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NE",
+        "name": "Pete Ricketts",
+        "description": "Pete Ricketts opposes strict climate regulations, favoring energy independence and gradual clean energy shifts.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "NJ",
+        "name": "Andy Kim",
+        "description": "Andy Kim supports clean energy, emissions reductions, and strong climate action.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NJ",
+        "name": "Curtis Bashaw",
+        "description": "Curtis Bashaw supports clean energy and practical solutions to combat climate change.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NM",
+        "name": "Martin Heinrich",
+        "description": "Martin Heinrich advocates for clean energy, carbon reduction, and strong climate action.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NM",
+        "name": "Nella Domenici",
+        "description": "Nella Domenici supports clean energy and carbon reduction to combat climate change.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NY",
+        "name": "Kirsten Gillibrand",
+        "description": "Kirsten Gillibrand supports bold climate action, clean energy, and green job creation.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "NY",
+        "name": "Mike Sapraicone",
+        "description": "Mike Sapraicone supports clean energy and emissions reduction.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "OK",
+        "name": "James Lankford",
+        "description": "Lankford has expressed skepticism about climate change regulations and favors innovation and energy independence without heavy government intervention.",
+        "link": "https://www.lankford.senate.gov/news/press-releases/lankford-fights-back-against-radical-environmental-agenda/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "SC",
+        "name": "Lindsey Graham",
+        "description": "Graham has called for climate change action but opposes policies like the Green New Deal, preferring market-driven solutions.",
+        "link": "https://www.cnbc.com/2023/02/18/climate-reparations-are-not-going-to-be-helpful-us-sen-lindsey-graham-says.html",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "SD",
+        "name": "John Thune",
+        "description": "Thune supports a pragmatic approach to climate change, focusing on technological innovation and energy efficiency, without heavy regulatory burdens on the fossil fuel industry.",
+        "link": "https://www.thune.senate.gov/public/index.cfm/2021/10/thune-democrats-prioritize-radical-climate-agenda-over-addressing-ongoing-energy-crisis",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "TN",
+        "name": "Marsha Blackburn",
+        "description": "Blackburn is a vocal critic of climate change regulations and the Green New Deal, prioritizing energy production and economic growth.",
+        "link": "https://www.factcheck.org/2014/02/blackburn-takes-on-the-science-guy/",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "TN",
+        "name": "Gloria Johnson",
+        "description": "Gloria Johnson supports clean energy, carbon reduction, and strong federal climate policies for environmental justice.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "TX",
+        "name": "Ted Cruz",
+        "description": "Cruz has been a staunch skeptic of the climate change agenda, often opposing regulations and advocating for oil and gas industry interests.",
+        "link": "https://www.npr.org/2015/12/09/459026242/scientific-evidence-doesnt-support-global-warming-sen-ted-cruz-says",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "TX",
+        "name": "Colin Allred",
+        "description": "Colin Allred supports clean energy, emissions reductions, and green job investments to combat climate change.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "UT",
+        "name": "John Curtis",
+        "description": "John Curtis supports market solutions and clean energy to address climate change.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      {
+        "state": "UT",
+        "name": "Caroline Gleich",
+        "description": "Caroline Gleich advocates for urgent climate action, clean energy, and protecting public lands.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "VT",
+        "name": "Bernie Sanders",
+        "description": "Sanders is a strong advocate for aggressive climate change policies, including the Green New Deal, renewable energy, and climate justice.",
+        "link": "https://www.vox.com/2020/2/19/21142923/bernie-sanders-climate-change-policy-plan-2020",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "VT",
+        "name": "Gerald Malloy",
+        "description": "Gerald Malloy supports clean energy, carbon reduction, and climate policies for environmental justice.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "WA",
+        "name": "Maria Cantwell",
+        "description": "Maria Cantwell supports clean energy, emissions cuts, and climate policies for green jobs and community protection.",
+        "link": "",
+        "party": Party.Democratic,
+        "rating": ""
+      },
+      {
+        "state": "WA",
+        "name": "Raul Garcia",
+        "description": "Raul Garcia supports strong climate action, clean energy, emissions reduction, and environmental justice.",
+        "link": "",
+        "party": Party.Republican,
+        "rating": ""
+      },
+      // {
+      //   "state": "NC",
+      //   "name": "North Carolina will not have a U.S. Senate election in 2024 for this seat.",
+      //   "description": "",
+      //   "link": "",
+      //   "party": "",
+      //   "rating": ""
+      // },
+      {
+        "state": "WY",
+        "name": "John Barrasso",
+        "description": "Barrasso has been a vocal critic of climate regulations and policies like the Green New Deal, emphasizing fossil fuel energy independence.",
+        "link": "https://www.barrasso.senate.gov/public/index.cfm/2021/2/barrasso-undermining-america-s-energy-security-will-not-solve-climate-change",
+        "party": Party.Republican,
+        "rating": ""
+      }      
+    ]    
   },
   {
     group: 'House of Representatives',

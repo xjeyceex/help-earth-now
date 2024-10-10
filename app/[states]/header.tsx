@@ -78,7 +78,7 @@ export default function Header() {
     },
     'nc': {
       video: 'uMlhkLbOnmA',
-      warning: 'Hurricanes are causing more damage in North Carolina, resulting in rising insurance costs.',
+      warning: 'Hurricanes getting stronger, more frequent, and cause more damage.',
       questions: [
         'Hurricanes are getting stronger, more frequent, and cause more damage due to rising sea levels?',
         'Flooding destroying homes and communities?',

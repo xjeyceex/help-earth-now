@@ -3,129 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LocationContext } from '../components/location-provider';
 import Link from 'next/link';
-
-const stateData: { [key: string]: { video: string, warning: string, questions: string[] } } = {
-  'Florida': {
-    video: 'ozqGvyTWeAg',
-    warning: 'Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.',
-    questions: [
-      'Hurricanes getting stronger, more frequent, and cause more damage due to rising sea levels?',
-      'Insurance cancelled or prices rising?',
-      'Sea level rising & beaches and houses at risk?',
-      'Temperatures increasing regularly',
-    ],
-  },
-  'Arizona': {
-    video: 'wxr-W5f0EzQ',
-    warning: 'Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.',
-    questions: [
-      'Temperatures are getting hotter?',
-      'Insurance cancelled or prices rising?',
-      'Droughts getting worse?'
-    ],
-  },
-  'Nevada': {
-    video: 'UjQEGYaDkSE',
-    warning: 'Temperatures are increasing regularly in Nevada. Insurance prices are on the rise.',
-    questions: [
-      'Temperatures are getting hotter?',
-      'Insurance prices going up?',
-      'Droughts getting worse?'
-    ],
-  },
-  'Georgia': {
-    video: 'h5dc6yAA84c',
-    warning: 'Hurricanes are getting stronger and more frequent in Georgia, leading to significant damage and rising insurance prices.',
-    questions: [
-      'Hurricanes getting stronger, more frequent, and cause more damage?',
-      'Flooding destroying homes and communities?',
-      'Insurance prices going up?',
-    ],
-  },
-  'Michigan': {
-    video: 'oZhxV5JVRT4',
-    warning: 'Michigan auto insurance rates are rising every year, affecting residents statewide.',
-    questions: [
-      'Insurance prices increasing each year?',
-      'Flooding destroying homes and communities?',
-      'Temperatures are getting hotter?',
-    ],
-  },
-  'Wisconsin': {
-    video: '2UkXtCR1eEQ',
-    warning: 'Car insurance rates are expected to increase by 8.4% in Wisconsin due to various climate impacts.',
-    questions: [
-      'Insurance prices increasing each year?',
-      'Flooding destroying homes and communities?',
-      'Temperatures are getting hotter?',
-    ],
-  },
-  'Pennsylvania': {
-    video: 'N73liuUE-l4',
-    warning: 'Car insurance rates are soaring in Pennsylvania, coupled with flooding damaging homes and communities.',
-    questions: [
-      'Insurance prices increasing each year?',
-      'Flooding destroying homes and communities?',
-      'Temperatures are getting hotter?',
-      'Problems with Agriculture?'
-    ],
-  },
-  'North Carolina': {
-    video: 'uMlhkLbOnmA',
-    warning: 'Hurricanes are causing more damage in North Carolina, resulting in rising insurance costs.',
-    questions: [
-      'Hurricanes getting stronger, more frequent, and cause more damage?',
-      'Flooding destroying homes and communities?',
-      'Insurance prices going up?',
-    ],
-  },
-  'Nebraska': {
-    video: '0yMGg5VDltI',
-    warning: 'Wildfires burning large areas, and destroying homes in Nebraska. Temperatures and insurance prices are increasing.',
-    questions: [
-      'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Temperatures increasing rapidly?',
-    ],
-  },
-  'Oregon': {
-    video: '0yMGg5VDltI',
-    warning: 'Oregon faces increasing wildfires, rising temperatures, and growing insurance premiums.',
-    questions: [
-      'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Temperatures increasing rapidly?',
-    ],
-  },
-  'New Mexico': {
-    video: '0yMGg5VDltI',
-    warning: 'New Mexico is experiencing regular temperature increases, wildfires, and rising insurance rates.',
-    questions: [
-      'Wildfires burning large areas, and destroying homes?',
-      'Temperatures increasing regularly?',
-      'Insurance cancelled or prices rising?',
-    ],
-  },
-  'Colorado': {
-    video: '0yMGg5VDltI',
-    warning: 'Colorado is seeing stronger winds, wildfires, and rising insurance rates as extreme weather increases.',
-    questions: [
-      'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Strong winds increasing, with more tornadoes?',
-    ],
-  },
-  'California': {
-    video: '0yMGg5VDltI',
-    warning: 'Wildfires and droughts in California are increasing, leading to rising temperatures and insurance premiums.',
-    questions: [
-      'Wildfires burning large areas, and destroying homes?',
-      'Insurance cancelled or prices rising?',
-      'Temperatures increasing rapidly?',
-      'Droughts increasing, with less water for longer periods?',
-    ],
-  },
-};
+import { stateData, stateAbbreviations } from '../us-datas';
 
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
@@ -140,17 +18,21 @@ export default function Header() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
 
-    if (location?.state && stateData[location.state]) {
-      const { video, warning, questions: stateQuestions } = stateData[location.state];
-      let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
+    if (location?.state) {
+      const stateAbbreviation = stateAbbreviations[location.state].toLowerCase();
 
-      if (isMobile) {
-        baseVideoUrl += '&vq=small';
+      if (stateAbbreviation && stateData[stateAbbreviation]) {
+        const { video, warning, questions: stateQuestions } = stateData[stateAbbreviation];
+        let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
+        
+        if (isMobile) {
+          baseVideoUrl += '&vq=small';
+        }
+
+        setVideoUrl(baseVideoUrl);
+        setWarningText(warning);
+        setQuestions(stateQuestions);
       }
-
-      setVideoUrl(baseVideoUrl);
-      setWarningText(warning);
-      setQuestions(stateQuestions);
     }
   }, [location?.state]);
 

@@ -7,112 +7,121 @@ import Link from 'next/link';
 const stateData: { [key: string]: { video: string, warning: string, questions: string[] } } = {
   'Florida': {
     video: 'ozqGvyTWeAg',
-    warning: 'Hurricanes getting stronger, more frequent, and cause more damage due to rising sea levels.',
+    warning: 'Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.',
     questions: [
-      'More and larger hurricanes?',
-      'Increasing insurance rates?',
-      'More and deeper floods?',
+      'Hurricanes getting stronger, more frequent, and cause more damage due to rising sea levels?',
+      'Insurance cancelled or prices rising?',
+      'Sea level rising & beaches and houses at risk?',
+      'Temperatures increasing regularly',
     ],
   },
   'Arizona': {
     video: 'wxr-W5f0EzQ',
-    warning: 'Temperatures are getting hotter.',
+    warning: 'Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.',
     questions: [
-      'Temperatures increasing regularly?',
-      'Insurance prices increasing each year?',
+      'Temperatures are getting hotter?',
+      'Insurance cancelled or prices rising?',
+      'Droughts getting worse?'
     ],
   },
   'Nevada': {
     video: 'UjQEGYaDkSE',
-    warning: 'Temperatures are getting hotter.',
+    warning: 'Temperatures are increasing regularly in Nevada. Insurance prices are on the rise.',
     questions: [
-      'Temperatures increasing regularly?',
-      'Insurance prices increasing each year?',
+      'Temperatures are getting hotter?',
+      'Insurance prices going up?',
+      'Droughts getting worse?'
     ],
   },
   'Georgia': {
     video: 'h5dc6yAA84c',
-    warning: 'Hurricanes getting stronger, more frequent, and cause more damage.',
+    warning: 'Hurricanes are getting stronger and more frequent in Georgia, leading to significant damage and rising insurance prices.',
     questions: [
-      'Hurricanes are getting stronger, more frequent, and cause more damage due to rising sea levels?',
+      'Hurricanes getting stronger, more frequent, and cause more damage?',
       'Flooding destroying homes and communities?',
-      'Insurance prices increasing each year?',
+      'Insurance prices going up?',
     ],
   },
   'Michigan': {
     video: 'oZhxV5JVRT4',
-    warning: 'Insurance prices increasing each year.',
+    warning: 'Michigan auto insurance rates are rising every year, affecting residents statewide.',
     questions: [
       'Insurance prices increasing each year?',
+      'Flooding destroying homes and communities?',
+      'Temperatures are getting hotter?',
     ],
   },
   'Wisconsin': {
     video: '2UkXtCR1eEQ',
-    warning: 'Insurance prices increasing each year.',
+    warning: 'Car insurance rates are expected to increase by 8.4% in Wisconsin due to various climate impacts.',
     questions: [
       'Insurance prices increasing each year?',
+      'Flooding destroying homes and communities?',
+      'Temperatures are getting hotter?',
     ],
   },
   'Pennsylvania': {
     video: 'N73liuUE-l4',
-    warning: 'Insurance prices increasing each year.',
+    warning: 'Car insurance rates are soaring in Pennsylvania, coupled with flooding damaging homes and communities.',
     questions: [
       'Insurance prices increasing each year?',
       'Flooding destroying homes and communities?',
+      'Temperatures are getting hotter?',
+      'Problems with Agriculture?'
     ],
   },
   'North Carolina': {
     video: 'uMlhkLbOnmA',
-    warning: 'Hurricanes getting stronger, more frequent, and cause more damage.',
+    warning: 'Hurricanes are causing more damage in North Carolina, resulting in rising insurance costs.',
     questions: [
-      'Hurricanes are getting stronger, more frequent, and cause more damage due to rising sea levels?',
+      'Hurricanes getting stronger, more frequent, and cause more damage?',
       'Flooding destroying homes and communities?',
-      'Insurance prices increasing each year?',
+      'Insurance prices going up?',
     ],
   },
   'Nebraska': {
     video: '0yMGg5VDltI',
-    warning: 'Wildfires burning large areas, and destroying homes.',
+    warning: 'Wildfires burning large areas, and destroying homes in Nebraska. Temperatures and insurance prices are increasing.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance prices increasing each year?',
-      'Temperatures increasing regularly?',
+      'Insurance cancelled or prices rising?',
+      'Temperatures increasing rapidly?',
     ],
   },
   'Oregon': {
     video: '0yMGg5VDltI',
-    warning: 'Wildfires burning large areas, and destroying homes.',
+    warning: 'Oregon faces increasing wildfires, rising temperatures, and growing insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance prices increasing each year?',
-      'Temperatures increasing regularly?',
+      'Insurance cancelled or prices rising?',
+      'Temperatures increasing rapidly?',
     ],
   },
   'New Mexico': {
     video: '0yMGg5VDltI',
-    warning: 'Wildfires burning large areas, and destroying homes.',
+    warning: 'New Mexico is experiencing regular temperature increases, wildfires, and rising insurance rates.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
       'Temperatures increasing regularly?',
-      'Insurance prices increasing each year?',
+      'Insurance cancelled or prices rising?',
     ],
   },
   'Colorado': {
     video: '0yMGg5VDltI',
-    warning: 'Wildfires burning large areas, and destroying homes.',
+    warning: 'Colorado is seeing stronger winds, wildfires, and rising insurance rates as extreme weather increases.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance prices increasing each year?',
+      'Insurance cancelled or prices rising?',
       'Strong winds increasing, with more tornadoes?',
     ],
   },
   'California': {
     video: '0yMGg5VDltI',
-    warning: 'Wildfires burning large areas, and destroying homes.',
+    warning: 'Wildfires and droughts in California are increasing, leading to rising temperatures and insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
-      'Insurance prices increasing each year?',
-      'Temperatures increasing regularly?',
+      'Insurance cancelled or prices rising?',
+      'Temperatures increasing rapidly?',
       'Droughts increasing, with less water for longer periods?',
     ],
   },

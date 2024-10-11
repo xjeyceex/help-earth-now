@@ -1,6 +1,7 @@
 import CookieConsent from "@/app/components/CookieConsent";
 import NavbarThree from "../v3/navbar-v3";
 import ActionTable from "../components/AdditionalInformation";
+import FeedbackButton from "../components/FeedBack";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <NavbarThree/>
       <ActionTable/>
       <CookieConsent/>
+      <FeedbackButton/>
     </main>
   );
 }

@@ -3,6 +3,7 @@ import What from "./v3/what/what";
 import NavbarThree from "./v3/navbar-v3";
 import CookieConsent from "./components/CookieConsent";
 import Footer from "./components/Footer";
+import FeedbackButton from "./components/FeedBack";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <What />
       <CookieConsent/>
       <Footer/>
+      <FeedbackButton/>
     </main>
   );
 }

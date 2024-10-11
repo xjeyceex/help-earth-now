@@ -1,3 +1,4 @@
+import BackButton from "../components/BackButton";
 import FeedbackButton from "../components/FeedBack";
 import NavbarThree from "../v3/navbar-v3";
 
@@ -5,6 +6,7 @@ export default function AboutUsPage() {
     return (
         <>
             <NavbarThree />
+            <BackButton/>
             <main className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-900 py-16 px-6">
                 <section className="max-w-7xl mx-auto space-y-12">
                     <h1 className="text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">

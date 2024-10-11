@@ -100,6 +100,7 @@ export default function Who() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       if (location && location.state) {
         const fullStateName = location.state;
         const stateAbbreviation = Object.keys(routeToStateMap).find(

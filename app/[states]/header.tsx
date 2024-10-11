@@ -83,7 +83,7 @@ export default function Header() {
             {warningText}
           </div>
           <div className="exposition-link p-6 lg:flex hidden text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex-col items-center justify-start">
-            <Link href="#what" className="text-blue-500 underline hover:text-blue-700">What can I do? &rarr;</Link>
+            <Link href="#what" className="text-blue-500 underline hover:text-blue-700 font-bold">What can I do? &rarr;</Link>
           </div>
         </div>
       </div>

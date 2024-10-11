@@ -1747,7 +1747,7 @@ export const countyData: { [key: string]: { video: string, warning: string, ques
     video: 'eYOpfGLJ30s',
     warning: 'Erie County is facing rising lake levels and severe storms threatening its shoreline, economy, and environment',
     questions: [
-      "Rising lake levels and severe storms threaten Erie County's shoreline, economy, and environment?",
+      "Rising lake levels and severe storms?",
     ],
   },
 };

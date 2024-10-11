@@ -87,7 +87,7 @@ export default function Header() {
 
         {/* Exposition Section */}
         <div className="flex flex-col col-span-4 h-full justify-center items-center">
-          <div className="exposition-warning p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-white h-full w-full text-center flex flex-col items-center justify-center">
+          <div className="exposition-warning p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-gray-900 h-full w-full text-center flex flex-col items-center justify-center">
             {warningText}
           </div>
           <div className="exposition-link p-6 lg:flex hidden text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex-col items-center justify-start">

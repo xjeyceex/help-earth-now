@@ -1782,7 +1782,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
   },
   'mi': {
     video: 'bj2YtSMKEBU',
-    warning: 'Michigan auto insurance rates are rising every year, affecting residents statewide.',
+    warning: 'Michigan home   insurance rates are rising every year, affecting residents statewide.',
     questions: [
       'Insurance prices increasing each year?',
       'Flooding destroying homes and communities?',

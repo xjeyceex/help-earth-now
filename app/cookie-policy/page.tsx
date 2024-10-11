@@ -6,7 +6,7 @@ export default function CookiePolicy() {
             <CookieConsent/>
             <div className="min-h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-gray-50 to-gray-100 p-8">
                 <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg overflow-hidden">
-                    <div className="bg-gray-800 text-white p-6">
+                    <div className="bg-gray-900 text-white p-6">
                         <h1 className="text-4xl font-bold mb-4">Cookie Policy</h1>
                         <p className="text-lg mb-4">
                             This Cookie Policy explains what cookies are, how we use cookies, and your options regarding cookies on our website.

@@ -82,7 +82,7 @@ export default function NavbarThree() {
 
   return (
     <>
-      <nav className="bg-gray-800 w-full sticky top-0 z-50">
+      <nav className="bg-gray-900 w-full sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-3 py-2">
           {/* Brand / Logo */}
           <div className="sm:block">
@@ -159,7 +159,7 @@ export default function NavbarThree() {
                   Menu
                 </button>
                 {isDropdownOpen && (
-                  <div className="absolute right-0 w-72 bg-gray-800 shadow-lg rounded-lg mt-2 p-3">
+                  <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
                     <Link href="//content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Content Management
                     </Link>

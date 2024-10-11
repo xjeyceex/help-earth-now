@@ -177,7 +177,7 @@ export default function Who() {
                     className={`col-span-2 p-4 md:p-8 border border-gray-300`} 
                     style={{ backgroundColor: partyColor, color: 'white' }} 
                   >
-                    {candidate.name} - {' '}
+                    <span className="italic">{candidate.name}</span>: {' '}
                     {candidate.description || ""}
                     {candidate.link && (
                       <>

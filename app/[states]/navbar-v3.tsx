@@ -1,7 +1,7 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
@@ -13,6 +13,7 @@ import { routeToStateMap } from '../us-datas';
 export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   const { location, setManualLocation, updateLocation } = useContext(LocationContext) || {};
@@ -57,6 +58,11 @@ export default function NavbarThree() {
       };
       setManualLocation(newLocation);
     }
+
+    if (selectedState) {
+      router.push(`/${stateAbbreviations[selectedState].toLowerCase()}`);
+    }
+    
     setIsModalOpen(false);
   };
 

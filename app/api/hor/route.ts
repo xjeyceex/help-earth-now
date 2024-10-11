@@ -59,8 +59,9 @@ export async function GET(req: NextRequest) {
     const horsData = await getSheetsData();
     return NextResponse.json(horsData, {
       headers: {
-        'Cache-Control': 'no-store', // Disable caching at the browser level
-        'Vercel-CDN-Cache-Control': 'no-store', // Disable Vercel CDN cache
+        'Cache-Control': 'public, no-store, max-age=0, must-revalidate',
+        'Vercel-CDN-Cache-Control': 'no-store',
+        'x-vercel-cache': 'no-store', // Explicitly tell Vercel not to cache
       },
     });
   } catch (error) {

@@ -64,9 +64,10 @@ export async function GET(req: NextRequest) {
       const govData = await getSheetsData();
       return NextResponse.json(govData, {
         headers: {
-            'Access-Control-Allow-Origin': '*',  
-            'Access-Control-Allow-Methods': 'GET, POST',
-            'Access-Control-Allow-Headers': 'Content-Type',
+          'Cache-Control': 'no-store, no-cache, must-revalidate',  // Add no-cache
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST',
+          'Access-Control-Allow-Headers': 'Content-Type',
         },
       });
     } catch (error) {

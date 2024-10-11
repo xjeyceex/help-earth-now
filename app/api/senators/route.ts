@@ -59,7 +59,8 @@ export async function GET(req: NextRequest) {
       const senatorsData = await getSheetsData();
       return NextResponse.json(senatorsData, {
         headers: {
-          'Access-Control-Allow-Origin': '*',  
+          'Cache-Control': 'no-store, no-cache, must-revalidate',  // Add no-cache
+          'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST',
           'Access-Control-Allow-Headers': 'Content-Type',
         },

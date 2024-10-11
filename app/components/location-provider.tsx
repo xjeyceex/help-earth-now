@@ -68,14 +68,15 @@ const fetchLocationFromIP = async (setLocation: (location: LocationState) => voi
     const ipLocation: LocationState = {
       latitude: data.latitude || 0,
       longitude: data.longitude || 0,
-      region: data.region || '',
+      region: '',
       state: data.region || '',
+      city: data.city || '', 
       country: data.country || 'United States',
       county: '',
       countryCode: data.country_code?.toUpperCase() || undefined,
     };
     setLocation(ipLocation);
-    await fetchCountyFromCityOrState(ipLocation, setLocation); // Try to get the county based on IP data
+    await fetchCountyFromCityOrState(ipLocation, setLocation); 
   } catch (error) {
     console.error('Error fetching location from IP:', error);
   }
@@ -96,8 +97,8 @@ const getLocation = (setLocation: (location: LocationState) => void): void => {
           const locationData: LocationState = {
             latitude,
             longitude,
-            region: data.address.region || undefined,
-            city: data.address.city || data.address.town || data.address.village || undefined,
+            region: undefined,
+            city: undefined,
             state: data.address.state || undefined,
             country: data.address.country || undefined,
             countryCode: data.address.country_code?.toUpperCase() || undefined,
@@ -136,19 +137,21 @@ export default function LocationProvider({ children }: { children: ReactNode }) 
     const newLocation = {
       latitude: manualLocation.latitude,
       longitude: manualLocation.longitude,
-      region: undefined,
+      region: manualLocation.region,
       city: manualLocation.city || undefined,
       state: manualLocation.state || undefined,
       country: manualLocation.country || 'United States',
-      countyCode: manualLocation.countryCode || undefined,
+      countryCode: manualLocation.countryCode || undefined,
       county: manualLocation.county || undefined,
     };
   
     setLocation(newLocation);
     Cookies.set('userLocation', JSON.stringify(newLocation), { expires: 365 });
-
-    // If county is missing, try to get it
-    fetchCountyFromCityOrState(newLocation, setLocation);
+  
+    // Skip fetching county if the state is already available
+    if (!newLocation.state) {
+      fetchCountyFromCityOrState(newLocation, setLocation);
+    }
   };
 
   useEffect(() => {

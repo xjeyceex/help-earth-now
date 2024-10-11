@@ -3,56 +3,46 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LocationContext } from '../components/location-provider';
 import Link from 'next/link';
-import { stateData, stateAbbreviations, countyData } from '../us-datas';
+import { useParams } from 'next/navigation'; 
+import { stateData } from '../us-datas';
 
 export default function Header() {
+  const params = useParams();
+  const state = params.states as string;  
   const { location } = useContext(LocationContext) || {};
+
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI");
   const [warningText, setWarningText] = useState("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
-  const [questions, setQuestions] = useState<string[]>([
+  const [questions, setquestions] = useState<string[]>([
     'Rising temperatures?',
-    'Extreme weather events affecting communities?',
-    'The potential increase in insurance premiums due to climate-related risks?',
+    'Insurance cancelled or prices rising?',
+    'Flooding destroying homes and communities?',
   ]);
-
+  
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
 
-    if (location?.state && location?.county) {
-      const countyKey = `${location.county}, ${location.state}`;
+    if (state && stateData[state]) {
+      const { video, warning, questions } = stateData[state];
+      let videoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
+      if (isMobile) {
+        videoUrl += '&vq=small';
+      }
       
-      if (countyData[countyKey]) {
-        const { video, warning, questions: countyQuestions } = countyData[countyKey];
-        let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
-        
-        if (isMobile) {
-          baseVideoUrl += '&vq=small';
-        }
-
-        setVideoUrl(baseVideoUrl);
-        setWarningText(warning);
-        setQuestions(countyQuestions);
-      }
-      else {
-        const convertStateAbbreviations = stateAbbreviations[location.state] || 'US';
-        const stateAbbreviation = convertStateAbbreviations.toLowerCase();
-        
-        if (stateAbbreviation && stateData[stateAbbreviation]) {
-          const { video, warning, questions: stateQuestions } = stateData[stateAbbreviation];
-          let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
-
-          if (isMobile) {
-            baseVideoUrl += '&vq=small';
-          }
-
-          setVideoUrl(baseVideoUrl);
-          setWarningText(warning);
-          setQuestions(stateQuestions);
-        }
-      }
+      setVideoUrl(videoUrl);
+      setWarningText(warning);
+      setquestions(questions);
+    } else {
+      setVideoUrl("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI");
+      setWarningText("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
+      setquestions([
+        'Rising temperatures?',
+        'Insurance cancelled or prices rising?',
+        'Flooding destroying homes and communities?',
+      ]);
     }
-  }, [location?.state, location?.county]);
-
+  }, [state]);
+  
   return (
     <div className="w-full" id="home">
       <div className="grid grid-cols-1 lg:grid-cols-9 premise">

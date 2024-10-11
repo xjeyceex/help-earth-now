@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
-import { states, counties as allCounties } from '../us-locations';
+import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
@@ -13,8 +13,8 @@ export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for the dropdown
-  const { location, setManualLocation } = useContext(LocationContext) || {};
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+  const { location, setManualLocation, updateLocation } = useContext(LocationContext) || {};
   const [selectedState, setSelectedState] = useState<string>(location?.state || '');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
@@ -32,15 +32,6 @@ export default function NavbarThree() {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
-  useEffect(() => {
-    if (selectedState) {
-      const stateCounties = allCounties[selectedState] || [];
-      setCounties(stateCounties);
-    } else {
-      setCounties([]);
-    }
-  }, [selectedState]);
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
@@ -66,26 +57,51 @@ export default function NavbarThree() {
     setIsModalOpen(false);
   };
 
+  const handleUpdateAutomatically = () => {
+    if (updateLocation) {
+      updateLocation(); 
+    }
+    setIsModalOpen(false); 
+  }
+
+  useEffect(() => {
+    if (isModalOpen && location) {
+      setSelectedState(location.state || '');
+      setSelectedCounty(location.county || '');
+    }
+  }, [isModalOpen, location]);
+
+  useEffect(() => {
+    if (selectedState) {
+      const stateCounties = allCounties[selectedState] || [];
+      setCounties(stateCounties);
+    } else {
+      setCounties([]);
+    }
+  }, [selectedState]);
+
   return (
     <>
       <nav className="bg-gray-800 w-full sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-3 py-2">
           {/* Brand / Logo */}
-          <div className="hidden sm:block">
-            <Link href="/v3">
+          <div className="sm:block">
+            <Link href="/">
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={40} // Reduced width
-                height={40} // Reduced height
+                width={40} 
+                height={40} 
               />
             </Link>
           </div>
           <div className="flex items-center">
             <p className="mr-1 text-xs md:text-sm text-white">
-              Location: {location?.county 
-                ? `${location.county}${location.region ? ', ' + location.region : location.city ? ', ' + location.city : location.state ? ', ' + location.state : ''}` 
-                : location?.region || location?.city || location?.state || location?.country || 'United States'}
+              Location: {location?.county
+                ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
+                : location?.state
+                ? stateAbbreviations[location.state] // Show state abbreviation only
+                : 'United States'}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}
@@ -117,16 +133,19 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
+            <Link href="/" className={linkClasses('/')}>
+              Home
+            </Link>
             <Link href="/about" className={linkClasses('/about')}>
               About Us
             </Link>
-            <Link href="/v3" className={linkClasses('/v3')}>
-              Home
+            <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+              Learn More
             </Link>
-            <Link href="/v3/what" className={linkClasses('/v3/what')}>
+            {/* <Link href="//what" className={linkClasses('//what')}>
               What can I do?
-            </Link>
-            {/* <Link href="/v3/who" className={linkClasses('/v3/who')}>
+            </Link> */}
+            {/* <Link href="//who" className={linkClasses('//who')}>
               Who
             </Link> */}
 
@@ -141,10 +160,10 @@ export default function NavbarThree() {
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-72 bg-gray-800 shadow-lg rounded-lg mt-2 p-3">
-                    <Link href="/v3/content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="//content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Content Management
                     </Link>
-                    <Link href="/v3/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="//admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Admin Panel
                     </Link>
                     <Link
@@ -166,25 +185,28 @@ export default function NavbarThree() {
             <button onClick={toggleMenu} className="text-white self-end text-lg">
               ✕
             </button>
-            <Link href="/v3" className={linkClasses('/v3')}>
+            <Link href="/" className={linkClasses('/')}>
               Home
             </Link>
             <Link href="/about" className={linkClasses('/about')}>
               About Us
             </Link>
-            <Link href="/v3/what" className={linkClasses('/v3/what')}>
-              What can I do?
+            <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+              Learn More
             </Link>
-            {/* <Link href="/v3/who" className={linkClasses('/v3/who')}>
+            {/* <Link href="//what" className={linkClasses('//what')}>
+              What can I do?
+            </Link> */}
+            {/* <Link href="//who" className={linkClasses('//who')}>
               Who
             </Link> */}
 
             {status === 'authenticated' && (
               <>
-                <Link href="/v3/content" className={linkClasses("/v3/content")}>
+                <Link href="//content" className={linkClasses("//content")}>
                   Content Management
                 </Link>
-                <Link href="/v3/admin" className={linkClasses('/v3/admin')}>
+                <Link href="//admin" className={linkClasses('//admin')}>
                   Admin Panel
                 </Link>
                 <Link
@@ -235,10 +257,22 @@ export default function NavbarThree() {
               </select>
             </div>
             <button
+              onClick={handleUpdateAutomatically}
+              className="mt-2 w-full py-2 px-4 border bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+            >
+              Update Automatically
+            </button>
+            <button
               onClick={handleUpdateLocation}
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+              className="mt-2 w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
             >
               Save
+            </button>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="mt-2 w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition"
+            >
+              Cancel
             </button>
           </div>
         </div>

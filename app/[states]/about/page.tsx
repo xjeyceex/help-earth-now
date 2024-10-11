@@ -1,5 +1,4 @@
-import NavbarThree from "../v3/navbar-v3";
-
+import NavbarThree from "../navbar-v3";
 export default function AboutUsPage() {
     return (
         <>

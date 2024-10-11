@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+main{
+  background-color: #1F2937;
+}
+
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 50px;
 }
 
 /* Premise */
@@ -126,6 +131,11 @@ html {
 
 .who-help .who-help-3 {
   background: #a548ff;
+  color: white;
+}
+
+.who-help .who-help-4 {
+  background: #00c4cc;
   color: white;
 }
 

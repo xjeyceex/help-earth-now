@@ -1,15 +1,13 @@
 import CookieConsent from "@/app/components/CookieConsent";
-import LocationAndEmail from "@/app/email-input";
-import NavbarTwo from "../navbar-v2";
-import Who from "./who";
+import NavbarThree from "../v3/navbar-v3";
+import ActionTable from "../components/AdditionalInformation";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      <NavbarTwo/>
-      <Who/>
+      <NavbarThree/>
+      <ActionTable/>
       <CookieConsent/>
-      {/* <LocationAndEmail/> */}
     </main>
   );
 }

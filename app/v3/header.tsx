@@ -18,13 +18,13 @@ export default function Header() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
 
-    if (location?.state && location?.county) {
-      const countyKey = `${location.county}, ${location.state}`;
+    if (location?.state) {
+      const countyKey = location.county ? `${location.county}, ${location.state}` : null;
       
-      if (countyData[countyKey]) {
+      if (countyKey && countyData[countyKey]) {
         const { video, warning, questions: countyQuestions } = countyData[countyKey];
         let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
-        
+
         if (isMobile) {
           baseVideoUrl += '&vq=small';
         }
@@ -32,12 +32,11 @@ export default function Header() {
         setVideoUrl(baseVideoUrl);
         setWarningText(warning);
         setQuestions(countyQuestions);
-      }
-      else {
-        const convertStateAbbreviations = stateAbbreviations[location.state] || 'US';
-        const stateAbbreviation = convertStateAbbreviations.toLowerCase();
-        
-        if (stateAbbreviation && stateData[stateAbbreviation]) {
+      } else {
+        // Fallback to state-level data
+        const stateAbbreviation = stateAbbreviations[location.state]?.toLowerCase() || 'us';
+
+        if (stateData[stateAbbreviation]) {
           const { video, warning, questions: stateQuestions } = stateData[stateAbbreviation];
           let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
 

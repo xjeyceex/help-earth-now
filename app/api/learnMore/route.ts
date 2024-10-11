@@ -1,4 +1,4 @@
-// app/api/senators/route.ts
+// app/api/learnMore/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
@@ -20,7 +20,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
-  const range = 'Senators!A3:F'; // Adjust the range as needed
+  const range = 'Additional Pages!B1:D'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -45,7 +45,6 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
         return acc;
       }, {} as SheetRow);
     });
-
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
@@ -55,17 +54,17 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
-    try {
-      const senatorsData = await getSheetsData();
-      return NextResponse.json(senatorsData, {
-          headers: {
-              'Access-Control-Allow-Origin': '*',  
-              'Access-Control-Allow-Methods': 'GET, POST',
-              'Access-Control-Allow-Headers': 'Content-Type',
-          },
-          });;
-    } catch (error) {
-      console.error('Error fetching senators data:', error);
-      return NextResponse.json({ error: 'Failed to fetch senators data' }, { status: 500 });
-    }
+  try {
+    const learnMoreData = await getSheetsData();
+    return NextResponse.json(learnMoreData, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',  
+            'Access-Control-Allow-Methods': 'GET, POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        },
+        });;
+  } catch (error) {
+    console.error('Error fetching learnMore data:', error);
+    return NextResponse.json({ error: 'Failed to fetch learnMore data' }, { status: 500 });
   }
+}

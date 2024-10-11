@@ -58,12 +58,12 @@ export async function GET(req: NextRequest) {
     try {
       const senatorsData = await getSheetsData();
       return NextResponse.json(senatorsData, {
-          headers: {
-              'Access-Control-Allow-Origin': '*',  
-              'Access-Control-Allow-Methods': 'GET, POST',
-              'Access-Control-Allow-Headers': 'Content-Type',
-          },
-          });;
+        headers: {
+          'Access-Control-Allow-Origin': '*',  
+          'Access-Control-Allow-Methods': 'GET, POST',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      });
     } catch (error) {
       console.error('Error fetching senators data:', error);
       return NextResponse.json({ error: 'Failed to fetch senators data' }, { status: 500 });

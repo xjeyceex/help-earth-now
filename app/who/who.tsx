@@ -169,13 +169,12 @@ export default function Who() {
               </div>
 
               {group.items.map((candidate, itemIndex) => {
-                const partyColor = candidate.party === 'democratic' ? '#0033A0' : '#C8102E';
-
                 return (
                   <div
                     key={`${group.group}-${candidate.name}-${itemIndex}`}
-                    className={`col-span-2 p-4 md:p-8 border border-gray-300`} 
-                    style={{ backgroundColor: partyColor, color: 'white' }} 
+                    className={`col-span-2 p-4 md:p-8 border border-gray-300 ${
+                      candidate.party === Party.Democratic ? 'bg-blue-600 text-white' : 'bg-red-600 text-white'
+                    }`}
                   >
                     <span className="italic">{candidate.name}</span>: {' '}
                     {candidate.description || ""}

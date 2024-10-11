@@ -47,8 +47,10 @@ export default function Header() {
     <div className="w-full" id="home">
       <div className="grid grid-cols-1 lg:grid-cols-9 premise">
         {/* Title Section - Centered */}
-        <div className="title col-span-5 p-2 md:p-2 text-lg md:text-3xl leading-tight md:leading-normal flex justify-center items-center text-center">
-          Climate change is hurting us all - now
+        <div className="title col-span-5 p-2 md:p-2 text-lg md:text-3xl leading-tight md:leading-normal text-center flex justify-center items-center">
+          <div>
+            Climate change is hurting us <span className="font-bold text-red-500 inline-block">all</span> - <span className="italic text-green-500 inline-block">now</span>
+          </div>
         </div>
 
         {/* Care About Section - Left-aligned */}

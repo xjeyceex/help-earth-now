@@ -161,6 +161,9 @@ export default function NavbarThree() {
             <Link href={`/${currentState}/about`} className={linkClasses(`/${currentState}/about`)}>
               About Us
             </Link>
+            <Link href={`/${currentState}/learn-more`} className={linkClasses(`/${currentState}/learn-more`)}>
+              Learn More
+            </Link>
             {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
               What can I do?
             </Link> */}
@@ -209,6 +212,9 @@ export default function NavbarThree() {
             </Link>
             <Link href={`/${currentState}/about`} className={linkClasses(`/${currentState}/about`)}>
               About Us
+            </Link>
+            <Link href={`/${currentState}/learn-more`} className={linkClasses(`/${currentState}/learn-more`)}>
+              Learn More
             </Link>
             {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
               What can I do?

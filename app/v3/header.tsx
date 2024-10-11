@@ -20,9 +20,7 @@ export default function Header() {
 
     if (location?.state && location?.county) {
       const countyKey = `${location.county}, ${location.state}`;
-      console.log(countyKey)
       
-      // First, check if county data exists for the current location
       if (countyData[countyKey]) {
         const { video, warning, questions: countyQuestions } = countyData[countyKey];
         let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
@@ -35,7 +33,6 @@ export default function Header() {
         setWarningText(warning);
         setQuestions(countyQuestions);
       }
-      // If no county data, fallback to state data
       else {
         const convertStateAbbreviations = stateAbbreviations[location.state] || 'US';
         const stateAbbreviation = convertStateAbbreviations.toLowerCase();

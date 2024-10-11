@@ -85,15 +85,15 @@ export default function NavbarThree() {
   return (
     <>
       <nav className="bg-gray-900 w-full sticky top-0 z-50">
-        <div className="container mx-auto flex items-center justify-between px-3 py-2">
+        <div className="container mx-auto flex items-center justify-between px-3 py-0">
           {/* Brand / Logo */}
           <div className="sm:block">
             <Link href="/">
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={50} 
-                height={50} 
+                width={70} 
+                height={70} 
               />
             </Link>
           </div>

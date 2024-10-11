@@ -57,6 +57,7 @@ export default function NavbarThree() {
         county: selectedCounty || undefined,
       };
       setManualLocation(newLocation);
+      window.location.reload();
     }
 
     if (selectedState) {
@@ -71,6 +72,7 @@ export default function NavbarThree() {
       updateLocation(); 
     }
     setIsModalOpen(false); 
+    window.location.reload();
   }
 
   useEffect(() => {

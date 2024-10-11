@@ -55,6 +55,7 @@ export default function NavbarThree() {
       setManualLocation(newLocation);
     }
     setIsModalOpen(false);
+    window.location.reload();
   };
 
   const handleUpdateAutomatically = () => {
@@ -62,6 +63,7 @@ export default function NavbarThree() {
       updateLocation(); 
     }
     setIsModalOpen(false); 
+    window.location.reload();
   }
 
   useEffect(() => {

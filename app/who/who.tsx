@@ -5,6 +5,7 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { LocationContext } from '@/app/components/location-provider';
 import { routeToStateMap } from '@/app/us-datas'; 
+import { Spinner } from '@radix-ui/themes';
 
 enum Party {
   Democratic = 'democratic',
@@ -113,28 +114,20 @@ export default function Who() {
               group: 'President',
               items: [
                 {
-                  "name": 'Kamala Harris',
-                  "rating": '90% from LCV.',
-                  "description": 'Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change',
-                  "link": 'https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/',
-                  "party": Party.Democratic,
-                  "state": 'All',
+                  name: 'Kamala Harris',
+                  rating: '90% from LCV.',
+                  description: 'Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change',
+                  link: 'https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/',
+                  party: Party.Democratic,
+                  state: 'All',
                 },
                 {
-                  "name": 'Donald Trump',
-                  "rating": '30% from LCV.',
-                  "description": 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
-                  "link": 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
-                  "party": Party.Republican,
-                  "state": 'All',
-                },
-                {
-                  "name": 'Donald Trump',
-                  "rating": '30% from LCV.',
-                  "description": "Trump's delay of a $19.1 billion disaster relief bill for North Carolina hindered vital flood mitigation, worsening the effects of Hurricane Helene in 2023.",
-                  "link": 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
-                  "party": Party.Republican,
-                  "state": 'NC',
+                  name: 'Donald Trump',
+                  rating: '30% from LCV.',
+                  description: 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
+                  link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
+                  party: Party.Republican,
+                  state: 'All',
                 },
               ],
             },
@@ -154,7 +147,7 @@ export default function Who() {
   }, [location]);
 
   if (loading) {
-    return <div>Loading location and candidates data...</div>;
+    return <Spinner />;
   }
 
   if (!location || !location.state) {
@@ -205,7 +198,7 @@ export default function Who() {
           ))
         ) : (
           <div className="col-span-3 p-4 text-center">
-            Loading...
+            No candidates available for this state.
           </div>
         )}
       </div>

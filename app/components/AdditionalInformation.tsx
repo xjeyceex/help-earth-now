@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
+import { Spinner } from '@radix-ui/themes';
 
 interface ActionItem {
   action: string;
@@ -18,7 +19,7 @@ const ActionTable: React.FC = () => {
       try {
         const response = await fetch('/api/learnMore');
         const data = await response.json();
-        setActionItems(data); // Assuming your API returns the array of action items
+        setActionItems(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching action items:', error);
@@ -30,7 +31,7 @@ const ActionTable: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // You can add a better loader/spinner here if you want
+    return <Spinner/>; 
   }
 
   return (

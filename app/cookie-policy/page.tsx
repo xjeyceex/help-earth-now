@@ -14,12 +14,12 @@ export default function CookiePolicy() {
                     </div>
 
                     <div className="p-6">
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">What Are Cookies?</h2>
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-4">What Are Cookies?</h2>
                         <p className="text-gray-700 mb-6">
                             Cookies are small text files placed on your device by a website. They are used to remember your preferences and enhance your experience on our site.
                         </p>
 
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">How We Use Cookies</h2>
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-4">How We Use Cookies</h2>
                         <p className="text-gray-700 mb-2">
                             We use cookies to:
                         </p>
@@ -34,7 +34,7 @@ export default function CookiePolicy() {
 
                         <br />
 
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Managing Cookies</h2>
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Managing Cookies</h2>
                         <p className="text-gray-700 mb-6">
                             You can manage or disable cookies through your browser settings. For detailed instructions, refer to your browser&#39;s help section or visit{' '}
                             <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
@@ -42,7 +42,7 @@ export default function CookiePolicy() {
                             </a>.
                         </p>
 
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Your Choices</h2>
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your Choices</h2>
                         <p className="text-gray-700 mb-6">
                             By using our site, you consent to our use of cookies. You can withdraw your consent or manage cookie preferences at any time through your browser settings.
                         </p>

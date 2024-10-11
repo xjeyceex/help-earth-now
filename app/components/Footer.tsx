@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-gray-800 text-white py-6 px-4 w-full">
+        <footer className="bg-gray-900 text-white py-6 px-4 w-full">
                 {/* Email Registration Section */}
                 <div className="flex flex-col items-center justify-center">
                     <p className="text-sm mb-2 text-center">

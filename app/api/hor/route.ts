@@ -59,7 +59,9 @@ export async function GET(req: NextRequest) {
     const horsData = await getSheetsData();
     return NextResponse.json(horsData, {
       headers: {
-        'Cache-Control': 'public, no-store, max-age=0, must-revalidate',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',  // Strict no-cache policy
+        'Pragma': 'no-cache', // Compatibility with HTTP/1.1 caches
+        'Expires': '0', // Prevents caching in the future
         'Vercel-CDN-Cache-Control': 'no-store',
         'x-vercel-cache': 'no-store', // Explicitly tell Vercel not to cache
       },

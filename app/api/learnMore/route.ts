@@ -56,14 +56,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 export async function GET(req: NextRequest) {
   try {
     const learnMoreData = await getSheetsData();
-    return NextResponse.json(learnMoreData, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      },
-    });
+    return NextResponse.json(learnMoreData);
   } catch (error) {
     console.error('Error fetching learnMore data:', error);
     return NextResponse.json({ error: 'Failed to fetch learnMore data' }, { status: 500 });

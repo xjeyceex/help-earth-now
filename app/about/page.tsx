@@ -1,3 +1,4 @@
+import FeedbackButton from "../components/FeedBack";
 import NavbarThree from "../v3/navbar-v3";
 
 export default function AboutUsPage() {
@@ -66,6 +67,7 @@ export default function AboutUsPage() {
                     </div>
                 </section>
             </main>
+            <FeedbackButton/>
         </>
     );
 }

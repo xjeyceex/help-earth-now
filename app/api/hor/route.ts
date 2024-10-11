@@ -59,6 +59,7 @@ export async function GET(req: NextRequest) {
     const horsData = await getSheetsData();
     return NextResponse.json(horsData, {
       headers: {
+        'Cache-Control': 'no-store',
         'Access-Control-Allow-Origin': '*',  
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',

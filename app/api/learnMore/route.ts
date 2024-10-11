@@ -58,12 +58,12 @@ export async function GET(req: NextRequest) {
     const learnMoreData = await getSheetsData();
     return NextResponse.json(learnMoreData, {
       headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate',  // Add no-cache
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
-    });  } catch (error) {
+    });  
+  } catch (error) {
     console.error('Error fetching learnMore data:', error);
     return NextResponse.json({ error: 'Failed to fetch learnMore data' }, { status: 500 });
   }

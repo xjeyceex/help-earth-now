@@ -1745,9 +1745,9 @@ export const candidates: CandidateGroup[] = [
 export const countyData: { [key: string]: { video: string, warning: string, questions: string[] } } = {
   'Erie County, Pennsylvania': {
     video: 'eYOpfGLJ30s',
-    warning: 'Flooding is devastating homes and communities in Pennsylvania, causing widespread destruction and displacing residents.',
+    warning: 'Erie County is facing rising lake levels and severe storms threatening its shoreline, economy, and environment',
     questions: [
-      "Rising lake levels and severe storms threaten Erie County's shoreline, economy, and environment?",
+      "Rising lake levels and severe storms?",
     ],
   },
 };

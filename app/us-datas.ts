@@ -1742,6 +1742,16 @@ export const candidates: CandidateGroup[] = [
   },
 ];
 
+export const countyData: { [key: string]: { video: string, warning: string, questions: string[] } } = {
+  'Erie County, Pennsylvania': {
+    video: 'eYOpfGLJ30s',
+    warning: 'Flooding is devastating homes and communities in Pennsylvania, causing widespread destruction and displacing residents.',
+    questions: [
+      "Rising lake levels and severe storms threaten Erie County's shoreline, economy, and environment?",
+    ],
+  },
+};
+
 export const stateData: { [key: string]: { video: string, warning: string, questions: string[] } } = {
   'fl': {
     video: 'ozqGvyTWeAg',

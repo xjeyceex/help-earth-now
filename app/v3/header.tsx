@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LocationContext } from '../components/location-provider';
 import Link from 'next/link';
-import { stateData, stateAbbreviations } from '../us-datas';
+import { stateData, stateAbbreviations, countyData } from '../us-datas';
 
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
@@ -18,12 +18,13 @@ export default function Header() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
 
-    if (location?.state) {
-      const convertStateAbbreviations = stateAbbreviations[location.state] || 'US';
-      const stateAbbreviation = convertStateAbbreviations.toLowerCase();
-
-      if (stateAbbreviation && stateData[stateAbbreviation]) {
-        const { video, warning, questions: stateQuestions } = stateData[stateAbbreviation];
+    if (location?.state && location?.county) {
+      const countyKey = `${location.county}, ${location.state}`;
+      console.log(countyKey)
+      
+      // First, check if county data exists for the current location
+      if (countyData[countyKey]) {
+        const { video, warning, questions: countyQuestions } = countyData[countyKey];
         let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
         
         if (isMobile) {
@@ -32,10 +33,28 @@ export default function Header() {
 
         setVideoUrl(baseVideoUrl);
         setWarningText(warning);
-        setQuestions(stateQuestions);
+        setQuestions(countyQuestions);
+      }
+      // If no county data, fallback to state data
+      else {
+        const convertStateAbbreviations = stateAbbreviations[location.state] || 'US';
+        const stateAbbreviation = convertStateAbbreviations.toLowerCase();
+        
+        if (stateAbbreviation && stateData[stateAbbreviation]) {
+          const { video, warning, questions: stateQuestions } = stateData[stateAbbreviation];
+          let baseVideoUrl = `https://www.youtube.com/embed/${video}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${video}`;
+
+          if (isMobile) {
+            baseVideoUrl += '&vq=small';
+          }
+
+          setVideoUrl(baseVideoUrl);
+          setWarningText(warning);
+          setQuestions(stateQuestions);
+        }
       }
     }
-  }, [location?.state]);
+  }, [location?.state, location?.county]);
 
   return (
     <div className="w-full" id="home">

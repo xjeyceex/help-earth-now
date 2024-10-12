@@ -1753,16 +1753,6 @@ export const countyData: { [key: string]: { video: string, warning: string, ques
 };
 
 export const stateData: { [key: string]: { video: string, warning: string, questions: string[] } } = {
-  'fl': {
-    video: 'ozqGvyTWeAg',
-    warning: 'Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.',
-    questions: [
-      'Hurricanes getting stronger, more frequent, and causing more damage due to rising sea levels?',
-      'Insurance cancelled or prices rising?',
-      'Sea level rising & beaches and houses at risk?',
-      'Temperatures increasing regularly',
-    ],
-  },
   'az': {
     video: 'wxr-W5f0EzQ',
     warning: 'Phoenix breaks temperature record with 19th day of extreme heat. Insurance prices are also increasing each year.',
@@ -1773,7 +1763,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'nv': {
-    video: 'UjQEGYaDkSE',
+    video: '9wGb557yAgc',
     warning: 'Temperatures are increasing regularly in Nevada. Insurance prices are on the rise.',
     questions: [
       'Temperatures are getting hotter?',
@@ -1827,8 +1817,18 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
       'Insurance prices going up?',
     ],
   },
+  'fl': {
+    video: 'knfcsOoYsGI',
+    warning: 'Storm surge from hurricanes in Florida is devastating communities, and insurance prices are on the rise.',
+    questions: [
+      'Hurricanes getting stronger, more frequent, and causing more damage due to rising sea levels?',
+      'Insurance cancelled or prices rising?',
+      'Sea level rising & beaches and houses at risk?',
+      'Temperatures increasing regularly',
+    ],
+  },
   'ne': {
-    video: '0yMGg5VDltI',
+    video: 'Vox2kq3ammk',
     warning: 'Wildfires burning large areas, and destroying homes in Nebraska. Temperatures and insurance prices are increasing.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
@@ -1837,7 +1837,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'or': {
-    video: '0yMGg5VDltI',
+    video: '3-4SR8vC1kA',
     warning: 'Oregon faces increasing wildfires, rising temperatures, and growing insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
@@ -1846,7 +1846,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'nm': {
-    video: '0yMGg5VDltI',
+    video: 'TZV__hUOkJQ',
     warning: 'New Mexico is experiencing regular temperature increases, wildfires, and rising insurance rates.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
@@ -1855,7 +1855,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'co': {
-    video: '0yMGg5VDltI',
+    video: '7P4fVa2_8cg',
     warning: 'Colorado is seeing stronger winds, wildfires, and rising insurance rates as extreme weather increases.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',
@@ -1864,7 +1864,7 @@ export const stateData: { [key: string]: { video: string, warning: string, quest
     ],
   },
   'ca': {
-    video: '0yMGg5VDltI',
+    video: 'u_b0o-1_r9Q',
     warning: 'Wildfires and droughts in California are increasing, leading to rising temperatures and insurance premiums.',
     questions: [
       'Wildfires burning large areas, and destroying homes?',

@@ -147,7 +147,11 @@ export default function Who() {
   }, [location]);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+      </div>
+    );  
   }
 
   return (

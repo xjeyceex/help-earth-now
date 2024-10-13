@@ -11,8 +11,8 @@ interface SheetRow {
 const getSheetsData = async (): Promise<SheetRow[]> => {
   const auth = new google.auth.GoogleAuth({
     credentials: {
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_SHEETS_API_KEY,
+      client_email: process.env.NEXT_PUBLIC_GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY,
     },
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
@@ -24,7 +24,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      spreadsheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID,
       range,
     });
 

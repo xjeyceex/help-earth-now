@@ -183,43 +183,44 @@ export default function NavbarThree() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col space-y-3 p-3">
-            <button onClick={toggleMenu} className="text-white self-end text-lg">
-              ✕
-            </button>
-            <Link href="/" className={linkClasses('/')}>
-              Home
-            </Link>
-            <Link href="/about" className={linkClasses('/about')}>
-              About Us
-            </Link>
-            <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
-              Learn More
-            </Link>
-            {/* <Link href="//what" className={linkClasses('//what')}>
-              What can I do?
-            </Link> */}
-            {/* <Link href="//who" className={linkClasses('//who')}>
-              Who
-            </Link> */}
-
-            {status === 'authenticated' && (
-              <>
-                <Link href="//content" className={linkClasses("//content")}>
-                  Content Management
-                </Link>
-                <Link href="//admin" className={linkClasses('//admin')}>
-                  Admin Panel
-                </Link>
-                <Link
-                  href="/api/auth/signout"
-                  className="block px-4 py-2 text-white hover:text-red-500 transition"
-                >
-                  Sign Out
-                </Link>
-              </>
-            )}
-          </div>
+          <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
+          <button onClick={toggleMenu} className="text-white self-end text-lg">
+            ✕
+          </button>
+          <Link href="/" className={linkClasses('/')}>
+            Home
+          </Link>
+          <Link href="/about" className={linkClasses('/about')}>
+            About Us
+          </Link>
+          <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+            Learn More
+          </Link>
+          {/* <Link href="//what" className={linkClasses('//what')}>
+            What can I do?
+          </Link> */}
+          {/* <Link href="//who" className={linkClasses('//who')}>
+            Who
+          </Link> */}
+          
+          {status === 'authenticated' && (
+            <>
+              <Link href="//content" className={linkClasses("//content")}>
+                Content Management
+              </Link>
+              <Link href="//admin" className={linkClasses('//admin')}>
+                Admin Panel
+              </Link>
+              <Link
+                href="/api/auth/signout"
+                className="block px-4 py-2 text-white hover:text-red-500 transition"
+              >
+                Sign Out
+              </Link>
+            </>
+          )}
+        </div>
+        
         )}
       </nav>
 

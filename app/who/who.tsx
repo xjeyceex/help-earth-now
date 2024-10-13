@@ -169,7 +169,9 @@ export default function Who() {
                   <div
                     key={`${group.group}-${candidate.name}-${itemIndex}`}
                     className={`col-span-2 p-4 md:p-8 border border-gray-300 ${
-                      candidate.party === Party.Democratic ? 'bg-blue-600 text-white' : 'bg-red-600 text-white'
+                      candidate.party === Party.Democratic ? 'bg-blue-600 text-white' :
+                      candidate.party === Party.Republican ? 'bg-red-600 text-white' :
+                      'bg-gray-400 text-gray-900'  // For Independent party
                     }`}
                   >
                     <span className="italic">{candidate.name}</span>: {' '}
@@ -179,7 +181,11 @@ export default function Who() {
                         {' - '}
                         <Link
                           href={candidate.link}
-                          className="inline-flex items-center text-blue-300 hover:text-blue-500 underline transition duration-200"
+                          className={`inline-flex items-center ${
+                            candidate.party === Party.Independent 
+                              ? 'text-blue-900 hover:text-blue-700' 
+                              : 'text-blue-300 hover:text-blue-500'  
+                          } underline transition duration-200`}
                           target="_blank"
                         >
                           Learn More 
@@ -190,6 +196,7 @@ export default function Who() {
                   </div>
                 );
               })}
+
             </React.Fragment>
           ))
         ) : (

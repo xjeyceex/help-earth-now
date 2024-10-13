@@ -10,6 +10,7 @@ export async function POST(request: Request) {
 
   try {
     const recipients = [
+      'feedback@HelpYouHelpYou.org',
       'jcmiguel.beltran@gmail.com',
     ];
 

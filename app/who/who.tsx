@@ -151,10 +151,6 @@ export default function Who() {
     return <Spinner />;
   }
 
-  if (!location || !location.state) {
-    return <div>Loading location data...</div>;
-  }
-
   return (
     <>
       <div className="grid grid-cols-3 who-help" id="who">

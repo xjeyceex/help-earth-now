@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
   try {
     const recipients = [
-      'feedback@HelpYouHelpYou.org',
+      'feedback@helpyouhelpyou.org',
       'jcmiguel.beltran@gmail.com',
     ];
 
@@ -25,9 +25,9 @@ export async function POST(request: Request) {
 
     // Send feedback email with a generic "no-reply" sender
     await transporter.sendMail({
-      from: 'no-reply@helpyouhelpyou.com', // Set this to something like no-reply
+      from: 'no-reply@helpyouhelpyou.org', // Set this to something like no-reply
       to: recipients.join(', '), // Send to all recipients
-      subject: 'Feedback test', // Email subject
+      subject: 'Feedback', // Email subject
       text: `${feedback}`, // Email body with the feedback content
     });
 

@@ -5,8 +5,8 @@ import { faDove, faDollarSign, faSolarPanel } from '@fortawesome/free-solid-svg-
 export default function What() {
     return (
         <>
-            <div className="w-full max-w-7xl mx-auto pt-8 pb-12 lg:px-16" id='what'>
-                <h2 className="text-5xl text-center dark:text-gray-200 mb-12 font-bold px-4"> {/* Increased title font size */}
+            <div className="w-full max-w-7xl mx-auto pt-6 pb-12 lg:px-16" id='what'>
+                <h2 className="text-5xl text-center dark:text-gray-200 font-bold pb-6 px-4 italic">
                     What Can I Do?
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 px-6"> {/* Increased gap for better spacing */}

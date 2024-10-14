@@ -4,6 +4,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { LocationContext } from '../components/location-provider';
 import Link from 'next/link';
 import { stateAbbreviations } from '../us-datas';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
 
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
@@ -89,7 +91,11 @@ export default function Header() {
           <div className="grid max-w-screen-2xl px-6 py-10 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div className="mr-auto place-self-center lg:col-span-7">
               <h1 className="max-w-2xl mb-4 font-extrabold tracking-tight leading-none md:text-6xl xl:text-7xl text-4xl dark:text-white">
-                Climate change is hurting us <span className="font-bold inline-block">all</span> - <span className="italic text-green-500 inline-block">now</span>
+                  Climate change is hurting us <span className="font-bold inline-block">all</span> -{' '} 
+                  <span className="inline-flex items-center italic text-green-500">
+                    <span className="mr-1">now</span>
+                    <FontAwesomeIcon icon={faLeaf} className="text-2xl text-green-600 mb-4" />
+                  </span>
               </h1>
               <div className="max-w-2xl mb-6 font-light text-gray-600 lg:mb-8 md:text-xl lg:text-2xl dark:text-gray-400">
                 <div className="py-4">

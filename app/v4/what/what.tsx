@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLeaf, faDollarSign, faSolarPanel } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
+import { faDove, faDollarSign, faSolarPanel } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
 
 export default function What() {
     return (
@@ -13,7 +13,7 @@ export default function What() {
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-full bg-yellow-100 opacity-30"></div> {/* Background effect */}
                         <div className="relative z-10"> {/* Ensure text is on top */}
-                            <FontAwesomeIcon icon={faLeaf} className="text-5xl text-green-600 mb-4" /> {/* Increased icon size */}
+                            <FontAwesomeIcon icon={faDove} className="text-5xl text-green-500 mb-4" /> {/* Increased icon size */}
                             <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100"> {/* Increased font size */}
                                 What can I do for free?
                             </h3>
@@ -34,7 +34,7 @@ export default function What() {
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-full bg-purple-100 opacity-30"></div>
                         <div className="relative z-10">
-                            <FontAwesomeIcon icon={faDollarSign} className="text-5xl text-yellow-600 mb-4" /> {/* Increased icon size */}
+                            <FontAwesomeIcon icon={faDollarSign} className="text-5xl text-yellow-500 mb-4" /> {/* Increased icon size */}
                             <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100"> {/* Increased font size */}
                                 What if I can spend a little?
                             </h3>

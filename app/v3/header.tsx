@@ -82,15 +82,16 @@ export default function Header() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-9 premise">
-            {/* Title Section - Centered */}
+          <div className="grid grid-cols-1 lg:grid-cols-9 premise row-span-5">
+            {/* Title Section - Centered (1) */}
             <div className="title col-span-5 p-2 md:p-2 text-lg md:text-3xl leading-tight md:leading-normal text-center flex justify-center items-center">
               <div>
                 Climate change is hurting us all - <span className="italic text-green-500 inline-block">now</span>
               </div>
             </div>
-            {/* Care About Section - Left-aligned */}
-            <div className="care-about col-span-4 flex flex-col items-start p-2 md:p-4 text-lg md:text-2xl">
+
+            {/* Care About Section - Left-aligned (2) */}
+            <div className="care-about col-span-4 row-span-4 flex flex-col items-start p-2 md:p-4 text-lg md:text-2xl">
               <div className="text-left">Do you care about:</div>
               <ul className="care-about-list list-disc mt-2 text-base md:text-xl leading-relaxed md:leading-tight pl-8">
                 {questions.map((question: string, index: number) => (
@@ -100,28 +101,34 @@ export default function Header() {
                 ))}
               </ul>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-9">
-            {/* Video Section */}
-            <iframe
-              className="col-span-5 w-full aspect-video"
-              src={videoUrl}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            >
-              Your browser does not support the video tag.
-            </iframe>
+            {/* Video Section (3) */}
+            <div className="col-span-5 w-full aspect-video h-full bg-black row-span-5 flex justify-center">
+              <iframe
+                className="w-full aspect-video"
+                src={videoUrl}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              >
+                Your browser does not support the video tag.
+              </iframe>
+            </div>
 
-            {/* Exposition Section */}
-            <div className="flex flex-col col-span-4 h-full justify-center items-center">
+            {/* Exposition Section (4) */}
+            <div className="flex flex-col col-span-4 row-span-2 h-full justify-center items-center">
               <div className="exposition-warning p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-gray-900 h-full w-full text-center flex flex-col items-center justify-center">
                 {warningText}
-                {/* <Link href="#what" className="text-blue-500 underline hover:text-blue-700 font-bold pt-5">What can I do? &rarr;</Link> */}
-                <Link type="button" href="#what" className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 mt-10">What can I do? &rarr;</Link>
-              </div>            
+                <Link
+                  type="button"
+                  href="#what"
+                  className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-xl px-6 py-3 text-center me-2 mb-2 mt-10" // Changed text-lg to text-xl and adjusted padding
+                >
+                  What can I do? &rarr;
+                </Link>
+              </div>
             </div>
           </div>
+
         </>
       )}
     </div>

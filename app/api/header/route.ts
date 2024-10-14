@@ -57,7 +57,6 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 export async function GET(req: NextRequest) {
   try {
     const headerData = await getSheetsData();
-    console.log('headerData', headerData)
     return NextResponse.json(headerData, {
         headers: {
             'Access-Control-Allow-Origin': '*',  

@@ -5,7 +5,6 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { LocationContext } from '@/app/components/location-provider';
 import { routeToStateMap } from '@/app/us-datas'; 
-import { Spinner } from '@radix-ui/themes';
 
 enum Party {
   Democratic = 'democratic',
@@ -159,7 +158,7 @@ export default function Who() {
     
     return (
       <div className="flex justify-center items-center h-screen">
-        <Spinner />
+        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
       </div>
     );
   }

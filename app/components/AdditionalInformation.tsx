@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
-import { Spinner } from '@radix-ui/themes';
 
 interface ActionItem {
   action: string;
@@ -31,7 +30,11 @@ const ActionTable: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <Spinner/>; 
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+      </div>
+    )
   }
 
   return (

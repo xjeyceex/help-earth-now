@@ -78,7 +78,7 @@ export default function Header() {
     <div className="w-full" id="home">
       {loading ? ( // Show loading message while data is being fetched
         <div className="flex justify-center items-center h-screen">
-          <span className="text-xl">Loading...</span>
+          <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
         </div>
       ) : (
         <>

@@ -1,4 +1,4 @@
-import AdminPanel from '@/app/v3/admin/admin-panel';
+import AdminPanel from './admin-panel';
 import CookieConsent from '@/app/components/CookieConsent';
 import NavbarThree from '../navbar-v3';
 

@@ -29,51 +29,55 @@ export default function Header() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Set loading to true at the start
+      setLoading(true); // Start loading indicator
+  
       try {
-        if (location?.state) {
-          // Assuming API returns data based on state in JSON format
-          const response = await fetch(`/api/header`);
-          const mainData = await response.json();
+        if (!location?.state) return; // Exit early if state is not available
   
-          // Filter data based on the state or 'ALL'
-          const data = mainData.filter((item: HeaderData) => {
-            const stateKey = stateAbbreviations[location.state as keyof typeof stateAbbreviations];
+        // Fetch data from the API
+        const response = await fetch(`/api/header`);
+        const mainData = await response.json();
   
-            return stateKey === item.state || item.state === 'ALL';
-          });
-    
-          // Remove 'ALL' if there's more than one entry in data
-          const filteredData = data.length > 1 
-            ? data.filter((item: HeaderData) => item.state !== 'ALL') // Remove 'ALL' if there are multiple entries
-            : data; // Keep the original data if there's only one entry
+        // Map state key for filtering
+        const stateKey = stateAbbreviations[location.state as keyof typeof stateAbbreviations];
   
-          if (filteredData.length > 0) {
-            const selectedData = filteredData[0]; // Get the first matching data
-            setWarningText(selectedData.warning || warningText);
-            setQuestions([
-              selectedData.problem1,
-              selectedData.problem2,
-              selectedData.problem3,
-              selectedData.problem4,
-            ].filter(Boolean)); // Filter out empty problems
+        // Filter based on state and county
+        const data = mainData.filter((item: HeaderData) => {
+          const matchesState = stateKey === item.state || item.state === 'ALL';
+          const matchesCounty = location.county ? location.county === item.county || item.county === '' : true;
+          return matchesState && matchesCounty;
+        });
   
-            if (selectedData.link) {
-              const baseVideoUrl = `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`;
-              setVideoUrl(baseVideoUrl);
-            }
+        // Prioritize county data if available, otherwise use state data
+        let filteredData = [];
+        if (location.county) {
+          const countyData = data.filter((item: HeaderData) => item.county !== '');
+          filteredData = countyData.length > 0 ? countyData : data;
+        } else {
+          filteredData = data.filter((item: HeaderData) => item.state !== 'ALL');
+        }
+  
+        if (filteredData.length > 0) {
+          const selectedData = filteredData[0]; // Select the highest priority data
+          setWarningText(selectedData.warning || warningText);
+          setQuestions([selectedData.problem1, selectedData.problem2, selectedData.problem3, selectedData.problem4].filter(Boolean)); // Only include non-empty problems
+  
+          // Set video URL if available
+          if (selectedData.link) {
+            const videoUrl = `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`;
+            setVideoUrl(videoUrl);
           }
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setLoading(false); // Set loading to false once the fetch is done
+        setLoading(false); // End loading indicator
       }
     };
   
     fetchData();
-  }, [location?.state, location?.county]);
-
+  }, [location?.state, location?.county]); // Re-run only if state or county changes
+  
   return (
     <div className="w-full" id="home">
       {loading ? ( // Show loading message while data is being fetched

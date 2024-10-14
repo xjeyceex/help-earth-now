@@ -22,7 +22,7 @@ export default function Footer() {
                 </div>
             {/* Bottom Section */}
             <div className="mt-6 text-center text-sm border-t border-gray-700 pt-4">
-                <p>&copy; 2024 Our Name Here. All rights reserved.</p>
+                <p>&copy; 2024 Help You Help You. All rights reserved.</p>
             </div>
         </footer>
     );

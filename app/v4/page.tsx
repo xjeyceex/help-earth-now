@@ -1,5 +1,4 @@
 import Header from "./header";
-import What from "../v4/what/what";
 import NavbarThree from "./navbar-v4";
 import CookieConsent from "../components/CookieConsent";
 import Footer from "../components/Footer";
@@ -11,7 +10,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <NavbarThree/>
       <Header />
-      <What/>
       <CookieConsent/>
       <FixSocialIcon/>
       <Footer/>

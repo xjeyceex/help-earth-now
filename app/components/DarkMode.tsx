@@ -1,24 +1,27 @@
-// components/DarkModeToggle.tsx
 import React, { useEffect, useState } from 'react';
 
 const DarkModeToggle = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
 
-    // Load the theme from local storage or default to light mode
+    // Load the theme from local storage or default to dark mode
     useEffect(() => {
-        const savedMode = localStorage.getItem('darkMode');
-        if (savedMode) {
-            setIsDarkMode(savedMode === 'true');
-            document.documentElement.classList.toggle('dark', savedMode === 'true');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            setIsDarkMode(currentTheme === 'dark');
+            document.documentElement.classList.toggle('dark', currentTheme === 'dark'); // Apply the theme immediately
+        } else {
+            document.documentElement.classList.add('dark'); // Ensure dark mode is applied
         }
     }, []);
 
     // Function to toggle dark mode
     const toggleDarkMode = () => {
-        setIsDarkMode((prevMode) => !prevMode);
-        const newMode = !isDarkMode;
-        document.documentElement.classList.toggle('dark', newMode);
-        localStorage.setItem('darkMode', String(newMode)); // Save the mode in local storage
+        setIsDarkMode((prevMode) => {
+            const newMode = !prevMode;
+            document.documentElement.classList.toggle('dark', newMode); // Apply the theme
+            localStorage.setItem('theme', newMode ? 'dark' : 'light'); // Save the mode in local storage
+            return newMode; // Return the new mode state
+        });
     };
 
     return (

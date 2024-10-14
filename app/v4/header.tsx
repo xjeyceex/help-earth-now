@@ -10,9 +10,9 @@ export default function Header() {
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI");
   const [warningText, setWarningText] = useState("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
   const [questions, setQuestions] = useState<string[]>([
-    'Rising temperatures?',
-    'Extreme weather events affecting communities?',
-    'The potential increase in insurance premiums due to climate-related risks?',
+    'Rising temperatures',
+    'Extreme weather events affecting communities',
+    'The potential increase in insurance premiums due to climate-related risks',
   ]);
   const [loading, setLoading] = useState(true); // Loading state
 

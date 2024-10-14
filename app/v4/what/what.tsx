@@ -21,7 +21,7 @@ export default function What() {
                                 Share this site with others
                                 <br />
                                 <Link href='/v4/who'>
-                                    <span className="text-blue-500 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-400 cursor-pointer text-xl font-bold"> {/* Increased font size for link */}
+                                    <span className="text-blue-500 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-400 cursor-pointer text-2xl font-bold"> {/* Increased font size for link */}
                                         Vote for people who care &rarr;
                                     </span>
                                 </Link>

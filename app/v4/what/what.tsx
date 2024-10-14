@@ -20,7 +20,7 @@ export default function What() {
                             <p className="text-2xl text-gray-700 dark:text-gray-300 mt-4"> {/* Increased paragraph font size */}
                                 Share this site with others
                                 <br />
-                                <Link href='/who'>
+                                <Link href='/v4/who'>
                                     <span className="text-blue-500 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-400 cursor-pointer text-xl font-bold"> {/* Increased font size for link */}
                                         Vote for people who care &rarr;
                                     </span>

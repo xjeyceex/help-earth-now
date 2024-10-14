@@ -141,10 +141,10 @@ export default function NavbarThree() {
             <Link href="/v4" className={linkClasses('/v4')}>
               Home
             </Link>
-            <Link href="/about" className={linkClasses('/about')}>
+            <Link href="/v4/about" className={linkClasses('v4/about')}>
               About Us
             </Link>
-            <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+            <Link href={`/v4/learn-more`} className={linkClasses(`v4/learn-more`)}>
               Learn More
             </Link>
             <DarkModeToggle/>
@@ -193,10 +193,10 @@ export default function NavbarThree() {
           <Link href="/v4" className={linkClasses('/v4')}>
             Home
           </Link>
-          <Link href="/about" className={linkClasses('/about')}>
+          <Link href="/v4/about" className={linkClasses('v4/about')}>
             About Us
           </Link>
-          <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+          <Link href={`/v4/learn-more`} className={linkClasses(`v4/learn-more`)}>
             Learn More
           </Link>
           {/* <Link href="//what" className={linkClasses('//what')}>

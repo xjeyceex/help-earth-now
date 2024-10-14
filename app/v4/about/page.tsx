@@ -1,6 +1,6 @@
-import BackButton from "../components/BackButton";
-import FeedbackButton from "../components/FeedBack";
-import NavbarThree from "../v3/navbar-v3";
+import BackButton from "../../components/BackButton";
+import FeedbackButton from "../../components/FeedBack";
+import NavbarThree from "../navbar-v4";
 
 export default function AboutUsPage() {
     return (

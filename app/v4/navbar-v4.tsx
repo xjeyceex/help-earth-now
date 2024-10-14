@@ -6,7 +6,7 @@ import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import DarkModeToggle from '../components/DarkMode';
 
@@ -99,9 +99,10 @@ export default function NavbarThree() {
               />
             </Link>
           </div>
-          <div className="flex items-center">
-            <p className="mr-1 text-xs md:text-sm text-white">
-              Location: {location?.county
+          <div className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="text-green-400 mr-2" />
+            <p className="text-xs md:text-sm text-white flex-grow">
+              {location?.county
                 ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
                 : location?.state
                 ? stateAbbreviations[location.state] // Show state abbreviation only
@@ -109,12 +110,12 @@ export default function NavbarThree() {
             </p>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center justify-center w-5 h-5 bg-gray-600 text-white text-xs rounded-full hover:bg-blue-700 transition"
+              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300"
+              aria-label="Edit Location"
             >
               <FontAwesomeIcon icon={faPen} className="text-xs" />
             </button>
           </div>
-          
           {/* Hamburger button for small screens */}
           <div className="md:hidden flex gap-5">
             <DarkModeToggle/>
@@ -228,9 +229,9 @@ export default function NavbarThree() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 px-4">
           <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-xs sm:max-w-md flex flex-col items-center">
-            <h2 className="text-lg font-semibold mb-4">Update Location</h2>
+            <h2 className="text-lg font-semibold mb-4 dark:text-black">Update Location</h2>
             <div className="w-full mb-4">
               <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">State</label>
               <select

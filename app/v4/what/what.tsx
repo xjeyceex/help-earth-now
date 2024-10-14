@@ -47,7 +47,7 @@ export default function What() {
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-full bg-purple-100 opacity-30"></div>
                         <div className="relative z-10">
-                            <FontAwesomeIcon icon={faSolarPanel} className="text-5xl text-purple-600 mb-4" /> {/* Increased icon size */}
+                            <FontAwesomeIcon icon={faSolarPanel} className="text-5xl text-cyan-600 mb-4" /> {/* Increased icon size */}
                             <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100"> {/* Increased font size */}
                                 What if I can spend more?
                             </h3>

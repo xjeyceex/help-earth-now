@@ -89,7 +89,7 @@ export default function NavbarThree() {
         <div className="container mx-auto flex items-center justify-between px-3 py-0">
           {/* Brand / Logo */}
           <div className="sm:block">
-            <Link href="/">
+            <Link href="/v4">
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
@@ -137,7 +137,7 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/" className={linkClasses('/')}>
+            <Link href="/v4" className={linkClasses('/v4')}>
               Home
             </Link>
             <Link href="/about" className={linkClasses('/about')}>
@@ -165,10 +165,10 @@ export default function NavbarThree() {
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                    <Link href="//content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="/content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Content Management
                     </Link>
-                    <Link href="//admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Admin Panel
                     </Link>
                     <Link
@@ -189,7 +189,7 @@ export default function NavbarThree() {
           <button onClick={toggleMenu} className="text-white self-end text-lg">
             ✕
           </button>
-          <Link href="/" className={linkClasses('/')}>
+          <Link href="/v4" className={linkClasses('/v4')}>
             Home
           </Link>
           <Link href="/about" className={linkClasses('/about')}>

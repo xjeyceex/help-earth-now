@@ -95,6 +95,7 @@ export default function NavbarThree() {
                 alt="MyApp Logo"
                 width={70} 
                 height={70} 
+                priority
               />
             </Link>
           </div>

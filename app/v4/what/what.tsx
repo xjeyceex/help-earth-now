@@ -5,7 +5,7 @@ import { faLeaf, faDollarSign, faSolarPanel } from '@fortawesome/free-solid-svg-
 export default function What() {
     return (
         <>
-            <div className="w-full max-w-7xl mx-auto py-12" id='what'>
+            <div className="w-full max-w-7xl mx-auto py-12 lg:px-16" id='what'>
                 <h2 className="text-5xl text-center dark:text-gray-200 mb-12 font-bold p-4"> {/* Increased title font size */}
                     What Can I Do?
                 </h2>

@@ -86,7 +86,7 @@ export default function Header() {
             {/* Title Section - Centered */}
             <div className="title col-span-5 p-2 md:p-2 text-lg md:text-3xl leading-tight md:leading-normal text-center flex justify-center items-center">
               <div>
-                Climate change is hurting us <span className="font-bold text-red-500 inline-block">all</span> - <span className="italic text-green-500 inline-block">now</span>
+                Climate change is hurting us all - <span className="italic text-green-500 inline-block">now</span>
               </div>
             </div>
             {/* Care About Section - Left-aligned */}
@@ -117,10 +117,9 @@ export default function Header() {
             <div className="flex flex-col col-span-4 h-full justify-center items-center">
               <div className="exposition-warning p-6 text-xl md:text-3xl lg:text-4xl bg-yellow-400 text-gray-900 h-full w-full text-center flex flex-col items-center justify-center">
                 {warningText}
-              </div>
-              <div className="exposition-link p-6 lg:flex hidden text-xl md:text-3xl lg:text-4xl bg-green-400 text-white h-full w-full text-center flex-col items-center justify-start">
-                <Link href="#what" className="text-blue-500 underline hover:text-blue-700 font-bold">What can I do? &rarr;</Link>
-              </div>
+                {/* <Link href="#what" className="text-blue-500 underline hover:text-blue-700 font-bold pt-5">What can I do? &rarr;</Link> */}
+                <Link type="button" href="#what" className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 mt-10">What can I do? &rarr;</Link>
+              </div>            
             </div>
           </div>
         </>

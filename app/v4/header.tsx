@@ -22,10 +22,19 @@ export default function Header() {
     low: string[];
     high: string[];
   }>({
-    free: [],
-    low: [],
-    high: []
-  });
+    free: [
+      "Burn fewer things: fewer fires, drive less, etc.",
+      "Vote for people who care",
+      "Share this site with others"
+    ],
+    low: [
+      "Insulate your doors & windows better"
+    ],
+    high: [
+      "Make next car electric or hybrid",
+      "Replace gas water heater with electric"
+    ]
+});
 
   const [loading, setLoading] = useState(true); // Loading state
 

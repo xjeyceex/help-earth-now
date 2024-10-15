@@ -51,8 +51,10 @@ export default function Header() {
         // Prioritize county data if available, otherwise use state data
         let filteredData = [];
         if (location.county) {
-          const countyData = data.filter((item: HeaderData) => item.county !== '');
-          filteredData = countyData.length > 0 ? countyData : data;
+          const countyData = data.filter((item: HeaderData) => 
+            item.county !== '' && item.state !== 'ALL'
+          );
+          filteredData = countyData.length > 0 ? countyData : data.filter((item: HeaderData) => item.state !== 'ALL');
         } else {
           filteredData = data.filter((item: HeaderData) => item.state !== 'ALL');
         }

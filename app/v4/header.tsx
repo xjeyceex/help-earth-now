@@ -69,12 +69,15 @@ export default function Header() {
   
         let filteredData = [];
         if (location.county) {
-          const countyData = data.filter((item: HeaderData) => item.county !== '');
-          filteredData = countyData.length > 0 ? countyData : data;
+          const countyData = data.filter((item: HeaderData) => 
+            item.county !== '' && item.state !== 'ALL'
+          );
+          filteredData = countyData.length > 0 ? countyData : data.filter((item: HeaderData) => item.state !== 'ALL');
         } else {
           filteredData = data.filter((item: HeaderData) => item.state !== 'ALL');
         }
-  
+
+        console.log('filteredData', filteredData)
         if (filteredData.length > 0) {
           const selectedData = filteredData[0];
           setWarningText(selectedData.warning || warningText);

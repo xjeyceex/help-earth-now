@@ -56,12 +56,11 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(learnMoreData, {
       headers: {
-        'Cache-Control': 'public, max-age=5, must-revalidate',
-        'Expires': '0',
-        'Pragma': 'no-cache',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
+        'Cache-Control': 'no-store, max-age=0, must-revalidate', // Ensure fresh data
+        'Vercel-Cache-Control': 'no-store', // Force Vercel's edge not to cache
       },
     });
   } catch (error) {

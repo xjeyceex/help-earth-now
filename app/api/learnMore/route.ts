@@ -1,5 +1,3 @@
-// app/api/learnMore/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
@@ -52,7 +50,6 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   }
 };
 
-// Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
     const learnMoreData = await getSheetsData();
@@ -61,9 +58,10 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate', // Disable caching
-        Expires: '0',
-        Pragma: 'no-cache',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Expires': '0',
+        'Pragma': 'no-cache',
+        'x-vercel-cache': 'MISS', // Ensure Vercel doesn't cache the response
       },
     });
   } catch (error) {

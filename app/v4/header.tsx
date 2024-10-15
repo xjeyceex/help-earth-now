@@ -77,7 +77,6 @@ export default function Header() {
           filteredData = data.filter((item: HeaderData) => item.state !== 'ALL');
         }
 
-        console.log('filteredData', filteredData)
         if (filteredData.length > 0) {
           const selectedData = filteredData[0];
           setWarningText(selectedData.warning || warningText);

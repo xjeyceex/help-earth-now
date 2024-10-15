@@ -18,6 +18,9 @@ const ActionTable: React.FC = () => {
       try {
         const response = await fetch('/api/learnMore', {
           cache: 'no-store', // Ensures fresh data is fetched
+          next : {
+            revalidate: 5
+          }
         });
         
         const data = await response.json(); // Parse the response data directly
@@ -32,7 +35,6 @@ const ActionTable: React.FC = () => {
     fetchActionItems();
   }, []);
   
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">

@@ -53,15 +53,15 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 export async function GET(req: NextRequest) {
   try {
     const learnMoreData = await getSheetsData();
+
     return NextResponse.json(learnMoreData, {
       headers: {
+        'Cache-Control': 'public, max-age=5, must-revalidate',
+        'Expires': '0',
+        'Pragma': 'no-cache',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-        'Expires': '0',
-        'Pragma': 'no-cache',
-        'x-vercel-cache': 'MISS', // Ensure Vercel doesn't cache the response
       },
     });
   } catch (error) {

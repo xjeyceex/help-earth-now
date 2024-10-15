@@ -16,7 +16,11 @@ const ActionTable: React.FC = () => {
   useEffect(() => {
     const fetchActionItems = async () => {
       try {
-        const response = await fetch('/api/learnMore');
+        const response = await fetch('/api/learnMore',{
+          next: {
+            revalidate: 5,
+          },
+        });
         const data = await response.json();
         setActionItems(data);
         setLoading(false);

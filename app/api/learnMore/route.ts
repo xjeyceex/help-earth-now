@@ -59,8 +59,8 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Cache-Control': 'no-store, max-age=0, must-revalidate', // Ensure fresh data
-        'Vercel-Cache-Control': 'no-store', // Force Vercel's edge not to cache
+        'Cache-Control': 'public, max-age=10, must-revalidate', // Cache for 10 seconds
+        'Vercel-Cache-Control': 'max-age=10', // Vercel-specific cache control
       },
     });
   } catch (error) {

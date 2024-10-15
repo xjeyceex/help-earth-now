@@ -18,7 +18,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   });
 
   const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient as any});
+  const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
   const range = 'Additional Pages!B1:D'; // Adjust the range as needed
 
@@ -41,7 +41,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
     // Map each row into an object using headers as keys
     const formattedData: SheetRow[] = data.map((row) => {
       return headers.reduce((acc: SheetRow, header: string, i: number) => {
-        acc[header] = row[i] || ''; 
+        acc[header] = row[i] || '';
         return acc;
       }, {} as SheetRow);
     });
@@ -61,8 +61,11 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate', // Disable caching
+        Expires: '0',
+        Pragma: 'no-cache',
       },
-    });  
+    });
   } catch (error) {
     console.error('Error fetching learnMore data:', error);
     return NextResponse.json({ error: 'Failed to fetch learnMore data' }, { status: 500 });

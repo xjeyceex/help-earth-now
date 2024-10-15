@@ -16,22 +16,22 @@ const ActionTable: React.FC = () => {
   useEffect(() => {
     const fetchActionItems = async () => {
       try {
-        const response = await fetch('/api/learnMore',{
-          next: {
-            revalidate: 5,
-          },
+        const response = await fetch('/api/learnMore', {
+          cache: 'no-store', // Ensures fresh data is fetched
         });
-        const data = await response.json();
-        setActionItems(data);
-        setLoading(false);
+        
+        const data = await response.json(); // Parse the response data directly
+        setActionItems(data); // Set the action items with fetched data
+        setLoading(false); // Set loading state to false once data is loaded
       } catch (error) {
         console.error('Error fetching action items:', error);
-        setLoading(false);
+        setLoading(false); // Set loading state to false in case of error
       }
     };
-
+  
     fetchActionItems();
   }, []);
+  
 
   if (loading) {
     return (

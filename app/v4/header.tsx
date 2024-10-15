@@ -65,9 +65,7 @@ export default function Header() {
       try {
         if (!location?.state) return;
   
-        const response = await fetch(`/api/header`, {
-          next: { revalidate: 10 },
-        });
+        const response = await fetch(`/api/header`);
         const mainData = await response.json();
   
         const stateKey = stateAbbreviations[location.state as keyof typeof stateAbbreviations];

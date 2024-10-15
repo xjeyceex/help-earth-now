@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
+export const fetchCache = 'force-no-store';
+
 interface SheetRow {
   [key: string]: string;
 }

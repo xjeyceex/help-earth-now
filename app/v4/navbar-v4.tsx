@@ -100,8 +100,8 @@ export default function NavbarThree() {
             </Link>
           </div>
           <div
-            onClick={() => setIsModalOpen(true)} // Use an arrow function here
-            className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer" // Added cursor-pointer for better UX
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group" // Added group class
           >
             <FontAwesomeIcon icon={faMapMarkerAlt} className="text-green-400 mr-2" />
             <p className="text-xs md:text-sm text-white flex-grow">
@@ -112,8 +112,8 @@ export default function NavbarThree() {
                 : 'United States'}
             </p>
             <button
-              onClick={() => setIsModalOpen(true)} // This is fine
-              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300"
+              onClick={() => setIsModalOpen(true)}
+              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300 group-hover:bg-blue-700" // Added group-hover
               aria-label="Edit Location"
             >
               <FontAwesomeIcon icon={faPen} className="text-xs" />

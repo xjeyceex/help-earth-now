@@ -16,23 +16,19 @@ const ActionTable: React.FC = () => {
   useEffect(() => {
     const fetchActionItems = async () => {
       try {
-        const response = await fetch(`/api/learnMore?ts=${Date.now()}`, {
-          cache: 'no-store', // Ensures fresh data is fetched
-        });
-  
-        const data = await response.json(); // Parse the response data directly
-        setActionItems(data); // Set the action items with fetched data
-        setLoading(false); // Set loading state to false once data is loaded
+        const response = await fetch('/api/learnMore');
+        const data = await response.json();
+        setActionItems(data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching action items:', error);
-        setLoading(false); // Set loading state to false in case of error
+        setLoading(false);
       }
     };
-  
+
     fetchActionItems();
   }, []);
-  
-  
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">

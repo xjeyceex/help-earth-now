@@ -1,7 +1,7 @@
+// app/api/learnMore/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
-
-export const fetchCache = 'force-no-store';
 
 interface SheetRow {
   [key: string]: string;
@@ -18,7 +18,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   });
 
   const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient as any });
+  const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
   const range = 'Additional Pages!B1:D'; // Adjust the range as needed
 
@@ -41,7 +41,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
     // Map each row into an object using headers as keys
     const formattedData: SheetRow[] = data.map((row) => {
       return headers.reduce((acc: SheetRow, header: string, i: number) => {
-        acc[header] = row[i] || '';
+        acc[header] = row[i] || ''; 
         return acc;
       }, {} as SheetRow);
     });
@@ -52,19 +52,17 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   }
 };
 
+// Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
     const learnMoreData = await getSheetsData();
-
     return NextResponse.json(learnMoreData, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Cache-Control': 'public, max-age=10, must-revalidate', // Cache for 10 seconds
-        'Vercel-Cache-Control': 'max-age=10', // Vercel-specific cache control
       },
-    });
+    });  
   } catch (error) {
     console.error('Error fetching learnMore data:', error);
     return NextResponse.json({ error: 'Failed to fetch learnMore data' }, { status: 500 });

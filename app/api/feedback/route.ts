@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   const { feedback } = await request.json();
 
   if (!feedback) {
-    return NextResponse.json({ message: "Feedback is required" }, { status: 400 });
+    return NextResponse.json({ message: 'Feedback is required' }, { status: 400 });
   }
 
   try {
@@ -14,24 +14,29 @@ export async function POST(request: Request) {
       'jcmiguel.beltran@gmail.com',
     ];
 
-    // Create transporter for sending emails anonymously
+    // Create a transporter object using nodemailer
     const transporter = nodemailer.createTransport({
       service: 'Gmail', // or any other email service provider
       auth: {
-        user: process.env.EMAIL_USER, // your email for sending
-        pass: process.env.EMAIL_PASS, // your email password
+        user: process.env.EMAIL_USER, // Sender email
+        pass: process.env.EMAIL_PASS, // Sender email password
       },
     });
 
-    // Send feedback email with a generic "no-reply" sender
+    // Send the feedback email
     await transporter.sendMail({
-      from: 'no-reply@helpearthnow.org', // Set this to something like no-reply
-      to: recipients.join(', '), // Send to all recipients
-      subject: 'Feedback', // Email subject
-      text: `${feedback}`, // Email body with the feedback content
+      from: '"Help Earth Now" <no-reply@helpearthnow.org>', // Improved sender format
+      to: recipients, // Recipients array
+      subject: '🌍 New Feedback Received', // Add an engaging subject
+      html: `
+        <h3>You've received new feedback:</h3>
+        <p>${feedback}</p>
+        <br/>
+        <p style="font-size: 0.9em;">This message was sent anonymously via Help Earth Now's feedback system.</p>
+      `, // Use HTML for better formatting
     });
 
-    return NextResponse.json({ message: 'Feedback sent successfully' });
+    return NextResponse.json({ message: 'Feedback sent successfully!' });
   } catch (error) {
     console.error('Error sending feedback:', error);
     return NextResponse.json({ message: 'Error sending feedback' }, { status: 500 });

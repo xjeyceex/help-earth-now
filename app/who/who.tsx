@@ -60,41 +60,9 @@ const fetchCandidateData = async (state: string) => {
   }
 };
 
-const getCandidatesForState = (state: string, candidates: CandidateGroup[]) => {
-  return candidates
-    .map(group => {
-      const stateSpecificCandidates = group.items.filter(candidate =>
-        candidate.state.toLowerCase() === state.toLowerCase()
-      );
-
-      const allCandidates = group.items.filter(candidate =>
-        candidate.state === 'All'
-      );
-
-      const combinedCandidates = [
-        ...stateSpecificCandidates,
-        ...allCandidates.filter(allCandidate => 
-          !stateSpecificCandidates.some(stateCandidate => stateCandidate.name === allCandidate.name)
-        )
-      ];
-
-      const sortedCandidates = combinedCandidates.sort((a, b) => {
-        if (a.party === 'democratic' && b.party !== 'democratic') return -1;
-        if (a.party !== 'democratic' && b.party === 'democratic') return 1;
-        return 0;
-      });
-
-      return {
-        ...group,
-        items: sortedCandidates,
-      };
-    })
-    .filter(group => group.items.length > 0);
-};
-
 export default function Who() {
   const { location } = useContext(LocationContext) || {};
-  const [filteredCandidates, setFilteredCandidates] = useState<CandidateGroup[]>([]);
+  const [candidates, setCandidates] = useState<CandidateGroup[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -144,8 +112,8 @@ export default function Who() {
             { group: 'House of Representatives', items: hor },
           ];
 
-          const stateCandidates = getCandidatesForState(stateAbbreviation, combinedData);
-          setFilteredCandidates(stateCandidates);
+          // Directly set the combined data without filtering
+          setCandidates(combinedData);
         }
       }
       setLoading(false);
@@ -155,7 +123,6 @@ export default function Who() {
   }, [location]);
 
   if (loading) {
-    
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
@@ -166,8 +133,8 @@ export default function Who() {
   return (
     <>
       <div className="grid grid-cols-3 who-help" id="who">
-        {filteredCandidates.length > 0 ? (
-          filteredCandidates.map((group, groupIndex) => (
+        {candidates.length > 0 ? (
+          candidates.map((group, groupIndex) => (
             <React.Fragment key={group.group}>
               <div
                 className={`flex items-center justify-center text-center who-help-${groupIndex + 1} p-4 md:p-8 border border-gray-300`} 

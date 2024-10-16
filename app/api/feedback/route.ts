@@ -11,7 +11,8 @@ export async function POST(request: Request) {
   try {
     const recipients = [
       'feedback@helpearthnow.org',
-      'jcmiguel.beltran@gmail.com',
+      'feedback@helpyouhelpyou.org',
+      'jcmiguel.beltran@gmail.com'
     ];
 
     // Create a transporter object using nodemailer

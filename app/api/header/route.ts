@@ -57,12 +57,15 @@ export async function GET(req: NextRequest) {
   try {
     const headerData = await getSheetsData();
     return NextResponse.json(headerData, {
-        headers: {
-            'Access-Control-Allow-Origin': '*',  
-            'Access-Control-Allow-Methods': 'GET, POST',
-            'Access-Control-Allow-Headers': 'Content-Type',
-        },
-        });
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Cache-Control': 'no-cache, no-store, must-revalidate', // Add no-cache headers
+        'Pragma': 'no-cache', // HTTP 1.0
+        'Expires': '0', // Proxies
+      },
+    });
   } catch (error) {
     console.error('Error fetching header data:', error);
     return NextResponse.json({ error: 'Failed to fetch header data' }, { status: 500 });

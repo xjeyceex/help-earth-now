@@ -69,6 +69,9 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
+        'Cache-Control': 'no-cache, no-store, must-revalidate', // Add no-cache headers
+        'Pragma': 'no-cache', // HTTP 1.0
+        'Expires': '0', // Proxies
       },
     });
   } catch (error) {

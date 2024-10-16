@@ -57,7 +57,7 @@ const WhyItMatters: React.FC = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="border dark:border-gray-700 border-gray-300 relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-gray-900 transform cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-black hover:scale-105 transition-all duration-300 ease-in-out" // Animation on hover
+              className="border dark:border-gray-800 border-gray-300 relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-gray-900 transform cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-black hover:scale-105 transition-all duration-300 ease-in-out" // Animation on hover
               onClick={() => handleCardClick(item)}
             >
               <img

@@ -1,5 +1,3 @@
-// app/api/governors/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
@@ -8,7 +6,7 @@ interface SheetRow {
 }
 
 // Fetching data from Google Sheets
-const getSheetsData = async (): Promise<SheetRow[]> => {
+const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -18,7 +16,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   });
 
   const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient as any});
+  const sheets = google.sheets({ version: 'v4', auth: authClient } as any);
 
   const range = 'Governor!A3:F'; // Adjust the range as needed
 
@@ -38,14 +36,19 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
     const headers: string[] = rows[0]; // First row as headers
     const data: string[][] = rows.slice(1); // Remaining rows as data
 
-    // Map each row into an object using headers as keys
-    const formattedData: SheetRow[] = data.map((row) => {
-      return headers.reduce((acc: SheetRow, header: string, i: number) => {
-        acc[header] = row[i] || ''; 
-        return acc;
-      }, {} as SheetRow);
-    });
-    
+    // Map each row into an object using headers as keys and filter by state if provided
+    const formattedData: SheetRow[] = data
+      .filter(row => {
+        const stateIndex = headers.indexOf('state'); // Assuming 'state' is the header for the state column
+        return state ? (row[stateIndex]?.toLowerCase() === state.toLowerCase()) : true;
+      })
+      .map((row) => {
+        return headers.reduce((acc: SheetRow, header: string, i: number) => {
+          acc[header] = row[i] || '';
+          return acc;
+        }, {} as SheetRow);
+      });
+
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
@@ -60,17 +63,20 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
-    try {
-      const govData = await getSheetsData();
-      return NextResponse.json(govData, {
-          headers: {
-              'Access-Control-Allow-Origin': '*',  
-              'Access-Control-Allow-Methods': 'GET, POST',
-              'Access-Control-Allow-Headers': 'Content-Type',
-          },
-          });
-    } catch (error) {
-      console.error('Error fetching gov data:', error);
-      return NextResponse.json({ error: 'Failed to fetch gov data' }, { status: 500 });
-    }
+  try {
+    const url = new URL(req.url);
+    const state = url.searchParams.get('state') || undefined; // Convert null to undefined
+    const govData = await getSheetsData(state); // Pass state to filter during fetch
+
+    return NextResponse.json(govData, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    });
+  } catch (error) {
+    console.error('Error fetching gov data:', error);
+    return NextResponse.json({ error: 'Failed to fetch gov data' }, { status: 500 });
   }
+}

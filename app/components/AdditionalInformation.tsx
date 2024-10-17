@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
+import Link from 'next/link';
 
 interface ActionItem {
   action: string;
@@ -58,14 +59,14 @@ const ActionTable: React.FC = () => {
             <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
               <h3 className="text-xl font-bold text-green-600 dark:text-green-400">{item.action}</h3>
               <p className="text-gray-700 dark:text-gray-300 mt-2">{item.description}</p>
-              <a
+              <Link
                 href={item.link}
                 className="text-blue-500 hover:underline mt-4 inline-block dark:text-blue-300"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
           ))}
         </div>

@@ -152,13 +152,13 @@ const WhyItMatters: React.FC = () => {
           </div>
 
           {/* Navigation Arrows */}
-          <div className="absolute top-1/2 transform -translate-y-1/2 left-0">
-            <button className="text-white bg-gray-900 hover:bg-gray-700 p-4 rounded-full text-3xl" onClick={scrollLeft}>
+          <div className="absolute top-1/2 transform -translate-y-1/2 left-5">
+            <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollLeft}>
               &#8249;
             </button>
           </div>
-          <div className="absolute top-1/2 transform -translate-y-1/2 right-0">
-            <button className="text-white bg-gray-900 hover:bg-gray-700 p-4 rounded-full text-3xl" onClick={scrollRight}>
+          <div className="absolute top-1/2 transform -translate-y-1/2 right-5">
+            <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollRight}>
               &#8250;
             </button>
           </div>
@@ -199,6 +199,7 @@ const WhyItMatters: React.FC = () => {
         </div>
       )}
     </section>
+
   );
 };
 

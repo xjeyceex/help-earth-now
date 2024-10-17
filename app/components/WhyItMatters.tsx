@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image'; // Import Image from next/image
 import React, { useState, useRef, useEffect } from 'react';
 
 const WhyItMatters: React.FC = () => {
@@ -64,9 +65,7 @@ const WhyItMatters: React.FC = () => {
     },
   ];  
 
-  // Create a duplicated array for infinite scrolling
   const duplicatedItems = [...items, ...items];
-  
   const cardContainerRef = useRef<HTMLDivElement>(null);
 
   const handleCardClick = (item: { title: string; description: string; image: string; moreInfo: string; learnMore: string }) => {
@@ -92,19 +91,15 @@ const WhyItMatters: React.FC = () => {
     }
   };
 
-  // Handle scroll position reset to achieve infinite effect
   useEffect(() => {
     const container = cardContainerRef.current;
 
     const handleScroll = () => {
       if (container) {
         const { scrollLeft, scrollWidth, clientWidth } = container;
-        // If scrolled to the start of the second set of items
         if (scrollLeft >= scrollWidth / 2) {
           container.scrollLeft = scrollLeft - scrollWidth / 2;
-        }
-        // If scrolled to the start of the first set of items
-        else if (scrollLeft < 0) {
+        } else if (scrollLeft < 0) {
           container.scrollLeft = scrollWidth / 2 + scrollLeft;
         }
       }
@@ -128,9 +123,7 @@ const WhyItMatters: React.FC = () => {
           Climate change is affecting every corner of the planet, from extreme weather events to rising sea levels. By taking action now, we can slow down these effects and protect our future.
         </p>
 
-        {/* Horizontal Scrolling Cards */}
         <div className="mt-6 relative overflow-hidden p-4">
-          {/* Cards container */}
           <div ref={cardContainerRef} className="flex space-x-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-4">
             {duplicatedItems.map((item, index) => (
               <div
@@ -138,9 +131,11 @@ const WhyItMatters: React.FC = () => {
                 className="min-w-[300px] snap-center border dark:border-gray-800 border-gray-300 relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-gray-900 cursor-pointer shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
                 onClick={() => handleCardClick(item)}
               >
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
+                  width={300}
+                  height={256} // Adjust height accordingly
                   className="w-full h-64 object-cover transition-transform duration-500 transform hover:scale-110"
                 />
                 <div className="relative p-6 text-gray-900 dark:text-gray-100">
@@ -151,7 +146,6 @@ const WhyItMatters: React.FC = () => {
             ))}
           </div>
 
-          {/* Navigation Arrows */}
           <div className="absolute top-1/2 transform -translate-y-1/2 left-5">
             <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollLeft}>
               &#8249;
@@ -165,41 +159,30 @@ const WhyItMatters: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal for detailed information */}
       {isOpen && (
-        <div
-          className="px-4 fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 transition-opacity duration-300 ease-in-out"
-          onClick={closeModal}  // Close modal when clicking outside
-        >
-          <div
-            className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 scale-100 max-w-5xl"
-            onClick={(e) => e.stopPropagation()}  // Prevent closing when clicking inside the modal
-          >
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white dark:bg-gray-800 max-w-lg mx-auto p-8 rounded-lg shadow-lg relative">
             <button
-              className="absolute top-3 right-3 text-gray-600 dark:text-gray-400"
               onClick={closeModal}
+              className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 text-2xl"
             >
-              &#10005;
+              &times;
             </button>
-            <img src={modalContent.image} alt={modalContent.title} className="w-full h-64 object-cover" />
-            <div className="p-8">
-              <h3 className="text-2xl font-semibold pb-4">{modalContent.title}</h3>
-              <p className="mt-2 text-gray-700 dark:text-gray-300">{modalContent.description}</p>
-              <p className="mt-4">{modalContent.moreInfo}</p>
-              <a
-                href={modalContent.learnMore}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500"
-              >
-                Learn More
-              </a>
-            </div>
+            <Image src={modalContent.image} alt={modalContent.title} width={600} height={400} className="w-full h-64 object-cover rounded-lg" />
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-4">{modalContent.title}</h3>
+            <p className="mt-2 text-gray-700 dark:text-gray-300">{modalContent.moreInfo}</p>
+            <Link
+              href={modalContent.learnMore}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              Learn More
+            </Link>
           </div>
         </div>
       )}
     </section>
-
   );
 };
 

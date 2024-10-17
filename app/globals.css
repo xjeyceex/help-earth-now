@@ -10,6 +10,16 @@ html {
   scroll-padding-top: 62px;
 }
 
+/* Add this to your global CSS */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari */
+}
+
+.scrollbar-hide {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer/Edge */
+}
+
 /* Premise */
 .premise .title {
   font-size: 4rem;

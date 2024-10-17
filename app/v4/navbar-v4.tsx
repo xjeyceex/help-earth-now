@@ -101,7 +101,7 @@ export default function NavbarThree() {
           </div>
           <div
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group" // Added group class
+            className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group m-5" // Added group class
           >
             <FontAwesomeIcon icon={faMapMarkerAlt} className="text-green-400 mr-2" />
             <p className="text-xs md:text-sm text-white flex-grow">

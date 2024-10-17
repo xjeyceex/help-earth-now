@@ -93,8 +93,8 @@ export default function NavbarThree() {
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={70} 
-                height={70} 
+                width={50} 
+                height={50} 
                 priority
               />
             </Link>

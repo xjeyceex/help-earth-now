@@ -14,6 +14,13 @@ const WhyItMatters: React.FC = () => {
   });
 
   const items = [
+    // {
+    //   image: '/article1.webp',
+    //   title: 'Water Cycle in Crisis: Climate Change Threatens Global Food Security',
+    //   description: 'Humanity has thrown the global water cycle off balance “for the first time in human history,” fueling a growing water disaster that will wreak havoc on economies, food production and lives, according to a landmark new report.',
+    //   moreInfo: "Decades of destructive land use and water mismanagement have collided with the human-caused climate crisis to put “unprecedented stress” on the global water cycle, said the report published Wednesday by the Global Commission on the Economics of Water, a group of international leaders and experts.The water cycle refers to the complex system by which water moves around the Earth. Water evaporates from the ground — including from lakes, rivers and plants — and rises into the atmosphere, forming large rivers of water vapor able to travel long distances, before cooling, condensing and eventually falling back to the ground as rain or snow. Disruptions to the water cycle are already causing suffering. Nearly 3 billion people face water scarcity. Crops are shriveling and cities are sinking as the groundwater beneath them dries out. The consequences will be even more catastrophic without urgent action. The water crisis threatens more than 50% of global food production and risks shaving an average of 8% off countries' GDPs by 2050, with much higher losses of up to 15% projected in low-income countries, the report found. 'For the first time in human history, we are pushing the global water cycle out of balance,” said Johan Rockström, co-chair of the Global Commission on the Economics of Water and a report author. “Precipitation, the source of all freshwater, can no longer be relied upon'",
+    //   learnMore: 'https://edition.cnn.com/2024/10/16/climate/global-water-cycle-off-balance-food-production?cid=ios_app',
+    // },
     {
       image: '/sea-level.jpg',
       title: 'Rising Sea Levels',

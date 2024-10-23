@@ -91,10 +91,10 @@ export default function NavbarThree() {
           <div className="sm:block">
             <Link href="/v4">
               <Image
-                src="/logo.png"
+                src="/logowhite.png"
                 alt="MyApp Logo"
-                width={50} 
-                height={50} 
+                width={200} 
+                height={200} 
                 priority
               />
             </Link>

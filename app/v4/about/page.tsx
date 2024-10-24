@@ -71,9 +71,7 @@ export default function AboutUsPage() {
                     <div className="bg-gradient-to-r from-green-400 to-blue-500 shadow-xl rounded-lg p-10 text-center text-white transition-transform transform hover:scale-105 duration-300">
                         <h2 className="text-3xl font-semibold mb-6">Join Us</h2>
                         <p className="text-lg leading-8 mb-6">
-                            Ready to make a difference? 🌱 It&apos;s as easy as downloading this app! Whether you&apos;re a seasoned climate warrior
-                            or just getting started, we need you. Let&apos;s build a greener future, one action at a time!
-                            And hey, we promise—no guilt trips, just actionable steps and good vibes.
+                        Ready to make a difference? 🌱  Connect with us on your favorite Social Media and tell your friends abuot us!   Whether you&apos;re a seasoned climate warrior or just getting started, we need you.  Let&apos;s build a greener future, one action at a time!  And hey, we promise, no guilt trips — just actionable steps and good vibes.
                         </p>
                     </div>
                 </section>

@@ -1,5 +1,5 @@
 import CookieConsent from "@/app/components/CookieConsent";
-import NavbarThree from "../v3/navbar-v3";
+import NavbarThree from "../v4/navbar-v4";
 import ActionTable from "../components/AdditionalInformation";
 import FeedbackButton from "../components/FeedBack";
 import BackButton from "../components/BackButton";

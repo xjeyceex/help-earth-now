@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Climate change is hurting us all",
-  description: "Be informed of current political agenda relevant to you and your location",
+  description: "Stay informed about climate change initiatives.",
 };
 
 interface RootLayoutProps {

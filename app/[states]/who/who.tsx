@@ -5,7 +5,6 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import { LocationContext } from '@/app/components/location-provider';
 import { routeToStateMap } from '@/app/us-datas'; 
-import { Spinner } from '@radix-ui/themes';
 
 enum Party {
   Democratic = 'democratic',
@@ -147,11 +146,11 @@ export default function Who() {
   }, [location]);
 
   if (loading) {
-    return <Spinner />;
-  }
-
-  if (!location || !location.state) {
-    return <div>Loading location data...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+      </div>
+    );  
   }
 
   return (
@@ -168,22 +167,27 @@ export default function Who() {
               </div>
 
               {group.items.map((candidate, itemIndex) => {
-                const partyColor = candidate.party === 'democratic' ? '#0033A0' : '#C8102E';
-
                 return (
                   <div
                     key={`${group.group}-${candidate.name}-${itemIndex}`}
-                    className={`col-span-2 p-4 md:p-8 border border-gray-300`} 
-                    style={{ backgroundColor: partyColor, color: 'white' }} 
+                    className={`col-span-2 p-4 md:p-8 border border-gray-300 ${
+                      candidate.party === Party.Democratic ? 'bg-blue-600 text-white' :
+                      candidate.party === Party.Republican ? 'bg-red-600 text-white' :
+                      'bg-gray-400 text-gray-900'  // For Independent party
+                    }`}
                   >
-                    {candidate.name} - {' '}
+                    <span className="italic">{candidate.name}</span>: {' '}
                     {candidate.description || ""}
                     {candidate.link && (
                       <>
                         {' - '}
                         <Link
                           href={candidate.link}
-                          className="inline-flex items-center text-blue-300 hover:text-blue-500 underline transition duration-200"
+                          className={`inline-flex items-center ${
+                            candidate.party === Party.Independent 
+                              ? 'text-blue-900 hover:text-blue-700' 
+                              : 'text-blue-300 hover:text-blue-500'  
+                          } underline transition duration-200`}
                           target="_blank"
                         >
                           Learn More 

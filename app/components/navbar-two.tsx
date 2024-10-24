@@ -78,6 +78,7 @@ export default function NavbarTwo() {
                 alt="MyApp Logo"
                 width={48}  // Set the appropriate width
                 height={48} // Set the appropriate height
+                priority
               />
             </Link>
           </div>

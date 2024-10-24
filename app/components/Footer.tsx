@@ -1,8 +1,6 @@
-import Link from "next/link";
-
 export default function Footer() {
     return (
-        <footer className="bg-gray-800 text-white py-6 px-4 w-full">
+        <footer className="bg-gray-900 text-white py-6 px-4 w-full">
                 {/* Email Registration Section */}
                 <div className="flex flex-col items-center justify-center">
                     <p className="text-sm mb-2 text-center">
@@ -11,7 +9,7 @@ export default function Footer() {
                     <form className="flex space-x-2">
                         <input
                             type="email"
-                            className="p-2 rounded text-gray-800 w-52"
+                            className="p-2 rounded text-gray-900 w-52"
                             placeholder="Enter your email"
                         />
                         <button
@@ -24,7 +22,7 @@ export default function Footer() {
                 </div>
             {/* Bottom Section */}
             <div className="mt-6 text-center text-sm border-t border-gray-700 pt-4">
-                <p>&copy; 2024 -Placeholder-. All rights reserved.</p>
+                <p>&copy; 2024 Help You Help You. All rights reserved.</p>
             </div>
         </footer>
     );

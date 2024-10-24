@@ -1,7 +1,7 @@
 import CookieConsent from "@/app/components/CookieConsent";
-import NavbarThree from "../v3/navbar-v3";
+import NavbarThree from "../navbar-v4";
 import Who from "./who";
-import BackButton from "../components/BackButton";
+import BackButton from "@/app/components/BackButton";
 
 export default function Home() {
   return (

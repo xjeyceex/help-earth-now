@@ -113,7 +113,7 @@ export default function Navbar() {
               </button>
             </div>
           ) : (
-            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition">
+            <button className="bg-gray-300 hover:bg-gray-400 text-gray-900 font-bold py-2 px-4 rounded-md transition">
               <Link href="/login">
                 Sign In
               </Link>
@@ -159,7 +159,7 @@ export default function Navbar() {
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-gray-300 text-gray-800 text-sm rounded-md hover:bg-gray-400 transition"
+                className="px-4 py-2 bg-gray-300 text-gray-900 text-sm rounded-md hover:bg-gray-400 transition"
               >
                 Cancel
               </button>

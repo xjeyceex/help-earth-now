@@ -1,14 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 
 main{
   background-color: #1F2937;
-}
+} */
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 50px;
+  scroll-padding-top: 62px;
+}
+
+/* Add this to your global CSS */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari */
+}
+
+.scrollbar-hide {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer/Edge */
 }
 
 /* Premise */

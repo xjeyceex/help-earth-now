@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+// app/api/header/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
@@ -6,9 +6,8 @@ import { google } from 'googleapis';
 interface SheetRow {
   [key: string]: string;
 }
-
 // Fetching data from Google Sheets
-const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
+const getSheetsData = async (): Promise<SheetRow[]> => {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -18,9 +17,9 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
   });
 
   const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient } as any);
+  const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
-  const range = 'Senators!A3:F'; // Adjust the range as needed
+  const range = 'Header Contents!A1:P'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -38,19 +37,14 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
     const headers: string[] = rows[0]; // First row as headers
     const data: string[][] = rows.slice(1); // Remaining rows as data
 
-    // Map each row into an object using headers as keys and filter by state if provided
-    const formattedData: SheetRow[] = data
-      .filter((row) => {
-        const stateIndex = headers.indexOf('state'); // Assuming 'state' is the header for the state column
-        return state ? (row[stateIndex]?.toUpperCase() === state.toUpperCase()) : true;
-      })
-      .map((row) => {
-        return headers.reduce((acc: SheetRow, header: string, i: number) => {
-          acc[header] = row[i] || '';
-          return acc;
-        }, {} as SheetRow);
-      });
-
+    // Map each row into an object using headers as keys
+    const formattedData: SheetRow[] = data.map((row) => {
+      return headers.reduce((acc: SheetRow, header: string, i: number) => {
+        acc[header] = row[i] || ''; 
+        return acc;
+      }, {} as SheetRow);
+    });
+        
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
@@ -61,12 +55,8 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
-    const url = new URL(req.url);
-    const lowerCasestate = url.searchParams.get('state'); // Retrieve the 'state' query parameter
-    const state = lowerCasestate ? lowerCasestate.toUpperCase() : undefined; // Convert to uppercase or set to undefined
-    const senatorsData = await getSheetsData(state); // Pass state to filter during fetch
-
-    return NextResponse.json(senatorsData, {
+    const headerData = await getSheetsData();
+    return NextResponse.json(headerData, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
@@ -77,7 +67,7 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error fetching senators data:', error);
-    return NextResponse.json({ error: 'Failed to fetch senators data' }, { status: 500 });
+    console.error('Error fetching header data:', error);
+    return NextResponse.json({ error: 'Failed to fetch header data' }, { status: 500 });
   }
 }

@@ -1,7 +1,7 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
@@ -13,6 +13,7 @@ import { routeToStateMap } from '../us-datas';
 export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   const { location, setManualLocation, updateLocation } = useContext(LocationContext) || {};
@@ -56,7 +57,13 @@ export default function NavbarThree() {
         county: selectedCounty || undefined,
       };
       setManualLocation(newLocation);
+      window.location.reload();
     }
+
+    if (selectedState) {
+      router.push(`/${stateAbbreviations[selectedState].toLowerCase()}`);
+    }
+    
     setIsModalOpen(false);
   };
 
@@ -65,6 +72,7 @@ export default function NavbarThree() {
       updateLocation(); 
     }
     setIsModalOpen(false); 
+    window.location.reload();
   }
 
   useEffect(() => {
@@ -104,16 +112,17 @@ export default function NavbarThree() {
 
   return (
     <>
-      <nav className="bg-gray-800 w-full sticky top-0 z-50">
-        <div className="container mx-auto flex items-center justify-between px-3 py-2">
+      <nav className="bg-gray-900 w-full sticky top-0 z-50">
+        <div className="container mx-auto flex items-center justify-between px-3 py-0">
           {/* Brand / Logo */}
           <div className="sm:block">
             <Link href={`/${currentState}`}>
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={40} 
-                height={40} 
+                width={70} 
+                height={70} 
+                priority
               />
             </Link>
           </div>
@@ -181,7 +190,7 @@ export default function NavbarThree() {
                   Menu
                 </button>
                 {isDropdownOpen && (
-                  <div className="absolute right-0 w-72 bg-gray-800 shadow-lg rounded-lg mt-2 p-3">
+                  <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
                     <Link href={`/${currentState}/content`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Content Management
                     </Link>

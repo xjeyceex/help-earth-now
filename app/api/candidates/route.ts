@@ -18,9 +18,9 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
   });
 
   const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient } as any);
+  const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
-  const range = 'Senators!A3:F'; // Adjust the range as needed
+  const range = 'Candidate Contents!A3:G'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -38,7 +38,7 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
     const headers: string[] = rows[0]; // First row as headers
     const data: string[][] = rows.slice(1); // Remaining rows as data
 
-    // Map each row into an object using headers as keys and filter by state if provided
+    // Filter and map each row into an object using headers as keys
     const formattedData: SheetRow[] = data
       .filter((row) => {
         const stateIndex = headers.indexOf('state'); // Assuming 'state' is the header for the state column
@@ -64,9 +64,9 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const lowerCasestate = url.searchParams.get('state'); // Retrieve the 'state' query parameter
     const state = lowerCasestate ? lowerCasestate.toUpperCase() : undefined; // Convert to uppercase or set to undefined
-    const senatorsData = await getSheetsData(state); // Pass state to filter during fetch
+    const horsData = await getSheetsData(state); // Pass state to filter during fetch
 
-    return NextResponse.json(senatorsData, {
+    return NextResponse.json(horsData, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
@@ -77,7 +77,7 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error fetching senators data:', error);
-    return NextResponse.json({ error: 'Failed to fetch senators data' }, { status: 500 });
+    console.error('Error fetching House of Representatives data:', error);
+    return NextResponse.json({ error: 'Failed to fetch House of Representatives data' }, { status: 500 });
   }
 }

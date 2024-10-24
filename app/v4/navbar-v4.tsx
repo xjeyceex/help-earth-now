@@ -6,8 +6,9 @@ import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
 import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import DarkModeToggle from '../components/DarkMode';
 
 export default function NavbarThree() {
   const { status } = useSession();
@@ -88,19 +89,23 @@ export default function NavbarThree() {
         <div className="container mx-auto flex items-center justify-between px-3 py-0">
           {/* Brand / Logo */}
           <div className="sm:block">
-            <Link href="/">
+            <Link href="/v4">
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={70} 
-                height={70} 
+                width={50} 
+                height={50} 
                 priority
               />
             </Link>
           </div>
-          <div className="flex items-center">
-            <p className="mr-1 text-xs md:text-sm text-white">
-              Location: {location?.county
+          <div
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group m-5" // Added group class
+          >
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="text-green-400 mr-2" />
+            <p className="text-xs md:text-sm text-white flex-grow">
+              {location?.county
                 ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
                 : location?.state
                 ? stateAbbreviations[location.state] // Show state abbreviation only
@@ -108,14 +113,15 @@ export default function NavbarThree() {
             </p>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center justify-center w-5 h-5 bg-gray-600 text-white text-xs rounded-full hover:bg-blue-700 transition"
+              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300 group-hover:bg-blue-700" // Added group-hover
+              aria-label="Edit Location"
             >
               <FontAwesomeIcon icon={faPen} className="text-xs" />
             </button>
           </div>
-
           {/* Hamburger button for small screens */}
-          <div className="md:hidden">
+          <div className="md:hidden flex gap-5">
+            <DarkModeToggle/>
             <button className="text-white focus:outline-none" onClick={toggleMenu}>
               <svg
                 className="w-6 h-6"
@@ -136,15 +142,16 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/" className={linkClasses('/')}>
+            <Link href="/v4" className={linkClasses('/v4')}>
               Home
             </Link>
-            <Link href="/about" className={linkClasses('/about')}>
+            <Link href="/v4/about" className={linkClasses('v4/about')}>
               About Us
             </Link>
-            <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+            <Link href={`/v4/learn-more`} className={linkClasses(`v4/learn-more`)}>
               Learn More
             </Link>
+            <DarkModeToggle/>
             {/* <Link href="//what" className={linkClasses('//what')}>
               What can I do?
             </Link> */}
@@ -163,10 +170,10 @@ export default function NavbarThree() {
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                    <Link href="//content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="/content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Content Management
                     </Link>
-                    <Link href="//admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link href="/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Admin Panel
                     </Link>
                     <Link
@@ -181,20 +188,19 @@ export default function NavbarThree() {
             )}
           </div>
         </div>
-
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
           <button onClick={toggleMenu} className="text-white self-end text-lg">
             ✕
           </button>
-          <Link href="/" className={linkClasses('/')}>
+          <Link href="/v4" className={linkClasses('/v4')}>
             Home
           </Link>
-          <Link href="/about" className={linkClasses('/about')}>
+          <Link href="/v4/about" className={linkClasses('v4/about')}>
             About Us
           </Link>
-          <Link href={`/learn-more`} className={linkClasses(`/learn-more`)}>
+          <Link href={`/v4/learn-more`} className={linkClasses(`v4/learn-more`)}>
             Learn More
           </Link>
           {/* <Link href="//what" className={linkClasses('//what')}>
@@ -221,15 +227,14 @@ export default function NavbarThree() {
             </>
           )}
         </div>
-        
         )}
       </nav>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 px-4">
           <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-xs sm:max-w-md flex flex-col items-center">
-            <h2 className="text-lg font-semibold mb-4">Update Location</h2>
+            <h2 className="text-lg font-semibold mb-4 dark:text-black">Update Location</h2>
             <div className="w-full mb-4">
               <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">State</label>
               <select

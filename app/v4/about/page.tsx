@@ -22,7 +22,7 @@ export default function AboutUsPage() {
                         <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
                             We&apos;re a team passionate about making a positive impact on people and the planet. 
                             Help You Help YOU is here to help you help YOURself by giving you information and guidance as clearly as we can. 
-                            We keep it simple, offering clear solutions to complex problems—so everyone can take action. 
+                            We keep it simple, offering clear solutions to complex problems—so everyone can do what they can. 
                             Want more? The deeper you go, the more you&apos;ll find (but no clutter, we promise!).
                         </p>
                     </div>

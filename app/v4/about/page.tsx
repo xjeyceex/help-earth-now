@@ -8,9 +8,9 @@ export default function AboutUsPage() {
         <>
             <NavbarThree />
             <BackButton />
-            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-16 px-6">
+            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-8 px-6">
                 <section className="max-w-7xl mx-auto space-y-12">
-                    <h1 className="text-5xl font-extrabold text-center text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
+                    <h1 className="text-5xl font-extrabold text-center text-gray-900 dark:text-gray-100 mb-8 tracking-tight">
                         About Us
                     </h1>
 

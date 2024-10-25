@@ -55,7 +55,7 @@ const CookieConsent = () => {
     >
       <div className="text-sm text-gray-700">
         <p>
-          This website uses cookies to ensure you get the best experience on our website.{' '}
+          We do not and will never collect or store any personal information through cookies.{' '}
           <Link
             href="/cookie-policy"
             className="text-blue-600 underline hover:text-blue-800"

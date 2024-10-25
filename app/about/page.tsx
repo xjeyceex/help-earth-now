@@ -1,6 +1,6 @@
 import BackButton from "../components/BackButton";
 import FeedbackButton from "../components/FeedBack";
-import NavbarThree from "../v3/navbar-v3";
+import NavbarThree from "../v4/navbar-v4";
 import { FaUsers, FaClipboardList, FaHandsHelping, FaLeaf } from "react-icons/fa";
 
 export default function AboutUsPage() {
@@ -8,9 +8,9 @@ export default function AboutUsPage() {
         <>
             <NavbarThree />
             <BackButton />
-            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-16 px-6">
+            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-8 px-6">
                 <section className="max-w-7xl mx-auto space-y-12">
-                    <h1 className="text-5xl font-extrabold text-center text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
+                    <h1 className="text-5xl font-extrabold text-center text-gray-900 dark:text-gray-100 mb-8 tracking-tight">
                         About Us
                     </h1>
 
@@ -20,8 +20,9 @@ export default function AboutUsPage() {
                             <FaUsers className="mr-2 text-blue-500" /> Who We Are
                         </h2>
                         <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
-                            We&apos;re a team passionate about making a positive impact on people and the planet.
-                            We keep it simple, offering clear solutions to complex problems—so everyone can take action.
+                            We&apos;re a team passionate about making a positive impact on people and the planet. 
+                            Help You Help YOU is here to help you help YOURself by giving you information and guidance as clearly as we can. 
+                            We keep it simple, offering clear solutions to complex problems—so everyone can do what they can. 
                             Want more? The deeper you go, the more you&apos;ll find (but no clutter, we promise!).
                         </p>
                     </div>
@@ -32,9 +33,9 @@ export default function AboutUsPage() {
                             <FaClipboardList className="mr-2 text-green-500" /> Our Mission
                         </h2>
                         <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
-                            We&apos;re on a mission to save the planet, one small step (and maybe a few big ones) at a time.
-                            Climate change? Yeah, we&apos;re not fans. We&apos;re here to help you take action and make sustainable
-                            living easier, because Earth only comes in one model—so let&apos;s take care of it.
+                            We&apos;re on a mission to save the planet, one small step (and maybe a few big ones) at a time. 
+                            Climate change? Yeah, we&apos;re not fans. We&apos;re here to help you take action and make sustainable living easier, 
+                            because Earth only comes in one model—so let&apos;s take care of it.
                         </p>
                     </div>
 
@@ -44,7 +45,7 @@ export default function AboutUsPage() {
                             <FaHandsHelping className="mr-2 text-green-500" /> What We Do
                         </h2>
                         <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
-                            We help you navigate the climate maze! From tips to connecting with others who care—we&apos;ve got your back.
+                            We help you navigate the climate maze! From tips to connecting with others who care—we&apos;ve got your back. 
                             Think of us as your climate-sidekick, armed with facts, tools, and a bit of humor to make it all less overwhelming.
                         </p>
                     </div>
@@ -71,9 +72,9 @@ export default function AboutUsPage() {
                     <div className="bg-gradient-to-r from-green-400 to-blue-500 shadow-xl rounded-lg p-10 text-center text-white transition-transform transform hover:scale-105 duration-300">
                         <h2 className="text-3xl font-semibold mb-6">Join Us</h2>
                         <p className="text-lg leading-8 mb-6">
-                            Ready to make a difference? 🌱 It&apos;s as easy as downloading this app! Whether you&apos;re a seasoned climate warrior
-                            or just getting started, we need you. Let&apos;s build a greener future, one action at a time!
-                            And hey, we promise—no guilt trips, just actionable steps and good vibes.
+                            Ready to make a difference? 🌱 Connect with us on your favorite Social Media and tell your friends about us! 
+                            Whether you&apos;re a seasoned climate warrior or just getting started, we need you. 
+                            Let&apos;s build a greener future, one action at a time! And hey, we promise, no guilt trips — just actionable steps and good vibes.
                         </p>
                     </div>
                 </section>

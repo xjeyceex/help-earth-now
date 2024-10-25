@@ -29,7 +29,7 @@ export default function CookiePolicy() {
                             <li>Analyze site traffic and usage to improve our service.</li>
                             <li>Provide certain functionalities like remembering your login details.</li>
                         </ul>
-                        <span className="text-gray-600 block">
+                        <span className="text-gray-600 block font-bold italic">
                             We do not and will never collect or store any personal information through cookies.
                         </span>
 

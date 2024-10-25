@@ -89,12 +89,12 @@ export default function NavbarThree() {
         <div className="container mx-auto flex items-center justify-between px-3 py-0">
           {/* Brand / Logo */}
           <div className="sm:block">
-            <Link href="/v4">
+            <Link href="/">
               <Image
-                src="/logo.png"
+                src="/logowhite.png"
                 alt="MyApp Logo"
-                width={50} 
-                height={50} 
+                width={200} 
+                height={200} 
                 priority
               />
             </Link>
@@ -142,13 +142,13 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/v4" className={linkClasses('/v4')}>
+            <Link href="/" className={linkClasses('')}>
               Home
             </Link>
-            <Link href="/v4/about" className={linkClasses('v4/about')}>
+            <Link href="/about" className={linkClasses('about')}>
               About Us
             </Link>
-            <Link href={`/v4/learn-more`} className={linkClasses(`v4/learn-more`)}>
+            <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
               Learn More
             </Link>
             <DarkModeToggle/>
@@ -194,13 +194,13 @@ export default function NavbarThree() {
           <button onClick={toggleMenu} className="text-white self-end text-lg">
             ✕
           </button>
-          <Link href="/v4" className={linkClasses('/v4')}>
+          <Link href="/" className={linkClasses('')}>
             Home
           </Link>
-          <Link href="/v4/about" className={linkClasses('v4/about')}>
+          <Link href="/about" className={linkClasses('about')}>
             About Us
           </Link>
-          <Link href={`/v4/learn-more`} className={linkClasses(`v4/learn-more`)}>
+          <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
             Learn More
           </Link>
           {/* <Link href="//what" className={linkClasses('//what')}>
@@ -243,7 +243,7 @@ export default function NavbarThree() {
                 onChange={handleStateChange}
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
               >
-                <option value="">Select State</option>
+                <option value="/">Select State</option>
                 {states.map(state => (
                   <option key={state} value={state} className="text-gray-700">{state}</option>
                 ))}
@@ -257,7 +257,7 @@ export default function NavbarThree() {
                 onChange={handleCountyChange}
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
               >
-                <option value="">Select County</option>
+                <option value="/">Select County</option>
                 {counties.map((county, index) => (
                   <option key={index} value={county} className="text-gray-700">
                     {county}

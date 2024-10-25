@@ -4,6 +4,7 @@ import CookieConsent from "./components/CookieConsent";
 import Footer from "./components/Footer";
 import FeedbackButton from "./components/FeedBack";
 import WhyItMatters from "./components/WhyItMatters";
+import FixSocialIcon from "./components/FixSocialIcon";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Header />
       <WhyItMatters/>
       <CookieConsent/>
+      <FixSocialIcon/>
       <Footer/>
       <FeedbackButton/>
     </main>

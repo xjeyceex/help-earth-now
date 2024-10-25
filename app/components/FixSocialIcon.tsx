@@ -18,16 +18,6 @@ function FixSocialIcon() {
         </li>
         <li>
           <Link
-            href="https://www.instagram.com" // Add your link
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"
-          >
-            <FaInstagram />
-          </Link>
-        </li>
-        <li>
-          <Link
             href="https://www.facebook.com" // Add your link
             target="_blank"
             rel="noopener noreferrer"

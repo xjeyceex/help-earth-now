@@ -19,6 +19,7 @@ interface Candidate {
   link: string;
   party: Party;
   state: string;
+  position: string; // Added position property
 }
 
 interface CandidateGroup {
@@ -36,33 +37,103 @@ const mapToCandidate = (data: any): Candidate => {
   };
 };
 
-// Helper function to fetch data from APIs
+// Helper function to fetch data from a single API
 const fetchCandidateData = async (state: string) => {
   try {
-    const endpoints = ['/api/governors', '/api/senators', '/api/hor'];
-    const responses = await Promise.all(endpoints.map(endpoint => fetch(`${endpoint}?state=${state}`)));
+    const response = await fetch(`/api/candidates?state=${state}`);
 
-    if (responses.some(response => !response.ok)) {
-      throw new Error('One or more API requests failed');
+    if (!response.ok) {
+      throw new Error('API request failed');
     }
 
-    const data = await Promise.all(responses.map(response => response.json()));
+    const data = await response.json();
 
     // Ensure the data is valid before proceeding
     if (!Array.isArray(data)) {
       throw new Error('API response is not an array');
     }
 
-    return data.map(group => group.map(mapToCandidate));
+    return data.map(mapToCandidate);
   } catch (error) {
     console.error('Error fetching data:', error);
     return [];  // Return empty data to handle the error gracefully
   }
 };
 
+const getCandidatesForState = (state: string, candidates: Candidate[]) => {
+  const governors = candidates.filter(candidate => candidate.position === 'gov');
+  const senators = candidates.filter(candidate => candidate.position === 'sen');
+  const hor = candidates.filter(candidate => candidate.position === 'rep');
+
+  // Sort candidates with Democratic candidates at the top
+  const sortByParty = (a: Candidate, b: Candidate) => {
+    if (a.party === Party.Democratic && b.party !== Party.Democratic) {
+      return -1; // Move Democrats to the top
+    } else if (a.party !== Party.Democratic && b.party === Party.Democratic) {
+      return 1;  // Move others down
+    }
+    return 0; // Keep the order otherwise
+  };
+
+  // Function to handle the logic of removing duplicates and sorting by party
+  const stateSpecificCandidates = (groupItems: Candidate[]) => {
+    const stateSpecific = groupItems.filter(candidate => candidate.state.toLowerCase() === state.toLowerCase());
+    const allCandidates = groupItems.filter(candidate => candidate.state === 'All');
+
+    // Remove 'All' candidates if a state-specific candidate exists with the same name and position
+    const filteredCandidates = allCandidates.filter(allCandidate =>
+      !stateSpecific.some(
+        stateCandidate =>
+          stateCandidate.name === allCandidate.name && stateCandidate.position === allCandidate.position
+      )
+    );
+
+    // Combine state-specific and non-duplicate 'All' candidates, then sort by party
+    return [...stateSpecific, ...filteredCandidates].sort(sortByParty);
+  };
+
+  return [
+    {
+      group: 'President',
+      items: stateSpecificCandidates([
+        {
+          name: 'Kamala Harris',
+          rating: '90% from LCV.',
+          description: 'Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change',
+          link: 'https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/',
+          party: Party.Democratic,
+          state: 'All',  // Vice President is relevant for all states
+          position: 'vp',
+        },
+        {
+          name: 'Donald Trump',
+          rating: '30% from LCV.',
+          description: 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
+          link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
+          party: Party.Republican,
+          state: 'All',  // President is relevant for all states
+          position: 'pres',
+        },
+        {
+          name: 'Donald Trump',
+          rating: '30% from LCV.',
+          description: "In 2019, Trump's delay of a crucial $19.1 billion disaster relief bill for North Carolina postponed vital flood mitigation projects, leading to significant impacts from subsequent storms, including the flooding caused by Hurricane Helene in 2023.",
+          link: 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
+          party: Party.Republican,
+          state: 'NC',
+          position: 'pres',
+        },
+      ]),
+    },
+    { group: 'Governors', items: stateSpecificCandidates(governors) },
+    { group: 'Senators', items: stateSpecificCandidates(senators) },
+    { group: 'House of Representatives', items: stateSpecificCandidates(hor) },
+  ].filter(group => group.items.length > 0); // Filter out empty groups
+};
+
 export default function Who() {
   const { location } = useContext(LocationContext) || {};
-  const [candidates, setCandidates] = useState<CandidateGroup[]>([]);
+  const [filteredCandidates, setFilteredCandidates] = useState<CandidateGroup[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -75,45 +146,9 @@ export default function Who() {
         );
 
         if (stateAbbreviation) {
-          const [governors, senators, hor] = await fetchCandidateData(stateAbbreviation);
-
-          const combinedData: CandidateGroup[] = [
-            {
-              group: 'President',
-              items: [
-                {
-                  name: 'Kamala Harris',
-                  rating: '90% from LCV.',
-                  description: 'Calls climate crisis an urgent issue and promoted the IRA - spending $20B to fight climate change',
-                  link: 'https://www.whitehouse.gov/briefing-room/speeches-remarks/2023/07/14/remarks-by-vice-president-harris-on-combatting-climate-change-and-building-a-clean-energy-economy/',
-                  party: Party.Democratic,
-                  state: 'All',
-                },
-                {
-                  name: 'Donald Trump',
-                  rating: '30% from LCV.',
-                  description: 'Pulled U.S. out of the Paris Agreement and rolled back efforts to fight climate change',
-                  link: 'https://www.npr.org/2024/06/25/nx-s1-5006573/trump-election-2024-climate-change-fossil-fuels',
-                  party: Party.Republican,
-                  state: 'All',
-                },
-                {
-                  name: 'Donald Trump',
-                  rating: '30% from LCV.',
-                  description: "In 2019, Trump's delay of a crucial $19.1 billion disaster relief bill for North Carolina postponed vital flood mitigation projects, leading to significant impacts from subsequent storms, including the flooding caused by Hurricane Helene in 2023.",
-                  link: 'https://news.yahoo.com/news/damning-news-report-revives-questions-104558837.html?fr=sycsrp_catchall',
-                  party: Party.Republican,
-                  state: 'NC',
-                },
-              ],
-            },
-            { group: 'Governors', items: governors },
-            { group: 'Senators', items: senators },
-            { group: 'House of Representatives', items: hor },
-          ];
-
-          // Directly set the combined data without filtering
-          setCandidates(combinedData);
+          const candidates = await fetchCandidateData(stateAbbreviation);
+          const stateCandidates = getCandidatesForState(stateAbbreviation, candidates);
+          setFilteredCandidates(stateCandidates);
         }
       }
       setLoading(false);
@@ -133,8 +168,8 @@ export default function Who() {
   return (
     <>
       <div className="grid grid-cols-3 who-help" id="who">
-        {candidates.length > 0 ? (
-          candidates.map((group, groupIndex) => (
+        {filteredCandidates.length > 0 ? (
+          filteredCandidates.map((group, groupIndex) => (
             <React.Fragment key={group.group}>
               <div
                 className={`flex items-center justify-center text-center who-help-${groupIndex + 1} p-4 md:p-8 border border-gray-300`} 

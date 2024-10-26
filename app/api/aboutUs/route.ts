@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+// app/api/aboutUs/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
@@ -6,6 +6,7 @@ import { google } from 'googleapis';
 interface SheetRow {
   [key: string]: string;
 }
+
 // Fetching data from Google Sheets
 const getSheetsData = async (): Promise<SheetRow[]> => {
   const auth = new google.auth.GoogleAuth({
@@ -19,7 +20,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
-  const range = 'Primary Table!A2:S'; // Adjust the range as needed
+  const range = 'About Us!A2:B'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -44,7 +45,6 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
         return acc;
       }, {} as SheetRow);
     });
-        
     return formattedData;
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
@@ -55,8 +55,8 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
-    const headerData = await getSheetsData();
-    return NextResponse.json(headerData, {
+    const aboutUsData = await getSheetsData();
+    return NextResponse.json(aboutUsData, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
@@ -65,9 +65,9 @@ export async function GET(req: NextRequest) {
         'Pragma': 'no-cache', // HTTP 1.0
         'Expires': '0', // Proxies
       },
-    });
+    });  
   } catch (error) {
-    console.error('Error fetching header data:', error);
-    return NextResponse.json({ error: 'Failed to fetch header data' }, { status: 500 });
+    console.error('Error fetching aboutUs data:', error);
+    return NextResponse.json({ error: 'Failed to fetch aboutUs data' }, { status: 500 });
   }
 }

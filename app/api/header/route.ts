@@ -19,7 +19,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any});
 
-  const range = 'Header Contents!A1:P'; // Adjust the range as needed
+  const range = 'Primary Table!A2:S'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({

@@ -1,9 +1,56 @@
+'use client'
+import { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import FeedbackButton from "../components/FeedBack";
 import NavbarThree from "../v4/navbar-v4";
 import { FaUsers, FaClipboardList, FaHandsHelping, FaLeaf } from "react-icons/fa";
 
+type AboutUsItem = {
+    header: string;
+    contents: string;
+};
+
+type HeaderType = "Who We Are" | "Our Mission" | "What We Do" | "Our Values" | "Join Us";
+
+const iconMap: Record<HeaderType, JSX.Element> = {
+    "Who We Are": <FaUsers className="mr-2 text-blue-500" />,
+    "Our Mission": <FaClipboardList className="mr-2 text-green-500" />,
+    "What We Do": <FaHandsHelping className="mr-2 text-green-500" />,
+    "Our Values": <FaLeaf className="mr-2 text-green-700" />,
+    "Join Us": <FaHandsHelping className="mr-2 text-green-500" />
+};
+
 export default function AboutUsPage() {
+    const [aboutUsData, setAboutUsData] = useState<AboutUsItem[]>([]);
+    const [groupedData, setGroupedData] = useState<{ header: string; contents: string[] }[]>([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch('/api/aboutUs');
+                const data: AboutUsItem[] = await response.json();
+                setAboutUsData(data);
+            } catch (error) {
+                console.error("Error fetching About Us data:", error);
+            }
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        let currentHeader = "";
+        const grouped = aboutUsData.reduce((acc, item) => {
+            if (item.header) {
+                currentHeader = item.header;
+                acc.push({ header: currentHeader, contents: [item.contents] });
+            } else if (currentHeader) {
+                acc[acc.length - 1].contents.push(item.contents);
+            }
+            return acc;
+        }, [] as { header: string; contents: string[] }[]);
+        setGroupedData(grouped);
+    }, [aboutUsData]);
+
     return (
         <>
             <NavbarThree />
@@ -14,69 +61,30 @@ export default function AboutUsPage() {
                         About Us
                     </h1>
 
-                    {/* Who We Are Section */}
-                    <div className="bg-white shadow-xl rounded-lg p-10 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700">
-                        <h2 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100 flex items-center">
-                            <FaUsers className="mr-2 text-blue-500" /> Who We Are
-                        </h2>
-                        <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
-                            We&apos;re a team passionate about making a positive impact on people and the planet. 
-                            Help You Help YOU is here to help you help YOURself by giving you information and guidance as clearly as we can. 
-                            We keep it simple, offering clear solutions to complex problems—so everyone can do what they can. 
-                            Want more? The deeper you go, the more you&apos;ll find (but no clutter, we promise!).
-                        </p>
-                    </div>
-
-                    {/* Our Mission Section */}
-                    <div className="bg-white shadow-xl rounded-lg p-10 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700">
-                        <h2 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100 flex items-center">
-                            <FaClipboardList className="mr-2 text-green-500" /> Our Mission
-                        </h2>
-                        <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
-                            We&apos;re on a mission to save the planet, one small step (and maybe a few big ones) at a time. 
-                            Climate change? Yeah, we&apos;re not fans. We&apos;re here to help you take action and make sustainable living easier, 
-                            because Earth only comes in one model—so let&apos;s take care of it.
-                        </p>
-                    </div>
-
-                    {/* What We Do Section */}
-                    <div className="bg-white shadow-xl rounded-lg p-10 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700">
-                        <h2 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100 flex items-center">
-                            <FaHandsHelping className="mr-2 text-green-500" /> What We Do
-                        </h2>
-                        <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
-                            We help you navigate the climate maze! From tips to connecting with others who care—we&apos;ve got your back. 
-                            Think of us as your climate-sidekick, armed with facts, tools, and a bit of humor to make it all less overwhelming.
-                        </p>
-                    </div>
-
-                    {/* Our Values Section */}
-                    <div className="bg-white shadow-xl rounded-lg p-10 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700">
-                        <h2 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100 flex items-center">
-                            <FaLeaf className="mr-2 text-green-700" /> Our Values
-                        </h2>
-                        <ul className="list-disc list-inside text-lg leading-8 text-gray-600 dark:text-gray-300 space-y-4">
-                            <li>
-                                <strong>Keep It Clear:</strong> Climate change is complicated enough—we make it simple so you can act without the confusion.
-                            </li>
-                            <li>
-                                <strong>Every Little Bit Counts:</strong> Whether you&apos;re starting small or going big, every action matters. Let&apos;s make progress, not perfection!
-                            </li>
-                            <li>
-                                <strong>No Guilt, Just Action:</strong> We won&apos;t overwhelm you with doom and gloom—just the good stuff and easy wins for a better planet.
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Join Us Section */}
-                    <div className="bg-gradient-to-r from-green-400 to-blue-500 shadow-xl rounded-lg p-10 text-center text-white transition-transform transform hover:scale-105 duration-300">
-                        <h2 className="text-3xl font-semibold mb-6">Join Us</h2>
-                        <p className="text-lg leading-8 mb-6">
-                            Ready to make a difference? 🌱 Connect with us on your favorite Social Media and tell your friends about us! 
-                            Whether you&apos;re a seasoned climate warrior or just getting started, we need you. 
-                            Let&apos;s build a greener future, one action at a time! And hey, we promise, no guilt trips — just actionable steps and good vibes.
-                        </p>
-                    </div>
+                    {groupedData.map((section, index) => (
+                        section.header === "Join Us" ? (
+                            <div key={index} className="bg-gradient-to-r from-green-400 to-blue-500 shadow-xl rounded-lg p-10 text-center text-white transition-transform transform hover:scale-105 duration-300">
+                                <h2 className="text-3xl font-semibold mb-6">{section.header}</h2>
+                                {section.contents.map((content, idx) => (
+                                    <p key={idx} className="text-lg leading-8 mb-6">
+                                        {content}
+                                    </p>
+                                ))}
+                            </div>
+                        ) : (
+                            <div key={index} className="bg-white shadow-xl rounded-lg p-10 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700">
+                                <h2 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100 flex items-center">
+                                    {iconMap[section.header as HeaderType] || <FaHandsHelping className="mr-2 text-green-500" />}
+                                    {section.header}
+                                </h2>
+                                {section.contents.map((content, idx) => (
+                                    <p key={idx} className="text-lg leading-8 text-gray-600 dark:text-gray-300 mb-6">
+                                        {content}
+                                    </p>
+                                ))}
+                            </div>
+                        )
+                    ))}
                 </section>
             </main>
             <FeedbackButton />

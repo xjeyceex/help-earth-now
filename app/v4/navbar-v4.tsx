@@ -95,6 +95,7 @@ export default function NavbarThree() {
                 alt="MyApp Logo"
                 width={200} 
                 height={200} 
+                style={{ width: 'auto', height: 'auto' }}
                 priority
               />
             </Link>
@@ -257,7 +258,7 @@ export default function NavbarThree() {
                 onChange={handleCountyChange}
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
               >
-                <option value="/">Select County</option>
+                <option value="">Select County</option>
                 {counties.map((county, index) => (
                   <option key={index} value={county} className="text-gray-700">
                     {county}

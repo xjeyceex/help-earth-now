@@ -144,6 +144,7 @@ const WhyItMatters: React.FC = () => {
                   width={300}
                   height={256} // Adjust height accordingly
                   className="w-full h-64 object-cover transition-transform duration-500 transform hover:scale-110"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
                 <div className="relative p-6 text-gray-900 dark:text-gray-100">
                   <h3 className="text-3xl font-semibold">{item.title}</h3>

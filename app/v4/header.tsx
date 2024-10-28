@@ -42,7 +42,7 @@ export default function Header() {
     state: string;
     county: string;
     link: string;
-    warning: string;
+    Warning: string;
     problem1: string;
     problem2?: string;
     problem3?: string;
@@ -61,21 +61,24 @@ export default function Header() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-  
+
       try {
         if (!location?.state) return;
-  
+
         const response = await fetch(`/api/header`);
         const mainData = await response.json();
-  
+
         const stateKey = stateAbbreviations[location.state as keyof typeof stateAbbreviations];
-  
+
         const data = mainData.filter((item: HeaderData) => {
-          const matchesState = stateKey === item.state || item.state === 'ALL';
+          const matchesState = 
+            item.state === stateKey ||         // Exact state match
+            item.state === `${stateKey} - ALL` ||  // State with '- ALL'
+            item.state === 'ALL';              // General "ALL" entry
           const matchesCounty = location.county ? location.county === item.county || item.county === '' : true;
           return matchesState && matchesCounty;
         });
-  
+
         let filteredData = [];
         if (location.county) {
           const countyData = data.filter((item: HeaderData) => 
@@ -90,14 +93,14 @@ export default function Header() {
           const selectedData = filteredData[0];
           setWarningText(selectedData.warning || warningText);
           setQuestions([selectedData.problem1, selectedData.problem2, selectedData.problem3, selectedData.problem4].filter(Boolean));
-  
+
           // Set actions
           setActions({
-            free: [selectedData.action1free, selectedData.action2free, selectedData.action3free].filter(Boolean),
+            free: [selectedData.action1free, selectedData.action2free, selectedData.action3free, selectedData.action4free].filter(Boolean),
             low: [selectedData.action1low, selectedData.action2low, selectedData.action3low].filter(Boolean),
             high: [selectedData.action1high, selectedData.action2high, selectedData.action3high].filter(Boolean)
           });
-  
+
           if (selectedData.link) {
             const videoUrl = `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`;
             setVideoUrl(videoUrl);

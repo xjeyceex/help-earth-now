@@ -96,7 +96,7 @@ export default function Header() {
 
           // Set actions
           setActions({
-            free: [selectedData.action1free, selectedData.action2free, selectedData.action3free].filter(Boolean),
+            free: [selectedData.action1free, selectedData.action2free, selectedData.action3free, selectedData.action4free].filter(Boolean),
             low: [selectedData.action1low, selectedData.action2low, selectedData.action3low].filter(Boolean),
             high: [selectedData.action1high, selectedData.action2high, selectedData.action3high].filter(Boolean)
           });

@@ -50,6 +50,7 @@ export default function Header() {
     action1free?: string;
     action2free?: string;
     action3free?: string;
+    action4free?: string;
     action1low?: string;
     action2low?: string;
     action3low?: string;

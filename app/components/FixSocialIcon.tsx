@@ -8,7 +8,7 @@ function FixSocialIcon() {
       <ul className="flex justify-center space-x-6 lg:block lg:space-x-0 lg:space-y-12">
         <li>
           <Link
-            href="https://www.linkedin.com" // Add your link
+            href="https://www.linkedin.com/company/help-you-help-you/" // Add your link
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"
@@ -18,7 +18,7 @@ function FixSocialIcon() {
         </li>
         <li>
           <Link
-            href="https://www.facebook.com" // Add your link
+            href="https://www.facebook.com/profile.php?id=61567410655540" // Add your link
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"
@@ -28,7 +28,7 @@ function FixSocialIcon() {
         </li>
         <li>
           <Link
-            href="https://www.twitter.com" // Add your link
+            href="https://x.com/HelpYou_HelpYou" // Add your link
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"

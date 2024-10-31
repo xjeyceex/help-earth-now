@@ -160,7 +160,7 @@ export default function Header() {
                   <ul className="care-about-list list-disc mt-2 text-base md:text-2xl leading-relaxed md:leading-tight pl-8">
                     {questions.map((question: string, index: number) => (
                       <li key={index} className="pb-1 md:pb-2">
-                        {question}
+                        {question.endsWith('?') ? question : `${question}?`}
                       </li>
                     ))}
                   </ul>

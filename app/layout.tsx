@@ -7,7 +7,7 @@ import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import { getSession } from 'next-auth/react';
 import { Session } from "next-auth";
-import Script from "next/script"; // Import Script
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +29,20 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Theme>
+          {/* Google Ads Script */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=AW-16761923424"
+            strategy="afterInteractive"
+          />
+          <Script id="google-ads" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-16761923424');
+            `}
+          </Script>
+          
           {/* Google Analytics Script */}
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-JSGJDD1V6M"
@@ -42,6 +56,7 @@ export default async function RootLayout({
               gtag('config', 'G-JSGJDD1V6M');
             `}
           </Script>
+
           <AuthProvider session={session || undefined}>  
             <LocationProvider>
               {children}

@@ -136,7 +136,7 @@ export default function Header() {
   
   return (
     <div className="w-full" id="home">
-      {loading ? ( // Show loading message while data is being fetched
+      {loading ? (
         <div className="flex justify-center items-center h-screen">
           <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
         </div>
@@ -146,16 +146,14 @@ export default function Header() {
             <div className="grid max-w-screen-2xl px-6 py-10 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
               <div className="mr-auto place-self-center lg:col-span-7">
                 <h1 className="max-w-2xl mb-4 font-extrabold tracking-tight leading-none md:text-6xl xl:text-7xl text-4xl dark:text-white">
-                    Climate change is hurting us <span className="font-bold inline-block">all</span> - {' '} 
-                    <span className="inline-flex items-center italic text-green-500">
-                      <span className="mr-1">now</span>
-                      <FontAwesomeIcon icon={faLeaf} className="text-2xl text-green-600 mb-4" />
-                    </span>
+                  Climate change is hurting us <span className="font-bold inline-block">all</span> - {' '}
+                  <span className="inline-flex items-center italic text-green-500">
+                    <span className="mr-1">now</span>
+                    <FontAwesomeIcon icon={faLeaf} className="text-2xl text-green-600 mb-4" />
+                  </span>
                 </h1>
                 <div className="max-w-2xl mb-6 font-light text-gray-600 lg:mb-8 md:text-xl lg:text-2xl dark:text-gray-400">
-                  <div className="py-4">
-                    {warningText}
-                  </div>
+                  <div className="py-4">{warningText}</div>
                   <div className="text-left">Do you care about:</div>
                   <ul className="care-about-list list-disc mt-2 text-base md:text-2xl leading-relaxed md:leading-tight pl-8">
                     {questions.map((question: string, index: number) => (
@@ -185,14 +183,14 @@ export default function Header() {
             </div>
           </section>
           
-          <div className="w-full max-w-7xl mx-auto pt-6 pb-12 lg:px-16" id='what'>
+          <div className="w-full max-w-7xl mx-auto pt-6 pb-12 lg:px-16" id="what">
             <h2 className="text-5xl text-center dark:text-gray-200 font-bold pb-6 px-4 italic">
-                What Can I Do?
+              What Can I Do?
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 px-6">
+            <div className="flex flex-wrap gap-6 justify-center px-6">
               {/* Free actions */}
               {actions.free.length > 0 && (
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
+                <div className="flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-yellow-100 opacity-30"></div>
                   <div className="relative z-10">
                     <FontAwesomeIcon icon={faDove} className="text-5xl text-green-500 mb-4" />
@@ -214,7 +212,7 @@ export default function Header() {
 
               {/* Low-cost actions */}
               {actions.low.length > 0 && (
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
+                <div className="flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-purple-100 opacity-30"></div>
                   <div className="relative z-10">
                     <FontAwesomeIcon icon={faDollarSign} className="text-5xl text-yellow-500 mb-4" />
@@ -232,7 +230,7 @@ export default function Header() {
 
               {/* High-cost actions */}
               {actions.high.length > 0 && (
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
+                <div className="flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-purple-100 opacity-30"></div>
                   <div className="relative z-10">
                     <FontAwesomeIcon icon={faSolarPanel} className="text-5xl text-cyan-600 mb-4" />
@@ -248,9 +246,8 @@ export default function Header() {
                 </div>
               )}
             </div>
-
-        </div>
-      </>
+          </div>
+        </>
       )}
     </div>
   );

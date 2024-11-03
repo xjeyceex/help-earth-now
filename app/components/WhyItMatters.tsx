@@ -22,18 +22,18 @@ const WhyItMatters: React.FC = () => {
     //   learnMore: 'https://edition.cnn.com/2024/10/16/climate/global-water-cycle-off-balance-food-production?cid=ios_app',
     // },
     {
-      image: '/sea-level.jpg',
-      title: 'Rising Sea Levels',
-      description: 'Coastal cities around the world are threatened by rising sea levels, displacing communities and disrupting ecosystems.',
-      moreInfo: 'Rising sea levels result from melting ice caps and glaciers and thermal expansion of seawater, leading to the loss of homes, arable land, and critical infrastructure. Increased flooding and erosion threaten freshwater supplies and create significant economic challenges, particularly for coastal communities dependent on tourism and fishing.',
-      learnMore: 'https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level',
-    },
-    {
       image: '/wildfire.jpg',
       title: 'Wildfires',
       description: 'Increasing temperatures have led to more frequent and intense wildfires, devastating forests and wildlife, and endangering human lives.',
       moreInfo: 'Wildfires are exacerbated by climate change, leading to more severe damage to ecosystems and releasing significant amounts of CO2 into the atmosphere, worsening global warming. These fires threaten air quality, contribute to respiratory diseases, and force communities to evacuate, resulting in economic losses and long-term psychological impacts on affected populations.',
       learnMore: 'https://www.who.int/health-topics/wildfires',
+    },
+    {
+      image: '/sea-level.jpg',
+      title: 'Rising Sea Levels',
+      description: 'Coastal cities around the world are threatened by rising sea levels, displacing communities and disrupting ecosystems.',
+      moreInfo: 'Rising sea levels result from melting ice caps and glaciers and thermal expansion of seawater, leading to the loss of homes, arable land, and critical infrastructure. Increased flooding and erosion threaten freshwater supplies and create significant economic challenges, particularly for coastal communities dependent on tourism and fishing.',
+      learnMore: 'https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level',
     },
     {
       image: '/drought.jpg',
@@ -43,11 +43,11 @@ const WhyItMatters: React.FC = () => {
       learnMore: 'https://www.drought.gov/current-conditions',
     },
     {
-      image: '/melting.jpg',
-      title: 'Melting Ice Caps',
-      description: 'The polar ice caps are melting at an alarming rate, contributing to sea level rise and threatening polar ecosystems.',
-      moreInfo: "The loss of Arctic and Antarctic ice disrupts global weather patterns, accelerates sea level rise, and puts species like polar bears and penguins at risk of extinction. The melting ice also impacts Indigenous communities that rely on these ecosystems for their livelihoods, as well as global climate patterns by reducing the Earth's albedo effect, which helps regulate temperatures.",
-      learnMore: 'https://www.nationalgeographic.com/environment/article/antarctic-ice-melt',
+      image: '/storms.jpg',
+      title: 'Severe Storms',
+      description: 'Climate change is fueling more intense hurricanes, typhoons, and cyclones, causing widespread damage to communities and infrastructure.',
+      moreInfo: 'Warmer ocean temperatures and changing weather patterns are contributing to more powerful and destructive storms, displacing millions and costing billions in damages. The increase in storm frequency and intensity leads to higher insurance premiums, infrastructure repair costs, and long-term displacement for communities, significantly affecting local economies and recovery efforts.',
+      learnMore: 'https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level',
     },
     {
       image: '/heatwave.jpg',
@@ -57,11 +57,11 @@ const WhyItMatters: React.FC = () => {
       learnMore: 'https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health',
     },
     {
-      image: '/storms.jpg',
-      title: 'Severe Storms',
-      description: 'Climate change is fueling more intense hurricanes, typhoons, and cyclones, causing widespread damage to communities and infrastructure.',
-      moreInfo: 'Warmer ocean temperatures and changing weather patterns are contributing to more powerful and destructive storms, displacing millions and costing billions in damages. The increase in storm frequency and intensity leads to higher insurance premiums, infrastructure repair costs, and long-term displacement for communities, significantly affecting local economies and recovery efforts.',
-      learnMore: 'https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level',
+      image: '/melting.jpg',
+      title: 'Melting Ice Caps',
+      description: 'The polar ice caps are melting at an alarming rate, contributing to sea level rise and threatening polar ecosystems.',
+      moreInfo: "The loss of Arctic and Antarctic ice disrupts global weather patterns, accelerates sea level rise, and puts species like polar bears and penguins at risk of extinction. The melting ice also impacts Indigenous communities that rely on these ecosystems for their livelihoods, as well as global climate patterns by reducing the Earth's albedo effect, which helps regulate temperatures.",
+      learnMore: 'https://www.nationalgeographic.com/environment/article/antarctic-ice-melt',
     },
     {
       image: '/biodiversity.jpg',
@@ -72,7 +72,7 @@ const WhyItMatters: React.FC = () => {
     },
   ];  
 
-  const duplicatedItems = [...items, ...items];
+  const duplicatedItems = [...items, ...items, ...items]; // Duplicate items to make scroll smooth in both directions
   const cardContainerRef = useRef<HTMLDivElement>(null);
 
   const handleCardClick = (item: { title: string; description: string; image: string; moreInfo: string; learnMore: string }) => {
@@ -104,16 +104,21 @@ const WhyItMatters: React.FC = () => {
     const handleScroll = () => {
       if (container) {
         const { scrollLeft, scrollWidth, clientWidth } = container;
-        if (scrollLeft >= scrollWidth / 2) {
-          container.scrollLeft = scrollLeft - scrollWidth / 2;
-        } else if (scrollLeft < 0) {
-          container.scrollLeft = scrollWidth / 2 + scrollLeft;
+        const halfWidth = scrollWidth / 3;
+
+        // Reset scroll when near the left or right boundaries
+        if (scrollLeft <= 0) {
+          container.scrollLeft = halfWidth;
+        } else if (scrollLeft >= scrollWidth - clientWidth) {
+          container.scrollLeft = halfWidth;
         }
       }
     };
 
     if (container) {
       container.addEventListener('scroll', handleScroll);
+      // Initialize scroll to the center
+      container.scrollLeft = container.scrollWidth / 3;
     }
 
     return () => {

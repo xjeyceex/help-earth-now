@@ -50,6 +50,7 @@ export default function Header() {
     action1free?: string;
     action2free?: string;
     action3free?: string;
+    action4free?: string;
     action1low?: string;
     action2low?: string;
     action3low?: string;
@@ -61,15 +62,16 @@ export default function Header() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-
+  
       try {
         if (!location?.state) return;
-
+  
         const response = await fetch(`/api/header`);
         const mainData = await response.json();
-
+  
         const stateKey = stateAbbreviations[location.state as keyof typeof stateAbbreviations];
-
+  
+        // Filter data for the state and optionally the county
         const data = mainData.filter((item: HeaderData) => {
           const matchesState = 
             item.state === stateKey ||         // Exact state match
@@ -78,33 +80,49 @@ export default function Header() {
           const matchesCounty = location.county ? location.county === item.county || item.county === '' : true;
           return matchesState && matchesCounty;
         });
-
-        let filteredData = [];
-        if (location.county) {
-          const countyData = data.filter((item: HeaderData) => 
-            item.county !== '' && item.state !== 'ALL'
-          );
-          filteredData = countyData.length > 0 ? countyData : data.filter((item: HeaderData) => item.state !== 'ALL');
-        } else {
-          filteredData = data.filter((item: HeaderData) => item.state !== 'ALL');
-        }
-
-        if (filteredData.length > 0) {
-          const selectedData = filteredData[0];
-          setWarningText(selectedData.warning || warningText);
-          setQuestions([selectedData.problem1, selectedData.problem2, selectedData.problem3, selectedData.problem4].filter(Boolean));
-
-          // Set actions
-          setActions({
-            free: [selectedData.action1free, selectedData.action2free, selectedData.action3free, selectedData.action4free].filter(Boolean),
-            low: [selectedData.action1low, selectedData.action2low, selectedData.action3low].filter(Boolean),
-            high: [selectedData.action1high, selectedData.action2high, selectedData.action3high].filter(Boolean)
-          });
-
-          if (selectedData.link) {
-            const videoUrl = `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`;
-            setVideoUrl(videoUrl);
-          }
+  
+        console.log('data', data);
+  
+        let countyData = data.filter((item: HeaderData) => 
+          item.county === location.county && item.state !== 'ALL'
+        );
+        const stateAllData = data.find((item: HeaderData) => item.state === `${stateKey} - ALL`);
+  
+        // If countyData is limited or empty, fall back to stateAllData for missing fields
+        const selectedData = countyData.length > 0 ? countyData[0] : stateAllData;
+  
+        // Merge missing fields from stateAllData if necessary
+        const finalData = {
+          warning: selectedData?.warning || stateAllData?.warning || warningText,
+          problem1: selectedData?.problem1 || stateAllData?.problem1,
+          problem2: selectedData?.problem2 || stateAllData?.problem2,
+          problem3: selectedData?.problem3 || stateAllData?.problem3,
+          problem4: selectedData?.problem4 || stateAllData?.problem4,
+          action1free: selectedData?.action1free || stateAllData?.action1free,
+          action2free: selectedData?.action2free || stateAllData?.action2free,
+          action3free: selectedData?.action3free || stateAllData?.action3free,
+          action4free: selectedData?.action4free || stateAllData?.action4free,
+          action1low: selectedData?.action1low || stateAllData?.action1low,
+          action2low: selectedData?.action2low || stateAllData?.action2low,
+          action3low: selectedData?.action3low || stateAllData?.action3low,
+          action1high: selectedData?.action1high || stateAllData?.action1high,
+          action2high: selectedData?.action2high || stateAllData?.action2high,
+          action3high: selectedData?.action3high || stateAllData?.action3high,
+          link: selectedData?.link || stateAllData?.link
+        };
+  
+        // Update component state
+        setWarningText(finalData.warning);
+        setQuestions([finalData.problem1, finalData.problem2, finalData.problem3, finalData.problem4].filter(Boolean));
+        setActions({
+          free: [finalData.action1free, finalData.action2free, finalData.action3free, finalData.action4free].filter(Boolean),
+          low: [finalData.action1low, finalData.action2low, finalData.action3low].filter(Boolean),
+          high: [finalData.action1high, finalData.action2high, finalData.action3high].filter(Boolean)
+        });
+  
+        if (finalData.link) {
+          const videoUrl = `https://www.youtube.com/embed/${finalData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${finalData.link}`;
+          setVideoUrl(videoUrl);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -112,10 +130,10 @@ export default function Header() {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, [location?.state, location?.county]);
-
+  
   return (
     <div className="w-full" id="home">
       {loading ? ( // Show loading message while data is being fetched
@@ -142,7 +160,7 @@ export default function Header() {
                   <ul className="care-about-list list-disc mt-2 text-base md:text-2xl leading-relaxed md:leading-tight pl-8">
                     {questions.map((question: string, index: number) => (
                       <li key={index} className="pb-1 md:pb-2">
-                        {question}
+                        {question.endsWith('?') ? question : `${question}?`}
                       </li>
                     ))}
                   </ul>

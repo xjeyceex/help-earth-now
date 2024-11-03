@@ -29,31 +29,22 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Theme>
-          {/* Google Ads Script */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=AW-16761923424"
-            strategy="afterInteractive"
-          />
-          <Script id="google-ads" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-16761923424');
-            `}
-          </Script>
-          
-          {/* Google Analytics Script */}
+          {/* Combined Google Analytics and Google Ads Script */}
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-JSGJDD1V6M"
             strategy="afterInteractive"
           />
-          <Script id="google-analytics" strategy="afterInteractive">
+          <Script id="google-analytics-and-ads" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              
+              // Google Analytics ID
               gtag('config', 'G-JSGJDD1V6M');
+              
+              // Google Ads ID
+              gtag('config', 'AW-16761923424');
             `}
           </Script>
 

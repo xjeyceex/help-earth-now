@@ -74,41 +74,41 @@ export default function Header() {
         // Filter data for the state and optionally the county
         const data = mainData.filter((item: HeaderData) => {
           const matchesState = 
-            item.state === stateKey ||         // Exact state match
-            item.state === `${stateKey} - ALL` ||  // State with '- ALL'
-            item.state === 'ALL';              // General "ALL" entry
+            item.state === stateKey ||                // Exact state match
+            item.state === `${stateKey} - ALL` ||     // State with '- ALL'
+            item.state === 'ALL';                     // General "ALL" entry
           const matchesCounty = location.county ? location.county === item.county || item.county === '' : true;
           return matchesState && matchesCounty;
         });
   
         console.log('data', data);
   
-        let countyData = data.filter((item: HeaderData) => 
-          item.county === location.county && item.state !== 'ALL'
-        );
+        // Separate data entries
+        let countyData = data.find((item: HeaderData) => item.county === location.county && item.state !== 'ALL');
         const stateAllData = data.find((item: HeaderData) => item.state === `${stateKey} - ALL`);
+        const generalAllData = data.find((item: HeaderData) => item.state === 'ALL');
   
-        // If countyData is limited or empty, fall back to stateAllData for missing fields
-        const selectedData = countyData.length > 0 ? countyData[0] : stateAllData;
+        // Determine the selected data
+        const selectedData = countyData || stateAllData || generalAllData;
   
-        // Merge missing fields from stateAllData if necessary
+        // Merge missing fields from stateAllData and generalAllData if necessary
         const finalData = {
-          warning: selectedData?.warning || stateAllData?.warning || warningText,
-          problem1: selectedData?.problem1 || stateAllData?.problem1,
-          problem2: selectedData?.problem2 || stateAllData?.problem2,
-          problem3: selectedData?.problem3 || stateAllData?.problem3,
-          problem4: selectedData?.problem4 || stateAllData?.problem4,
-          action1free: selectedData?.action1free || stateAllData?.action1free,
-          action2free: selectedData?.action2free || stateAllData?.action2free,
-          action3free: selectedData?.action3free || stateAllData?.action3free,
-          action4free: selectedData?.action4free || stateAllData?.action4free,
-          action1low: selectedData?.action1low || stateAllData?.action1low,
-          action2low: selectedData?.action2low || stateAllData?.action2low,
-          action3low: selectedData?.action3low || stateAllData?.action3low,
-          action1high: selectedData?.action1high || stateAllData?.action1high,
-          action2high: selectedData?.action2high || stateAllData?.action2high,
-          action3high: selectedData?.action3high || stateAllData?.action3high,
-          link: selectedData?.link || stateAllData?.link
+          warning: selectedData?.warning || stateAllData?.warning || generalAllData?.warning || warningText,
+          problem1: selectedData?.problem1 || stateAllData?.problem1 || generalAllData?.problem1,
+          problem2: selectedData?.problem2 || stateAllData?.problem2 || generalAllData?.problem2,
+          problem3: selectedData?.problem3 || stateAllData?.problem3 || generalAllData?.problem3,
+          problem4: selectedData?.problem4 || stateAllData?.problem4 || generalAllData?.problem4,
+          action1free: selectedData?.action1free || stateAllData?.action1free || generalAllData?.action1free,
+          action2free: selectedData?.action2free || stateAllData?.action2free || generalAllData?.action2free,
+          action3free: selectedData?.action3free || stateAllData?.action3free || generalAllData?.action3free,
+          action4free: selectedData?.action4free || stateAllData?.action4free || generalAllData?.action4free,
+          action1low: selectedData?.action1low || stateAllData?.action1low || generalAllData?.action1low,
+          action2low: selectedData?.action2low || stateAllData?.action2low || generalAllData?.action2low,
+          action3low: selectedData?.action3low || stateAllData?.action3low || generalAllData?.action3low,
+          action1high: selectedData?.action1high || stateAllData?.action1high || generalAllData?.action1high,
+          action2high: selectedData?.action2high || stateAllData?.action2high || generalAllData?.action2high,
+          action3high: selectedData?.action3high || stateAllData?.action3high || generalAllData?.action3high,
+          link: selectedData?.link || stateAllData?.link || generalAllData?.link
         };
   
         // Update component state

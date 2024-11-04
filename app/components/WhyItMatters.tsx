@@ -132,7 +132,7 @@ const WhyItMatters: React.FC = () => {
 
   return (
     <section className="bg-gray-100 dark:bg-gray-900 py-8 px-4 w-full relative lg:px-20">
-      <div className="max-w-7xl mx-auto text-center">
+      <div className="max-w-screen-2xl mx-auto text-center">
         <p className="text-2xl text-gray-700 dark:text-gray-300">
           Climate change is affecting every corner of the planet, from extreme weather events to rising sea levels. By taking action now, we can slow down these effects and protect our future.
         </p>

@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import Image from 'next/image'; // Import Image from next/image
 import React, { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const WhyItMatters: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +54,7 @@ const WhyItMatters: React.FC = () => {
     {
       image: '/heatwave.jpg',
       title: 'Heatwaves',
-      description: 'Heatwaves are becoming more intense and prolonged, endangering public health, agriculture, and energy supplies.',
+      description: 'Intense heatwaves are becoming more intense and prolonged, endangering public health, agriculture, and energy supplies.',
       moreInfo: 'Extreme heat events cause heat-related illnesses and deaths, strain power grids, and reduce crop yields, exacerbating food insecurity. Vulnerable populations, including the elderly and those with pre-existing health conditions, are at greater risk. The agricultural sector also faces challenges as heat stress on crops reduces yields and quality, impacting food supply and prices.',
       learnMore: 'https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health',
     },
@@ -161,13 +163,19 @@ const WhyItMatters: React.FC = () => {
 
           {/* Navigation buttons */}
           <div className="absolute top-1/2 transform -translate-y-1/2 left-5">
-            <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollLeft}>
-              &#8249;
+            <button 
+              className="text-white bg-blue-500 dark:text-white hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center" 
+              onClick={scrollLeft}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} className="text-1xl" />
             </button>
           </div>
           <div className="absolute top-1/2 transform -translate-y-1/2 right-5">
-            <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollRight}>
-              &#8250;
+            <button 
+              className="text-white bg-blue-500 dark:text-white hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center" 
+              onClick={scrollRight}
+            >
+              <FontAwesomeIcon icon={faChevronRight} className="text-1xl" />
             </button>
           </div>
         </div>

@@ -76,6 +76,7 @@ const WhyItMatters: React.FC = () => {
 
   const duplicatedItems = [...items, ...items, ...items]; // Duplicate items to make scroll smooth in both directions
   const cardContainerRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null); // Reference for modal content
 
   const handleCardClick = (item: { title: string; description: string; image: string; moreInfo: string; learnMore: string }) => {
     setModalContent(item);
@@ -130,6 +131,25 @@ const WhyItMatters: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        closeModal();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+
   return (
     <section className="bg-gray-100 dark:bg-gray-900 py-8 px-4 w-full relative lg:px-20">
       <div className="max-w-screen-2xl mx-auto text-center">
@@ -183,8 +203,8 @@ const WhyItMatters: React.FC = () => {
 
       {/* Modal content */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-white dark:bg-gray-800 max-w-lg mx-auto p-8 rounded-lg shadow-lg relative text-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-6">
+          <div ref={modalRef} className="bg-white dark:bg-gray-800 max-w-lg mx-auto p-8 rounded-lg shadow-lg relative text-center">
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 text-2xl"
@@ -197,8 +217,7 @@ const WhyItMatters: React.FC = () => {
             <Link
               href={modalContent.learnMore}
               target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              className="inline-block mt-4 px-6 py-3 text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 rounded-lg"
             >
               Learn More
             </Link>

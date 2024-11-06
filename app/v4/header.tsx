@@ -199,11 +199,7 @@ export default function Header() {
                     </h3>
                     {actions.free.map((action, index) => (
                       <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
-                        {action === "Vote for people who care" ? (
-                          <Link href="/who" className="text-blue-500 underline hover:text-blue-700 font-bold dark:text-blue-400 dark:hover:text-blue-500">{action}&rarr;</Link>
-                        ) : (
-                          action
-                        )}
+                          {action}
                       </p>
                     ))}
                   </div>

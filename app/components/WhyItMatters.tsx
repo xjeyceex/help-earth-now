@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import Image from 'next/image'; // Import Image from next/image
 import React, { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const WhyItMatters: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,8 +53,8 @@ const WhyItMatters: React.FC = () => {
     },
     {
       image: '/heatwave.jpg',
-      title: 'Extreme Heatwaves',
-      description: 'Heatwaves are becoming more intense and prolonged, endangering public health, agriculture, and energy supplies.',
+      title: 'Heatwaves',
+      description: 'Intense heatwaves are becoming more intense and prolonged, endangering public health, agriculture, and energy supplies.',
       moreInfo: 'Extreme heat events cause heat-related illnesses and deaths, strain power grids, and reduce crop yields, exacerbating food insecurity. Vulnerable populations, including the elderly and those with pre-existing health conditions, are at greater risk. The agricultural sector also faces challenges as heat stress on crops reduces yields and quality, impacting food supply and prices.',
       learnMore: 'https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health',
     },
@@ -74,6 +76,7 @@ const WhyItMatters: React.FC = () => {
 
   const duplicatedItems = [...items, ...items, ...items]; // Duplicate items to make scroll smooth in both directions
   const cardContainerRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null); // Reference for modal content
 
   const handleCardClick = (item: { title: string; description: string; image: string; moreInfo: string; learnMore: string }) => {
     setModalContent(item);
@@ -128,67 +131,93 @@ const WhyItMatters: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        closeModal();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+
   return (
-    <section className="bg-gray-100 dark:bg-gray-900 py-8 px-4 w-full relative">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="bg-gray-100 dark:bg-gray-900 py-8 px-4 w-full relative lg:px-20">
+      <div className="max-w-screen-2xl mx-auto text-center">
         <p className="text-2xl text-gray-700 dark:text-gray-300">
           Climate change is affecting every corner of the planet, from extreme weather events to rising sea levels. By taking action now, we can slow down these effects and protect our future.
         </p>
 
-        <div className="mt-6 relative overflow-hidden p-4">
+        <div className="mt-6 relative overflow-hidden">
           <div ref={cardContainerRef} className="flex space-x-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-4">
             {duplicatedItems.map((item, index) => (
               <div
                 key={index}
-                className="min-w-[300px] snap-center border dark:border-gray-800 border-gray-300 relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-gray-900 cursor-pointer shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+                className="min-w-[300px] snap-center border dark:border-gray-800 border-gray-300 relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-gray-900 cursor-pointer shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
                 onClick={() => handleCardClick(item)}
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={300}
-                  height={256} // Adjust height accordingly
-                  className="w-full h-64 object-cover transition-transform duration-500 transform hover:scale-110"
-                  style={{ width: 'auto', height: 'auto' }}
+                  height={256}
+                  className="w-full h-64 object-cover rounded-t-lg transition-transform duration-500 transform hover:scale-110"
                 />
-                <div className="relative p-6 text-gray-900 dark:text-gray-100">
-                  <h3 className="text-3xl font-semibold">{item.title}</h3>
-                  <p className="mt-3">{item.description}</p>
+                <div className="relative p-6 text-gray-900 dark:text-gray-100 text-center">
+                  <h3 className="text-3xl font-semibold mb-3">{item.title}</h3>
+                  <hr className="border-t-2 border-gray-300 dark:border-gray-700 my-6 mx-auto w-3/4" />
+                  <p className="mt-2 text-gray-700 dark:text-gray-300">{item.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
+          {/* Navigation buttons */}
           <div className="absolute top-1/2 transform -translate-y-1/2 left-5">
-            <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollLeft}>
-              &#8249;
+            <button 
+              className="text-white bg-blue-500 dark:text-white hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center" 
+              onClick={scrollLeft}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} className="text-1xl" />
             </button>
           </div>
           <div className="absolute top-1/2 transform -translate-y-1/2 right-5">
-            <button className="text-2xl text-white bg-gray-700 dark:bg-gray-300 dark:text-gray-900 hover:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center opacity-75 hover:opacity-100" onClick={scrollRight}>
-              &#8250;
+            <button 
+              className="text-white bg-blue-500 dark:text-white hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center" 
+              onClick={scrollRight}
+            >
+              <FontAwesomeIcon icon={faChevronRight} className="text-1xl" />
             </button>
           </div>
         </div>
       </div>
 
+      {/* Modal content */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-white dark:bg-gray-800 max-w-lg mx-auto p-8 rounded-lg shadow-lg relative">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-6">
+          <div ref={modalRef} className="bg-white dark:bg-gray-800 max-w-lg mx-auto p-8 rounded-lg shadow-lg relative text-center">
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 text-2xl"
             >
               &times;
             </button>
-            <Image src={modalContent.image} alt={modalContent.title} width={600} height={400} className="w-full h-64 object-cover rounded-lg" />
+            <Image src={modalContent.image} alt={modalContent.title} width={600} height={400} className="w-full h-64 object-cover rounded-lg mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-4">{modalContent.title}</h3>
             <p className="mt-2 text-gray-700 dark:text-gray-300">{modalContent.moreInfo}</p>
             <Link
               href={modalContent.learnMore}
               target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              className="inline-block mt-4 px-6 py-3 text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 rounded-lg"
             >
               Learn More
             </Link>
@@ -196,6 +225,7 @@ const WhyItMatters: React.FC = () => {
         </div>
       )}
     </section>
+
   );
 };
 

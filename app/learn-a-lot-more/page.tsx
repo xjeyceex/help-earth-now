@@ -16,13 +16,13 @@ export default function LearnALotMore() {
 
         <h2 className="text-2xl font-semibold mt-8">Climatebase</h2>
         <p className="text-lg mt-2">
-          Climatebase is a great resource for finding organizations and jobs that are shaping a climate-positive future.
+          Climatebase is a great resource for finding organizations and jobs that are shaping a climate-positive future. {' '}
           <a href="https://climatebase.org/" className="text-blue-500 hover:underline">Explore Climatebase</a>
         </p>
 
         <h2 className="text-2xl font-semibold mt-8">Terra.do</h2>
         <p className="text-lg mt-2">
-          Terra.do offers an excellent platform for learning about climate change and taking action towards climate solutions.
+          Terra.do offers an excellent platform for learning about climate change and taking action towards climate solutions. {' '}
           <a href="https://terra.do" className="text-blue-500 hover:underline">Explore Terra.do</a>
         </p>
       </div>

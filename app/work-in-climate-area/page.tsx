@@ -16,14 +16,14 @@ export default function WorkInClimateArea() {
 
         <h2 className="text-2xl font-semibold mt-8">Climatebase</h2>
         <p className="text-lg mt-2">
-          Climatebase is the platform for climate action, connecting people to climate-positive job opportunities.
+          Climatebase is the platform for climate action, connecting people to climate-positive job opportunities. {' '}
           <a href="https://climatebase.org/" className="text-blue-500 hover:underline">Visit Climatebase</a>
         </p>
 
         <h2 className="text-2xl font-semibold mt-8">Terra.do</h2>
         <p className="text-lg mt-2">
           Terra.do offers climate education, green skills, and climate careers, helping individuals learn about climate change 
-          and take action towards solutions.
+          and take action towards solutions. {' '}
           <a href="https://terra.do" className="text-blue-500 hover:underline">Visit Terra.do</a>
         </p>
       </div>

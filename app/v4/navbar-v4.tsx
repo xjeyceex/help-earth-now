@@ -86,8 +86,8 @@ export default function NavbarThree() {
   return (
     <>
       <nav className="bg-gray-900 w-full sticky top-0 z-50">
-        <div className="container mx-auto flex items-center justify-between px-3 py-0">
-          {/* Brand / Logo */}
+        <div className="w-full lg:container mx-auto flex items-center justify-between px-3 py-0">
+        {/* Brand / Logo */}
           <div className="sm:block">
             <Link href="/">
               <Image
@@ -142,12 +142,15 @@ export default function NavbarThree() {
           </div>
 
           {/* Links for larger screens */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6 text-center">
             <Link href="/" className={linkClasses('')}>
               Home
             </Link>
             <Link href="/about" className={linkClasses('about')}>
               About Us
+            </Link>
+            <Link href="/jointeam" className={linkClasses('about')}>
+              Join a Team
             </Link>
             <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
               Learn More
@@ -200,6 +203,9 @@ export default function NavbarThree() {
           </Link>
           <Link href="/about" className={linkClasses('about')}>
             About Us
+          </Link>
+          <Link href="/jointeam" className={linkClasses('about')}>
+            Join a Team
           </Link>
           <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
             Learn More

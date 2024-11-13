@@ -57,7 +57,7 @@ export default function Jointeam() {
                         <h2 className="text-xl font-semibold">Leah Thomas</h2>
                         <p className="text-sm text-gray-600">Founder of Intersectional Environmentalist, a platform for climate justice advocacy.</p>
                         <a
-                            href="https://x.com/leahthomas"
+                            href="https://x.com/Leahtommi"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-500 hover:underline"

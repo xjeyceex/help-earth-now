@@ -176,7 +176,7 @@ export default function NavbarThree() {
                 </svg>
               </button>
               {aboutDropdownOpen && (
-                <div className="absolute right-0 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
                   <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                     About Us
                   </Link>
@@ -192,6 +192,7 @@ export default function NavbarThree() {
                 </div>
               )}
             </div>
+
             <DarkModeToggle />
 
             {/* Dropdown for authenticated users */}
@@ -222,21 +223,27 @@ export default function NavbarThree() {
         </div>
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
+        <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
           <button onClick={toggleMenu} className="text-white self-end text-lg">
             ✕
           </button>
-          <Link href="/" className={linkClasses('')}>
+          <Link href="/" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Home
           </Link>
-          <Link href="/about-us" className={linkClasses('about-us')}>
+          <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             About Us
           </Link>
-          <Link href="/join-a-team" className={linkClasses('join-a-team')}>
+          <Link href="/join-a-team" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Join a Team
           </Link>
-          <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
+          <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+            Work in the Climate Area
+          </Link>
+          <Link href={`/learn-more`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Learn More
+          </Link>
+          <Link href="/learn-a-lot-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+            Learn a Lot More
           </Link>
           {/* <Link href="//what" className={linkClasses('//what')}>
             What can I do?

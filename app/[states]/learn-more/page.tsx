@@ -1,5 +1,5 @@
 import CookieConsent from "@/app/components/CookieConsent";
-import NavbarThree from "../navbar-v3";
+import NavbarThree from "@/app/v4/navbar-v4";
 import ActionTable from "@/app/components/AdditionalInformation";
 
 export default function Home() {

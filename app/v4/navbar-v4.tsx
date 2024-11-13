@@ -20,6 +20,11 @@ export default function NavbarThree() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+
+  const toggleAboutDropdown = () => {
+    setAboutDropdownOpen(!aboutDropdownOpen);
+  };
 
   const linkClasses = (path: string) =>
     `block px-3 py-1 text-sm transition ${
@@ -146,24 +151,50 @@ export default function NavbarThree() {
             <Link href="/" className={linkClasses('')}>
               Home
             </Link>
-            <Link href="/about" className={linkClasses('about')}>
-              About Us
-            </Link>
-            <Link href="/jointeam" className={linkClasses('about')}>
+            <Link href="/join-a-team" className={linkClasses('join-a-team')}>
               Join a Team
             </Link>
-            <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
-              Learn More
-            </Link>
-            <DarkModeToggle/>
-            {/* <Link href="//what" className={linkClasses('//what')}>
-              What can I do?
-            </Link> */}
-            {/* <Link href="//who" className={linkClasses('//who')}>
-              Who
-            </Link> */}
+            {/* About Us dropdown */}
+            <div className="relative">
+              <button
+                onClick={toggleAboutDropdown}
+                className={`flex items-center px-4 py-2 rounded-lg bg-gray-800 text-sm text-gray-200 hover:bg-gray-700 transition-all duration-200 ${
+                  aboutDropdownOpen ? 'text-white bg-gray-700' : ''
+                }`}
+              >
+                About Us
+                <svg
+                  className={`w-4 h-4 ml-2 transition-transform duration-200 ${
+                    aboutDropdownOpen ? 'transform rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {aboutDropdownOpen && (
+                <div className="absolute right-0 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
+                  <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    About Us
+                  </Link>
+                  <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    Work in the Climate Area
+                  </Link>
+                  <Link href="/learn-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    Learn More
+                  </Link>
+                  <Link href="/learn-a-lot-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    Learn a Lot More
+                  </Link>
+                </div>
+              )}
+            </div>
+            <DarkModeToggle />
 
-            {/* Show dropdown if authenticated */}
+            {/* Dropdown for authenticated users */}
             {status === 'authenticated' && (
               <div className="relative">
                 <button
@@ -180,10 +211,7 @@ export default function NavbarThree() {
                     <Link href="/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Admin Panel
                     </Link>
-                    <Link
-                      href="/api/auth/signout"
-                      className="block px-3 py-2 text-base text-white hover:text-red-500 transition"
-                    >
+                    <Link href="/api/auth/signout" className="block px-3 py-2 text-base text-white hover:text-red-500 transition">
                       Sign Out
                     </Link>
                   </div>
@@ -201,10 +229,10 @@ export default function NavbarThree() {
           <Link href="/" className={linkClasses('')}>
             Home
           </Link>
-          <Link href="/about" className={linkClasses('about')}>
+          <Link href="/about-us" className={linkClasses('about-us')}>
             About Us
           </Link>
-          <Link href="/jointeam" className={linkClasses('about')}>
+          <Link href="/join-a-team" className={linkClasses('join-a-team')}>
             Join a Team
           </Link>
           <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>

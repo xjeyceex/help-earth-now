@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CookieConsent from "@/app/components/CookieConsent";
 import NavbarThree from "@/app/v4/navbar-v4";
 
@@ -17,14 +18,43 @@ export default function WorkInClimateArea() {
         <h2 className="text-2xl font-semibold mt-8">Climatebase</h2>
         <p className="text-lg mt-2">
           Climatebase is the platform for climate action, connecting people to climate-positive job opportunities. {' '}
-          <a href="https://climatebase.org/" className="text-blue-500 hover:underline">Visit Climatebase</a>
+          <Link 
+            href="https://climatebase.org/" 
+            className="text-blue-500 hover:underline" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Visit Climatebase
+          </Link>
         </p>
 
         <h2 className="text-2xl font-semibold mt-8">Terra.do</h2>
         <p className="text-lg mt-2">
           Terra.do offers climate education, green skills, and climate careers, helping individuals learn about climate change 
           and take action towards solutions. {' '}
-          <a href="https://terra.do" className="text-blue-500 hover:underline">Visit Terra.do</a>
+          <Link 
+            href="https://terra.do" 
+            className="text-blue-500 hover:underline" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Visit Terra.do
+          </Link>
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8">Learn More</h2>
+        <p className="text-lg mt-2">
+          Gain deeper insights into climate communication and solutions from thought leaders in the field. 
+          Check out this post by climate scientist {' '}
+          <Link 
+            href="https://bsky.app/profile/katharinehayhoe.com/post/3lcg2zsx72226" 
+            className="text-blue-500 hover:underline" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Katharine Hayhoe
+          </Link> {' '}
+          to explore valuable perspectives on climate action.
         </p>
       </div>
 

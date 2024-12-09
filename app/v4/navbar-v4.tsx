@@ -176,21 +176,91 @@ export default function NavbarThree() {
                 </svg>
               </button>
               {aboutDropdownOpen && (
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                  <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
+                  <Link
+                    href="/about-us"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     About Us
                   </Link>
-                  <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                  <Link
+                    href="/work-in-climate-area"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     Work in the Climate Area
                   </Link>
-                  <Link href="/learn-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-                    Learn More
-                  </Link>
-                  <Link href="/learn-a-lot-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+
+                  {/* Learn More Section */}
+                  <div className="relative group">
+                    <button
+                      className="flex items-center justify-center w-full px-4 py-3 text-base font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-200"
+                    >
+                      Learn More
+                      <span className="ml-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                    <div className="hidden group-hover:block absolute left-full top-0 w-56 bg-gray-800 shadow-lg rounded-lg mt-2 p-3">
+                      <Link
+                        href="/learn-more/topic1"
+                        className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                      >
+                        Topic 1
+                      </Link>
+                      <Link
+                        href="/learn-more/topic2"
+                        className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                      >
+                        Topic 2
+                      </Link>
+
+                      {/* Nested Layer */}
+                      <div className="relative group">
+                        <button
+                          className="block w-full px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                        >
+                          Topic 3
+                        </button>
+                        <div className="hidden group-hover:block absolute left-full top-0 w-56 bg-gray-700 shadow-lg rounded-lg mt-2 p-3">
+                          <Link
+                            href="/learn-more/topic3/detail1"
+                            className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                          >
+                            Detail 1
+                          </Link>
+                          <Link
+                            href="/learn-more/topic3/detail2"
+                            className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                          >
+                            Detail 2
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    href="/learn-a-lot-more"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     Learn a Lot More
                   </Link>
                 </div>
               )}
+
             </div>
 
             <DarkModeToggle />

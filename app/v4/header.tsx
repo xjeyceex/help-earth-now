@@ -187,7 +187,7 @@ export default function Header() {
           
           <div className="w-full max-w-7xl mx-auto pt-6 pb-12 lg:px-16" id="what">
             <h2 className="text-5xl text-center dark:text-gray-200 font-bold pb-6 px-4 italic">
-              What Can I Do?
+              You CAN make a difference!
             </h2>
             <div className="flex flex-wrap gap-6 justify-center px-6">
               {/* Free actions */}

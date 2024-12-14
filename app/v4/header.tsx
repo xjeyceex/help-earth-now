@@ -11,11 +11,11 @@ import { faLeaf } from '@fortawesome/free-solid-svg-icons'; // Importing Font Aw
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI");
-  const [warningText, setWarningText] = useState("It's getting hotter out there—and no, it's not just the summer. Time to face climate change head-on before we're all roasted.");
+  const [warningText, setWarningText] = useState("");
   const [questions, setQuestions] = useState<string[]>([
-    'Rising temperatures',
-    'Extreme weather events affecting communities',
-    'The potential increase in insurance premiums due to climate-related risks',
+    "",
+    "",
+    "",
   ]);
   const [actions, setActions] = useState<{
     free: string[];
@@ -23,18 +23,18 @@ export default function Header() {
     high: string[];
   }>({
     free: [
-      "Use electric heaters instead of fireplaces",
-      "Talk about Climate Chage with others",
-      "Share this site with others"
+      "",
+      "",
+      ""
     ],
     low: [
-      "Insulate your doors & windows better",
-      "Compost if possible"
+      "",
+      ""
     ],
     high: [
-      "Make next car electric or hybrid",
-      "Replace gas water heater with electric",
-      "Use heat pump for air conditioning"
+      "",
+      "",
+      ""
     ]
 });
 

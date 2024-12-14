@@ -192,27 +192,35 @@ export default function Header() {
             <div className="flex flex-wrap gap-6 justify-center px-6">
               {/* Free actions */}
               {actions.free.length > 0 && (
-                <div className="flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
+                <div className="flex flex-col flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-yellow-100 opacity-30"></div>
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex-grow">
                     <FontAwesomeIcon icon={faDove} className="text-5xl text-green-500 mb-4" />
                     <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
                       What can I do for free?
                     </h3>
                     {actions.free.map((action, index) => (
                       <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
-                          {action}
+                        {action}
                       </p>
                     ))}
+                  </div>
+                  <div className="relative z-10 text-right mt-auto">
+                    <Link
+                      href="/actions/free"
+                      className="text-xl text-blue-500 hover:underline"
+                    >
+                      More →
+                    </Link>
                   </div>
                 </div>
               )}
 
               {/* Low-cost actions */}
               {actions.low.length > 0 && (
-                <div className="flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
+                <div className="flex flex-col flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-purple-100 opacity-30"></div>
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex-grow">
                     <FontAwesomeIcon icon={faDollarSign} className="text-5xl text-yellow-500 mb-4" />
                     <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
                       What if I can spend a little?
@@ -223,14 +231,22 @@ export default function Header() {
                       </p>
                     ))}
                   </div>
+                  <div className="relative z-10 text-right mt-auto">
+                    <Link
+                      href="/actions/low"
+                      className="text-xl text-blue-500 hover:underline"
+                    >
+                      More →
+                    </Link>
+                  </div>
                 </div>
               )}
 
               {/* High-cost actions */}
               {actions.high.length > 0 && (
-                <div className="flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
+                <div className="flex flex-col flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-purple-100 opacity-30"></div>
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex-grow">
                     <FontAwesomeIcon icon={faSolarPanel} className="text-5xl text-cyan-600 mb-4" />
                     <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
                       What if I can spend more?
@@ -241,10 +257,20 @@ export default function Header() {
                       </p>
                     ))}
                   </div>
+                  <div className="relative z-10 text-right mt-auto">
+                    <Link
+                      href="/actions/high"
+                      className="text-xl text-blue-500 hover:underline"
+                    >
+                      More →
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
           </div>
+
+
         </>
       )}
     </div>

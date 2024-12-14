@@ -23,16 +23,18 @@ export default function Header() {
     high: string[];
   }>({
     free: [
-      "Burn fewer things: fewer fires, drive less, etc.",
-      "Vote for people who care",
+      "Use electric heaters instead of fireplaces",
+      "Talk about Climate Chage with others",
       "Share this site with others"
     ],
     low: [
-      "Insulate your doors & windows better"
+      "Insulate your doors & windows better",
+      "Compost if possible"
     ],
     high: [
       "Make next car electric or hybrid",
-      "Replace gas water heater with electric"
+      "Replace gas water heater with electric",
+      "Use heat pump for air conditioning"
     ]
 });
 

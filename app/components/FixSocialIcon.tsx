@@ -1,6 +1,7 @@
 import React from "react";
 import { FaLinkedin, FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
+import { FaBluesky } from "react-icons/fa6";
 
 function FixSocialIcon() {
   return (
@@ -46,6 +47,17 @@ function FixSocialIcon() {
             <FaInstagram />
           </Link>
         </li>
+        <li>
+          <Link
+            href="https://bsky.app/profile/helpyouhelpyou.bsky.social" // Add your link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"
+          >
+            <FaBluesky /> 
+          </Link>
+        </li>
+
       </ul>
     </div>
   );

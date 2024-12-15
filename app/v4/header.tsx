@@ -205,14 +205,16 @@ export default function Header() {
                       </p>
                     ))}
                   </div>
-                  <div className="relative z-10 text-right mt-auto">
-                    <Link
-                      href="/actions/free"
-                      className="text-xl text-blue-500 hover:underline"
-                    >
-                      More →
-                    </Link>
-                  </div>
+                  {location?.county === 'Contra Costa County' && (
+                    <div className="relative z-10 text-right mt-auto">
+                      <Link
+                        href={`/high/${encodeURIComponent(location?.county || '')}`} 
+                        className="text-xl text-blue-500 hover:underline"
+                      >
+                        More →
+                      </Link>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -231,14 +233,16 @@ export default function Header() {
                       </p>
                     ))}
                   </div>
-                  <div className="relative z-10 text-right mt-auto">
-                    <Link
-                      href="/actions/low"
-                      className="text-xl text-blue-500 hover:underline"
-                    >
-                      More →
-                    </Link>
-                  </div>
+                  {location?.county === 'Contra Costa County' && (
+                    <div className="relative z-10 text-right mt-auto">
+                      <Link
+                        href={`/high/${encodeURIComponent(location?.county || '')}`} 
+                        className="text-xl text-blue-500 hover:underline"
+                      >
+                        More →
+                      </Link>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -257,14 +261,16 @@ export default function Header() {
                       </p>
                     ))}
                   </div>
-                  <div className="relative z-10 text-right mt-auto">
-                    <Link
-                      href="/actions/high"
-                      className="text-xl text-blue-500 hover:underline"
-                    >
-                      More →
-                    </Link>
-                  </div>
+                  {location?.county === 'Contra Costa County' && (
+                    <div className="relative z-10 text-right mt-auto">
+                      <Link
+                        href={`/high/${encodeURIComponent(location?.county || '')}`} 
+                        className="text-xl text-blue-500 hover:underline"
+                      >
+                        More →
+                      </Link>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

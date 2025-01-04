@@ -194,17 +194,22 @@ export default function Header() {
               {actions.free.length > 0 && (
                 <div className="flex flex-col flex-1 min-w-[300px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-transform transform hover:scale-105 p-8 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-yellow-100 opacity-30"></div>
-                  <div className="relative z-10 flex-grow">
-                    <FontAwesomeIcon icon={faDove} className="text-5xl text-green-500 mb-4" />
-                    <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                      What can I do for free?
-                    </h3>
-                    {actions.free.map((action, index) => (
-                      <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
-                        {action}
-                      </p>
-                    ))}
-                  </div>
+                    <div className="relative z-10 flex-grow">
+                      <FontAwesomeIcon icon={faDove} className="text-5xl text-green-500 mb-4" />
+                      <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                        What can I do for free?
+                      </h3>
+                      <div className="space-y-4"> {/* Added container div with space-y */}
+                        {actions.free.map((action, index) => (
+                          <p
+                            key={index}
+                            className="text-2xl text-gray-700 dark:text-gray-300 break-words leading-tight"
+                          >
+                            {action}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
                   {location?.county === 'Contra Costa County' && (
                     <div className="relative z-10 text-right mt-auto">
                       <Link
@@ -227,11 +232,13 @@ export default function Header() {
                     <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
                       What if I can spend a little?
                     </h3>
-                    {actions.low.map((action, index) => (
-                      <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
-                        {action}
-                      </p>
-                    ))}
+                    <div className="space-y-4">
+                      {actions.low.map((action, index) => (
+                        <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
+                          {action}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                   {location?.county === 'Contra Costa County' && (
                     <div className="relative z-10 text-right mt-auto">
@@ -255,11 +262,13 @@ export default function Header() {
                     <h3 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
                       What if I can spend more?
                     </h3>
-                    {actions.high.map((action, index) => (
-                      <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
-                        {action}
-                      </p>
-                    ))}
+                    <div className="space-y-4">
+                      {actions.high.map((action, index) => (
+                        <p key={index} className="text-2xl text-gray-700 dark:text-gray-300 mt-2">
+                          {action}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                   {location?.county === 'Contra Costa County' && (
                     <div className="relative z-10 text-right mt-auto">

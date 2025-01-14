@@ -63,37 +63,40 @@ export default function Header() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!location?.state) return; // Exit early if location data isn't available
-
+      const stateKey = location?.state
+        ? stateAbbreviations[location.state as keyof typeof stateAbbreviations]
+        : "US"; // Default to "US" if location.state is falsy
+  
+      if (!stateKey) return; // Exit early if no valid state key
+  
       setLoading(true); // Set loading to true while fetching data
       try {
         const response = await fetch(`/api/header`);
         if (!response.ok) {
           throw new Error(`Failed to fetch data: ${response.statusText}`);
         }
-
+  
         const mainData: HeaderData[] = await response.json();
-        const stateKey = stateAbbreviations[location.state as keyof typeof stateAbbreviations];
-
+  
         // Filter data for the state and optionally the county
         const relevantData = mainData.filter((item) => {
           const matchesState =
             item.state === stateKey ||
             item.state === `${stateKey} - ALL` ||
             item.state === "ALL";
-          const matchesCounty = location.county
+          const matchesCounty = location?.county
             ? location.county === item.county || item.county === ""
             : true;
           return matchesState && matchesCounty;
         });
-
+  
         // Prioritize county-specific, state-wide, and general data in order
         const selectedData =
-          relevantData.find((item) => item.county === location.county) ||
+          relevantData.find((item) => item.county === location?.county) ||
           relevantData.find((item) => item.state === `${stateKey} - ALL`) ||
           relevantData.find((item) => item.state === "ALL") ||
           ({} as HeaderData);
-
+  
         // Update state with the selected data
         setWarningText(selectedData.warning || "");
         setQuestions(
@@ -103,7 +106,7 @@ export default function Header() {
             selectedData.problem3,
             selectedData.problem4,
           ].filter((item): item is string => item !== undefined && item.trim() !== "") // Excludes undefined and empty strings
-        );        
+        );
         setActions({
           free: [
             selectedData.action1free,
@@ -121,8 +124,7 @@ export default function Header() {
             selectedData.action3high,
           ].filter((item): item is string => item !== undefined), // Type guard
         });
-        
-
+  
         if (selectedData.link) {
           const videoEmbedUrl = `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`;
           setVideoUrl(videoEmbedUrl);
@@ -133,10 +135,10 @@ export default function Header() {
         setLoading(false); // Ensure loading is set to false after data is fetched
       }
     };
-
-    fetchData();
-  }, [location?.state, location?.county]); 
   
+    fetchData();
+  }, [location?.state, location?.county]);
+    
   return (
     <div className="w-full" id="home">
       {loading ? (

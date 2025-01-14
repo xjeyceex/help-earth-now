@@ -175,7 +175,7 @@ export default function Header() {
                   </svg>
                 </Link>
               </div>
-              <div className="lg:mt-0 lg:col-span-5 lg:flex">
+              <div className="lg:mt-0 lg:col-span-5 lg:flex lg:ml-8">
                 <iframe
                   className="w-full aspect-video rounded-md shadow-lg"
                   src={videoUrl}

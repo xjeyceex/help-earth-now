@@ -20,6 +20,11 @@ export default function NavbarThree() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+
+  const toggleAboutDropdown = () => {
+    setAboutDropdownOpen(!aboutDropdownOpen);
+  };
 
   const linkClasses = (path: string) =>
     `block px-3 py-1 text-sm transition ${
@@ -86,8 +91,8 @@ export default function NavbarThree() {
   return (
     <>
       <nav className="bg-gray-900 w-full sticky top-0 z-50">
-        <div className="container mx-auto flex items-center justify-between px-3 py-0">
-          {/* Brand / Logo */}
+        <div className="w-full lg:container mx-auto flex items-center justify-between px-3 py-0">
+        {/* Brand / Logo */}
           <div className="sm:block">
             <Link href="/">
               <Image
@@ -142,25 +147,125 @@ export default function NavbarThree() {
           </div>
 
           {/* Links for larger screens */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6 text-center">
             <Link href="/" className={linkClasses('')}>
               Home
             </Link>
-            <Link href="/about" className={linkClasses('about')}>
-              About Us
+            <Link href="/join-a-team" className={linkClasses('join-a-team')}>
+              Join a Team
             </Link>
-            <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
-              Learn More
-            </Link>
-            <DarkModeToggle/>
-            {/* <Link href="//what" className={linkClasses('//what')}>
-              What can I do?
-            </Link> */}
-            {/* <Link href="//who" className={linkClasses('//who')}>
-              Who
-            </Link> */}
+            {/* About Us dropdown */}
+            <div className="relative">
+              <button
+                onClick={toggleAboutDropdown}
+                className={`flex items-center px-4 py-2 rounded-lg bg-gray-800 text-sm text-gray-200 hover:bg-gray-700 transition-all duration-200 ${
+                  aboutDropdownOpen ? 'text-white bg-gray-700' : ''
+                }`}
+              >
+                About Us
+                <svg
+                  className={`w-4 h-4 ml-2 transition-transform duration-200 ${
+                    aboutDropdownOpen ? 'transform rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {aboutDropdownOpen && (
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
+                  <Link
+                    href="/about-us"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    href="/work-in-climate-area"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
+                    Work in the Climate Area
+                  </Link>
 
-            {/* Show dropdown if authenticated */}
+                  {/* Learn More Section */}
+                  <div className="relative group">
+                    <button
+                      className="flex items-center justify-center w-full px-4 py-3 text-base font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-200"
+                    >
+                      Learn More
+                      <span className="ml-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                    <div className="hidden group-hover:block absolute left-full top-0 w-56 bg-gray-800 shadow-lg rounded-lg mt-2 p-3">
+                      <Link
+                        href="/learn-more/topic1"
+                        className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                      >
+                        Topic 1
+                      </Link>
+                      <Link
+                        href="/learn-more/topic2"
+                        className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                      >
+                        Topic 2
+                      </Link>
+
+                      {/* Nested Layer */}
+                      <div className="relative group">
+                        <button
+                          className="block w-full px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                        >
+                          Topic 3
+                        </button>
+                        <div className="hidden group-hover:block absolute left-full top-0 w-56 bg-gray-700 shadow-lg rounded-lg mt-2 p-3">
+                          <Link
+                            href="/learn-more/topic3/detail1"
+                            className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                          >
+                            Detail 1
+                          </Link>
+                          <Link
+                            href="/learn-more/topic3/detail2"
+                            className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                          >
+                            Detail 2
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    href="/learn-a-lot-more"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
+                    Learn a Lot More
+                  </Link>
+                </div>
+              )}
+
+            </div>
+
+            <DarkModeToggle />
+
+            {/* Dropdown for authenticated users */}
             {status === 'authenticated' && (
               <div className="relative">
                 <button
@@ -177,10 +282,7 @@ export default function NavbarThree() {
                     <Link href="/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
                       Admin Panel
                     </Link>
-                    <Link
-                      href="/api/auth/signout"
-                      className="block px-3 py-2 text-base text-white hover:text-red-500 transition"
-                    >
+                    <Link href="/api/auth/signout" className="block px-3 py-2 text-base text-white hover:text-red-500 transition">
                       Sign Out
                     </Link>
                   </div>
@@ -191,18 +293,27 @@ export default function NavbarThree() {
         </div>
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
+        <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
           <button onClick={toggleMenu} className="text-white self-end text-lg">
             ✕
           </button>
-          <Link href="/" className={linkClasses('')}>
+          <Link href="/" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Home
           </Link>
-          <Link href="/about" className={linkClasses('about')}>
+          <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             About Us
           </Link>
-          <Link href={`/learn-more`} className={linkClasses(`learn-more`)}>
+          <Link href="/join-a-team" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+            Join a Team
+          </Link>
+          <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+            Work in the Climate Area
+          </Link>
+          <Link href={`/learn-more`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Learn More
+          </Link>
+          <Link href="/learn-a-lot-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+            Learn a Lot More
           </Link>
           {/* <Link href="//what" className={linkClasses('//what')}>
             What can I do?

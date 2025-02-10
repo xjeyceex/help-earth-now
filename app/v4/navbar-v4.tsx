@@ -152,7 +152,7 @@ export default function NavbarThree() {
               Home
             </Link>
             <Link href="/join-a-team" className={linkClasses('join-a-team')}>
-              Join a Team
+              Follow Key People
             </Link>
             {/* About Us dropdown */}
             <div className="relative">
@@ -162,7 +162,7 @@ export default function NavbarThree() {
                   aboutDropdownOpen ? 'text-white bg-gray-700' : ''
                 }`}
               >
-                About Us
+                Learn More
                 <svg
                   className={`w-4 h-4 ml-2 transition-transform duration-200 ${
                     aboutDropdownOpen ? 'transform rotate-180' : ''
@@ -304,7 +304,7 @@ export default function NavbarThree() {
             About Us
           </Link>
           <Link href="/join-a-team" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            Join a Team
+            Follow Key People
           </Link>
           <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Work in the Climate Area

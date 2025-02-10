@@ -8,7 +8,7 @@ export default function Jointeam() {
             <NavbarThree/>
             <BackButton />
             <div className="p-6 mx-auto max-w-2xl">
-                <h1 className="text-3xl font-bold text-center mb-4">Join a Team</h1>
+                <h1 className="text-3xl font-bold text-center mb-4">Follow Key People</h1>
                 <p className="text-lg text-center mb-6">
                     Explore influential voices in climate action and join the movement. Follow these leaders to stay informed, get involved, and make a difference!
                 </p>

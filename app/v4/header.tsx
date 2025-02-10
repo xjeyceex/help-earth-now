@@ -12,32 +12,8 @@ export default function Header() {
   const { location } = useContext(LocationContext) || {};
   const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/embed/0yMGg5VDltI?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=0yMGg5VDltI");
   const [warningText, setWarningText] = useState("");
-  const [questions, setQuestions] = useState<string[]>([
-    "",
-    "",
-    "",
-  ]);
-  const [actions, setActions] = useState<{
-    free: string[];
-    low: string[];
-    high: string[];
-  }>({
-    free: [
-      "",
-      "",
-      ""
-    ],
-    low: [
-      "",
-      ""
-    ],
-    high: [
-      "",
-      "",
-      ""
-    ]
-});
-
+  const [questions, setQuestions] = useState<string[]>([]);
+  const [actions, setActions] = useState<{ free: string[]; low: string[]; high: string[] }>({ free: [], low: [], high: [] });
   const [loading, setLoading] = useState(true); // Loading state
 
   interface HeaderData {
@@ -63,79 +39,46 @@ export default function Header() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const stateKey = location?.state
-        ? stateAbbreviations[location.state as keyof typeof stateAbbreviations]
-        : "US"; // Default to "US" if location.state is falsy
-  
-      if (!stateKey) return; // Exit early if no valid state key
-  
-      setLoading(true); // Set loading to true while fetching data
+      const stateKey = location?.state ? stateAbbreviations[location.state as keyof typeof stateAbbreviations] : "US";
+      if (!stateKey) return;
+
+      setLoading(true);
       try {
         const response = await fetch(`/api/header`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
-        }
-  
+        if (!response.ok) throw new Error(`Failed to fetch data: ${response.statusText}`);
+
         const mainData: HeaderData[] = await response.json();
-  
-        // Filter data for the state and optionally the county
-        const relevantData = mainData.filter((item) => {
-          const matchesState =
-            item.state === stateKey ||
-            item.state === `${stateKey} - ALL` ||
-            item.state === "ALL";
-          const matchesCounty = location?.county
-            ? location.county === item.county || item.county === ""
-            : true;
+
+        const relevantData = mainData.filter(item => {
+          const matchesState = item.state === stateKey || item.state === `${stateKey} - ALL` || item.state === "ALL";
+          const matchesCounty = location?.county ? location.county === item.county || item.county === "" : true;
           return matchesState && matchesCounty;
         });
-  
-        // Prioritize county-specific, state-wide, and general data in order
+
         const selectedData =
-          relevantData.find((item) => item.county === location?.county) ||
-          relevantData.find((item) => item.state === `${stateKey} - ALL`) ||
-          relevantData.find((item) => item.state === "ALL") ||
+          relevantData.find(item => item.county === location?.county) ||
+          relevantData.find(item => item.state === `${stateKey} - ALL`) ||
+          relevantData.find(item => item.state === "ALL") ||
           ({} as HeaderData);
-  
-        // Update state with the selected data
-        setWarningText(selectedData.warning || "");
-        setQuestions(
-          [
-            selectedData.problem1,
-            selectedData.problem2,
-            selectedData.problem3,
-            selectedData.problem4,
-          ].filter((item): item is string => item !== undefined && item.trim() !== "") // Excludes undefined and empty strings
-        );
+
+        setWarningText(selectedData.warning?.trim() || "");
+        setQuestions([selectedData.problem1, selectedData.problem2, selectedData.problem3, selectedData.problem4].filter(Boolean) as string[]);
         setActions({
-          free: [
-            selectedData.action1free,
-            selectedData.action2free,
-            selectedData.action3free,
-          ].filter((item): item is string => item !== undefined), // Type guard
-          low: [
-            selectedData.action1low,
-            selectedData.action2low,
-            selectedData.action3low,
-          ].filter((item): item is string => item !== undefined), // Type guard
-          high: [
-            selectedData.action1high,
-            selectedData.action2high,
-            selectedData.action3high,
-          ].filter((item): item is string => item !== undefined), // Type guard
+          free: [selectedData.action1free, selectedData.action2free, selectedData.action3free].filter(Boolean) as string[],
+          low: [selectedData.action1low, selectedData.action2low, selectedData.action3low].filter(Boolean) as string[],
+          high: [selectedData.action1high, selectedData.action2high, selectedData.action3high].filter(Boolean) as string[],
         });
-  
+
         if (selectedData.link) {
-          const videoEmbedUrl = `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`;
-          setVideoUrl(videoEmbedUrl);
+          setVideoUrl(`https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`);
         }
       } catch (error) {
         console.error("Error fetching header data:", error);
       } finally {
-        setLoading(false); // Ensure loading is set to false after data is fetched
+        setLoading(false);
       }
     };
-  
+
     fetchData();
   }, [location?.state, location?.county]);
     

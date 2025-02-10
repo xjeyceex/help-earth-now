@@ -41,7 +41,7 @@ const ActionTable: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 w-full text-gray-900 dark:text-gray-200">
       {/* Main header */}
-      <header className="bg-green-600 dark:bg-green-700 text-white py-16 text-center">
+      <header className="bg-green-600 dark:bg-green-700 text-white py-8 text-center">
         <h1 className="text-5xl font-bold">Saving the Planet: No Cape, Just Common Sense</h1>
         <p className="mt-4 text-lg max-w-2xl mx-auto">
           Practical steps you can take today to make a real difference in protecting our planet.

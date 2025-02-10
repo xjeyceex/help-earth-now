@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
 import Link from 'next/link';
+import FixSocialIcon from './FixSocialIcon';
 
 interface ActionItem {
   action: string;
@@ -83,6 +84,7 @@ const ActionTable: React.FC = () => {
           ))}
         </div>
       </section>
+      <FixSocialIcon/>
       <Footer />
     </div>
   );

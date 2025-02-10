@@ -19,7 +19,7 @@ const ActionTable: React.FC = () => {
       try {
         const response = await fetch('/api/learnMore');
         const data = await response.json();
-        setActionItems(data);
+        setActionItems(data || []);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching action items:', error);

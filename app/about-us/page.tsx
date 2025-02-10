@@ -23,15 +23,23 @@ const iconMap: Record<HeaderType, JSX.Element> = {
 export default function AboutUsPage() {
     const [aboutUsData, setAboutUsData] = useState<AboutUsItem[]>([]);
     const [groupedData, setGroupedData] = useState<{ header: string; contents: string[] }[]>([]);
+    const [loading, setLoading] = useState(true); // Add loading state
+    const [error, setError] = useState<string | null>(null); // Add error state
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch('/api/aboutUs');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
                 const data: AboutUsItem[] = await response.json();
                 setAboutUsData(data);
             } catch (error) {
+                setError('There was an error fetching the data.');
                 console.error("Error fetching About Us data:", error);
+            } finally {
+                setLoading(false); // Set loading to false once data is fetched
             }
         }
         fetchData();
@@ -50,6 +58,22 @@ export default function AboutUsPage() {
         }, [] as { header: string; contents: string[] }[]);
         setGroupedData(grouped);
     }, [aboutUsData]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-8 px-6 text-center">
+                <p className="text-lg text-red-500">{error}</p>
+            </main>
+        );
+    }
 
     return (
         <>

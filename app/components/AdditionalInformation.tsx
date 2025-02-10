@@ -48,8 +48,18 @@ const ActionTable: React.FC = () => {
         </p>
       </header>
 
+      {/* Embedded Video */}
+      <div className="flex justify-center py-8">
+        <iframe
+          className="w-full max-w-3xl aspect-video rounded-md shadow-lg"
+          src="https://www.youtube.com/embed/nnMJedLHjpY"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        ></iframe>
+      </div>
+
       {/* Section with additional actions */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
+      <section className="max-w-7xl mx-auto px-6 py-2">
         <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100 text-center mb-8">
           Additional Things You Can Do
         </h2>

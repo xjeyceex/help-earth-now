@@ -151,7 +151,7 @@ export default function NavbarThree() {
             <Link href="/" className={linkClasses('')}>
               Home
             </Link>
-            <Link href="/join-a-team" className={linkClasses('join-a-team')}>
+            <Link href="/follow-people" className={linkClasses('follow-people')}>
               Follow Key People
             </Link>
             {/* About Us dropdown */}
@@ -303,7 +303,7 @@ export default function NavbarThree() {
           <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             About Us
           </Link>
-          <Link href="/join-a-team" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+          <Link href="/follow-people" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
             Follow Key People
           </Link>
           <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">

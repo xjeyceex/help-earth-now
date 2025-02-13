@@ -2,11 +2,13 @@
 import { useEffect, useState } from 'react';
 import BackButton from "../components/BackButton";
 import NavbarThree from "../v4/navbar-v4";
+import Link from 'next/link';
 
 interface KeyPerson {
   Name: string;
   Description: string;
   Link: string;
+  Platform: string;
 }
 
 export default function Jointeam() {
@@ -50,7 +52,7 @@ export default function Jointeam() {
       </div>
     );
   }
-
+  
   return (
     <>
       <NavbarThree />
@@ -66,14 +68,14 @@ export default function Jointeam() {
             <div key={person.Name} className="p-4 border rounded-lg shadow-md">
               <h2 className="text-xl font-semibold">{person.Name}</h2>
               <p className="text-sm text-gray-600">{person.Description}</p>
-              <a
-                href={person.Link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                Follow on X (Twitter)
-              </a>
+              <Link
+                  href={person.Link || "#"} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  Follow on {person.Platform}
+                </Link>
             </div>
           ))}
         </div>

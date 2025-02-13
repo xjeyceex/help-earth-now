@@ -79,40 +79,48 @@ export default function AboutUsPage() {
         <>
             <NavbarThree />
             <BackButton />
-            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-8 px-6">
-                <section className="max-w-7xl mx-auto "> {/* Reduced space-y-12 to space-y-6 */}
-                    <h1 className="text-5xl font-extrabold text-center text-gray-900 dark:text-gray-100 tracking-tight mb-6">
-                        About Us
-                    </h1>
+            <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 py-4 px-6">
+                <section className="max-w-7xl mx-auto">
+                <h1 className="text-5xl font-extrabold text-center text-gray-900 dark:text-gray-100 tracking-tight mb-3">
+                    About Us
+                </h1>
 
-                    {groupedData.map((section, index) => (
-                        section.header === "Join Us" ? (
-                            <div key={index} className="bg-gradient-to-r from-green-400 to-blue-500 shadow-xl rounded-lg p-8 text-center text-white transition-transform transform hover:scale-105 duration-300 mt-4">
-                                <h2 className="text-3xl font-semibold mb-3">{section.header}</h2> {/* Reduced mb-6 to mb-3 */}
-                                {section.contents.map((content, idx) => (
-                                    <p key={idx} className="text-lg leading-7 mb-3"> {/* Reduced mb-6 to mb-3 */}
-                                        {content}
-                                    </p>
-                                ))}
-                            </div>
-                        ) : (
-                            <div key={index} className="bg-white shadow-xl rounded-lg p-8 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700 mt-4">
-                                <h2 className="text-3xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
-                                    {iconMap[section.header as HeaderType] || <FaHandsHelping className="mr-2 text-green-500" />}
-                                    {section.header}
-                                </h2>
-                                {section.contents.map((content, idx) => (
-                                    <p key={idx} className="text-lg leading-7 text-gray-600 dark:text-gray-300 mb-3">
-                                        {content}
-                                    </p>
-                                ))}
-                            </div>
-                        )
-                    ))}
+                {groupedData.map((section, index) =>
+                    section.header === "Join Us" ? (
+                    <div
+                        key={index}
+                        className="bg-gradient-to-r from-green-400 to-blue-500 shadow-xl rounded-lg px-8 py-6 text-center text-white transition-transform transform hover:scale-105 duration-300 mt-3" // Reduced mt-4 to mt-3
+                    >
+                        <h2 className="text-3xl font-semibold mb-2">{section.header}</h2> {/* Reduced mb-3 to mb-2 */}
+                        {section.contents.map((content, idx) => (
+                        <p key={idx} className="text-lg leading-7 mb-2"> {/* Reduced mb-3 to mb-2 */}
+                            {content}
+                        </p>
+                        ))}
+                    </div>
+                    ) : (
+                    <div
+                        key={index}
+                        className="bg-white shadow-xl rounded-lg px-8 py-6 transition-transform transform hover:scale-105 duration-300 dark:bg-gray-700 mt-3" // Reduced mt-4 to mt-3
+                    >
+                        <h2 className="text-3xl font-semibold mb-2 text-gray-900 dark:text-gray-100 flex items-center">
+                        {iconMap[section.header as HeaderType] || (
+                            <FaHandsHelping className="mr-2 text-green-500" />
+                        )}
+                        {section.header}
+                        </h2>
+                        {section.contents.map((content, idx) => (
+                        <p key={idx} className="text-lg leading-7 text-gray-600 dark:text-gray-300 mb-2"> {/* Reduced mb-3 to mb-2 */}
+                            {content}
+                        </p>
+                        ))}
+                    </div>
+                    )
+                )}
                 </section>
             </main>
 
             <FeedbackButton />
-        </>
+            </>
     );
 }

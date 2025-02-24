@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
-import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
+import {
+  states,
+  counties as allCounties,
+  stateAbbreviations,
+} from '../us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
@@ -14,9 +18,12 @@ export default function NavbarThree() {
   const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
-  const { location, setManualLocation, updateLocation } = useContext(LocationContext) || {};
-  const [selectedState, setSelectedState] = useState<string>(location?.state || '');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { location, setManualLocation, updateLocation } =
+    useContext(LocationContext) || {};
+  const [selectedState, setSelectedState] = useState<string>(
+    location?.state || ''
+  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
@@ -66,11 +73,11 @@ export default function NavbarThree() {
 
   const handleUpdateAutomatically = () => {
     if (updateLocation) {
-      updateLocation(); 
+      updateLocation();
     }
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
     window.location.reload();
-  }
+  };
 
   useEffect(() => {
     if (isModalOpen && location) {
@@ -92,14 +99,14 @@ export default function NavbarThree() {
     <>
       <nav className="bg-gray-900 w-full sticky top-0 z-50">
         <div className="w-full lg:container mx-auto flex items-center justify-between px-3 py-0">
-        {/* Brand / Logo */}
+          {/* Brand / Logo */}
           <div className="sm:block">
             <Link href="/">
               <Image
                 src="/logowhite.png"
                 alt="MyApp Logo"
-                width={200} 
-                height={200} 
+                width={200}
+                height={200}
                 style={{ width: 'auto', height: 'auto' }}
                 priority
               />
@@ -109,10 +116,15 @@ export default function NavbarThree() {
             onClick={() => setIsModalOpen(true)}
             className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group m-5" // Added group class
           >
-            <FontAwesomeIcon icon={faMapMarkerAlt} className="text-green-400 mr-2" />
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              className="text-green-400 mr-2"
+            />
             <p className="text-xs md:text-sm text-white flex-grow">
               {location?.county
-                ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
+                ? `${location.county}, ${
+                    stateAbbreviations[location.state ?? '']
+                  }`
                 : location?.state
                 ? stateAbbreviations[location.state] // Show state abbreviation only
                 : 'United States'}
@@ -127,8 +139,11 @@ export default function NavbarThree() {
           </div>
           {/* Hamburger button for small screens */}
           <div className="md:hidden flex gap-5">
-            <DarkModeToggle/>
-            <button className="text-white focus:outline-none" onClick={toggleMenu}>
+            <DarkModeToggle />
+            <button
+              className="text-white focus:outline-none"
+              onClick={toggleMenu}
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -151,7 +166,10 @@ export default function NavbarThree() {
             <Link href="/" className={linkClasses('')}>
               Home
             </Link>
-            <Link href="/follow-people" className={linkClasses('follow-people')}>
+            <Link
+              href="/follow-people"
+              className={linkClasses('follow-people')}
+            >
               Follow Key People
             </Link>
             {/* About Us dropdown */}
@@ -172,21 +190,38 @@ export default function NavbarThree() {
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
               {aboutDropdownOpen && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                  <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                  <Link
+                    href="/about-us"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     About Us
                   </Link>
-                  <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                  <Link
+                    href="/work-in-climate-area"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     Work in the Climate Area
                   </Link>
-                  <Link href="/learn-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                  <Link
+                    href="/learn-more"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     Learn More
                   </Link>
-                  <Link href="/learn-a-lot-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                  <Link
+                    href="/learn-a-lot-more"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
                     Learn a Lot More
                   </Link>
                 </div>
@@ -200,19 +235,30 @@ export default function NavbarThree() {
               <div className="relative">
                 <button
                   onClick={toggleDropdown}
-                  className={`text-gray-400 hover:text-gray-300 transition ${isDropdownOpen ? 'text-white' : ''}`}
+                  className={`text-gray-400 hover:text-gray-300 transition ${
+                    isDropdownOpen ? 'text-white' : ''
+                  }`}
                 >
                   Menu
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                    <Link href="/content" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link
+                      href="/content"
+                      className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                    >
                       Content Management
                     </Link>
-                    <Link href="/admin" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link
+                      href="/admin"
+                      className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                    >
                       Admin Panel
                     </Link>
-                    <Link href="/api/auth/signout" className="block px-3 py-2 text-base text-white hover:text-red-500 transition">
+                    <Link
+                      href="/api/auth/signout"
+                      className="block px-3 py-2 text-base text-white hover:text-red-500 transition"
+                    >
                       Sign Out
                     </Link>
                   </div>
@@ -223,52 +269,73 @@ export default function NavbarThree() {
         </div>
         {/* Mobile Menu */}
         {isMenuOpen && (
-        <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
-          <button onClick={toggleMenu} className="text-white self-end text-lg">
-            ✕
-          </button>
-          <Link href="/" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            Home
-          </Link>
-          <Link href="/about-us" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            About Us
-          </Link>
-          <Link href="/follow-people" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            Follow Key People
-          </Link>
-          <Link href="/work-in-climate-area" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            Work in the Climate Area
-          </Link>
-          <Link href={`/learn-more`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            Learn More
-          </Link>
-          <Link href="/learn-a-lot-more" className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
-            Learn a Lot More
-          </Link>
-          {/* <Link href="//what" className={linkClasses('//what')}>
+          <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
+            <button
+              onClick={toggleMenu}
+              className="text-white self-end text-lg"
+            >
+              ✕
+            </button>
+            <Link
+              href="/"
+              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about-us"
+              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+            >
+              About Us
+            </Link>
+            <Link
+              href="/follow-people"
+              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+            >
+              Follow Key People
+            </Link>
+            <Link
+              href="/work-in-climate-area"
+              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+            >
+              Work in the Climate Area
+            </Link>
+            <Link
+              href={`/learn-more`}
+              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+            >
+              Learn More
+            </Link>
+            <Link
+              href="/learn-a-lot-more"
+              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+            >
+              Learn a Lot More
+            </Link>
+            {/* <Link href="//what" className={linkClasses('//what')}>
             What can I do?
           </Link> */}
-          {/* <Link href="//who" className={linkClasses('//who')}>
+            {/* <Link href="//who" className={linkClasses('//who')}>
             Who
           </Link> */}
-          
-          {status === 'authenticated' && (
-            <>
-              <Link href="//content" className={linkClasses("//content")}>
-                Content Management
-              </Link>
-              <Link href="//admin" className={linkClasses('//admin')}>
-                Admin Panel
-              </Link>
-              <Link
-                href="/api/auth/signout"
-                className="block px-4 py-2 text-white hover:text-red-500 transition"
-              >
-                Sign Out
-              </Link>
-            </>
-          )}
-        </div>
+
+            {status === 'authenticated' && (
+              <>
+                <Link href="//content" className={linkClasses('//content')}>
+                  Content Management
+                </Link>
+                <Link href="//admin" className={linkClasses('//admin')}>
+                  Admin Panel
+                </Link>
+                <Link
+                  href="/api/auth/signout"
+                  className="block px-4 py-2 text-white hover:text-red-500 transition"
+                >
+                  Sign Out
+                </Link>
+              </>
+            )}
+          </div>
         )}
       </nav>
 
@@ -276,9 +343,16 @@ export default function NavbarThree() {
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 px-4">
           <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-xs sm:max-w-md flex flex-col items-center">
-            <h2 className="text-lg font-semibold mb-4 dark:text-black">Update Location</h2>
+            <h2 className="text-lg font-semibold mb-4 dark:text-black">
+              Update Location
+            </h2>
             <div className="w-full mb-4">
-              <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">State</label>
+              <label
+                htmlFor="state"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                State
+              </label>
               <select
                 id="state"
                 value={selectedState}
@@ -286,13 +360,20 @@ export default function NavbarThree() {
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
               >
                 <option value="/">Select State</option>
-                {states.map(state => (
-                  <option key={state} value={state} className="text-gray-700">{state}</option>
+                {states.map((state) => (
+                  <option key={state} value={state} className="text-gray-700">
+                    {state}
+                  </option>
                 ))}
               </select>
             </div>
             <div className="w-full mb-4">
-              <label htmlFor="county" className="block text-sm font-medium text-gray-700 mb-2">County</label>
+              <label
+                htmlFor="county"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                County
+              </label>
               <select
                 id="county"
                 value={selectedCounty}

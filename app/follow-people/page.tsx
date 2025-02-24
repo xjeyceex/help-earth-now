@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import { useEffect, useState } from 'react';
-import BackButton from "../components/BackButton";
-import NavbarThree from "../v4/navbar-v4";
+import BackButton from '../components/BackButton';
+import NavbarThree from '../v4/navbar-v4';
 import Link from 'next/link';
 
 interface KeyPerson {
@@ -39,9 +39,9 @@ export default function Jointeam() {
 
   if (loading) {
     return (
-        <div className="flex justify-center items-center h-screen">
-            <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
-        </div>
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+      </div>
     );
   }
 
@@ -52,15 +52,19 @@ export default function Jointeam() {
       </div>
     );
   }
-  
+
   return (
     <>
       <NavbarThree />
       <BackButton />
       <div className="p-6 mx-auto max-w-2xl">
-        <h1 className="text-3xl font-bold text-center mb-4">Follow Key People</h1>
+        <h1 className="text-3xl font-bold text-center mb-4">
+          Follow Key People
+        </h1>
         <p className="text-lg text-center mb-6">
-          Explore influential voices in climate action and join the movement. Follow these leaders to stay informed, get involved, and make a difference!
+          Explore influential voices in climate action and join the movement.
+          Follow these leaders to stay informed, get involved, and make a
+          difference!
         </p>
 
         <div className="space-y-4">
@@ -69,13 +73,13 @@ export default function Jointeam() {
               <h2 className="text-xl font-semibold">{person.Name}</h2>
               <p className="text-sm text-gray-600">{person.Description}</p>
               <Link
-                  href={person.Link || "#"} 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
-                >
-                  Follow on {person.Platform}
-                </Link>
+                href={person.Link || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                Follow on {person.Platform}
+              </Link>
             </div>
           ))}
         </div>

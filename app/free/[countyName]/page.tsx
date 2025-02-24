@@ -76,23 +76,19 @@ const CountyPage: React.FC = () => {
       <BackButton />
       <div className="p-6 min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-extrabold mb-4">
+          <h1 className="text-3xl font-extrabold mb-4 text-center">
             How can I help in {countyName}
           </h1>
-          <p className="text-lg mb-8">
-            Currently viewing information for county:{' '}
-            <span className="font-semibold">{countyName}</span>
-          </p>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {actionItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow"
+                className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow"
               >
-                <h2 className="text-xl font-semibold mb-4">{item.action}</h2>
+                <h2 className="text-xl font-semibold mb-3">{item.action}</h2>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {item.links.map((link, i) => (
                     <span key={i} className="inline-block">
                       {link.url && link.name && (
@@ -104,9 +100,9 @@ const CountyPage: React.FC = () => {
                         </Link>
                       )}
 
-                      {/* Use a subtle dot separator between links */}
+                      {/* Use a larger separator dot */}
                       {i < item.links.length - 1 && (
-                        <span className="mx-2 text-gray-600 dark:text-gray-400">
+                        <span className="mx-3 text-gray-600 dark:text-gray-400 text-lg">
                           •
                         </span>
                       )}

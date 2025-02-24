@@ -7,12 +7,10 @@ import NavbarThree from '@/app/v4/navbar-v4';
 
 interface ActionItem {
   action: string;
-  link1Name?: string;
-  link1?: string;
-  link2Name?: string;
-  link2?: string;
-  link3Name?: string;
-  link3?: string;
+  links: {
+    name?: string;
+    url?: string;
+  }[]; // Array to hold up to 10 links
 }
 
 const CountyPage: React.FC = () => {
@@ -32,12 +30,18 @@ const CountyPage: React.FC = () => {
 
         const normalizedData = data.map((item: any) => ({
           action: item.Action || '',
-          link1Name: item['Link 1 name'] || '',
-          link1: item['Link 1'] || '',
-          link2Name: item['Link 2 name'] || '',
-          link2: item['Link 2'] || '',
-          link3Name: item['Link 3 name'] || '',
-          link3: item['Link 3'] || '',
+          links: [
+            { name: item['Link 1 name'], url: item['Link 1'] },
+            { name: item['Link 2 name'], url: item['Link 2'] },
+            { name: item['Link 3 name'], url: item['Link 3'] },
+            { name: item['Link 4 name'], url: item['Link 4'] },
+            { name: item['Link 5 name'], url: item['Link 5'] },
+            { name: item['Link 6 name'], url: item['Link 6'] },
+            { name: item['Link 7 name'], url: item['Link 7'] },
+            { name: item['Link 8 name'], url: item['Link 8'] },
+            { name: item['Link 9 name'], url: item['Link 9'] },
+            { name: item['Link 10 name'], url: item['Link 10'] },
+          ].filter(link => link.name && link.url), // Filter out empty links
         }));
 
         setActionItems(normalizedData);
@@ -65,7 +69,7 @@ const CountyPage: React.FC = () => {
       <BackButton />
       <div className="p-6 min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-extrabold mb-4">County Page</h1>
+          <h1 className="text-3xl font-extrabold mb-4">How can I help in {countyName} </h1>
           <p className="text-lg mb-8">
             Currently viewing information for county:{' '}
             <span className="font-semibold">{countyName}</span>
@@ -80,30 +84,22 @@ const CountyPage: React.FC = () => {
                 <h2 className="text-xl font-semibold mb-4">{item.action}</h2>
 
                 <div className="space-y-2">
-                  {item.link1 && item.link1Name && (
-                    <Link
-                      href={item.link1.replace('{countyName}', countyName)}
-                      className="text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline"
-                    >
-                      {item.link1Name}
-                    </Link>
-                  )}
-                  {item.link2 && item.link2Name && (
-                    <Link
-                      href={item.link2.replace('{countyName}', countyName)}
-                      className="text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline"
-                    >
-                      {item.link2Name}
-                    </Link>
-                  )}
-                  {item.link3 && item.link3Name && (
-                    <Link
-                      href={item.link3.replace('{countyName}', countyName)}
-                      className="text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline"
-                    >
-                      {item.link3Name}
-                    </Link>
-                  )}
+                  {item.links.map((link, i) => (
+                    <span key={i} className="inline-block">
+                      {link.url && link.name && (
+                        <Link
+                          href={link.url.replace('{countyName}', countyName)}
+                          className="text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+                      {/* Add separator after each link except the last one */}
+                      {i < item.links.length - 1 && (
+                        <span className="mx-2">|</span> // Pipe separator
+                      )}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}

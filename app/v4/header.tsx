@@ -130,11 +130,10 @@ export default function Header() {
       ) : (
         <>
           <section className="bg-gray-50 dark:bg-gray-900 lg:px-16">
-            <div className="grid max-w-screen-2xl px-6 py-6 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:pb-10 lg:grid-cols-12">
-              <div className="mr-auto place-self-center lg:col-span-7 space-y-3">
-                <h1 className="max-w-2xl mb-4 font-extrabold tracking-tight leading-none md:text-6xl xl:text-7xl text-4xl dark:text-white">
-                  Climate change is hurting us{' '}
-                  <span className="font-bold inline-block">all</span> -{' '}
+            <div className="grid max-w-screen-2xl px-6 pb-6 pt-3 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:pb-10 lg:grid-cols-12">
+              <div className="mr-auto lg:col-span-7 space-y-6">
+                <h1 className="max-w-3xl font-extrabold tracking-tight leading-none text-5xl md:text-6xl xl:text-7xl dark:text-white">
+                  Climate change is hurting us all -{' '}
                   <span className="inline-flex items-center italic text-green-500">
                     <span className="mr-1">now</span>
                     <FontAwesomeIcon
@@ -143,24 +142,28 @@ export default function Header() {
                     />
                   </span>
                 </h1>
-                <div className="max-w-2xl mb-6 font-light text-gray-600 lg:mb-8 md:text-xl lg:text-2xl dark:text-gray-400">
-                  <div className="py-4 leading-loose">{warningText}</div>
-                  <div className="text-left">Do you care about:</div>
-                  <ul className="care-about-list list-disc mt-2 text-base md:text-2xl leading-relaxed md:leading-tight pl-8 space-y-2">
+
+                <div className="max-w-2xl font-light text-gray-700 dark:text-gray-300 text-lg sm:text-xl md:text-2xl leading-relaxed">
+                  <div className="pb-4 leading-loose">{warningText}</div>
+                  <div className="text-left font-semibold text-xl sm:text-2xl mb-4">
+                    Do you care about:
+                  </div>
+                  <ul className="care-about-list list-disc pl-8 space-y-2">
                     {questions.map((question: string, index: number) => (
-                      <li key={index} className="pb-1 md:pb-2">
+                      <li key={index} className="pb-1.5">
                         {question.endsWith('?') ? question : `${question}?`}
                       </li>
                     ))}
                   </ul>
                 </div>
+
                 <Link
                   href="#what"
-                  className="mb-5 border border-gray-400 rounded-full hover:bg-gray-100 inline-flex items-center justify-center px-6 py-4 mr-3 text-base font-medium text-center dark:text-white text-gray-900 dark:hover:bg-gray-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+                  className="mb-5 border border-gray-400 rounded-full hover:bg-gray-200 inline-flex items-center justify-center px-6 py-4 text-lg sm:text-xl font-semibold text-center text-gray-900 dark:text-white dark:hover:bg-gray-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 transition duration-200"
                 >
                   What can I do?
                   <svg
-                    className="w-6 h-6 ml-2 -mr-1"
+                    className="w-7 h-7 ml-2 -mr-1"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -173,6 +176,7 @@ export default function Header() {
                   </svg>
                 </Link>
               </div>
+
               <div className="lg:mt-0 lg:col-span-5 lg:flex lg:ml-8 mt-6">
                 <iframe
                   className="w-full aspect-video rounded-md shadow-lg"

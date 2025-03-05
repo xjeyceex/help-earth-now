@@ -94,6 +94,8 @@ const CountyPage: React.FC = () => {
                       {link.url && link.name && (
                         <Link
                           href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-800 dark:hover:text-blue-500 transition-colors duration-200"
                         >
                           {link.name}

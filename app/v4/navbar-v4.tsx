@@ -172,7 +172,10 @@ export default function NavbarThree() {
             >
               Follow Key People
             </Link>
-            {/* About Us dropdown */}
+            <Link href="/about-us" className={linkClasses('about-us')}>
+              About Us
+            </Link>
+            {/* Learn More dropdown */}
             <div className="relative">
               <button
                 onClick={toggleAboutDropdown}
@@ -200,12 +203,6 @@ export default function NavbarThree() {
               </button>
               {aboutDropdownOpen && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                  <Link
-                    href="/about-us"
-                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                  >
-                    About Us
-                  </Link>
                   <Link
                     href="/work-in-climate-area"
                     className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"

@@ -144,13 +144,21 @@ export default function Header() {
                 </h1>
 
                 <div className="max-w-2xl font-light text-gray-700 dark:text-gray-300 text-lg sm:text-xl md:text-2xl leading-relaxed">
-                  <div className="pb-4 leading-normal">{warningText}</div>
-                  <div className="text-left font-semibold text-xl sm:text-2xl mb-4">
+                  {/* Warning text with reduced spacing */}
+                  <div className="pb-2 leading-snug">{warningText}</div>
+
+                  {/* Extra spacing after warning text */}
+                  <div className="pb-2"></div>
+
+                  {/* Title with reduced spacing before bullets */}
+                  <div className="text-left font-semibold text-xl sm:text-2xl mb-2">
                     Do you care about:
                   </div>
-                  <ul className="care-about-list list-disc pl-8 space-y-2">
+
+                  {/* Bullet points with reduced spacing */}
+                  <ul className="care-about-list list-disc pl-8 space-y-1">
                     {questions.map((question: string, index: number) => (
-                      <li key={index} className="pb-1.5">
+                      <li key={index} className="pb-1">
                         {question.endsWith('?') ? question : `${question}?`}
                       </li>
                     ))}

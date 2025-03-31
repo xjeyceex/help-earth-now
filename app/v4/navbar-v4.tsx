@@ -166,12 +166,7 @@ export default function NavbarThree() {
             <Link href="/" className={linkClasses('')}>
               Home
             </Link>
-            <Link
-              href="/follow-people"
-              className={linkClasses('follow-people')}
-            >
-              Follow Key People
-            </Link>
+
             <Link href="/about-us" className={linkClasses('about-us')}>
               About Us
             </Link>
@@ -214,6 +209,12 @@ export default function NavbarThree() {
                     className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
                   >
                     Learn More
+                  </Link>
+                  <Link
+                    href="/follow-people"
+                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                  >
+                    Follow Key People
                   </Link>
                   <Link
                     href="/learn-a-lot-more"

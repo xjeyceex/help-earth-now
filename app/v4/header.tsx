@@ -144,7 +144,7 @@ export default function Header() {
                 </h1>
 
                 <div className="max-w-2xl font-light text-gray-700 dark:text-gray-300 text-lg sm:text-xl md:text-2xl leading-relaxed">
-                  <div className="pb-4 leading-loose">{warningText}</div>
+                  <div className="pb-4 leading-normal">{warningText}</div>
                   <div className="text-left font-semibold text-xl sm:text-2xl mb-4">
                     Do you care about:
                   </div>

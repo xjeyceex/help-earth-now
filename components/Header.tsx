@@ -235,9 +235,9 @@ export default function Header() {
                     <div className="relative z-10 text-right mt-auto">
                       <br />
                       <Link
-                        href={`/high/${encodeURIComponent(
-                          location?.county || ''
-                        )}`}
+                        href={`/${encodeURIComponent(
+                          'category'
+                        )}/${encodeURIComponent(location?.county || '')}`}
                         className="text-2xl font-bold text-blue-500 hover:underline"
                       >
                         More →
@@ -274,9 +274,9 @@ export default function Header() {
                     <div className="relative z-10 text-right mt-auto">
                       <br />
                       <Link
-                        href={`/high/${encodeURIComponent(
-                          location?.county || ''
-                        )}`}
+                        href={`/${encodeURIComponent(
+                          'category'
+                        )}/${encodeURIComponent(location?.county || '')}`}
                         className="text-2xl font-bold text-blue-500 hover:underline"
                       >
                         More →
@@ -313,9 +313,9 @@ export default function Header() {
                     <div className="relative z-10 text-right mt-auto">
                       <br />
                       <Link
-                        href={`/high/${encodeURIComponent(
-                          location?.county || ''
-                        )}`}
+                        href={`/${encodeURIComponent(
+                          'category'
+                        )}/${encodeURIComponent(location?.county || '')}`}
                         className="text-2xl font-bold text-blue-500 hover:underline"
                       >
                         More →

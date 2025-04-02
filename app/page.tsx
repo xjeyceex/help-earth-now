@@ -1,8 +1,8 @@
-import Header from './components/Header';
-import CookieConsent from './components/CookieConsent';
-import Footer from './components/Footer';
-import FeedbackButton from './components/FeedBack';
-import WhyItMatters from './components/WhyItMatters';
+import Header from '@/components/Header';
+import CookieConsent from '@/components/CookieConsent';
+import Footer from '@/components/Footer';
+import FeedbackButton from '@/components/FeedBack';
+import WhyItMatters from '@/components/WhyItMatters';
 
 export default function Home() {
   return (

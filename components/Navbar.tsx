@@ -3,16 +3,16 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
-import { LocationContext } from '../components/location-provider';
+import { LocationContext } from '@/components/location-provider';
 import {
   states,
   counties as allCounties,
   stateAbbreviations,
-} from '../us-datas';
+} from '@/app/us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
-import DarkModeToggle from '../components/DarkMode';
+import DarkModeToggle from '@/components/DarkMode';
 
 export default function Navbar() {
   const { status } = useSession();

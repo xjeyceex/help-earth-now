@@ -1,14 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
-import BackButton from '../components/BackButton';
-import FeedbackButton from '../components/FeedBack';
+import BackButton from '@/components/BackButton';
+import FeedbackButton from '@/components/FeedBack';
 import {
   FaUsers,
   FaClipboardList,
   FaHandsHelping,
   FaLeaf,
 } from 'react-icons/fa';
-import Footer from '../components/Footer';
+import Footer from '@/components/Footer';
 
 type AboutUsItem = {
   header: string;

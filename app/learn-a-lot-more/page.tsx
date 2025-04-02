@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import CookieConsent from '@/app/components/CookieConsent';
+import CookieConsent from '@/components/CookieConsent';
 
 export default function LearnALotMore() {
   return (

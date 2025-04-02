@@ -1,7 +1,7 @@
-import CookieConsent from '@/app/components/CookieConsent';
-import ActionTable from '../components/AdditionalInformation';
-import FeedbackButton from '../components/FeedBack';
-import BackButton from '../components/BackButton';
+import CookieConsent from '@/components/CookieConsent';
+import ActionTable from '@/components/AdditionalInformation';
+import FeedbackButton from '@/components/FeedBack';
+import BackButton from '@/components/BackButton';
 
 export default function Home() {
   return (

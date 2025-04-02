@@ -1,6 +1,6 @@
-import CookieConsent from '@/app/components/CookieConsent';
+import CookieConsent from '@/components/CookieConsent';
 import Who from './who';
-import BackButton from '@/app/components/BackButton';
+import BackButton from '@/components/BackButton';
 
 export default function Home() {
   return (

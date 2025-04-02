@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import BackButton from '@/app/components/BackButton';
+import BackButton from '@/components/BackButton';
 
 interface ActionItem {
   action: string;
@@ -14,6 +14,9 @@ interface ActionItem {
 
 const CountyPage: React.FC = () => {
   const params = useParams();
+  const category = Array.isArray(params?.category)
+    ? decodeURIComponent(params.category[0])
+    : decodeURIComponent(params?.category || 'Unknown Category');
   const countyName = Array.isArray(params?.countyName)
     ? decodeURIComponent(params.countyName[0])
     : decodeURIComponent(params?.countyName || 'Unknown County');
@@ -44,7 +47,10 @@ const CountyPage: React.FC = () => {
             .filter((link) => link.name && link.url) // Filter out empty links
             .map((link) => ({
               ...link,
-              url: link.url.replace('{countyName}', countyName), // Replace placeholder
+              // Replace placeholders for both category and countyName
+              url: link.url
+                .replace('{category}', category)
+                .replace('{countyName}', countyName),
             })),
         }));
 
@@ -57,7 +63,7 @@ const CountyPage: React.FC = () => {
     };
 
     fetchActionItems();
-  }, [countyName]);
+  }, [category, countyName]);
 
   if (loading) {
     return (

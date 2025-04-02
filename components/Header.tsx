@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import { LocationContext } from '../components/location-provider';
+import { LocationContext } from '@/components/location-provider';
 import Link from 'next/link';
 import {
   faDove,
   faDollarSign,
   faSolarPanel,
 } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
-import { stateAbbreviations } from '../us-datas';
+import { stateAbbreviations } from '@/app/us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeaf } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
 

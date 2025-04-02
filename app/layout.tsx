@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import LocationProvider from './components/location-provider';
-import AuthProvider from './components/AuthProvider';
+import LocationProvider from '@/components/location-provider';
+import AuthProvider from '@/components/AuthProvider';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import Script from 'next/script';
-import Navbar from './components/Navbar';
-import FixedSocialIcon from './components/FixedSocialIcon';
+import Navbar from '@/components/Navbar';
+import FixedSocialIcon from '@/components/FixedSocialIcon';
 
 const inter = Inter({ subsets: ['latin'] });
 

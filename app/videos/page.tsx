@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import BackButton from '@/app/components/BackButton';
-import Footer from '../components/Footer';
+import BackButton from '@/components/BackButton';
+import Footer from '@/components/Footer';
 
 interface VideoItem {
   label: string;

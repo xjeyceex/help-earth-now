@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "set NODE_OPTIONS=--openssl-legacy-provider && next dev",
-    "build": "prisma generate --schema=app/prisma/schema.prisma && next build",
+    "build": "next build",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && next start",
     "lint": "next lint"
   },

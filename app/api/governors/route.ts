@@ -31,8 +31,7 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
     const rows = response.data.values;
 
     if (!rows || rows.length === 0) {
-      console.log('No data found.');
-      return [];
+      throw new Error('No data found.');
     }
 
     const headers: string[] = rows[0]; // First row as headers
@@ -40,9 +39,11 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
 
     // Map each row into an object using headers as keys and filter by state if provided
     const formattedData: SheetRow[] = data
-      .filter(row => {
+      .filter((row) => {
         const stateIndex = headers.indexOf('state'); // Assuming 'state' is the header for the state column
-        return state ? (row[stateIndex]?.toLowerCase() === state.toLowerCase()) : true;
+        return state
+          ? row[stateIndex]?.toLowerCase() === state.toLowerCase()
+          : true;
       })
       .map((row) => {
         return headers.reduce((acc: SheetRow, header: string, i: number) => {
@@ -76,12 +77,15 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Cache-Control': 'no-cache, no-store, must-revalidate', // Add no-cache headers
-        'Pragma': 'no-cache', // HTTP 1.0
-        'Expires': '0', // Proxies
+        Pragma: 'no-cache', // HTTP 1.0
+        Expires: '0', // Proxies
       },
     });
   } catch (error) {
     console.error('Error fetching gov data:', error);
-    return NextResponse.json({ error: 'Failed to fetch gov data' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch gov data' },
+      { status: 500 }
+    );
   }
 }

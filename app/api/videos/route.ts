@@ -32,8 +32,7 @@ const getVideosData = async (): Promise<SheetRow[]> => {
     const rows = response.data.values;
 
     if (!rows || rows.length === 0) {
-      console.log('No data found.');
-      return [];
+      throw new Error('No data found.');
     }
 
     const headers: string[] = rows[0]; // First row as headers

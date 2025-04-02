@@ -19,7 +19,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   });
 
   const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient as any});
+  const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
   const range = 'MORE 4 CCC!A1:U'; // Adjust the range as needed
 
@@ -32,8 +32,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
     const rows = response.data.values;
 
     if (!rows || rows.length === 0) {
-      console.log('No data found.');
-      return [];
+      throw new Error('No data found.');
     }
 
     const headers: string[] = rows[0]; // First row as headers
@@ -42,7 +41,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
     // Map each row into an object using headers as keys
     const formattedData: SheetRow[] = data.map((row) => {
       return headers.reduce((acc: SheetRow, header: string, i: number) => {
-        acc[header] = row[i] || ''; 
+        acc[header] = row[i] || '';
         return acc;
       }, {} as SheetRow);
     });
@@ -63,12 +62,15 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Cache-Control': 'no-cache, no-store, must-revalidate', // Add no-cache headers
-        'Pragma': 'no-cache', // HTTP 1.0
-        'Expires': '0', // Proxies
+        Pragma: 'no-cache', // HTTP 1.0
+        Expires: '0', // Proxies
       },
-    });  
+    });
   } catch (error) {
     console.error('Error fetching learnMore data:', error);
-    return NextResponse.json({ error: 'Failed to fetch learnMore data' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch learnMore data' },
+      { status: 500 }
+    );
   }
 }

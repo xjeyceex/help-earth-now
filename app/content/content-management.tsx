@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 interface ContentItem {
   id: number;
@@ -18,26 +18,26 @@ export default function ContentManagement() {
   const router = useRouter();
   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [newContentTitle, setNewContentTitle] = useState("");
-  const [newContentType, setNewContentType] = useState("article");
-  const [filterType, setFilterType] = useState("all");
-  const [activeTab, setActiveTab] = useState("all");
+  const [newContentTitle, setNewContentTitle] = useState('');
+  const [newContentType, setNewContentType] = useState('article');
+  const [filterType, setFilterType] = useState('all');
+  const [activeTab, setActiveTab] = useState('all');
 
   useEffect(() => {
     setContentItems([
-      { id: 1, title: "First Article", isActive: true, type: "article" },
-      { id: 2, title: "Second Video", isActive: true, type: "video" },
-      { id: 3, title: "Third Article", isActive: true, type: "article" },
-      { id: 4, title: "Fourth Podcast", isActive: true, type: "podcast" },
-      { id: 5, title: "Fifth Video", isActive: true, type: "video" },
-      { id: 6, title: "Sixth Article", isActive: true, type: "article" }
+      { id: 1, title: 'First Article', isActive: true, type: 'article' },
+      { id: 2, title: 'Second Video', isActive: true, type: 'video' },
+      { id: 3, title: 'Third Article', isActive: true, type: 'article' },
+      { id: 4, title: 'Fourth Podcast', isActive: true, type: 'podcast' },
+      { id: 5, title: 'Fifth Video', isActive: true, type: 'video' },
+      { id: 6, title: 'Sixth Article', isActive: true, type: 'article' },
     ]);
   }, []);
 
   useEffect(() => {
-    if (status === "loading") return;
-    if (status === "unauthenticated") {
-      router.push("/");
+    if (status === 'loading') return;
+    if (status === 'unauthenticated') {
+      router.push('/');
     }
   }, [status, router]);
 
@@ -47,28 +47,26 @@ export default function ContentManagement() {
         id: contentItems.length + 1,
         title: newContentTitle,
         isActive: true,
-        type: newContentType
+        type: newContentType,
       };
       setContentItems([newItem, ...contentItems]);
-      setNewContentTitle("");
-      setNewContentType("article");
+      setNewContentTitle('');
+      setNewContentType('article');
     }
   };
 
-  const handleEditContent = (item: ContentItem) => {
-    console.log("Editing content:", item);
-  };
+  const handleEditContent = (item: ContentItem) => {};
 
   const handleDeactivateContent = (itemId: number) => {
     setContentItems(
-      contentItems.map(item =>
+      contentItems.map((item) =>
         item.id === itemId ? { ...item, isActive: false } : item
       )
     );
   };
 
-  const filteredItems = contentItems.filter(item => {
-    if (activeTab === "all") return true;
+  const filteredItems = contentItems.filter((item) => {
+    if (activeTab === 'all') return true;
     return item.type === activeTab;
   });
 
@@ -79,14 +77,14 @@ export default function ContentManagement() {
   const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
 
   const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage(prev => prev - 1);
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
@@ -96,26 +94,26 @@ export default function ContentManagement() {
         <h2 className="text-lg font-semibold">Content Types</h2>
         <div className="flex flex-col">
           <button
-            className={`py-2 ${activeTab === "all" ? "bg-gray-300" : ""}`}
-            onClick={() => setActiveTab("all")}
+            className={`py-2 ${activeTab === 'all' ? 'bg-gray-300' : ''}`}
+            onClick={() => setActiveTab('all')}
           >
             All
           </button>
           <button
-            className={`py-2 ${activeTab === "article" ? "bg-gray-300" : ""}`}
-            onClick={() => setActiveTab("article")}
+            className={`py-2 ${activeTab === 'article' ? 'bg-gray-300' : ''}`}
+            onClick={() => setActiveTab('article')}
           >
             Articles
           </button>
           <button
-            className={`py-2 ${activeTab === "video" ? "bg-gray-300" : ""}`}
-            onClick={() => setActiveTab("video")}
+            className={`py-2 ${activeTab === 'video' ? 'bg-gray-300' : ''}`}
+            onClick={() => setActiveTab('video')}
           >
             Videos
           </button>
           <button
-            className={`py-2 ${activeTab === "podcast" ? "bg-gray-300" : ""}`}
-            onClick={() => setActiveTab("podcast")}
+            className={`py-2 ${activeTab === 'podcast' ? 'bg-gray-300' : ''}`}
+            onClick={() => setActiveTab('podcast')}
           >
             Podcasts
           </button>
@@ -168,9 +166,11 @@ export default function ContentManagement() {
         </div>
 
         <div className="space-y-4">
-          {currentItems.map(item => (
+          {currentItems.map((item) => (
             <div key={item.id} className="p-4 border rounded-md bg-white">
-              <p className="text-lg">{item.title} ({item.type})</p>
+              <p className="text-lg">
+                {item.title} ({item.type})
+              </p>
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0">
                 <button
                   onClick={() => handleEditContent(item)}
@@ -194,7 +194,7 @@ export default function ContentManagement() {
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
             className={`px-4 py-2 bg-gray-300 rounded-md w-full md:w-auto ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+              currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
             Previous
@@ -206,7 +206,7 @@ export default function ContentManagement() {
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
             className={`px-4 py-2 bg-gray-300 rounded-md w-full md:w-auto ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+              currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
             Next

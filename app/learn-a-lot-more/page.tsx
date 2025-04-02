@@ -1,12 +1,9 @@
 import Link from 'next/link';
 import CookieConsent from '@/app/components/CookieConsent';
-import Navbar from '@/app/v4/navbar-v4';
 
 export default function LearnALotMore() {
   return (
     <main className="flex flex-col items-center justify-between">
-      <Navbar />
-
       <h1 className="text-3xl font-bold mt-10">Learn a Lot More</h1>
 
       <div className="mt-8 max-w-4xl px-4">

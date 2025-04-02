@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
-import Navbar from './components/Navbar';
+
 import Link from 'next/link';
 
 interface KeyPerson {
@@ -55,7 +55,6 @@ export default function Jointeam() {
 
   return (
     <>
-      <Navbar />
       <BackButton />
       <div className="p-6 mx-auto max-w-2xl">
         <h1 className="text-3xl font-bold text-center mb-4">

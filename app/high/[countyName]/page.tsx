@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import BackButton from '@/app/components/BackButton';
-import Navbar from '@/app/v4/navbar-v4';
 
 interface ActionItem {
   action: string;
@@ -72,7 +71,6 @@ const CountyPage: React.FC = () => {
 
   return (
     <>
-      <Navbar />
       <BackButton />
       <div className="p-6 min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <div className="max-w-4xl mx-auto">

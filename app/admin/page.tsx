@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import AdminPanel from './admin-panel';
 import CookieConsent from '../components/CookieConsent';
-import Navbar from '../components/Navbar';
 
 export default function Admin() {
   const { status } = useSession();
@@ -39,7 +38,7 @@ export default function Admin() {
   return (
     <>
       <CookieConsent />
-      <Navbar />
+
       <AdminPanel />
     </>
   );

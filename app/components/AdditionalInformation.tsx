@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
 import Link from 'next/link';
-import FixSocialIcon from './FixSocialIcon';
+import FixedSocialIcon from './FixedSocialIcon';
 
 interface ActionItem {
   action: string;
@@ -47,7 +47,8 @@ const ActionTable: React.FC = () => {
           Saving the Planet: No Cape, Just Common Sense
         </h1>
         <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto">
-          Practical steps you can take today to make a real difference in protecting our planet.
+          Practical steps you can take today to make a real difference in
+          protecting our planet.
         </p>
       </header>
 
@@ -66,12 +67,19 @@ const ActionTable: React.FC = () => {
         <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100 text-center mb-8">
           Additional Things You Can Do
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {actionItems.map((item, index) => (
-            <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-bold text-green-600 dark:text-green-400">{item.action}</h3>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">{item.description}</p>
+            <div
+              key={index}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+            >
+              <h3 className="text-xl font-bold text-green-600 dark:text-green-400">
+                {item.action}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">
+                {item.description}
+              </p>
               <Link
                 href={item.link}
                 className="text-blue-500 hover:underline mt-4 inline-block dark:text-blue-300"
@@ -84,7 +92,7 @@ const ActionTable: React.FC = () => {
           ))}
         </div>
       </section>
-      <FixSocialIcon/>
+      <FixedSocialIcon />
       <Footer />
     </div>
   );

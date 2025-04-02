@@ -9,6 +9,7 @@ import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import Script from 'next/script';
 import Navbar from './components/Navbar';
+import FixedSocialIcon from './components/FixedSocialIcon';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -50,6 +51,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <AuthProvider session={session || undefined}>
             <LocationProvider>
               <Navbar />
+              <FixedSocialIcon />
               {children}
             </LocationProvider>
           </AuthProvider>

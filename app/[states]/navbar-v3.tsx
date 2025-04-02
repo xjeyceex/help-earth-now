@@ -4,20 +4,27 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import { LocationContext } from '../components/location-provider';
-import { states, counties as allCounties, stateAbbreviations } from '../us-datas';
+import {
+  states,
+  counties as allCounties,
+  stateAbbreviations,
+} from '../us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import { routeToStateMap } from '../us-datas';
 
-export default function NavbarThree() {
+export default function Navbar() {
   const { status } = useSession();
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
-  const { location, setManualLocation, updateLocation } = useContext(LocationContext) || {};
-  const [selectedState, setSelectedState] = useState<string>(location?.state || '');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { location, setManualLocation, updateLocation } =
+    useContext(LocationContext) || {};
+  const [selectedState, setSelectedState] = useState<string>(
+    location?.state || ''
+  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
@@ -63,17 +70,17 @@ export default function NavbarThree() {
     if (selectedState) {
       router.push(`/${stateAbbreviations[selectedState].toLowerCase()}`);
     }
-    
+
     setIsModalOpen(false);
   };
 
   const handleUpdateAutomatically = () => {
     if (updateLocation) {
-      updateLocation(); 
+      updateLocation();
     }
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
     window.location.reload();
-  }
+  };
 
   useEffect(() => {
     if (isModalOpen && location) {
@@ -92,9 +99,9 @@ export default function NavbarThree() {
   }, [selectedState]);
 
   useEffect(() => {
-    const route = pathname.split('/')[1]; 
+    const route = pathname.split('/')[1];
     const newState = routeToStateMap[route];
-  
+
     if (newState && location?.state !== newState && setManualLocation) {
       const newLocation = {
         latitude: 0,
@@ -104,7 +111,7 @@ export default function NavbarThree() {
         country: 'United States',
         county: '',
       };
-      
+
       setManualLocation(newLocation);
       setSelectedState(newState); // Update the dropdown or any relevant UI
     }
@@ -120,19 +127,22 @@ export default function NavbarThree() {
               <Image
                 src="/logo.png"
                 alt="MyApp Logo"
-                width={70} 
-                height={70} 
+                width={70}
+                height={70}
                 priority
               />
             </Link>
           </div>
           <div className="flex items-center">
             <p className="mr-1 text-xs md:text-sm text-white">
-              Location: {location?.county
-              ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
-              : location?.state
-              ? stateAbbreviations[location.state] // Show state abbreviation only
-              : 'United States'}
+              Location:{' '}
+              {location?.county
+                ? `${location.county}, ${
+                    stateAbbreviations[location.state ?? '']
+                  }`
+                : location?.state
+                ? stateAbbreviations[location.state] // Show state abbreviation only
+                : 'United States'}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}
@@ -144,7 +154,10 @@ export default function NavbarThree() {
 
           {/* Hamburger button for small screens */}
           <div className="md:hidden">
-            <button className="text-white focus:outline-none" onClick={toggleMenu}>
+            <button
+              className="text-white focus:outline-none"
+              onClick={toggleMenu}
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -164,13 +177,22 @@ export default function NavbarThree() {
 
           {/* Links for larger screens */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href={`/${currentState}`} className={linkClasses(`/${currentState}`)}>
+            <Link
+              href={`/${currentState}`}
+              className={linkClasses(`/${currentState}`)}
+            >
               Home
             </Link>
-            <Link href={`/${currentState}/about`} className={linkClasses(`/${currentState}/about`)}>
+            <Link
+              href={`/${currentState}/about`}
+              className={linkClasses(`/${currentState}/about`)}
+            >
               About Us
             </Link>
-            <Link href={`/${currentState}/learn-more`} className={linkClasses(`/${currentState}/learn-more`)}>
+            <Link
+              href={`/${currentState}/learn-more`}
+              className={linkClasses(`/${currentState}/learn-more`)}
+            >
               Learn More
             </Link>
             {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
@@ -185,16 +207,24 @@ export default function NavbarThree() {
               <div className="relative">
                 <button
                   onClick={toggleDropdown}
-                  className={`text-gray-400 hover:text-gray-300 transition ${isDropdownOpen ? 'text-white' : ''}`}
+                  className={`text-gray-400 hover:text-gray-300 transition ${
+                    isDropdownOpen ? 'text-white' : ''
+                  }`}
                 >
                   Menu
                 </button>
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                    <Link href={`/${currentState}/content`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link
+                      href={`/${currentState}/content`}
+                      className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                    >
                       Content Management
                     </Link>
-                    <Link href={`/${currentState}/admin`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                    <Link
+                      href={`/${currentState}/admin`}
+                      className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                    >
                       Admin Panel
                     </Link>
                     <Link
@@ -213,16 +243,28 @@ export default function NavbarThree() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col space-y-3 p-3">
-            <button onClick={toggleMenu} className="text-white self-end text-lg">
+            <button
+              onClick={toggleMenu}
+              className="text-white self-end text-lg"
+            >
               ✕
             </button>
-            <Link href={`/${pathname.split('/')[1]}`} className={linkClasses(`/${pathname.split('/')[1]}`)}>
+            <Link
+              href={`/${pathname.split('/')[1]}`}
+              className={linkClasses(`/${pathname.split('/')[1]}`)}
+            >
               Home
             </Link>
-            <Link href={`/${currentState}/about`} className={linkClasses(`/${currentState}/about`)}>
+            <Link
+              href={`/${currentState}/about`}
+              className={linkClasses(`/${currentState}/about`)}
+            >
               About Us
             </Link>
-            <Link href={`/${currentState}/learn-more`} className={linkClasses(`/${currentState}/learn-more`)}>
+            <Link
+              href={`/${currentState}/learn-more`}
+              className={linkClasses(`/${currentState}/learn-more`)}
+            >
               Learn More
             </Link>
             {/* <Link href="/v3/what" className={linkClasses('/v3/what')}>
@@ -234,10 +276,16 @@ export default function NavbarThree() {
 
             {status === 'authenticated' && (
               <>
-                <Link href={`/${currentState}/content`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                <Link
+                  href={`/${currentState}/content`}
+                  className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                >
                   Content Management
                 </Link>
-                <Link href={`/${currentState}/admin`} className="block px-3 py-2 text-base text-white hover:text-gray-300 transition">
+                <Link
+                  href={`/${currentState}/admin`}
+                  className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+                >
                   Admin Panel
                 </Link>
                 <Link
@@ -258,7 +306,12 @@ export default function NavbarThree() {
           <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-xs sm:max-w-md flex flex-col items-center">
             <h2 className="text-lg font-semibold mb-4">Update Location</h2>
             <div className="w-full mb-4">
-              <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">State</label>
+              <label
+                htmlFor="state"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                State
+              </label>
               <select
                 id="state"
                 value={selectedState}
@@ -266,13 +319,20 @@ export default function NavbarThree() {
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
               >
                 <option value="">Select State</option>
-                {states.map(state => (
-                  <option key={state} value={state} className="text-gray-700">{state}</option>
+                {states.map((state) => (
+                  <option key={state} value={state} className="text-gray-700">
+                    {state}
+                  </option>
                 ))}
               </select>
             </div>
             <div className="w-full mb-4">
-              <label htmlFor="county" className="block text-sm font-medium text-gray-700 mb-2">County</label>
+              <label
+                htmlFor="county"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                County
+              </label>
               <select
                 id="county"
                 value={selectedCounty}

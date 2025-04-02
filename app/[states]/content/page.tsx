@@ -1,13 +1,13 @@
-import CookieConsent from "@/app/components/CookieConsent";
-import NavbarThree from "../navbar-v3";
-import ContentManagement from "./content-management"
+import CookieConsent from '@/app/components/CookieConsent';
+import Navbar from '@/app/components/Navbar';
+import ContentManagement from './content-management';
 
 export default function Content() {
   return (
     <>
-      <NavbarThree/>
-      <ContentManagement/>
-      <CookieConsent/>
+      <Navbar />
+      <ContentManagement />
+      <CookieConsent />
     </>
   );
 }

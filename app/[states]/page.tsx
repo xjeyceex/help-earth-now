@@ -1,17 +1,15 @@
-import Header from "./header";
-import What from "./what/what";
-import NavbarThree from "./navbar-v3";
-import CookieConsent from "../components/CookieConsent";
-import Footer from "../components/Footer";
+import Header from './header';
+import Navbar from '../components/Navbar';
+import CookieConsent from '../components/CookieConsent';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      <NavbarThree/>
+      <Navbar />
       <Header />
-      <What/>
-      <CookieConsent/>
-      <Footer/>
+      <CookieConsent />
+      <Footer />
     </main>
   );
 }

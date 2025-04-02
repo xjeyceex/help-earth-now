@@ -14,7 +14,7 @@ import { faPen, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import DarkModeToggle from '../components/DarkMode';
 
-export default function NavbarThree() {
+export default function Navbar() {
   const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

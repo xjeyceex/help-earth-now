@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import NavbarThree from '@/app/v4/navbar-v4';
+import Navbar from '@/app/v4/navbar-v4';
 import BackButton from '@/app/components/BackButton';
 import Footer from '../components/Footer';
 
@@ -58,7 +58,7 @@ const VideosPage: React.FC = () => {
 
   return (
     <>
-      <NavbarThree />
+      <Navbar />
       <BackButton />
       <div className="p-8 min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <div className="max-w-7xl mx-auto">

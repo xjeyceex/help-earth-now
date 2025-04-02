@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
 import FeedbackButton from '../components/FeedBack';
-import NavbarThree from '../v4/navbar-v4';
+import Navbar from '../components/Navbar';
 import {
   FaUsers,
   FaClipboardList,
@@ -90,7 +90,7 @@ export default function AboutUsPage() {
 
   return (
     <>
-      <NavbarThree />
+      <Navbar />
       <BackButton />
       <main className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-900 text-gray-900 dark:text-gray-200 py-4 px-6">
         <section className="max-w-7xl mx-auto mb-3">

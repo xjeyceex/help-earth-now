@@ -1111,6 +1111,7 @@ export const counties: { [key: string]: string[] } = {
     'Wolfe County',
     'Woodford County',
     'Graves County',
+    'Hopkins County',
   ],
   Louisiana: [
     'Acadia Parish',

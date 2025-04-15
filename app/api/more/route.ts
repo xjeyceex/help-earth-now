@@ -21,7 +21,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
-  const range = 'Additional Pages!B1:D'; // Adjust the range as needed
+  const range = 'MORE 4 CCC!A1:U'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({

@@ -9,7 +9,7 @@ interface SheetRow {
 }
 
 // Fetching data from Google Sheets
-const getSheetsData = async (): Promise<SheetRow[]> => {
+const getVideosData = async (): Promise<SheetRow[]> => {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -21,7 +21,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
-  const range = 'Additional Pages!B1:D'; // Adjust the range as needed
+  const range = 'Videos!A1:C'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -55,7 +55,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
-    const learnMoreData = await getSheetsData();
+    const learnMoreData = await getVideosData();
     return NextResponse.json(learnMoreData, {
       headers: {
         'Access-Control-Allow-Origin': '*',

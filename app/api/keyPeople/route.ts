@@ -1,4 +1,3 @@
-// app/api/learnMore/route.ts
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -21,7 +20,7 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
-  const range = 'Additional Pages!B1:D'; // Adjust the range as needed
+  const range = 'People to Follow!A1:D'; // Adjust the range as needed
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -55,8 +54,8 @@ const getSheetsData = async (): Promise<SheetRow[]> => {
 // Named exports for each HTTP method
 export async function GET(req: NextRequest) {
   try {
-    const learnMoreData = await getSheetsData();
-    return NextResponse.json(learnMoreData, {
+    const aboutUsData = await getSheetsData();
+    return NextResponse.json(aboutUsData, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
@@ -67,9 +66,9 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error fetching learnMore data:', error);
+    console.error('Error fetching aboutUs data:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch learnMore data' },
+      { error: 'Failed to fetch aboutUs data' },
       { status: 500 }
     );
   }

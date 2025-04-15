@@ -31,8 +31,7 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
     const rows = response.data.values;
 
     if (!rows || rows.length === 0) {
-      console.log('No data found.');
-      return [];
+      throw new Error('No data found.');
     }
 
     const headers: string[] = rows[0]; // First row as headers
@@ -42,7 +41,9 @@ const getSheetsData = async (state?: string): Promise<SheetRow[]> => {
     const formattedData: SheetRow[] = data
       .filter((row) => {
         const stateIndex = headers.indexOf('state'); // Assuming 'state' is the header for the state column
-        return state ? (row[stateIndex]?.toUpperCase() === state.toUpperCase()) : true;
+        return state
+          ? row[stateIndex]?.toUpperCase() === state.toUpperCase()
+          : true;
       })
       .map((row) => {
         return headers.reduce((acc: SheetRow, header: string, i: number) => {
@@ -72,12 +73,15 @@ export async function GET(req: NextRequest) {
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Cache-Control': 'no-cache, no-store, must-revalidate', // Add no-cache headers
-        'Pragma': 'no-cache', // HTTP 1.0
-        'Expires': '0', // Proxies
+        Pragma: 'no-cache', // HTTP 1.0
+        Expires: '0', // Proxies
       },
     });
   } catch (error) {
     console.error('Error fetching House of Representatives data:', error);
-    return NextResponse.json({ error: 'Failed to fetch House of Representatives data' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch House of Representatives data' },
+      { status: 500 }
+    );
   }
 }

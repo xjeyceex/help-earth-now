@@ -71,9 +71,7 @@ export default function WorkInClimateArea() {
     if (/bluesky|bsky/i.test(name)) {
       return `Follow them on BlueSky`; // Prioritize BlueSky
     }
-    if (/twitter|x/i.test(name)) {
-      return `Follow them on X`;
-    }
+
     if (/facebook/i.test(name)) {
       return `Follow them on Facebook`;
     }
@@ -91,6 +89,9 @@ export default function WorkInClimateArea() {
     }
     if (/reddit/i.test(name)) {
       return `Follow them on Reddit`;
+    }
+    if (/twitter|x/i.test(name)) {
+      return `Follow them on X`;
     }
 
     // Default fallback text for other links

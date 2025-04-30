@@ -56,12 +56,11 @@ export default function Header() {
 
       setLoading(true);
       try {
-        const response = await fetch(`/api/header`);
+        const response = await fetch(`/api/sheet-data/header`);
         if (!response.ok)
           throw new Error(`Failed to fetch data: ${response.statusText}`);
 
         const mainData: HeaderData[] = await response.json();
-
         const relevantData = mainData.filter((item) => {
           const matchesState =
             item.state === stateKey ||

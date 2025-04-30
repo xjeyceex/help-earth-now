@@ -41,7 +41,7 @@ export default function AboutUsPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/aboutUs');
+        const response = await fetch('/api/sheet-data/aboutUs');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

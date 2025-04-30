@@ -18,11 +18,10 @@ export default function WorkInClimateArea() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/workInTheClimateArea');
+        const response = await fetch('/api/sheet-data/workInClimateArea');
         if (!response.ok) throw new Error('Failed to fetch key people data');
 
         const data = await response.json();
-        console.log('data', data);
 
         setKeyPeople(data);
       } catch (err) {
@@ -60,7 +59,6 @@ export default function WorkInClimateArea() {
     if (!platform) return 'Visit their website';
 
     const name = platform.toLowerCase();
-    console.log(name);
 
     // For climate-related websites (e.g., Climatebase, Terra)
     if (/climatebase|terra/i.test(name)) {

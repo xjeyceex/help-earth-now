@@ -4,6 +4,8 @@ import Image from 'next/image'; // Import Image from next/image
 import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faArrowLeft,
+  faArrowRight,
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
@@ -224,7 +226,7 @@ const WhyItMatters: React.FC = () => {
               className="text-white bg-blue-500 dark:text-white hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center"
               onClick={scrollLeft}
             >
-              <FontAwesomeIcon icon={faChevronLeft} className="text-1xl" />
+              <FontAwesomeIcon icon={faArrowLeft} className="text-1xl" />
             </button>
           </div>
           <div className="absolute top-1/2 transform -translate-y-1/2 right-5">
@@ -232,7 +234,7 @@ const WhyItMatters: React.FC = () => {
               className="text-white bg-blue-500 dark:text-white hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center"
               onClick={scrollRight}
             >
-              <FontAwesomeIcon icon={faChevronRight} className="text-1xl" />
+              <FontAwesomeIcon icon={faArrowRight} className="text-1xl" />
             </button>
           </div>
         </div>

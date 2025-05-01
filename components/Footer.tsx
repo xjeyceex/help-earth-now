@@ -45,37 +45,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white py-6 px-4 w-full">
-      {/* Email Registration Section */}
-      <div className="flex flex-col items-center justify-center px-4">
-        <p className="text-sm mb-4 text-center text-gray-700 dark:text-gray-300">
-          Sign up to receive occasional updates on our efforts and events
-        </p>
-        <form className="flex space-x-2" onSubmit={handleSubmit}>
-          <div className="relative w-full max-w-xs">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="p-3 pr-12 rounded-full text-gray-900 w-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-              placeholder="Enter your email"
-              required
-            />
-            <MdOutlineEmail className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5 pointer-events-none" />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition duration-200 w-24 mt-4 sm:mt-0"
-          >
-            Save
-          </button>
-        </form>
-        {message && (
-          <p className="text-sm mt-2 text-gray-500 dark:text-gray-300">
-            {message}
-          </p>
-        )}
-      </div>
-
       {/* Social Media Links Section */}
       <div className="mt-6 flex justify-center space-x-6">
         <Link

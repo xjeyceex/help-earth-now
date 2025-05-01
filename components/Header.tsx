@@ -11,6 +11,28 @@ import {
 import { stateAbbreviations } from '@/app/us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeaf } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
+import { MdOutlineEmail } from 'react-icons/md';
+
+interface HeaderData {
+  state: string;
+  county: string;
+  link: string;
+  warning: string;
+  problem1: string;
+  problem2?: string;
+  problem3?: string;
+  problem4?: string;
+  action1free?: string;
+  action2free?: string;
+  action3free?: string;
+  action4free?: string;
+  action1low?: string;
+  action2low?: string;
+  action3low?: string;
+  action1high?: string;
+  action2high?: string;
+  action3high?: string;
+}
 
 export default function Header() {
   const { location } = useContext(LocationContext) || {};
@@ -25,27 +47,41 @@ export default function Header() {
     high: string[];
   }>({ free: [], low: [], high: [] });
   const [loading, setLoading] = useState(true); // Loading state
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  interface HeaderData {
-    state: string;
-    county: string;
-    link: string;
-    warning: string;
-    problem1: string;
-    problem2?: string;
-    problem3?: string;
-    problem4?: string;
-    action1free?: string;
-    action2free?: string;
-    action3free?: string;
-    action4free?: string;
-    action1low?: string;
-    action2low?: string;
-    action3low?: string;
-    action1high?: string;
-    action2high?: string;
-    action3high?: string;
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent page reload
+    setMessage(''); // Reset the message
+
+    if (!email) {
+      setMessage('Please enter a valid email.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/recipients', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setMessage('Thank you for signing up!');
+        setEmail(''); // Clear the input
+      } else {
+        const errorData = await response.json();
+        setMessage(
+          errorData.error || 'Something went wrong. Please try again.'
+        );
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error);
+      setMessage('Failed to submit. Please check your connection.');
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -164,24 +200,29 @@ export default function Header() {
                   </ul>
                 </div>
 
-                <Link
-                  href="#what"
-                  className="mb-5 border border-gray-400 rounded-full hover:bg-gray-200 inline-flex items-center justify-center px-6 py-4 text-lg sm:text-xl font-semibold text-center text-gray-900 dark:text-white dark:hover:bg-gray-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 transition duration-200"
-                >
-                  What can I do?
-                  <svg
-                    className="w-7 h-7 ml-2 -mr-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div className="text-left text-lg">
+                  Sign up to receive occasional updates on our efforts and
+                  events:
+                </div>
+                <form className="flex space-x-2" onSubmit={handleSubmit}>
+                  <div className="relative w-full max-w-xs">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="p-3 pr-12 rounded-full text-gray-900 w-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                      placeholder="Enter your email"
+                      required
+                    />
+                    <MdOutlineEmail className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5 pointer-events-none" />
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition duration-200 w-24 mt-4 sm:mt-0"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </Link>
+                    Save
+                  </button>
+                </form>
               </div>
 
               <div className="lg:mt-0 lg:col-span-5 lg:flex lg:ml-8 mt-6">

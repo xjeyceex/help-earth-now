@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FaLinkedin, FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
 import { FaBluesky } from 'react-icons/fa6';
 import Link from 'next/link';
+import { MdEmail, MdOutlineEmail } from 'react-icons/md';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -32,7 +33,9 @@ export default function Footer() {
         setEmail(''); // Clear the input
       } else {
         const errorData = await response.json();
-        setMessage(errorData.error || 'Something went wrong. Please try again.');
+        setMessage(
+          errorData.error || 'Something went wrong. Please try again.'
+        );
       }
     } catch (error) {
       console.error('Error submitting email:', error);
@@ -42,30 +45,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white py-6 px-4 w-full">
-      {/* Email Registration Section */}
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-sm mb-2 text-center">
-          Sign up to receive occasional updates on our efforts and events
-        </p>
-        <form className="flex space-x-2" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-2 rounded text-gray-900 w-52"
-            placeholder="Enter your email"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-24"
-          >
-            Save
-          </button>
-        </form>
-        {message && <p className="text-sm mt-2">{message}</p>}
-      </div>
-
       {/* Social Media Links Section */}
       <div className="mt-6 flex justify-center space-x-6">
         <Link
@@ -77,7 +56,7 @@ export default function Footer() {
           <FaLinkedin />
         </Link>
         <Link
-          href="https://www.facebook.com/profile.php?id=61567410655540"
+          href="https://www.facebook.com/people/HelpYouHelpYOU/61567816064597/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-2xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"
@@ -101,7 +80,7 @@ export default function Footer() {
           <FaInstagram />
         </Link>
         <Link
-          href="https://bsky.app/profile/helpyouhelpyou.bsky.social"
+          href="https://bsky.app/profile/helpyouhelpyou.org"
           target="_blank"
           rel="noopener noreferrer"
           className="text-2xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"

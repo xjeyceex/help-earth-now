@@ -19,7 +19,7 @@ function FixedSocialIcon() {
         </li>
         <li>
           <Link
-            href="https://www.facebook.com/profile.php?id=61567410655540" // Add your link
+            href="https://www.facebook.com/people/HelpYouHelpYOU/61567816064597/" // Add your link
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"
@@ -49,7 +49,7 @@ function FixedSocialIcon() {
         </li>
         <li>
           <Link
-            href="https://bsky.app/profile/helpyouhelpyou.bsky.social" // Add your link
+            href="https://bsky.app/profile/helpyouhelpyou.org" // Add your link
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-gray-500 hover:text-blue-500 transition-transform transform hover:scale-110"

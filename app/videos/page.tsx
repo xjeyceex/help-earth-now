@@ -16,7 +16,7 @@ const VideosPage: React.FC = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('/api/videos'); // Adjust the API endpoint if needed
+        const response = await fetch('/api/sheet-data/videos'); // Adjust the API endpoint if needed
         const data: any[] = await response.json(); // Explicitly type the response data as an array
         const formattedVideos = data.map((item) => ({
           label: item['Label'],

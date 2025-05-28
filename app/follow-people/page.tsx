@@ -20,7 +20,7 @@ export default function Jointeam() {
   useEffect(() => {
     const fetchKeyPeople = async () => {
       try {
-        const response = await fetch('/api/keyPeople');
+        const response = await fetch('/api/sheet-data/keyPeople');
         if (!response.ok) {
           throw new Error('Failed to fetch key people data');
         }

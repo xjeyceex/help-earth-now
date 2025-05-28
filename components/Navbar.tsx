@@ -239,28 +239,6 @@ export default function Navbar() {
                 >
                   Menu
                 </button>
-                {isDropdownOpen && (
-                  <div className="absolute right-0 w-72 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                    <Link
-                      href="/content"
-                      className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                    >
-                      Content Management
-                    </Link>
-                    <Link
-                      href="/admin"
-                      className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                    >
-                      Admin Panel
-                    </Link>
-                    <Link
-                      href="/api/auth/signout"
-                      className="block px-3 py-2 text-base text-white hover:text-red-500 transition"
-                    >
-                      Sign Out
-                    </Link>
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -316,23 +294,6 @@ export default function Navbar() {
             {/* <Link href="//who" className={linkClasses('//who')}>
             Who
           </Link> */}
-
-            {status === 'authenticated' && (
-              <>
-                <Link href="//content" className={linkClasses('//content')}>
-                  Content Management
-                </Link>
-                <Link href="//admin" className={linkClasses('//admin')}>
-                  Admin Panel
-                </Link>
-                <Link
-                  href="/api/auth/signout"
-                  className="block px-4 py-2 text-white hover:text-red-500 transition"
-                >
-                  Sign Out
-                </Link>
-              </>
-            )}
           </div>
         )}
       </nav>

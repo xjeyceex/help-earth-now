@@ -27,7 +27,7 @@ const CountyPage: React.FC = () => {
   useEffect(() => {
     const fetchActionItems = async () => {
       try {
-        const response = await fetch('/api/more');
+        const response = await fetch('/api/sheet-data/more');
         const data = await response.json();
 
         const normalizedData = data.map((item: any) => ({

@@ -204,8 +204,11 @@ export default function Header() {
                   Sign up to receive occasional updates on our efforts and
                   events:
                 </div>
-                <form className="flex space-x-2" onSubmit={handleSubmit}>
-                  <div className="relative w-full max-w-xs">
+                <form
+                  className="flex items-center space-x-2 w-full max-w-md"
+                  onSubmit={handleSubmit}
+                >
+                  <div className="relative flex-1">
                     <input
                       type="email"
                       value={email}
@@ -218,13 +221,12 @@ export default function Header() {
                   </div>
                   <button
                     type="submit"
-                    className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition duration-200 w-24 mt-4 sm:mt-0"
+                    className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition duration-200 w-24"
                   >
                     Save
                   </button>
                 </form>
               </div>
-
               <div className="lg:mt-0 lg:col-span-5 lg:flex lg:ml-8 mt-6">
                 <iframe
                   className="w-full aspect-video rounded-md shadow-lg"

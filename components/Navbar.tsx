@@ -34,7 +34,7 @@ export default function Navbar() {
   };
 
   const linkClasses = (path: string) =>
-    `block px-3 py-1 text-sm transition ${
+    `block px-3 py-2 text-sm transition ${
       pathname === path ? 'text-white' : 'text-gray-400 hover:text-gray-300'
     }`;
 
@@ -97,25 +97,24 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-gray-900 w-full sticky top-0 z-50">
-        <div className="w-full lg:container mx-auto flex items-center justify-between px-3 py-0">
+      <nav className="bg-gray-900 w-full sticky top-0 z-50 py-2">
+        <div className="w-full lg:container mx-auto flex items-center justify-between px-3 py-2">
           {/* Brand / Logo */}
-          <div className="sm:block">
-            <Link href="/">
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
               <Image
                 src="/logowhite.png"
                 alt="MyApp Logo"
-                width={200}
-                height={200}
-                style={{ width: 'auto', height: 'auto' }}
+                width={160}
+                height={40}
+                className="h-auto w-auto max-h-10"
                 priority
               />
             </Link>
           </div>
-          <div
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group m-5" // Added group class
-          >
+
+          {/* Location indicator - hidden on small screens */}
+          <div className="hidden sm:flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group mx-2">
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
               className="text-green-400 mr-2"
@@ -126,23 +125,114 @@ export default function Navbar() {
                     stateAbbreviations[location.state ?? '']
                   }`
                 : location?.state
-                ? stateAbbreviations[location.state] // Show state abbreviation only
+                ? stateAbbreviations[location.state]
                 : 'United States'}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300 group-hover:bg-blue-700" // Added group-hover
+              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300 group-hover:bg-blue-700"
               aria-label="Edit Location"
             >
               <FontAwesomeIcon icon={faPen} className="text-xs" />
             </button>
           </div>
-          {/* Hamburger button for small screens */}
-          <div className="md:hidden flex gap-5">
+
+          {/* Desktop navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link href="/" className={linkClasses('/')}>
+              Home
+            </Link>
+
+            <Link href="/about-us" className={linkClasses('/about-us')}>
+              About Us
+            </Link>
+
+            {/* Learn More dropdown */}
+            <div className="relative">
+              <button
+                onClick={toggleAboutDropdown}
+                className={`flex items-center px-3 py-1 rounded-lg text-sm text-gray-200 hover:text-white transition-all duration-200 ${
+                  aboutDropdownOpen ? 'text-white' : ''
+                }`}
+              >
+                Learn More
+                <svg
+                  className={`w-4 h-4 ml-1 transition-transform duration-200 ${
+                    aboutDropdownOpen ? 'transform rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              {aboutDropdownOpen && (
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-2">
+                  <Link
+                    href="/work-in-climate-area"
+                    className="block px-3 py-2 text-sm text-white hover:bg-gray-800 transition rounded"
+                  >
+                    Work in the Climate Area
+                  </Link>
+                  <Link
+                    href="/learn-more"
+                    className="block px-3 py-2 text-sm text-white hover:bg-gray-800 transition rounded"
+                  >
+                    Learn More
+                  </Link>
+                  <Link
+                    href="/follow-people"
+                    className="block px-3 py-2 text-sm text-white hover:bg-gray-800 transition rounded"
+                  >
+                    Follow Key People
+                  </Link>
+                  <Link
+                    href="/learn-a-lot-more"
+                    className="block px-3 py-2 text-sm text-white hover:bg-gray-800 transition rounded"
+                  >
+                    Learn a Lot More
+                  </Link>
+                </div>
+              )}
+            </div>
+
             <DarkModeToggle />
+
+            {/* Dropdown for authenticated users */}
+            {status === 'authenticated' && (
+              <div className="relative">
+                <button
+                  onClick={toggleDropdown}
+                  className={`text-gray-400 hover:text-white transition ${
+                    isDropdownOpen ? 'text-white' : ''
+                  }`}
+                >
+                  Menu
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="sm:hidden text-white p-1"
+              aria-label="Location"
+            >
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
+            </button>
             <button
               className="text-white focus:outline-none"
               onClick={toggleMenu}
+              aria-label="Menu"
             >
               <svg
                 className="w-6 h-6"
@@ -160,145 +250,94 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
-
-          {/* Links for larger screens */}
-          <div className="hidden md:flex items-center space-x-6 text-center">
-            <Link href="/" className={linkClasses('')}>
-              Home
-            </Link>
-
-            <Link href="/about-us" className={linkClasses('about-us')}>
-              About Us
-            </Link>
-            {/* Learn More dropdown */}
-            <div className="relative">
-              <button
-                onClick={toggleAboutDropdown}
-                className={`flex items-center px-4 py-2 rounded-lg bg-gray-800 text-sm text-gray-200 hover:bg-gray-700 transition-all duration-200 ${
-                  aboutDropdownOpen ? 'text-white bg-gray-700' : ''
-                }`}
-              >
-                Learn More
-                <svg
-                  className={`w-4 h-4 ml-2 transition-transform duration-200 ${
-                    aboutDropdownOpen ? 'transform rotate-180' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              {aboutDropdownOpen && (
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-3">
-                  <Link
-                    href="/work-in-climate-area"
-                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                  >
-                    Work in the Climate Area
-                  </Link>
-                  <Link
-                    href="/learn-more"
-                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                  >
-                    Learn More
-                  </Link>
-                  <Link
-                    href="/follow-people"
-                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                  >
-                    Follow Key People
-                  </Link>
-                  <Link
-                    href="/learn-a-lot-more"
-                    className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-                  >
-                    Learn a Lot More
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <DarkModeToggle />
-
-            {/* Dropdown for authenticated users */}
-            {status === 'authenticated' && (
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className={`text-gray-400 hover:text-gray-300 transition ${
-                    isDropdownOpen ? 'text-white' : ''
-                  }`}
-                >
-                  Menu
-                </button>
-              </div>
-            )}
-          </div>
         </div>
+
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed top-0 right-0 w-full bg-black bg-opacity-90 z-50 flex flex-col items-center space-y-3 p-3">
+          <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex flex-col items-center pt-20 px-4 overflow-y-auto">
             <button
               onClick={toggleMenu}
-              className="text-white self-end text-lg"
+              className="absolute top-4 right-4 text-white text-2xl"
             >
               ✕
             </button>
+
+            {/* Location in mobile menu */}
+            <div
+              onClick={() => {
+                setIsModalOpen(true);
+                setIsMenuOpen(false);
+              }}
+              className="w-full max-w-xs flex items-center bg-gray-800 p-3 rounded-lg mb-6 cursor-pointer"
+            >
+              <FontAwesomeIcon
+                icon={faMapMarkerAlt}
+                className="text-green-400 mr-3"
+              />
+              <p className="text-sm text-white flex-grow">
+                {location?.county
+                  ? `${location.county}, ${
+                      stateAbbreviations[location.state ?? '']
+                    }`
+                  : location?.state
+                  ? stateAbbreviations[location.state]
+                  : 'United States'}
+              </p>
+              <FontAwesomeIcon icon={faPen} className="text-xs text-gray-400" />
+            </div>
+
             <Link
               href="/"
-              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+              className="w-full max-w-xs text-center py-3 text-lg text-white border-b border-gray-800 hover:bg-gray-800 transition"
+              onClick={toggleMenu}
             >
               Home
             </Link>
             <Link
               href="/about-us"
-              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+              className="w-full max-w-xs text-center py-3 text-lg text-white border-b border-gray-800 hover:bg-gray-800 transition"
+              onClick={toggleMenu}
             >
               About Us
             </Link>
             <Link
+              href="/work-in-climate-area"
+              className="w-full max-w-xs text-center py-3 text-lg text-white border-b border-gray-800 hover:bg-gray-800 transition"
+              onClick={toggleMenu}
+            >
+              Work in Climate
+            </Link>
+            <Link
               href="/follow-people"
-              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+              className="w-full max-w-xs text-center py-3 text-lg text-white border-b border-gray-800 hover:bg-gray-800 transition"
+              onClick={toggleMenu}
             >
               Follow Key People
             </Link>
             <Link
-              href="/work-in-climate-area"
-              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
-            >
-              Work in the Climate Area
-            </Link>
-            <Link
-              href={`/learn-more`}
-              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+              href="/learn-more"
+              className="w-full max-w-xs text-center py-3 text-lg text-white border-b border-gray-800 hover:bg-gray-800 transition"
+              onClick={toggleMenu}
             >
               Learn More
             </Link>
             <Link
               href="/learn-a-lot-more"
-              className="block px-3 py-2 text-base text-white hover:text-gray-300 transition"
+              className="w-full max-w-xs text-center py-3 text-lg text-white border-b border-gray-800 hover:bg-gray-800 transition"
+              onClick={toggleMenu}
             >
               Learn a Lot More
             </Link>
-            {/* <Link href="//what" className={linkClasses('//what')}>
-            What can I do?
-          </Link> */}
-            {/* <Link href="//who" className={linkClasses('//who')}>
-            Who
-          </Link> */}
+
+            {/* Dark mode toggle in mobile menu */}
+            <div className="w-full max-w-xs py-4 flex justify-center">
+              <DarkModeToggle />
+            </div>
           </div>
         )}
       </nav>
 
-      {/* Modal */}
+      {/* Location Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 px-4">
           <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-xs sm:max-w-md flex flex-col items-center">
@@ -318,7 +357,7 @@ export default function Navbar() {
                 onChange={handleStateChange}
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
               >
-                <option value="/">Select State</option>
+                <option value="">Select State</option>
                 {states.map((state) => (
                   <option key={state} value={state} className="text-gray-700">
                     {state}

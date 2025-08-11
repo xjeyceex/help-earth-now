@@ -1,5 +1,4 @@
 'use client';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
@@ -15,7 +14,6 @@ import Image from 'next/image';
 import DarkModeToggle from '@/components/DarkMode';
 
 export default function Navbar() {
-  const { status } = useSession();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

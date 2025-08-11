@@ -91,8 +91,6 @@ export default function Header() {
   }, []);
 
   const fetchData = useCallback(async (currentLocation: typeof location) => {
-    console.log('Fetching data for location:', currentLocation);
-
     const stateKey = currentLocation?.state
       ? stateAbbreviations[
           currentLocation.state as keyof typeof stateAbbreviations
@@ -100,7 +98,6 @@ export default function Header() {
       : 'US';
 
     if (!stateKey) {
-      console.log('No state key found, using defaults');
       setLoading(false);
       return;
     }
@@ -112,7 +109,6 @@ export default function Header() {
         throw new Error(`Failed to fetch data: ${response.statusText}`);
 
       const mainData: HeaderData[] = await response.json();
-      console.log('Fetched data:', mainData);
 
       // More precise filtering logic
       const relevantData = mainData.filter((item) => {
@@ -134,8 +130,6 @@ export default function Header() {
         return stateMatches && countyMatches;
       });
 
-      console.log('Filtered relevant data:', relevantData);
-
       // Priority-based selection: exact match > state-ALL > global ALL
       const selectedData =
         relevantData.find(
@@ -145,8 +139,6 @@ export default function Header() {
         relevantData.find((item) => item.state === `${stateKey} - ALL`) ||
         relevantData.find((item) => item.state === 'ALL') ||
         ({} as HeaderData);
-
-      console.log('Selected data:', selectedData);
 
       // Reset all state before setting new values
       setWarningText('');
@@ -205,12 +197,6 @@ export default function Header() {
 
     // Only fetch if location actually changed
     if (currentLocationKey !== lastLocationKey) {
-      console.log(
-        'Location changed from',
-        lastLocationKey,
-        'to',
-        currentLocationKey
-      );
       setLastLocationKey(currentLocationKey);
       fetchData(location);
     }
@@ -219,7 +205,6 @@ export default function Header() {
   // Also trigger on mount to ensure initial data load
   useEffect(() => {
     if (location && !lastLocationKey) {
-      console.log('Initial mount, fetching data');
       fetchData(location);
     }
   }, [location, lastLocationKey, fetchData]);

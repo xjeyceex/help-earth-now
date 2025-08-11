@@ -112,7 +112,10 @@ export default function Navbar() {
           </div>
 
           {/* Location indicator - hidden on small screens */}
-          <div className="hidden sm:flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group mx-2">
+          <div
+            className="hidden sm:flex items-center bg-gray-800 bg-opacity-75 p-2 rounded-lg cursor-pointer group mx-2 hover:bg-opacity-90 transition-all duration-300"
+            onClick={() => setIsModalOpen(true)}
+          >
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
               className="text-green-400 mr-2"
@@ -126,13 +129,10 @@ export default function Navbar() {
                 ? stateAbbreviations[location.state]
                 : 'United States'}
             </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="ml-2 flex items-center justify-center w-5 h-5 bg-gray-600 text-white rounded-full hover:bg-blue-700 transition duration-300 group-hover:bg-blue-700"
-              aria-label="Edit Location"
-            >
-              <FontAwesomeIcon icon={faPen} className="text-xs" />
-            </button>
+            <FontAwesomeIcon
+              icon={faPen}
+              className="text-xs text-gray-400 ml-2 group-hover:text-blue-400 transition-colors duration-300"
+            />
           </div>
 
           {/* Desktop navigation */}

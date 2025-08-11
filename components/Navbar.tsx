@@ -202,20 +202,6 @@ export default function Navbar() {
             </div>
 
             <DarkModeToggle />
-
-            {/* Dropdown for authenticated users */}
-            {status === 'authenticated' && (
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className={`text-gray-400 hover:text-white transition ${
-                    isDropdownOpen ? 'text-white' : ''
-                  }`}
-                >
-                  Menu
-                </button>
-              </div>
-            )}
           </div>
 
           {/* Mobile menu button */}

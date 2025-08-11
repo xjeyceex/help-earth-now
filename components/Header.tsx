@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { LocationContext } from '@/components/location-provider';
 import Link from 'next/link';
 import {
   faDove,
   faDollarSign,
   faSolarPanel,
-} from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
+} from '@fortawesome/free-solid-svg-icons';
 import { stateAbbreviations } from '@/app/us-datas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLeaf } from '@fortawesome/free-solid-svg-icons'; // Importing Font Awesome icons
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 import { MdOutlineEmail } from 'react-icons/md';
 
 interface HeaderData {
@@ -46,13 +46,14 @@ export default function Header() {
     low: string[];
     high: string[];
   }>({ free: [], low: [], high: [] });
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [lastLocationKey, setLastLocationKey] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
-    setMessage(''); // Reset the message
+    e.preventDefault();
+    setMessage('');
 
     if (!email) {
       setMessage('Please enter a valid email.');
@@ -70,7 +71,7 @@ export default function Header() {
 
       if (response.ok) {
         setMessage('Thank you for signing up!');
-        setEmail(''); // Clear the input
+        setEmail('');
       } else {
         const errorData = await response.json();
         setMessage(
@@ -83,78 +84,145 @@ export default function Header() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const stateKey = location?.state
-        ? stateAbbreviations[location.state as keyof typeof stateAbbreviations]
-        : 'US';
-      if (!stateKey) return;
+  // Create a stable location key for comparison
+  const getLocationKey = useCallback((loc: typeof location) => {
+    if (!loc) return 'no-location';
+    return `${loc.state || 'no-state'}-${loc.county || 'no-county'}`;
+  }, []);
 
-      setLoading(true);
-      try {
-        const response = await fetch(`/api/sheet-data/header`);
-        if (!response.ok)
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
+  const fetchData = useCallback(async (currentLocation: typeof location) => {
+    console.log('Fetching data for location:', currentLocation);
 
-        const mainData: HeaderData[] = await response.json();
-        const relevantData = mainData.filter((item) => {
-          const matchesState =
-            item.state === stateKey ||
-            item.state === `${stateKey} - ALL` ||
-            item.state === 'ALL';
-          const matchesCounty = location?.county
-            ? location.county === item.county || item.county === ''
-            : true;
-          return matchesState && matchesCounty;
-        });
+    const stateKey = currentLocation?.state
+      ? stateAbbreviations[
+          currentLocation.state as keyof typeof stateAbbreviations
+        ]
+      : 'US';
 
-        const selectedData =
-          relevantData.find((item) => item.county === location?.county) ||
-          relevantData.find((item) => item.state === `${stateKey} - ALL`) ||
-          relevantData.find((item) => item.state === 'ALL') ||
-          ({} as HeaderData);
+    if (!stateKey) {
+      console.log('No state key found, using defaults');
+      setLoading(false);
+      return;
+    }
 
-        setWarningText(selectedData.warning?.trim() || '');
-        setQuestions(
-          [
-            selectedData.problem1,
-            selectedData.problem2,
-            selectedData.problem3,
-            selectedData.problem4,
-          ].filter(Boolean) as string[]
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/sheet-data/header`);
+      if (!response.ok)
+        throw new Error(`Failed to fetch data: ${response.statusText}`);
+
+      const mainData: HeaderData[] = await response.json();
+      console.log('Fetched data:', mainData);
+
+      // More precise filtering logic
+      const relevantData = mainData.filter((item) => {
+        const normalizedItemState = item.state?.trim();
+        const normalizedItemCounty = item.county?.trim();
+
+        // Check for exact state match or state-ALL or global ALL
+        const stateMatches =
+          normalizedItemState === stateKey ||
+          normalizedItemState === `${stateKey} - ALL` ||
+          normalizedItemState === 'ALL';
+
+        // Check for county match - either exact match or empty (applies to all counties)
+        const countyMatches = currentLocation?.county
+          ? normalizedItemCounty === currentLocation.county ||
+            normalizedItemCounty === ''
+          : true;
+
+        return stateMatches && countyMatches;
+      });
+
+      console.log('Filtered relevant data:', relevantData);
+
+      // Priority-based selection: exact match > state-ALL > global ALL
+      const selectedData =
+        relevantData.find(
+          (item) =>
+            item.state === stateKey && item.county === currentLocation?.county
+        ) ||
+        relevantData.find((item) => item.state === `${stateKey} - ALL`) ||
+        relevantData.find((item) => item.state === 'ALL') ||
+        ({} as HeaderData);
+
+      console.log('Selected data:', selectedData);
+
+      // Reset all state before setting new values
+      setWarningText('');
+      setQuestions([]);
+      setActions({ free: [], low: [], high: [] });
+
+      // Set new values
+      setWarningText(selectedData.warning?.trim() || '');
+      setQuestions(
+        [
+          selectedData.problem1,
+          selectedData.problem2,
+          selectedData.problem3,
+          selectedData.problem4,
+        ].filter((item): item is string => Boolean(item?.trim()))
+      );
+
+      setActions({
+        free: [
+          selectedData.action1free,
+          selectedData.action2free,
+          selectedData.action3free,
+          selectedData.action4free,
+        ].filter((item): item is string => Boolean(item?.trim())),
+        low: [
+          selectedData.action1low,
+          selectedData.action2low,
+          selectedData.action3low,
+        ].filter((item): item is string => Boolean(item?.trim())),
+        high: [
+          selectedData.action1high,
+          selectedData.action2high,
+          selectedData.action3high,
+        ].filter((item): item is string => Boolean(item?.trim())),
+      });
+
+      if (selectedData.link?.trim()) {
+        const cleanLink = selectedData.link.trim();
+        setVideoUrl(
+          `https://www.youtube.com/embed/${cleanLink}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${cleanLink}`
         );
-        setActions({
-          free: [
-            selectedData.action1free,
-            selectedData.action2free,
-            selectedData.action3free,
-          ].filter(Boolean) as string[],
-          low: [
-            selectedData.action1low,
-            selectedData.action2low,
-            selectedData.action3low,
-          ].filter(Boolean) as string[],
-          high: [
-            selectedData.action1high,
-            selectedData.action2high,
-            selectedData.action3high,
-          ].filter(Boolean) as string[],
-        });
-
-        if (selectedData.link) {
-          setVideoUrl(
-            `https://www.youtube.com/embed/${selectedData.link}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${selectedData.link}`
-          );
-        }
-      } catch (error) {
-        console.error('Error fetching header data:', error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching header data:', error);
+      // Set fallback values on error
+      setWarningText('Unable to load location-specific data');
+      setQuestions([]);
+      setActions({ free: [], low: [], high: [] });
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-    fetchData();
-  }, [location?.state, location?.county]);
+  useEffect(() => {
+    const currentLocationKey = getLocationKey(location);
+
+    // Only fetch if location actually changed
+    if (currentLocationKey !== lastLocationKey) {
+      console.log(
+        'Location changed from',
+        lastLocationKey,
+        'to',
+        currentLocationKey
+      );
+      setLastLocationKey(currentLocationKey);
+      fetchData(location);
+    }
+  }, [location, getLocationKey, fetchData, lastLocationKey]);
+
+  // Also trigger on mount to ensure initial data load
+  useEffect(() => {
+    if (location && !lastLocationKey) {
+      console.log('Initial mount, fetching data');
+      fetchData(location);
+    }
+  }, [location, lastLocationKey, fetchData]);
 
   return (
     <div className="w-full" id="home">
@@ -179,6 +247,14 @@ export default function Header() {
                 </h1>
 
                 <div className="max-w-2xl font-light text-gray-700 dark:text-gray-300 text-lg sm:text-xl md:text-2xl leading-relaxed">
+                  {/* Location indicator for debugging */}
+                  {process.env.NODE_ENV === 'development' && (
+                    <div className="text-sm text-gray-500 mb-2">
+                      Location: {location?.state || 'No State'},{' '}
+                      {location?.county || 'No County'}
+                    </div>
+                  )}
+
                   {/* Warning text with reduced spacing */}
                   <div className="pb-2 leading-snug">{warningText}</div>
 
@@ -186,18 +262,22 @@ export default function Header() {
                   <div className="pb-2"></div>
 
                   {/* Title with reduced spacing before bullets */}
-                  <div className="text-left font-semibold text-xl sm:text-2xl mb-2">
-                    Do you care about:
-                  </div>
+                  {questions.length > 0 && (
+                    <>
+                      <div className="text-left font-semibold text-xl sm:text-2xl mb-2">
+                        Do you care about:
+                      </div>
 
-                  {/* Bullet points with reduced spacing */}
-                  <ul className="care-about-list list-disc pl-8 space-y-1">
-                    {questions.map((question: string, index: number) => (
-                      <li key={index} className="pb-1">
-                        {question.endsWith('?') ? question : `${question}?`}
-                      </li>
-                    ))}
-                  </ul>
+                      {/* Bullet points with reduced spacing */}
+                      <ul className="care-about-list list-disc pl-8 space-y-1">
+                        {questions.map((question: string, index: number) => (
+                          <li key={index} className="pb-1">
+                            {question.endsWith('?') ? question : `${question}?`}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </div>
 
                 <div className="text-left text-lg">
@@ -226,6 +306,17 @@ export default function Header() {
                     Save
                   </button>
                 </form>
+                {message && (
+                  <div
+                    className={`text-sm ${
+                      message.includes('Thank you')
+                        ? 'text-green-600'
+                        : 'text-red-600'
+                    }`}
+                  >
+                    {message}
+                  </div>
+                )}
               </div>
               <div className="lg:mt-0 lg:col-span-5 lg:flex lg:ml-8 mt-6">
                 <iframe
@@ -261,8 +352,6 @@ export default function Header() {
                       What can I do for free?
                     </h3>
                     <div className="space-y-4">
-                      {' '}
-                      {/* Added container div with space-y */}
                       {actions.free.map((action, index) => (
                         <p
                           key={index}

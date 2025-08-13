@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { LocationContext } from '@/components/location-provider';
 import {
   states,
@@ -26,10 +26,9 @@ export default function Navbar() {
   const [counties, setCounties] = useState<string[]>([]);
   const [selectedCounty, setSelectedCounty] = useState<string>('');
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleAboutDropdown = () => {
-    setAboutDropdownOpen(!aboutDropdownOpen);
-  };
+  const toggleAboutDropdown = () => setAboutDropdownOpen(!aboutDropdownOpen);
 
   const linkClasses = (path: string) =>
     `block px-3 py-2 text-sm transition ${
@@ -38,10 +37,6 @@ export default function Navbar() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,6 +71,22 @@ export default function Navbar() {
     setIsModalOpen(false);
     window.location.reload();
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setAboutDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     if (isModalOpen && location) {
@@ -146,7 +157,7 @@ export default function Navbar() {
             </Link>
 
             {/* Learn More dropdown */}
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={toggleAboutDropdown}
                 className={`flex items-center px-3 py-1 rounded-lg text-sm text-gray-200 hover:text-white transition-all duration-200 ${
@@ -171,6 +182,7 @@ export default function Navbar() {
                   />
                 </svg>
               </button>
+
               {aboutDropdownOpen && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-56 bg-gray-900 shadow-lg rounded-lg mt-2 p-2">
                   <Link

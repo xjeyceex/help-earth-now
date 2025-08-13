@@ -1,0 +1,20 @@
+export type HeaderData = {
+  state: string;
+  county: string;
+  link: string;
+  warning: string;
+  problem1: string;
+  problem2?: string;
+  problem3?: string;
+  problem4?: string;
+  action1free?: string;
+  action2free?: string;
+  action3free?: string;
+  action4free?: string;
+  action1low?: string;
+  action2low?: string;
+  action3low?: string;
+  action1high?: string;
+  action2high?: string;
+  action3high?: string;
+};

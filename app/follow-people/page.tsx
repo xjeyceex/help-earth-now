@@ -40,7 +40,7 @@ export default function Jointeam() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full" />
       </div>
     );
   }

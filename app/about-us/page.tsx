@@ -75,7 +75,7 @@ export default function AboutUsPage() {
     return (
       <div className="px-6 py-8 max-w-7xl mx-auto space-y-6">
         {/* Page title skeleton */}
-        <div className="h-12 md:h-16 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mx-auto animate-pulse"></div>
+        <div className="h-12 md:h-16 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mx-auto animate-pulse" />
 
         {/* Skeleton for sections */}
         {[1, 2, 3, 4, 5].map((section, idx) => (
@@ -88,7 +88,7 @@ export default function AboutUsPage() {
             }`}
           >
             {/* Header skeleton */}
-            <div className="h-8 md:h-10 w-2/5 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
+            <div className="h-8 md:h-10 w-2/5 bg-gray-300 dark:bg-gray-600 rounded mb-4" />
 
             {/* Content lines skeleton */}
             <div className="space-y-3">
@@ -98,14 +98,14 @@ export default function AboutUsPage() {
                   className={`h-4 rounded ${
                     idx === 3 ? 'bg-white/70' : 'bg-gray-300 dark:bg-gray-600'
                   } w-full`}
-                ></div>
+                />
               ))}
             </div>
           </div>
         ))}
 
         {/* Bottom feedback/footer skeleton */}
-        <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mx-auto animate-pulse mt-6"></div>
+        <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mx-auto animate-pulse mt-6" />
       </div>
     );
   }

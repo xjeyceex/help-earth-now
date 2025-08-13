@@ -5,8 +5,8 @@ import LocationProvider from '@/components/location-provider';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import Script from 'next/script';
-import Navbar from '@/components/Navbar';
 import FixedSocialIcon from '@/components/FixedSocialIcon';
+import Navbar from '@/components/navbar/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 

@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
@@ -18,7 +19,8 @@ const DarkModeToggle = () => {
     }
   }, []);
 
-  const toggleDarkMode = () => {
+  const toggleDarkMode = (e: React.MouseEvent | React.ChangeEvent) => {
+    e.preventDefault(); // Prevent label/checkbox from scrolling page
     setIsDarkMode((prevMode) => {
       const newMode = !prevMode;
       const newTheme = newMode ? 'dark' : 'light';
@@ -30,11 +32,14 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <label className="flex items-center cursor-pointer">
+    <label
+      className="flex items-center cursor-pointer"
+      onClick={toggleDarkMode} // Handle click at label level
+    >
       <input
         type="checkbox"
         checked={isDarkMode}
-        onChange={toggleDarkMode}
+        readOnly
         className="sr-only"
         aria-label="Toggle dark mode"
       />

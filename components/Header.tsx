@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { LocationContext } from '@/components/location-provider';
+import { LocationContext } from '@/context/location-provider';
 import Link from 'next/link';
 import {
   faDove,

@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { LocationContext } from '@/components/location-provider';
+import { LocationContext } from '@/context/location-provider';
 import { stateAbbreviations } from '@/app/us-datas';
 
 interface LocationIndicatorProps {

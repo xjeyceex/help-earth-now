@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useContext } from 'react';
-import { LocationContext } from '@/components/location-provider';
+import { LocationContext } from '@/context/location-provider';
 import { states, counties as allCounties } from '@/app/us-datas';
 
 interface LocationModalProps {

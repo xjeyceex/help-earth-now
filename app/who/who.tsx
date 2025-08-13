@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { LocationContext } from '@/components/location-provider';
+import { LocationContext } from '@/context/location-provider';
 import { routeToStateMap } from '@/app/us-datas';
 
 enum Party {

@@ -193,21 +193,10 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const currentLocationKey = getLocationKey(location);
+    if (!location) return;
 
-    // Only fetch if location actually changed
-    if (currentLocationKey !== lastLocationKey) {
-      setLastLocationKey(currentLocationKey);
-      fetchData(location);
-    }
-  }, [location, getLocationKey, fetchData, lastLocationKey]);
-
-  // Also trigger on mount to ensure initial data load
-  useEffect(() => {
-    if (location && !lastLocationKey) {
-      fetchData(location);
-    }
-  }, [location, lastLocationKey, fetchData]);
+    fetchData(location);
+  }, [location, fetchData]);
 
   return (
     <div className="w-full" id="home">

@@ -18,3 +18,11 @@ export type HeaderData = {
   action2high?: string;
   action3high?: string;
 };
+
+export type ClimateItem = {
+  image: string;
+  title: string;
+  description: string;
+  moreInfo: string;
+  learnMore: string;
+};

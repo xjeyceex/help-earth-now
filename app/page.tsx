@@ -1,7 +1,7 @@
 import CookieConsent from '@/components/CookieConsent';
 import Footer from '@/components/Footer';
 import FeedbackButton from '@/components/FeedBack';
-import WhyItMatters from '@/components/WhyItMatters';
+import WhyItMatters from '@/components/why-it-matters/WhyItMatters';
 import Header from '@/components/header/Header';
 
 export default function Home() {

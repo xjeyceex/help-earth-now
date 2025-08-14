@@ -16,10 +16,12 @@ export default function LocationIndicator({
 }: LocationIndicatorProps) {
   const { location } = useContext(LocationContext) || {};
 
-  const displayText = location?.county
-    ? `${location.county}, ${stateAbbreviations[location.state ?? '']}`
-    : location?.state
-    ? stateAbbreviations[location.state]
+  const displayText = location
+    ? location.county && location.state && stateAbbreviations[location.state]
+      ? `${location.county}, ${stateAbbreviations[location.state]}`
+      : location.state && stateAbbreviations[location.state]
+      ? stateAbbreviations[location.state]
+      : 'United States'
     : 'United States';
 
   const baseClasses =

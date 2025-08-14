@@ -134,24 +134,24 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
           </select>
         </div>
 
-        <div className="flex w-full gap-2 mt-4">
+        <div className="flex w-full gap-2 mt-4 flex-wrap">
           <button
             onClick={handleUpdateAutomatically}
-            className="flex-1 py-2 px-3 bg-green-600 hover:bg-green-700 focus:ring-1 focus:ring-green-400 text-white font-medium rounded-md transition-colors"
+            className="flex-1 min-w-[100px] py-2 px-3 bg-green-600 hover:bg-green-700 focus:ring-1 focus:ring-green-400 text-white font-medium rounded-md transition-colors"
           >
             Auto Detect
           </button>
 
           <button
             onClick={handleUpdateLocation}
-            className="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 focus:ring-1 focus:ring-blue-400 text-white font-medium rounded-md transition-colors"
+            className="flex-1 min-w-[100px] py-2 px-3 bg-blue-600 hover:bg-blue-700 focus:ring-1 focus:ring-blue-400 text-white font-medium rounded-md transition-colors"
           >
             Save
           </button>
 
           <button
             onClick={onClose}
-            className="flex-1 py-2 px-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-medium"
+            className="flex-1 min-w-[100px] py-2 px-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-medium"
           >
             Cancel
           </button>

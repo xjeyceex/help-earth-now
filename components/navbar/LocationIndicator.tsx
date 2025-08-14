@@ -22,20 +22,22 @@ export default function LocationIndicator({
     ? stateAbbreviations[location.state]
     : 'United States';
 
+  const baseClasses =
+    'flex items-center p-3 rounded-lg cursor-pointer transition-colors shadow-sm';
+
   if (isMobile) {
     return (
       <div
         onClick={onClick}
-        className="w-full max-w-xs flex items-center 
-                   bg-gray-200 dark:bg-gray-800 p-3 rounded-lg mb-6 
-                   cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-700 
-                   transition-colors"
+        className={`${baseClasses} w-full max-w-xs mb-6
+                    bg-green-50 dark:bg-green-900/80 border border-green-500/30
+                    hover:bg-green-100 dark:hover:bg-green-800`}
       >
         <FontAwesomeIcon
           icon={faMapMarkerAlt}
           className="text-green-600 dark:text-green-400 mr-3"
         />
-        <p className="text-sm text-gray-900 dark:text-white flex-grow">
+        <p className="text-sm font-medium text-gray-800 dark:text-white flex-grow">
           {displayText}
         </p>
         <FontAwesomeIcon
@@ -48,17 +50,16 @@ export default function LocationIndicator({
 
   return (
     <div
-      className="hidden sm:flex items-center 
-                 bg-gray-200/75 dark:bg-gray-800/75 p-2 rounded-lg 
-                 cursor-pointer group mx-2 hover:bg-gray-300/90 dark:hover:bg-gray-700/90 
-                 transition-all duration-300"
       onClick={onClick}
+      className={`${baseClasses} hidden sm:flex mx-2
+                  bg-green-50 dark:bg-green-900/80 border border-green-500/30
+                  hover:bg-green-100 dark:hover:bg-green-800`}
     >
       <FontAwesomeIcon
         icon={faMapMarkerAlt}
         className="text-green-600 dark:text-green-400 mr-2"
       />
-      <p className="text-xs md:text-sm text-gray-900 dark:text-white flex-grow">
+      <p className="text-xs md:text-sm font-medium text-gray-800 dark:text-white flex-grow">
         {displayText}
       </p>
       <FontAwesomeIcon

@@ -11,23 +11,32 @@ interface ClimateCardProps {
 const ClimateCard: React.FC<ClimateCardProps> = ({ item, onClick }) => {
   return (
     <div
-      className="min-w-[300px] snap-center border dark:border-gray-800 border-gray-300 relative overflow-hidden rounded-lg bg-zinc-100 dark:bg-gray-900 cursor-pointer shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
+      className="min-w-[300px] snap-center relative overflow-hidden rounded-xl bg-gradient-to-b from-white to-zinc-100 dark:from-gray-900 dark:to-gray-800 cursor-pointer shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
       onClick={() => onClick(item)}
     >
-      <Image
-        src={item.image}
-        alt={item.title}
-        width={300}
-        height={256}
-        className="w-full h-64 object-cover rounded-t-lg transition-transform duration-500 transform hover:scale-110"
-      />
-      <div className="relative p-6 text-gray-900 dark:text-gray-100 text-center">
-        <h3 className="text-3xl font-semibold mb-3">{item.title}</h3>
-        <hr className="border-t-2 border-gray-300 dark:border-gray-700 my-6 mx-auto w-3/4" />
-        <p className="mt-2 text-gray-700 dark:text-gray-300">
+      {/* Image with subtle overlay for better text contrast */}
+      <div className="relative w-full h-64 overflow-hidden rounded-t-xl">
+        <Image
+          src={item.image}
+          alt={item.title}
+          fill
+          className="object-cover transition-transform duration-500 transform hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-t-xl" />
+      </div>
+
+      <div className="p-5 text-center">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          {item.title}
+        </h3>
+        <hr className="border-t border-gray-300 dark:border-gray-700 w-16 mx-auto my-3" />
+        <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm leading-relaxed">
           {item.description}
         </p>
       </div>
+
+      {/* Optional: subtle shine/hover effect */}
+      <div className="absolute inset-0 pointer-events-none rounded-xl bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 hover:opacity-20 transition-opacity duration-300" />
     </div>
   );
 };

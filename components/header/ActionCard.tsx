@@ -31,8 +31,8 @@ export default function ActionCard({
       <div
         className={`flex items-center gap-4 p-6 ${bgColor} dark:bg-opacity-30`}
       >
-        <FontAwesomeIcon icon={icon} className={`text-4xl ${iconColor}`} />
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <FontAwesomeIcon icon={icon} className={`text-3xl ${iconColor}`} />
+        <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100">
           {title}
         </h3>
       </div>

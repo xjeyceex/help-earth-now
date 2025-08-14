@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
 
 interface ActionCardProps {
   icon: IconDefinition;
@@ -23,9 +24,14 @@ export default function ActionCard({
   location,
 }: ActionCardProps) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      whileHover={{ scale: 1.05, boxShadow: '0 10px 20px rgba(0,0,0,0.15)' }}
       className="flex flex-col flex-1 min-w-[280px] max-w-[calc(50%-1rem)] md:max-w-[calc(33%-1rem)] 
-                    bg-white dark:bg-gray-900 rounded-xl shadow-md hover:shadow-xl transition-shadow transform hover:scale-105 overflow-hidden"
+                 bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden"
     >
       {/* Header */}
       <div
@@ -39,20 +45,40 @@ export default function ActionCard({
 
       {/* Content */}
       <div className="p-6 flex flex-col gap-3">
-        <ul className="space-y-2">
+        <motion.ul
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.08 },
+            },
+          }}
+          className="space-y-2"
+        >
           {actions.map((action, index) => (
-            <li
+            <motion.li
               key={index}
+              variants={{
+                hidden: { opacity: 0, x: -15 },
+                visible: { opacity: 1, x: 0 },
+              }}
               className="text-lg md:text-xl text-gray-700 dark:text-gray-300 pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-blue-500"
             >
               {action}
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         {/* Location Link */}
         {location?.county === 'Contra Costa County' && (
-          <div className="mt-4 text-right">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-4 text-right"
+          >
             <Link
               href={`/${encodeURIComponent('category')}/${encodeURIComponent(
                 location?.county || ''
@@ -61,9 +87,9 @@ export default function ActionCard({
             >
               More →
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

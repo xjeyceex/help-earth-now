@@ -75,10 +75,12 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-3">
             <button
               onClick={openModal}
-              className="sm:hidden text-gray-900 dark:text-white p-1 hover:text-gray-800 dark:hover:text-gray-300 transition-colors"
+              className="sm:hidden flex items-center justify-center w-7 h-7 rounded-full
+               bg-gray-700 dark:bg-gray-200 text-white dark:text-gray-900
+               shadow-md transition-transform hover:scale-105"
               aria-label="Location"
             >
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="text-lg" />
             </button>
             <button
               className="text-gray-900 dark:text-white focus:outline-none hover:text-gray-800 dark:hover:text-gray-300 transition-colors"

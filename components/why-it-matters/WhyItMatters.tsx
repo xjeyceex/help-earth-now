@@ -19,16 +19,16 @@ const WhyItMatters: React.FC = () => {
       image: '/wildfire.jpg',
       title: 'Wildfires',
       description:
-        'More frequent and intense wildfires threaten forests, wildlife, and human lives.',
+        'Frequent and intense wildfires threaten forests, wildlife, and human communities.',
       moreInfo:
-        'Wildfires release CO2, damage ecosystems, reduce air quality, and force evacuations, causing economic and health impacts.',
+        'Wildfires release CO₂, harm ecosystems, reduce air quality, and force evacuations, causing both economic and health impacts.',
       learnMore: 'https://www.who.int/health-topics/wildfires',
     },
     {
       image: '/sea-level.jpg',
       title: 'Rising Sea Levels',
       description:
-        'Coastal cities face flooding and community displacement due to rising seas.',
+        'Coastal cities are at risk of flooding and community displacement due to rising seas.',
       moreInfo:
         'Melting ice caps and thermal expansion threaten homes, land, and infrastructure, creating economic challenges.',
       learnMore:
@@ -38,7 +38,7 @@ const WhyItMatters: React.FC = () => {
       image: '/drought.jpg',
       title: 'Droughts',
       description:
-        'Prolonged droughts threaten food, water, and livelihoods globally.',
+        'Prolonged droughts threaten food, water, and livelihoods across the globe.',
       moreInfo:
         'Droughts reduce crop yields, deplete water supplies, and increase social and economic instability.',
       learnMore: 'https://www.drought.gov/current-conditions',
@@ -47,9 +47,9 @@ const WhyItMatters: React.FC = () => {
       image: '/storms.jpg',
       title: 'Severe Storms',
       description:
-        'Hurricanes, typhoons, and cyclones are more intense, damaging communities.',
+        'Hurricanes, typhoons, and cyclones are becoming stronger and more destructive.',
       moreInfo:
-        'Warmer oceans and changing patterns cause destructive storms, displacing people and affecting economies.',
+        'Warmer oceans and changing weather patterns cause destructive storms, displacing communities and affecting economies.',
       learnMore:
         'https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level',
     },
@@ -57,9 +57,9 @@ const WhyItMatters: React.FC = () => {
       image: '/heatwave.jpg',
       title: 'Heatwaves',
       description:
-        'Extreme heat events endanger health, agriculture, and energy systems.',
+        'Extreme heat events pose serious risks to health, agriculture, and energy systems.',
       moreInfo:
-        'Heatwaves increase illness and death, strain power grids, and reduce crop yields, affecting food security.',
+        'Heatwaves increase illness and mortality, strain power grids, and reduce crop yields, impacting food security.',
       learnMore:
         'https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health',
     },
@@ -67,7 +67,7 @@ const WhyItMatters: React.FC = () => {
       image: '/melting.jpg',
       title: 'Melting Ice Caps',
       description:
-        'Polar ice is melting fast, raising sea levels and threatening ecosystems.',
+        'Polar ice is melting rapidly, raising sea levels and threatening ecosystems.',
       moreInfo:
         'Ice loss disrupts weather, accelerates sea level rise, and endangers species and Indigenous communities.',
       learnMore:
@@ -79,7 +79,7 @@ const WhyItMatters: React.FC = () => {
       description:
         'Species extinction is accelerating due to habitat and climate changes.',
       moreInfo:
-        'Loss of biodiversity disrupts ecosystems, affecting food chains, livelihoods, and essential environmental services.',
+        'Loss of biodiversity disrupts ecosystems, affecting food chains, livelihoods, and vital environmental services.',
       learnMore:
         'https://www.iucn.org/resources/issues-briefs/biodiversity-and-climate-change',
     },
@@ -90,17 +90,16 @@ const WhyItMatters: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
-    <section className="bg-gray-100 dark:bg-gray-900 py-8 px-4 w-full relative lg:px-20">
+    <section className="bg-gray-100 dark:bg-gray-900 py-12 px-4 lg:px-20 w-full">
       <div className="max-w-screen-2xl mx-auto text-center">
-        <p className="text-2xl text-gray-700 dark:text-gray-300">
-          Climate change is affecting every corner of the planet, from extreme
-          weather events to rising sea levels. By taking action now, we can slow
-          down these effects and protect our future.
+        <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+          Why Climate Change Matters
+        </h2>
+        <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
+          Climate change affects every corner of our planet—from extreme weather
+          events to rising seas. Taking action now helps protect communities,
+          ecosystems, and our shared future.
         </p>
 
         <ClimateCarousel items={climateItems} onCardClick={handleCardClick} />
@@ -109,7 +108,7 @@ const WhyItMatters: React.FC = () => {
       <ClimateModal
         isOpen={isModalOpen}
         content={modalContent}
-        onClose={closeModal}
+        onClose={() => setIsModalOpen(false)}
       />
     </section>
   );

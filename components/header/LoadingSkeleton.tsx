@@ -26,10 +26,27 @@ export default function LoadingSkeleton() {
             </ul>
 
             {/* Email form skeleton */}
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/2 mb-4 mt-8" />
-            <div className="flex items-center space-x-2 w-full max-w-md">
-              <div className="relative flex-1 h-12 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-              <div className="h-12 w-24 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
+            <div className="space-y-3 relative max-w-lg p-3 rounded-lg bg-white dark:bg-gray-800 shadow-md animate-pulse">
+              {/* Title */}
+              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3" />
+
+              {/* Form inputs */}
+              <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
+                {/* Email input skeleton */}
+                <div className="flex-1 h-10 bg-gray-200 dark:bg-gray-700 rounded-full" />
+
+                {/* Phone input skeleton */}
+                <div className="flex-1 h-10 bg-gray-200 dark:bg-gray-700 rounded-full" />
+              </div>
+
+              {/* Hint text skeleton */}
+              <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mt-1 mb-1" />
+
+              {/* Submit button skeleton */}
+              <div className="h-10 w-full bg-gray-300 dark:bg-gray-600 rounded-full" />
+
+              {/* Friendly message skeleton */}
+              <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mt-1" />
             </div>
           </div>
 

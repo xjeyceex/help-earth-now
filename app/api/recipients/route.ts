@@ -3,8 +3,8 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
-// Append data to Google Sheets
-const appendToSheets = async (email: string): Promise<void> => {
+// Append data to Google Sheets with independent columns
+const appendToSheets = async (email?: string, phone?: string) => {
   if (
     !process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ||
     !process.env.GOOGLE_SHEETS_API_KEY ||
@@ -26,18 +26,38 @@ const appendToSheets = async (email: string): Promise<void> => {
   const authClient = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', auth: authClient as any });
 
-  try {
-    await sheets.spreadsheets.values.append({
+  // Get last used row for Email (column A)
+  const colA = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
+    range: 'Recipients!A:A',
+  });
+  const lastRowA = colA.data.values ? colA.data.values.length : 0;
+
+  // Get last used row for Phone (column B)
+  const colB = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
+    range: 'Recipients!B:B',
+  });
+  const lastRowB = colB.data.values ? colB.data.values.length : 0;
+
+  // Write Email to next row in column A
+  if (email) {
+    await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: 'Recipients!A:A',
+      range: `Recipients!A${lastRowA + 1}`,
       valueInputOption: 'RAW',
-      requestBody: {
-        values: [[email]],
-      },
+      requestBody: { values: [[email]] },
     });
-  } catch (error) {
-    console.error('Error appending data to Google Sheets:', error);
-    throw new Error('Error appending data to Google Sheets');
+  }
+
+  // Write Phone to next row in column B
+  if (phone) {
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID!,
+      range: `Recipients!B${lastRowB + 1}`,
+      valueInputOption: 'RAW',
+      requestBody: { values: [[phone]] },
+    });
   }
 };
 
@@ -45,19 +65,46 @@ const appendToSheets = async (email: string): Promise<void> => {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const email = body.email;
+    const { email, phone } = body;
 
-    if (!email || typeof email !== 'string') {
+    // Validate that at least one contact method is provided
+    if (
+      (!email || typeof email !== 'string') &&
+      (!phone || typeof phone !== 'string')
+    ) {
       return NextResponse.json(
-        { error: 'Invalid email format' },
+        { error: 'Please provide either a valid email or phone number' },
         { status: 400 }
       );
     }
 
-    await appendToSheets(email);
+    // Validate email format if provided
+    if (email && typeof email === 'string') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return NextResponse.json(
+          { error: 'Invalid email format' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Validate phone format if provided
+    if (phone && typeof phone === 'string') {
+      const phoneRegex = /^\(\d{3}\)\s\d{3}-\d{4}$/;
+      if (!phoneRegex.test(phone)) {
+        return NextResponse.json(
+          { error: 'Invalid phone format. Please use (XXX) XXX-XXXX format' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Append data
+    await appendToSheets(email, phone);
 
     return NextResponse.json(
-      { success: true, message: 'Email successfully saved' },
+      { success: true, message: 'Contact information successfully saved' },
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -70,9 +117,9 @@ export async function POST(req: NextRequest) {
       }
     );
   } catch (error) {
-    console.error('Error saving email:', error);
+    console.error('Error saving contact information:', error);
     return NextResponse.json(
-      { error: 'Failed to save email' },
+      { error: 'Failed to save contact information' },
       { status: 500 }
     );
   }

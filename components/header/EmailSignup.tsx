@@ -9,6 +9,8 @@ export default function EmailSignup() {
   const [message, setMessage] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [signupComplete, setSignupComplete] = useState(false); // for replacing form later
 
   const formatPhoneNumber = (value: string) => {
     const phoneNumber = value.replace(/[^\d]/g, '');
@@ -50,6 +52,7 @@ export default function EmailSignup() {
       return;
     }
 
+    setLoading(true);
     try {
       const response = await fetch('/api/recipients', {
         method: 'POST',
@@ -71,6 +74,8 @@ export default function EmailSignup() {
       }
     } catch {
       setMessage('Network issue? Try again in a moment.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,6 +86,7 @@ export default function EmailSignup() {
         setTimeout(() => {
           setShowSuccessModal(false);
           setIsClosing(false);
+          setSignupComplete(true); // switch to "What can I do?" after toast
         }, 300);
       }, 3000);
       return () => clearTimeout(timer);
@@ -92,13 +98,27 @@ export default function EmailSignup() {
     setTimeout(() => {
       setShowSuccessModal(false);
       setIsClosing(false);
+      setSignupComplete(true);
     }, 300);
   };
+
+  if (signupComplete) {
+    return (
+      <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <a
+          href="/what-can-i-do"
+          className="text-blue-500 hover:underline font-semibold"
+        >
+          What can I do?
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4 relative max-w-lg p-4 rounded-lg bg-white dark:bg-gray-800 shadow-md">
       <div className="text-left text-lg font-medium">
-        Stay in the loop! Sign up for friendly updates:
+        Stay in the loop! Sign up for occasional updates — one or both of:
       </div>
       <form className="space-y-3" onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
@@ -108,8 +128,9 @@ export default function EmailSignup() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="p-3 pr-10 rounded-full w-full border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white text-black placeholder-gray-400"
-              placeholder="Your email (optional)"
+              disabled={loading}
+              className="p-3 pr-10 rounded-full w-full border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+              placeholder="Email Address"
             />
             <MdOutlineEmail className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           </div>
@@ -120,25 +141,46 @@ export default function EmailSignup() {
               type="tel"
               value={phone}
               onChange={handlePhoneChange}
-              className="p-3 pr-10 rounded-full w-full border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white text-black placeholder-gray-400"
-              placeholder="Phone (optional)"
+              disabled={loading}
+              className="p-3 pr-10 rounded-full w-full border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+              placeholder="Phone Number"
               maxLength={14}
             />
             <MdPhone className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           </div>
         </div>
 
-        {/* Hint */}
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          Both fields are optional - add whichever you like.
-        </div>
-
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition w-full"
+          disabled={loading}
+          className={`bg-blue-500 text-white p-3 rounded-full transition w-full flex justify-center items-center ${
+            loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-600'
+          }`}
         >
-          Sign Me Up
+          {loading && (
+            <svg
+              className="animate-spin h-5 w-5 mr-2 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+          )}
+          {loading ? 'Signing up…' : 'Sign Me Up'}
         </button>
 
         {/* Friendly messages */}
@@ -147,34 +189,31 @@ export default function EmailSignup() {
         )}
       </form>
 
-      {/* Success Modal */}
+      {/* Success Toast */}
       {showSuccessModal && (
         <div
-          className={`fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 transition-opacity ${
-            isClosing ? 'opacity-0' : 'opacity-100'
+          className={`fixed bottom-6 right-6 z-50 transition-all transform ${
+            isClosing ? 'opacity-0 translate-y-3' : 'opacity-100 translate-y-0'
           }`}
         >
-          <div
-            className={`bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-sm w-full text-center transition-all ${
-              isClosing ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
-            }`}
-          >
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 pr-10 relative flex items-start space-x-3 max-w-sm">
+            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-green-100 dark:bg-green-900 flex-shrink-0">
+              <MdCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Thanks for joining!
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                You&apos;re on our list for occasional updates.
+              </p>
+            </div>
             <button
               onClick={closeModal}
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
             >
-              <MdClose className="w-6 h-6" />
+              <MdClose className="w-5 h-5" />
             </button>
-            <div className="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-green-100 dark:bg-green-900 mb-4">
-              <MdCheck className="h-8 w-8 text-green-600 dark:text-green-400" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              Thanks for joining!
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              You&apos;ll get occasional friendly updates about our climate
-              efforts.
-            </p>
           </div>
         </div>
       )}

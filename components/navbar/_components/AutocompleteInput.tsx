@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -31,132 +32,150 @@ export default function AutocompleteInput({
   inputRef,
   selectedValue,
 }: AutocompleteInputProps) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
   const [dropdownPosition, setDropdownPosition] = useState<'below' | 'above'>(
     'below'
   );
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const inputContainerRef = useRef<HTMLDivElement>(null);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  /** Update filtered options based on value */
   useEffect(() => {
-    if (value.trim()) {
-      const filtered = options.filter((option) =>
-        option.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredOptions(filtered.slice(0, 10));
-      setIsDropdownOpen(filtered.length > 0);
-    } else {
-      setFilteredOptions([]);
-      setIsDropdownOpen(false);
+    if (!value.trim()) {
+      setFilteredOptions(options.slice(0, 50)); // Show first 50 if empty
+      return;
     }
+    setFilteredOptions(
+      options
+        .filter((option) => option.toLowerCase().includes(value.toLowerCase()))
+        .slice(0, 50)
+    );
   }, [value, options]);
 
+  /** Decide dropdown position based on available space */
   useEffect(() => {
-    if (isDropdownOpen && inputContainerRef.current) {
-      const rect = inputContainerRef.current.getBoundingClientRect();
-      const modalHeight = window.innerHeight;
-      const spaceBelow = modalHeight - rect.bottom;
+    if (isOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
-
-      if (spaceBelow < 200 && spaceAbove > spaceBelow) {
-        setDropdownPosition('above');
-      } else {
-        setDropdownPosition('below');
-      }
+      setDropdownPosition(
+        spaceBelow < 200 && spaceAbove > spaceBelow ? 'above' : 'below'
+      );
     }
-  }, [isDropdownOpen]);
+  }, [isOpen]);
 
+  /** Close on outside click */
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
       ) {
-        setIsDropdownOpen(false);
+        setIsOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
+  /** Handlers */
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.value);
+      if (!isOpen) setIsOpen(true);
+    },
+    [onChange, isOpen]
+  );
 
-  const handleOptionSelect = (option: string) => {
-    onChange(option);
-    onSelect(option);
-    setIsDropdownOpen(false);
-  };
+  const handleSelect = useCallback(
+    (option: string) => {
+      onChange(option);
+      onSelect(option);
+      setIsOpen(false);
+    },
+    [onChange, onSelect]
+  );
 
-  const handleInputFocus = () => {
-    if (value.trim() && filteredOptions.length > 0) {
-      setIsDropdownOpen(true);
-    }
-  };
+  const handleInputClick = useCallback(() => {
+    // Toggle open/close, always show all options if value empty
+    setIsOpen((prev) => !prev || !value.trim());
+  }, [value]);
 
-  const clearInput = () => {
+  const clearInput = useCallback(() => {
     onChange('');
+    setFilteredOptions(options.slice(0, 50));
     inputRef?.current?.focus();
-    setIsDropdownOpen(false);
-  };
+    setIsOpen(true); // Keep open so they can re-pick
+  }, [onChange, inputRef, options]);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={containerRef}>
       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
         {label}
       </label>
-      <div className="relative" ref={inputContainerRef}>
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+
+      <div className="relative">
+        {/* Search Icon */}
+        <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <FontAwesomeIcon icon={faSearch} className="text-gray-400 text-sm" />
-        </div>
+        </span>
+
+        {/* Input */}
         <input
           ref={inputRef}
           type="text"
           value={value}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
+          onChange={handleChange}
+          onClick={handleInputClick}
           placeholder={placeholder}
           disabled={disabled}
           className="block w-full pl-9 pr-11 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+
+        {/* Right Icons */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
           {value && (
             <button
               onClick={clearInput}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 mr-2"
               type="button"
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 mr-2"
             >
               <FontAwesomeIcon icon={faTimes} className="text-sm" />
             </button>
           )}
           {!disabled && (
-            <FontAwesomeIcon
-              icon={faChevronDown}
-              className={`text-gray-400 text-sm transition-transform ${
-                isDropdownOpen ? 'rotate-180' : ''
-              }`}
-            />
+            <button
+              type="button"
+              onClick={handleInputClick}
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                className={`text-sm transition-transform ${
+                  isOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
           )}
         </div>
       </div>
 
+      {/* Dropdown */}
       <AnimatePresence>
-        {isDropdownOpen && filteredOptions.length > 0 && (
+        {isOpen && filteredOptions.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: dropdownPosition === 'below' ? -8 : 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: dropdownPosition === 'below' ? -8 : 8 }}
             transition={{ duration: 0.15 }}
-            className={`absolute z-20 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-48 overflow-y-auto ${
+            className={`absolute z-20 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg ${
               dropdownPosition === 'above'
                 ? 'bottom-full mb-1.5'
                 : 'top-full mt-1.5'
             }`}
             style={{
-              maxHeight: '200px',
+              maxHeight: 200,
               overflowY: 'auto',
               WebkitOverflowScrolling: 'touch',
             }}
@@ -165,13 +184,13 @@ export default function AutocompleteInput({
               {filteredOptions.map((option, index) => (
                 <li key={`${option}-${index}`}>
                   <button
-                    onClick={() => handleOptionSelect(option)}
-                    className={`w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm ${
+                    type="button"
+                    onClick={() => handleSelect(option)}
+                    className={`w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm transition-colors ${
                       selectedValue === option
                         ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
                         : 'text-gray-900 dark:text-white'
                     }`}
-                    type="button"
                   >
                     {option}
                   </button>

@@ -3,7 +3,10 @@
 import React, { useState } from 'react';
 import { MdOutlineEmail, MdCheck, MdClose, MdPhone } from 'react-icons/md';
 
-export default function EmailSignup() {
+export default function EmailSignup({
+  feedbackButtonHeight = 72,
+  feedbackModalOpen = false,
+}) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
@@ -63,10 +66,12 @@ export default function EmailSignup() {
       });
 
       if (response.ok) {
-        setShowSuccessModal(true);
         setEmail('');
         setPhone('');
         setMessage('');
+
+        setShowSuccessModal(true);
+        setTimeout(() => setShowSuccessModal(false), 3000);
       } else {
         const errorData = await response.json();
         setMessage(errorData.error || 'Oops! Something went wrong.');
@@ -86,6 +91,13 @@ export default function EmailSignup() {
     }, 300);
   };
 
+  // Calculate toast bottom position dynamically
+  const baseBottom = 24; // 1.5rem
+  const extraOffset = feedbackModalOpen
+    ? feedbackButtonHeight + 140
+    : feedbackButtonHeight + 20;
+  const toastBottom = baseBottom + (showSuccessModal ? extraOffset : 0);
+
   return (
     <div className="space-y-4 relative max-w-lg p-4 rounded-lg bg-white dark:bg-gray-800 shadow-md">
       <div className="text-left text-lg font-medium">
@@ -93,7 +105,6 @@ export default function EmailSignup() {
       </div>
       <form className="space-y-3" onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
-          {/* Email Input */}
           <div className="flex-1 relative">
             <input
               type="email"
@@ -106,7 +117,6 @@ export default function EmailSignup() {
             <MdOutlineEmail className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
           </div>
 
-          {/* Phone Input */}
           <div className="flex-1 relative">
             <input
               type="tel"
@@ -121,7 +131,6 @@ export default function EmailSignup() {
           </div>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
@@ -154,24 +163,24 @@ export default function EmailSignup() {
           {loading ? 'Signing up…' : 'Sign Me Up'}
         </button>
 
-        {/* Friendly messages */}
         {message && !showSuccessModal && (
           <div className="text-sm text-gray-600 mt-1">{message}</div>
         )}
       </form>
 
-      {/* Success Toast */}
       {showSuccessModal && (
         <div
-          className={`fixed bottom-6 right-6 z-50 transition-all transform ${
-            isClosing ? 'opacity-0 translate-y-3' : 'opacity-100 translate-y-0'
-          }`}
+          className={`fixed left-1/2 top-1/2 z-50 transform -translate-x-1/2 -translate-y-1/2 
+                transition-all duration-300 opacity-100`}
         >
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 pr-10 relative flex items-start space-x-3 max-w-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 flex items-start space-x-3 max-w-sm relative">
+            {/* Icon */}
             <div className="flex items-center justify-center h-10 w-10 rounded-full bg-green-100 dark:bg-green-900 flex-shrink-0">
               <MdCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
             </div>
-            <div>
+
+            {/* Text */}
+            <div className="flex-1">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Thanks for joining!
               </h3>
@@ -179,8 +188,10 @@ export default function EmailSignup() {
                 You&apos;re on our list for occasional updates.
               </p>
             </div>
+
+            {/* Close Button */}
             <button
-              onClick={closeModal}
+              onClick={() => setShowSuccessModal(false)}
               className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
             >
               <MdClose className="w-5 h-5" />

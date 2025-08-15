@@ -64,7 +64,7 @@ export default function ActionCard({
                 hidden: { opacity: 0, x: -15 },
                 visible: { opacity: 1, x: 0 },
               }}
-              className="text-lg md:text-xl text-gray-700 dark:text-gray-300 pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-blue-500"
+              className="text-lg md:text-xl text-gray-700 dark:text-gray-300 pl-0"
             >
               {action}
             </motion.li>

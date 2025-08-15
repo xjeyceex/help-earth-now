@@ -4,7 +4,6 @@ import { LocationContext } from '@/context/location-provider';
 import { states, counties as allCounties } from '@/app/us-datas';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Import components
 import ModalHeader from './_components/ModalHeader';
 import AutocompleteInput from './_components/AutocompleteInput';
 import ActionButtons from './_components/ActionButtons';
@@ -17,8 +16,8 @@ interface LocationModalProps {
 export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
   const { location, setManualLocation, updateLocation } =
     useContext(LocationContext) || {};
-  const [selectedState, setSelectedState] = useState<string>('');
-  const [selectedCounty, setSelectedCounty] = useState<string>('');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCounty, setSelectedCounty] = useState('');
   const [counties, setCounties] = useState<string[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
   const [stateSearch, setStateSearch] = useState('');
@@ -27,7 +26,6 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
   const stateInputRef = useRef<HTMLInputElement>(null);
   const countyInputRef = useRef<HTMLInputElement>(null);
 
-  // Populate initial values
   useEffect(() => {
     if (isOpen && location) {
       setSelectedState(location.state || '');
@@ -42,7 +40,6 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
     }
   }, [isOpen, location]);
 
-  // Update counties when state changes
   useEffect(() => {
     if (selectedState) {
       const stateCounties = allCounties[selectedState] || [];
@@ -52,7 +49,6 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
     }
   }, [selectedState]);
 
-  // Focus state input when modal opens
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
@@ -62,19 +58,13 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
     }
   }, [isOpen]);
 
-  // Prevent background scroll when modal is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  // Close on escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -87,13 +77,9 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
 
   const handleStateSelect = (state: string) => {
     setSelectedState(state);
-    // Clear county selection when state changes
     setSelectedCounty('');
     setCountySearch('');
-    // Focus county input after short delay
-    setTimeout(() => {
-      countyInputRef.current?.focus();
-    }, 150);
+    setTimeout(() => countyInputRef.current?.focus(), 150);
   };
 
   const handleCountySelect = (county: string) => {
@@ -160,15 +146,12 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-visible relative"
-            style={{
-              maxHeight: 'calc(100vh - 4rem)',
-              overflow: 'visible',
-            }}
+            className="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-2xl w-full max-w-sm max-h-[85vh] overflow-visible relative"
+            style={{ maxHeight: 'calc(100vh - 4rem)' }}
           >
             <ModalHeader onClose={onClose} />
 
-            <div className="space-y-6 mb-6">
+            <div className="space-y-5 mb-5">
               <AutocompleteInput
                 label="State"
                 value={stateSearch}

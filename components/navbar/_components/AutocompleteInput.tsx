@@ -39,13 +39,12 @@ export default function AutocompleteInput({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
 
-  // Filter options based on input value
   useEffect(() => {
     if (value.trim()) {
       const filtered = options.filter((option) =>
         option.toLowerCase().includes(value.toLowerCase())
       );
-      setFilteredOptions(filtered.slice(0, 10)); // Limit to 10 items for mobile
+      setFilteredOptions(filtered.slice(0, 10));
       setIsDropdownOpen(filtered.length > 0);
     } else {
       setFilteredOptions([]);
@@ -53,7 +52,6 @@ export default function AutocompleteInput({
     }
   }, [value, options]);
 
-  // Calculate dropdown position to avoid overflow
   useEffect(() => {
     if (isDropdownOpen && inputContainerRef.current) {
       const rect = inputContainerRef.current.getBoundingClientRect();
@@ -61,7 +59,6 @@ export default function AutocompleteInput({
       const spaceBelow = modalHeight - rect.bottom;
       const spaceAbove = rect.top;
 
-      // If not enough space below and more space above, show above
       if (spaceBelow < 200 && spaceAbove > spaceBelow) {
         setDropdownPosition('above');
       } else {
@@ -70,7 +67,6 @@ export default function AutocompleteInput({
     }
   }, [isDropdownOpen]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -86,8 +82,7 @@ export default function AutocompleteInput({
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    onChange(newValue);
+    onChange(e.target.value);
   };
 
   const handleOptionSelect = (option: string) => {
@@ -110,11 +105,11 @@ export default function AutocompleteInput({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
         {label}
       </label>
       <div className="relative" ref={inputContainerRef}>
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <FontAwesomeIcon icon={faSearch} className="text-gray-400 text-sm" />
         </div>
         <input
@@ -125,9 +120,9 @@ export default function AutocompleteInput({
           onFocus={handleInputFocus}
           placeholder={placeholder}
           disabled={disabled}
-          className="block w-full pl-10 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="block w-full pl-9 pr-11 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
-        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-3">
           {value && (
             <button
               onClick={clearInput}
@@ -148,18 +143,17 @@ export default function AutocompleteInput({
         </div>
       </div>
 
-      {/* Dropdown */}
       <AnimatePresence>
         {isDropdownOpen && filteredOptions.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: dropdownPosition === 'below' ? -10 : 10 }}
+            initial={{ opacity: 0, y: dropdownPosition === 'below' ? -8 : 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: dropdownPosition === 'below' ? -10 : 10 }}
+            exit={{ opacity: 0, y: dropdownPosition === 'below' ? -8 : 8 }}
             transition={{ duration: 0.15 }}
-            className={`absolute z-20 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg max-h-48 overflow-y-auto ${
+            className={`absolute z-20 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-48 overflow-y-auto ${
               dropdownPosition === 'above'
-                ? 'bottom-full mb-2'
-                : 'top-full mt-2'
+                ? 'bottom-full mb-1.5'
+                : 'top-full mt-1.5'
             }`}
             style={{
               maxHeight: '200px',
@@ -172,7 +166,7 @@ export default function AutocompleteInput({
                 <li key={`${option}-${index}`}>
                   <button
                     onClick={() => handleOptionSelect(option)}
-                    className={`w-full text-left px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm ${
+                    className={`w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm ${
                       selectedValue === option
                         ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
                         : 'text-gray-900 dark:text-white'

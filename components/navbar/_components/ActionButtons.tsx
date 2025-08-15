@@ -23,13 +23,16 @@ export default function ActionButtons({
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         disabled={isUpdating}
-        className="w-1/2 flex items-center justify-center py-3 px-4 bg-green-600 hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-white font-medium rounded-lg transition-all disabled:opacity-70 text-base"
+        className="w-1/2 flex items-center justify-center py-2 px-3 bg-green-600 hover:bg-green-700 focus:ring-1 focus:ring-green-500 focus:ring-opacity-50 text-white font-medium rounded-lg transition-all disabled:opacity-70 text-sm"
         type="button"
       >
         {isUpdating ? (
-          <FontAwesomeIcon icon={faSpinner} className="animate-spin mr-2" />
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className="animate-spin mr-2 text-sm"
+          />
         ) : (
-          <FontAwesomeIcon icon={faLocationArrow} className="mr-2" />
+          <FontAwesomeIcon icon={faLocationArrow} className="mr-2 text-sm" />
         )}
         Auto Detect
       </motion.button>
@@ -39,11 +42,14 @@ export default function ActionButtons({
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         disabled={isUpdating || isSaveDisabled}
-        className="w-1/2 flex items-center justify-center py-3 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-white font-medium rounded-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed text-base"
+        className="w-1/2 flex items-center justify-center py-2 px-3 bg-blue-600 hover:bg-blue-700 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50 text-white font-medium rounded-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm"
         type="button"
       >
         {isUpdating ? (
-          <FontAwesomeIcon icon={faSpinner} className="animate-spin mr-2" />
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className="animate-spin mr-2 text-sm"
+          />
         ) : (
           'Save'
         )}

@@ -6,18 +6,18 @@ interface ModalHeaderProps {
 
 export default function ModalHeader({ onClose }: ModalHeaderProps) {
   return (
-    <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+    <div className="flex justify-between items-center mb-5 pb-3 border-b border-gray-200 dark:border-gray-700">
+      <h2 className="text-lg font-bold text-gray-900 dark:text-white">
         Update Location
       </h2>
       <button
         onClick={onClose}
-        className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+        className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
         aria-label="Close"
         type="button"
       >
         <svg
-          className="w-6 h-6"
+          className="w-5 h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MdOutlineEmail, MdCheck, MdClose, MdPhone } from 'react-icons/md';
 
 export default function EmailSignup() {
@@ -10,7 +10,6 @@ export default function EmailSignup() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [signupComplete, setSignupComplete] = useState(false); // for replacing form later
 
   const formatPhoneNumber = (value: string) => {
     const phoneNumber = value.replace(/[^\d]/g, '');
@@ -79,41 +78,13 @@ export default function EmailSignup() {
     }
   };
 
-  useEffect(() => {
-    if (showSuccessModal) {
-      const timer = setTimeout(() => {
-        setIsClosing(true);
-        setTimeout(() => {
-          setShowSuccessModal(false);
-          setIsClosing(false);
-          setSignupComplete(true); // switch to "What can I do?" after toast
-        }, 300);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [showSuccessModal]);
-
   const closeModal = () => {
     setIsClosing(true);
     setTimeout(() => {
       setShowSuccessModal(false);
       setIsClosing(false);
-      setSignupComplete(true);
     }, 300);
   };
-
-  if (signupComplete) {
-    return (
-      <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-        <a
-          href="/what-can-i-do"
-          className="text-blue-500 hover:underline font-semibold"
-        >
-          What can I do?
-        </a>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-4 relative max-w-lg p-4 rounded-lg bg-white dark:bg-gray-800 shadow-md">

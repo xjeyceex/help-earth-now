@@ -10,6 +10,7 @@ import LocationIndicator from './LocationIndicator';
 import LearnMoreDropdown from './LearnMoreDropdown';
 import MobileMenu from './MobileMenu';
 import LocationModal from './LocationModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -17,10 +18,10 @@ export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const linkClasses = (path: string) =>
-    `block px-3 py-2 text-sm transition-colors ${
+    `block px-3 py-2 text-sm font-medium transition-colors duration-200 ${
       pathname === path
-        ? 'text-gray-900 dark:text-white'
-        : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300'
+        ? 'text-primary-600 dark:text-primary-400'
+        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
     }`;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -29,92 +30,142 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-gray-100 dark:bg-gray-900 w-full sticky top-0 z-50 py-2 border-b border-gray-200 dark:border-gray-800">
-        <div className="w-full lg:container mx-auto flex items-center justify-between px-3 py-2">
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md w-full sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 shadow-sm"
+      >
+        <div className="w-full lg:container mx-auto flex items-center justify-between px-4 py-3">
           {/* Brand / Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center"
+          >
+            <Link href="/" className="flex items-center" aria-label="Home">
               <Image
-                src="/logodark.png" // now dark logo shows in light mode
+                src="/logodark.png"
                 alt="MyApp Logo"
                 width={160}
                 height={40}
-                className="h-auto w-auto max-h-10 dark:hidden"
+                className="h-auto w-auto max-h-10 dark:hidden transition-opacity hover:opacity-90"
                 priority
               />
               <Image
-                src="/logowhite.png" // now white logo shows in dark mode
+                src="/logowhite.png"
                 alt="MyApp Logo"
                 width={160}
                 height={40}
-                className="h-auto w-auto max-h-10 hidden dark:block"
+                className="h-auto w-auto max-h-10 hidden dark:block transition-opacity hover:opacity-90"
                 priority
               />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Location indicator - hidden on small screens */}
           <LocationIndicator onClick={openModal} />
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-1">
             <Link href="/" className={linkClasses('/')}>
-              Home
+              <motion.span whileHover={{ scale: 1.05 }} className="block">
+                Home
+              </motion.span>
             </Link>
 
             <Link href="/about-us" className={linkClasses('/about-us')}>
-              About Us
+              <motion.span whileHover={{ scale: 1.05 }} className="block">
+                About Us
+              </motion.span>
             </Link>
 
             <LearnMoreDropdown />
 
-            <DarkModeToggle />
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="ml-2"
+            >
+              <DarkModeToggle />
+            </motion.div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center gap-3">
-            <button
+          <div className="md:hidden flex items-center gap-4">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={openModal}
-              className="sm:hidden flex items-center justify-center w-7 h-7 rounded-full
-               bg-gray-700 dark:bg-gray-200 text-white dark:text-gray-900
-               shadow-md transition-transform hover:scale-105"
+              className="flex items-center justify-center w-8 h-8 rounded-full
+               bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200
+               shadow-sm transition-all"
               aria-label="Location"
             >
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="text-lg" />
-            </button>
-            <button
-              className="text-gray-900 dark:text-white focus:outline-none hover:text-gray-800 dark:hover:text-gray-300 transition-colors"
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="text-sm" />
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-gray-700 dark:text-gray-200 focus:outline-none transition-colors"
               onClick={toggleMenu}
               aria-label="Menu"
+              aria-expanded={isMenuOpen}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+              {isMenuOpen ? (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </motion.button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu */}
-      <MobileMenu
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        onLocationClick={openModal}
-      />
+      <AnimatePresence>
+        {isMenuOpen && (
+          <MobileMenu
+            isOpen={isMenuOpen}
+            onClose={() => setIsMenuOpen(false)}
+            onLocationClick={openModal}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Location Modal */}
-      <LocationModal isOpen={isModalOpen} onClose={closeModal} />
+      <AnimatePresence>
+        {isModalOpen && (
+          <LocationModal isOpen={isModalOpen} onClose={closeModal} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

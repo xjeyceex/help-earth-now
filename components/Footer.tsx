@@ -1,45 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import { FaLinkedin, FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
 import { FaBluesky } from 'react-icons/fa6';
 import Link from 'next/link';
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setMessage('');
-
-    if (!email) {
-      setMessage('Please enter a valid email.');
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/recipients', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.ok) {
-        setMessage('Thank you for signing up!');
-        setEmail('');
-      } else {
-        const errorData = await response.json();
-        setMessage(
-          errorData.error || 'Something went wrong. Please try again.'
-        );
-      }
-    } catch (error) {
-      console.error('Error submitting email:', error);
-      setMessage('Failed to submit. Please check your connection.');
-    }
-  };
-
   return (
     <footer className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-6 px-4 w-full">
       {/* Social Media Links Section */}

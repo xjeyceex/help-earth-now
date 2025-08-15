@@ -134,13 +134,7 @@ export default function HeroContent({
         )}
       </motion.div>
 
-      <motion.div
-        variants={itemVariants}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <EmailSignup />
-      </motion.div>
+      <EmailSignup />
     </motion.div>
   );
 }

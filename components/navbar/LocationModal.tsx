@@ -3,13 +3,11 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { LocationContext } from '@/context/location-provider';
 import { states, counties as allCounties } from '@/app/us-datas';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLocationArrow,
-  faSpinner,
-  faSearch,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
+
+// Import components
+import ModalHeader from './_components/ModalHeader';
+import AutocompleteInput from './_components/AutocompleteInput';
+import ActionButtons from './_components/ActionButtons';
 
 interface LocationModalProps {
   isOpen: boolean;
@@ -29,22 +27,19 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
   const stateInputRef = useRef<HTMLInputElement>(null);
   const countyInputRef = useRef<HTMLInputElement>(null);
 
-  // Filtered states and counties based on search
-  const filteredStates = states.filter((state) =>
-    state.toLowerCase().includes(stateSearch.toLowerCase())
-  );
-  const filteredCounties = counties.filter((county) =>
-    county.toLowerCase().includes(countySearch.toLowerCase())
-  );
-
   // Populate initial values
   useEffect(() => {
     if (isOpen && location) {
       setSelectedState(location.state || '');
       setSelectedCounty(location.county || '');
+      setStateSearch(location.state || '');
+      setCountySearch(location.county || '');
+    } else if (isOpen) {
+      setSelectedState('');
+      setSelectedCounty('');
+      setStateSearch('');
+      setCountySearch('');
     }
-    setStateSearch('');
-    setCountySearch('');
   }, [isOpen, location]);
 
   // Update counties when state changes
@@ -55,14 +50,28 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
     } else {
       setCounties([]);
     }
-    setCountySearch('');
   }, [selectedState]);
 
-  // Focus search input when opened
+  // Focus state input when modal opens
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => stateInputRef.current?.focus(), 100);
+      const timer = setTimeout(() => {
+        stateInputRef.current?.focus();
+      }, 150);
+      return () => clearTimeout(timer);
     }
+  }, [isOpen]);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   // Close on escape key
@@ -70,34 +79,45 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [onClose, isOpen]);
 
   const handleStateSelect = (state: string) => {
     setSelectedState(state);
-    setStateSearch(state);
-    setTimeout(() => countyInputRef.current?.focus(), 100);
+    // Clear county selection when state changes
+    setSelectedCounty('');
+    setCountySearch('');
+    // Focus county input after short delay
+    setTimeout(() => {
+      countyInputRef.current?.focus();
+    }, 150);
   };
 
   const handleCountySelect = (county: string) => {
     setSelectedCounty(county);
-    setCountySearch(county);
   };
 
   const handleUpdateLocation = async () => {
     if (setManualLocation) {
       setIsUpdating(true);
-      const newLocation = {
-        latitude: 0,
-        longitude: 0,
-        region: location?.region || '',
-        state: selectedState || undefined,
-        country: 'United States',
-        county: selectedCounty || undefined,
-      };
-      await setManualLocation(newLocation);
-      setIsUpdating(false);
+      try {
+        const newLocation = {
+          latitude: 0,
+          longitude: 0,
+          region: location?.region || '',
+          state: selectedState || undefined,
+          country: 'United States',
+          county: selectedCounty || undefined,
+        };
+        await setManualLocation(newLocation);
+      } catch (error) {
+        console.error('Error updating location:', error);
+      } finally {
+        setIsUpdating(false);
+      }
     }
     onClose();
   };
@@ -105,8 +125,13 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
   const handleUpdateAutomatically = async () => {
     if (updateLocation) {
       setIsUpdating(true);
-      await updateLocation();
-      setIsUpdating(false);
+      try {
+        await updateLocation();
+      } catch (error) {
+        console.error('Error auto-detecting location:', error);
+      } finally {
+        setIsUpdating(false);
+      }
     }
     onClose();
   };
@@ -116,6 +141,8 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
       onClose();
     }
   };
+
+  const isSaveDisabled = !selectedState && !selectedCounty;
 
   return (
     <AnimatePresence>
@@ -129,210 +156,53 @@ export default function LocationModal({ isOpen, onClose }: LocationModalProps) {
         >
           <motion.div
             ref={modalRef}
-            initial={{ scale: 0.95, y: 20 }}
+            initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 20 }}
-            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl w-full max-w-sm"
+            exit={{ scale: 0.9, y: 50 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-visible relative"
+            style={{
+              maxHeight: 'calc(100vh - 4rem)',
+              overflow: 'visible',
+            }}
           >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                Update Location
-              </h2>
-              <button
-                onClick={onClose}
-                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
-                aria-label="Close"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+            <ModalHeader onClose={onClose} />
+
+            <div className="space-y-6 mb-6">
+              <AutocompleteInput
+                label="State"
+                value={stateSearch}
+                onChange={setStateSearch}
+                onSelect={handleStateSelect}
+                options={states}
+                placeholder="Search for your state..."
+                inputRef={stateInputRef}
+                selectedValue={selectedState}
+              />
+
+              <AutocompleteInput
+                label="County"
+                value={countySearch}
+                onChange={setCountySearch}
+                onSelect={handleCountySelect}
+                options={counties}
+                placeholder={
+                  selectedState
+                    ? 'Search for your county...'
+                    : 'Select a state first'
+                }
+                disabled={!selectedState}
+                inputRef={countyInputRef}
+                selectedValue={selectedCounty}
+              />
             </div>
 
-            <div className="space-y-4 mb-6">
-              <div>
-                <label
-                  htmlFor="state-search"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  State
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FontAwesomeIcon
-                      icon={faSearch}
-                      className="text-gray-400"
-                    />
-                  </div>
-                  <input
-                    id="state-search"
-                    ref={stateInputRef}
-                    type="text"
-                    value={stateSearch}
-                    onChange={(e) => setStateSearch(e.target.value)}
-                    placeholder="Search states..."
-                    className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
-                  />
-                  {stateSearch && (
-                    <button
-                      onClick={() => {
-                        setStateSearch('');
-                        stateInputRef.current?.focus();
-                      }}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                    >
-                      <FontAwesomeIcon
-                        icon={faTimes}
-                        className="text-gray-400 hover:text-gray-600"
-                      />
-                    </button>
-                  )}
-                </div>
-                <div className="mt-2 max-h-60 overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-700">
-                  {filteredStates.length > 0 ? (
-                    <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                      {filteredStates.map((state) => (
-                        <li key={state}>
-                          <button
-                            onClick={() => handleStateSelect(state)}
-                            className={`w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                              selectedState === state
-                                ? 'bg-blue-50 dark:bg-blue-900/30'
-                                : ''
-                            }`}
-                          >
-                            {state}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="px-4 py-3 text-gray-500 dark:text-gray-400 text-sm">
-                      No states found
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="county-search"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  County
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FontAwesomeIcon
-                      icon={faSearch}
-                      className="text-gray-400"
-                    />
-                  </div>
-                  <input
-                    id="county-search"
-                    ref={countyInputRef}
-                    type="text"
-                    value={countySearch}
-                    onChange={(e) => setCountySearch(e.target.value)}
-                    placeholder={
-                      selectedState
-                        ? 'Search counties...'
-                        : 'Select a state first'
-                    }
-                    disabled={!selectedState}
-                    className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  {countySearch && (
-                    <button
-                      onClick={() => {
-                        setCountySearch('');
-                        countyInputRef.current?.focus();
-                      }}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                    >
-                      <FontAwesomeIcon
-                        icon={faTimes}
-                        className="text-gray-400 hover:text-gray-600"
-                      />
-                    </button>
-                  )}
-                </div>
-                {selectedState && (
-                  <div className="mt-2 max-h-60 overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-700">
-                    {filteredCounties.length > 0 ? (
-                      <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                        {filteredCounties.map((county) => (
-                          <li key={county}>
-                            <button
-                              onClick={() => handleCountySelect(county)}
-                              className={`w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
-                                selectedCounty === county
-                                  ? 'bg-blue-50 dark:bg-blue-900/30'
-                                  : ''
-                              }`}
-                            >
-                              {county}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <div className="px-4 py-3 text-gray-500 dark:text-gray-400 text-sm">
-                        No counties found
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <motion.button
-                onClick={handleUpdateAutomatically}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                disabled={isUpdating}
-                className="flex-1 flex items-center justify-center py-3 px-4 bg-green-600 hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-white font-medium rounded-lg transition-all disabled:opacity-70"
-              >
-                {isUpdating ? (
-                  <FontAwesomeIcon
-                    icon={faSpinner}
-                    className="animate-spin mr-2"
-                  />
-                ) : (
-                  <FontAwesomeIcon icon={faLocationArrow} className="mr-2" />
-                )}
-                Auto Detect
-              </motion.button>
-
-              <motion.button
-                onClick={handleUpdateLocation}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                disabled={isUpdating || (!selectedState && !selectedCounty)}
-                className="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-white font-medium rounded-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {isUpdating ? (
-                  <FontAwesomeIcon
-                    icon={faSpinner}
-                    className="animate-spin mr-2"
-                  />
-                ) : (
-                  'Save'
-                )}
-              </motion.button>
-            </div>
+            <ActionButtons
+              onAutoDetect={handleUpdateAutomatically}
+              onSave={handleUpdateLocation}
+              isUpdating={isUpdating}
+              isSaveDisabled={isSaveDisabled}
+            />
           </motion.div>
         </motion.div>
       )}

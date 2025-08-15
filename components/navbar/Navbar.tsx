@@ -98,7 +98,8 @@ export default function Navbar() {
               whileTap={{ scale: 0.9 }}
               onClick={openModal}
               className="flex items-center justify-center w-8 h-8 rounded-full
-               bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200
+               bg-green-50 dark:bg-green-900/80 text-green-600 dark:text-green-400
+               border border-green-500/30 hover:bg-green-100 dark:hover:bg-green-800
                shadow-sm transition-all"
               aria-label="Location"
             >

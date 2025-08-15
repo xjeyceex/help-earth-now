@@ -25,16 +25,18 @@ export default function LocationIndicator({
       : 'United States'
     : 'United States';
 
-  const baseClasses = `flex items-center rounded-lg cursor-pointer transition-all 
-                      focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50
-                      bg-green-50 dark:bg-green-900/80 border border-green-500/30
-                      hover:bg-green-100 dark:hover:bg-green-800`;
+  const baseClasses = `
+    flex items-center rounded-full cursor-pointer transition-all
+    focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50
+    bg-green-50 dark:bg-green-900/70 border border-green-500/20
+    hover:bg-green-100 dark:hover:bg-green-800 shadow-sm
+  `;
 
   const LocationButton = ({ className = '' }: { className?: string }) => (
     <motion.button
       onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
       className={`${baseClasses} ${className}`}
       aria-label="Change location"
     >
@@ -47,7 +49,7 @@ export default function LocationIndicator({
       </p>
       <FontAwesomeIcon
         icon={faPen}
-        className="text-gray-600 dark:text-gray-400 flex-shrink-0"
+        className="text-gray-500 dark:text-gray-300 flex-shrink-0"
       />
     </motion.button>
   );
@@ -55,19 +57,19 @@ export default function LocationIndicator({
   if (isMobile) {
     return (
       <div className="w-full px-4 mb-4">
-        <LocationButton className="w-full p-3 gap-3" />
+        <LocationButton className="w-full py-2 px-4 gap-2 text-base" />
       </div>
     );
   }
 
   return (
-    <div className="hidden sm:block mx-2">
+    <div className="hidden sm:block">
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <LocationButton className="py-2 px-3 gap-2 text-sm min-w-[120px] max-w-[180px]" />
+        <LocationButton className="py-1.5 px-3 gap-2 text-sm w-auto" />
       </motion.div>
     </div>
   );

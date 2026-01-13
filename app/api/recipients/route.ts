@@ -3,16 +3,13 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
-// Append data to Google Sheets with independent columns
 const appendToSheets = async (email?: string, phone?: string) => {
   if (
     !process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ||
     !process.env.GOOGLE_SHEETS_API_KEY ||
     !process.env.GOOGLE_SHEET_ID
   ) {
-    throw new Error(
-      'Missing required environment variables for Google Sheets API'
-    );
+    throw new Error('Missing Google Sheets environment variables');
   }
 
   const auth = new google.auth.GoogleAuth({
@@ -23,51 +20,27 @@ const appendToSheets = async (email?: string, phone?: string) => {
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
-  const authClient = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: authClient as any });
-
-  // Get last used row for Email (column A)
-  const colA = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-    range: 'Recipients!A:A',
+  // ✅ PASS GoogleAuth DIRECTLY (fixes TS overload error)
+  const sheets = google.sheets({
+    version: 'v4',
+    auth,
   });
-  const lastRowA = colA.data.values ? colA.data.values.length : 0;
 
-  // Get last used row for Phone (column B)
-  const colB = await sheets.spreadsheets.values.get({
+  await sheets.spreadsheets.values.append({
     spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-    range: 'Recipients!B:B',
+    range: 'Recipients!A:B',
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
+    requestBody: {
+      values: [[email ?? '', phone ?? '']],
+    },
   });
-  const lastRowB = colB.data.values ? colB.data.values.length : 0;
-
-  // Write Email to next row in column A
-  if (email) {
-    await sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: `Recipients!A${lastRowA + 1}`,
-      valueInputOption: 'RAW',
-      requestBody: { values: [[email]] },
-    });
-  }
-
-  // Write Phone to next row in column B
-  if (phone) {
-    await sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: `Recipients!B${lastRowB + 1}`,
-      valueInputOption: 'RAW',
-      requestBody: { values: [[phone]] },
-    });
-  }
 };
 
-// POST handler to append data
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { email, phone } = body;
+    const { email, phone } = await req.json();
 
-    // Validate that at least one contact method is provided
     if (
       (!email || typeof email !== 'string') &&
       (!phone || typeof phone !== 'string')
@@ -78,8 +51,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate email format if provided
-    if (email && typeof email === 'string') {
+    if (email) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         return NextResponse.json(
@@ -89,35 +61,32 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Validate phone format if provided
-    if (phone && typeof phone === 'string') {
+    if (phone) {
       const phoneRegex = /^\(\d{3}\)\s\d{3}-\d{4}$/;
       if (!phoneRegex.test(phone)) {
         return NextResponse.json(
-          { error: 'Invalid phone format. Please use (XXX) XXX-XXXX format' },
+          {
+            error: 'Invalid phone format. Use (XXX) XXX-XXXX',
+          },
           { status: 400 }
         );
       }
     }
 
-    // Append data
     await appendToSheets(email, phone);
 
     return NextResponse.json(
-      { success: true, message: 'Contact information successfully saved' },
+      { success: true },
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST',
+          'Access-Control-Allow-Methods': 'POST',
           'Access-Control-Allow-Headers': 'Content-Type',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          Pragma: 'no-cache',
-          Expires: '0',
         },
       }
     );
   } catch (error) {
-    console.error('Error saving contact information:', error);
+    console.error(error);
     return NextResponse.json(
       { error: 'Failed to save contact information' },
       { status: 500 }

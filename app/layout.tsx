@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import LocationProvider from '@/components/location-provider';
-import AuthProvider from '@/components/AuthProvider';
+import LocationProvider from '@/context/location-provider';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
-import { getSession } from 'next-auth/react';
-import { Session } from 'next-auth';
 import Script from 'next/script';
-import Navbar from '@/components/Navbar';
 import FixedSocialIcon from '@/components/FixedSocialIcon';
+import Navbar from '@/components/navbar/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,8 +20,6 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const session: Session | null = await getSession();
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -48,13 +43,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             `}
           </Script>
 
-          <AuthProvider session={session || undefined}>
-            <LocationProvider>
-              <Navbar />
-              <FixedSocialIcon />
-              {children}
-            </LocationProvider>
-          </AuthProvider>
+          <LocationProvider>
+            <Navbar />
+            <FixedSocialIcon />
+            {children}
+          </LocationProvider>
         </Theme>
       </body>
     </html>

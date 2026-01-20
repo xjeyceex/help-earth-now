@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { LocationContext } from '@/components/location-provider';
+import { LocationContext } from '@/context/location-provider';
 import { routeToStateMap } from '@/app/us-datas';
 
 enum Party {
@@ -181,7 +181,7 @@ export default function Who() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full" />
       </div>
     );
   }

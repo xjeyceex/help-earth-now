@@ -69,7 +69,6 @@ export default function WorkInClimateArea() {
     if (/bluesky|bsky/i.test(name)) {
       return `Follow them on BlueSky`; // Prioritize BlueSky
     }
-
     if (/facebook/i.test(name)) {
       return `Follow them on Facebook`;
     }
@@ -92,8 +91,8 @@ export default function WorkInClimateArea() {
       return `Follow them on X`;
     }
 
-    // Default fallback text for other links
-    return `Follow on ${platform.charAt(0).toUpperCase() + platform.slice(1)}`;
+    // Default fallback text
+    return 'Visit their website';
   };
 
   if (loading) {
@@ -115,27 +114,27 @@ export default function WorkInClimateArea() {
   return (
     <>
       <BackButton />
-      <div className="p-6 mx-auto max-w-3xl animate-fade-in">
-        <h1 className="text-3xl font-bold text-center mb-4 dark:text-white">
-          Work in the Climate Area{' '}
+      <div className="p-6 mx-auto max-w-5xl animate-fade-in">
+        <h1 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          Work in the Climate Area
         </h1>
-        <p className="text-lg text-center mb-8 text-gray-700 dark:text-gray-300">
+        <p className="text-lg text-center mb-10 text-gray-700 dark:text-gray-300">
           Climatebase and Terra.do are two companies doing amazing work in the
           climate space. Below, you can explore more about their efforts and
           opportunities in the climate sector.
         </p>
 
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {keyPeople.map((person) => (
             <div
               key={person.Name}
-              className="p-5 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between min-h-[220px]"
+              className="flex flex-col justify-between p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800"
             >
-              <div>
-                <h2 className="text-xl font-semibold mb-1 flex items-center gap-2 dark:text-white">
+              <div className="mb-4">
+                <h2 className="text-xl font-semibold mb-2 flex items-center gap-2 text-gray-900 dark:text-white">
                   {getLinkEmoji(person.Link)} {person.Name}
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                   {person.Description}
                 </p>
               </div>
@@ -144,7 +143,7 @@ export default function WorkInClimateArea() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${getLinkText(person.Link)} for ${person.Name}`}
-                className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+                className="mt-auto text-blue-600 dark:text-blue-400 font-medium hover:underline transition-colors duration-150"
               >
                 {getLinkText(person.Link)}
               </Link>

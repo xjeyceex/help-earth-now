@@ -73,8 +73,39 @@ export default function AboutUsPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin h-16 w-16 border-4 border-t-transparent border-blue-500 rounded-full"></div>
+      <div className="px-6 py-8 max-w-7xl mx-auto space-y-6">
+        {/* Page title skeleton */}
+        <div className="h-12 md:h-16 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mx-auto animate-pulse" />
+
+        {/* Skeleton for sections */}
+        {[1, 2, 3, 4, 5].map((section, idx) => (
+          <div
+            key={idx}
+            className={`rounded-lg p-6 animate-pulse ${
+              idx === 4 // fourth section is green
+                ? 'bg-gradient-to-r from-green-400 to-blue-500 h-56'
+                : 'bg-gray-200 dark:bg-gray-700 h-48'
+            }`}
+          >
+            {/* Header skeleton */}
+            <div className="h-8 md:h-10 w-2/5 bg-gray-300 dark:bg-gray-600 rounded mb-4" />
+
+            {/* Content lines skeleton */}
+            <div className="space-y-3">
+              {[1, 2, 3].map((line) => (
+                <div
+                  key={line}
+                  className={`h-4 rounded ${
+                    idx === 3 ? 'bg-white/70' : 'bg-gray-300 dark:bg-gray-600'
+                  } w-full`}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {/* Bottom feedback/footer skeleton */}
+        <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mx-auto animate-pulse mt-6" />
       </div>
     );
   }

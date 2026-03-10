@@ -52,73 +52,165 @@ export function useHeaderData(location?: {
 
       const mainData: HeaderData[] = await response.json();
 
-      // More precise filtering logic
-      const relevantData = mainData.filter((item) => {
-        const normalizedItemState = item.state?.trim();
-        const normalizedItemCounty = item.county?.trim();
+      // Find all relevant data sources in priority order
+      let countyData: HeaderData | undefined;
+      let stateData: HeaderData | undefined;
+      let globalData: HeaderData | undefined;
 
-        // Check for exact state match or state-ALL or global ALL
-        const stateMatches =
-          normalizedItemState === stateKey ||
-          normalizedItemState === `${stateKey} - ALL` ||
-          normalizedItemState === 'ALL';
-
-        // Check for county match - either exact match or empty (applies to all counties)
-        const countyMatches = currentLocation?.county
-          ? normalizedItemCounty === currentLocation.county ||
-            normalizedItemCounty === ''
-          : true;
-
-        return stateMatches && countyMatches;
-      });
-
-      // Priority-based selection: exact match > state-ALL > global ALL
-      const selectedData =
-        relevantData.find(
+      // Find county-specific data (most specific)
+      if (currentLocation?.county) {
+        countyData = mainData.find(
           (item) =>
-            item.state === stateKey && item.county === currentLocation?.county
-        ) ||
-        relevantData.find((item) => item.state === `${stateKey} - ALL`) ||
-        relevantData.find((item) => item.state === 'ALL') ||
-        ({} as HeaderData);
+            item.state?.trim() === stateKey &&
+            item.county?.trim() === currentLocation.county
+        );
+      }
 
-      // Reset all state before setting new values
-      setWarningText('');
-      setQuestions([]);
-      setActions({ free: [], low: [], high: [] });
-
-      // Set new values
-      setWarningText(selectedData.warning?.trim() || '');
-      setQuestions(
-        [
-          selectedData.problem1,
-          selectedData.problem2,
-          selectedData.problem3,
-          selectedData.problem4,
-        ].filter((item): item is string => Boolean(item?.trim()))
+      // Find state-level data (including state-ALL)
+      stateData = mainData.find(
+        (item) =>
+          item.state?.trim() === `${stateKey} - ALL` ||
+          (item.state?.trim() === stateKey && !item.county?.trim())
       );
 
+      // Find global ALL data (least specific, acts as ultimate fallback)
+      globalData = mainData.find((item) => item.state?.trim() === 'ALL');
+
+      // Helper function to get value with fallbacks
+      const getValue = <T>(
+        countyValue: T | undefined,
+        stateValue: T | undefined,
+        globalValue: T | undefined,
+        defaultValue: T
+      ): T => {
+        return countyValue ?? stateValue ?? globalValue ?? defaultValue;
+      };
+
+      // Helper function to get array values with fallbacks
+      const getArrayValue = (
+        countyArray: (string | undefined)[],
+        stateArray: (string | undefined)[],
+        globalArray: (string | undefined)[],
+        indices: number[]
+      ): string[] => {
+        return indices
+          .map((index) => {
+            const countyVal = countyArray[index]?.trim();
+            const stateVal = stateArray[index]?.trim();
+            const globalVal = globalArray[index]?.trim();
+            return countyVal || stateVal || globalVal;
+          })
+          .filter((item): item is string => Boolean(item));
+      };
+
+      // Get warning text with fallbacks
+      const warning = getValue(
+        countyData?.warning,
+        stateData?.warning,
+        globalData?.warning,
+        ''
+      );
+
+      // Get questions with fallbacks
+      const questionIndices = [0, 1, 2, 3];
+      const questions_array = getArrayValue(
+        [
+          countyData?.problem1,
+          countyData?.problem2,
+          countyData?.problem3,
+          countyData?.problem4,
+        ],
+        [
+          stateData?.problem1,
+          stateData?.problem2,
+          stateData?.problem3,
+          stateData?.problem4,
+        ],
+        [
+          globalData?.problem1,
+          globalData?.problem2,
+          globalData?.problem3,
+          globalData?.problem4,
+        ],
+        questionIndices
+      );
+
+      // Get actions with fallbacks
+      const freeActions = getArrayValue(
+        [
+          countyData?.action1free,
+          countyData?.action2free,
+          countyData?.action3free,
+          countyData?.action4free,
+        ],
+        [
+          stateData?.action1free,
+          stateData?.action2free,
+          stateData?.action3free,
+          stateData?.action4free,
+        ],
+        [
+          globalData?.action1free,
+          globalData?.action2free,
+          globalData?.action3free,
+          globalData?.action4free,
+        ],
+        [0, 1, 2, 3]
+      );
+
+      const lowActions = getArrayValue(
+        [
+          countyData?.action1low,
+          countyData?.action2low,
+          countyData?.action3low,
+        ],
+        [stateData?.action1low, stateData?.action2low, stateData?.action3low],
+        [
+          globalData?.action1low,
+          globalData?.action2low,
+          globalData?.action3low,
+        ],
+        [0, 1, 2]
+      );
+
+      const highActions = getArrayValue(
+        [
+          countyData?.action1high,
+          countyData?.action2high,
+          countyData?.action3high,
+        ],
+        [
+          stateData?.action1high,
+          stateData?.action2high,
+          stateData?.action3high,
+        ],
+        [
+          globalData?.action1high,
+          globalData?.action2high,
+          globalData?.action3high,
+        ],
+        [0, 1, 2]
+      );
+
+      // Get video link with fallbacks
+      const link = getValue(
+        countyData?.link,
+        stateData?.link,
+        globalData?.link,
+        '0yMGg5VDltI' // Default video ID
+      );
+
+      // Set all the merged values
+      setWarningText(warning);
+      setQuestions(questions_array);
       setActions({
-        free: [
-          selectedData.action1free,
-          selectedData.action2free,
-          selectedData.action3free,
-          selectedData.action4free,
-        ].filter((item): item is string => Boolean(item?.trim())),
-        low: [
-          selectedData.action1low,
-          selectedData.action2low,
-          selectedData.action3low,
-        ].filter((item): item is string => Boolean(item?.trim())),
-        high: [
-          selectedData.action1high,
-          selectedData.action2high,
-          selectedData.action3high,
-        ].filter((item): item is string => Boolean(item?.trim())),
+        free: freeActions,
+        low: lowActions,
+        high: highActions,
       });
 
-      if (selectedData.link?.trim()) {
-        const cleanLink = selectedData.link.trim();
+      if (link?.trim()) {
+        const cleanLink = link.trim();
         setVideoUrl(
           `https://www.youtube.com/embed/${cleanLink}?autoplay=1&mute=1&rel=0&modestbranding=1&loop=1&playlist=${cleanLink}`
         );
